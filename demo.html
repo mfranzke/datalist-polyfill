@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>datalist polyfill demo</title>
+	
+	<link rel="stylesheet" href="datalist-polyfill.css">
+</head>
+<body>
+	
+	<label for="colour">What's your favorite colour:</label>
+	<input type="text" name="colour" id="colour" value="" list="colourlist">
+	<datalist id="colourlist" title="Suggestions to choose from">
+		<option value="Black">
+		<option value="Blue">
+		<option value="Blue'ish" disabled>
+		<option value="Cyan">
+		<option value="Dark Green">
+		<option value="Grey">
+		<option value="Orange">
+		<option value="Red">
+		<option value="Yellow">
+	</datalist>
+
+	
+	<script type="text/javascript" src="datalist-polyfill.js"></script>
+
+</body>
+</html>

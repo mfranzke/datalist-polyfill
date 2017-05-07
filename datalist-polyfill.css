@@ -1,0 +1,11 @@
+datalist select {
+	visibility: hidden;
+	
+	position: absolute;
+}
+datalist select.visible {
+	visibility: visible;
+}
+datalist select.visible:empty {
+	visibility: hidden;
+}
