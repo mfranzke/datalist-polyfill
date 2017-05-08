@@ -1,5 +1,5 @@
 /*
-* datalist-polyfill.js - https://github.com/mfranzke/datalist-polypill
+* datalist-polyfill.js - https://github.com/mfranzke/datalist-polyfill
 * @license Copyright(c) 2017 by Maximilian Franzke
 * Supported by Christian and Johannes - many thanks for that !
 *//*

@@ -1,5 +1,5 @@
-# datalist-polypill
-This is a minimal and library dependency-free vanilla JavaScript polypill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
+# datalist-polyfill
+This is a minimal and library dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
 Tested in Safari, for which it's mainly meant for, as all of the others are already supporting it - quite - well: <http://caniuse.com/#feat=datalist>  
 No dependencies, written in plain JavaScript. Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
@@ -46,6 +46,10 @@ See the polyfill in action either by downloading / forking this repo and have a 
 Supported by Christian and Johannes.
 
 ## Changelog
+
+### Version 1.0.1 - 2017/05/08
+Small, but important typo. :-) Thanks Fyrd for mentioning this.
+
 ### Version 1.0.0 - 2017/05/04
 First release.
 
