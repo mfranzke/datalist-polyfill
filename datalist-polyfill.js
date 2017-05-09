@@ -46,7 +46,7 @@
 						}
 
 						var $dataListOptions = $dataList.querySelectorAll( 'option[value]' ),
-							inputValue = $eventTarget.value.toLowerCase(),
+							inputValue = $eventTarget.value,
 							newSelectValues = document.createDocumentFragment(),
 							disabledValues = document.createDocumentFragment(),
 							visible = false;
@@ -54,18 +54,24 @@
 						// if the input contains a value, than ...
 						if ( inputValue !== "" ) {
 
-							// ... sort all entries and
-							var nodeArray = Array.prototype.slice.call( $dataListOptions );
+							// ... create an array out of the options list
+							var nodeArray = Array.prototype.slice.call( $dataListOptions ),
+								selected = false;
 
+							// ... sort all entries and
 							nodeArray.sort( function( a, b ) {
 							    return a.value.localeCompare( b.value );
-							}).forEach( function( opt ) {
+							}).forEach( function( opt, index ) {
 								var optionValue = opt.value;
 
 								// ... put this option into the fragment that is meant to get inserted into the select
 								// "Each option element that is a descendant of the datalist element, that is not disabled, and whose value is a string that isn't the empty string, represents a suggestion. Each suggestion has a value and a label." (W3C)
-							    if ( optionValue !== "" && optionValue.toLowerCase().indexOf( inputValue ) !== -1 && opt.disabled === false ) {
+							    if ( optionValue !== "" && optionValue.toLowerCase().indexOf( inputValue.toLowerCase() ) !== -1 && opt.disabled === false ) {
 								    opt.innerText = optionValue;
+								    
+								    if ( optionValue === inputValue ) {
+								    	selected = index;
+								    }
 
 								    newSelectValues.appendChild( opt );
 
@@ -79,6 +85,9 @@
 
 							// input the options fragment into the datalists select
 							$dataListSelect.appendChild( newSelectValues );
+							
+							// preselect best fitting index
+							$dataListSelect.selectedIndex = selected || 0;
 
 							// input the unused options as siblings next to the select
 							$dataList.appendChild( disabledValues );

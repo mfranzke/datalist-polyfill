@@ -53,6 +53,9 @@ Supported by Christian and Johannes.
 
 ## Changelog
 
+### Version 1.0.3 - 2017/05/09
+better preselection on entries within the dropdown depending on the inputs value
+
 ### Version 1.0.2 - 2017/05/08
 added a package.json file
 
