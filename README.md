@@ -5,7 +5,7 @@ Tested in Safari, for which it's mainly meant for, as all of the others are alre
 No dependencies, written in plain JavaScript. Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
-*	Lightweight: 3.02 kB of JavaScript - less than 1.2 kB gzipped
+*	Lightweight: 3.07 kB of JavaScript - less than 1.3 kB gzipped
 *	Fully flexible to change the data / `<option>`s
 *	Enables core keyboard controls like e.g. the up and down arrow keys, ESC and ENTER
 *	Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
@@ -52,6 +52,9 @@ See the polyfill in action either by downloading / forking this repo and have a 
 Supported by Christian and Johannes.
 
 ## Changelog
+
+### Version 1.1.0 - 2017/05/09
+some small corrections
 
 ### Version 1.0.3 - 2017/05/09
 better preselection on entries within the dropdown depending on the inputs value
