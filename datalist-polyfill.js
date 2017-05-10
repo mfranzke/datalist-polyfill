@@ -55,13 +55,12 @@
 						if ( inputValue !== "" ) {
 
 							// ... create an array out of the options list
-							var nodeArray = Array.prototype.slice.call( $dataListOptions ),
-								selected = false;
+							var nodeArray = Array.prototype.slice.call( $dataListOptions );
 
 							// ... sort all entries and
 							nodeArray.sort( function( a, b ) {
 							    return a.value.localeCompare( b.value );
-							}).forEach( function( opt, index ) {
+							}).forEach( function( opt ) {
 								var optionValue = opt.value;
 
 								// ... put this option into the fragment that is meant to get inserted into the select
@@ -69,10 +68,6 @@
 							    if ( optionValue !== "" && optionValue.toLowerCase().indexOf( inputValue.toLowerCase() ) !== -1 && opt.disabled === false ) {
 								    opt.innerText = optionValue;
 								    
-								    if ( optionValue === inputValue ) {
-								    	selected = index;
-								    }
-
 								    newSelectValues.appendChild( opt );
 
 								    // ... and set the state of the select to get displayed in that case
@@ -87,7 +82,7 @@
 							$dataListSelect.appendChild( newSelectValues );
 							
 							// preselect best fitting index
-							$dataListSelect.selectedIndex = selected || 0;
+							$dataListSelect.selectedIndex = 0;
 
 							// input the unused options as siblings next to the select
 							$dataList.appendChild( disabledValues );
