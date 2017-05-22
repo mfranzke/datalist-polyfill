@@ -21,10 +21,11 @@
 		// function regarding the inputs interactions
 		var inputInputList = function( event ) {
 
-			var $eventTarget = event.target;
+			var $eventTarget = event.target,
+				eventTargetTagName = $eventTarget.tagName;
 
 			// check for whether the events target was an input datalist
-			if ( $eventTarget.matches( 'input[list]' ) ) {
+			if ( eventTargetTagName && eventTargetTagName.toLowerCase() === 'input' && $eventTarget.getAttribute('list') ) {
 
 				var list = $eventTarget.getAttribute( 'list' ),
 					$dataList = document.getElementById( list );
@@ -105,10 +106,11 @@
 		// focus or blur events
 		var changesInputList = function( event ) {
 
-			var $eventTarget = event.target;
+			var $eventTarget = event.target,
+				eventTargetTagName = $eventTarget.tagName;
 
 			// check for whether the events target was an input datalist
-			if ( $eventTarget.matches( 'input[list]' ) ) {
+			if ( eventTargetTagName && eventTargetTagName.toLowerCase() === 'input' && $eventTarget.getAttribute('list') ) {
 
 				var eventType = event.type,
 					list = $eventTarget.getAttribute( 'list' ),
@@ -190,10 +192,11 @@
 		var changeDataListSelect = function( event ) {
 
 			var $eventTarget = event.target,
+				eventTargetTagName = $eventTarget.tagName,
 				message = $eventTarget.parentNode.title;
 
 			// check for whether the events target was a select
-			if ( $eventTarget.matches( 'select' ) ) {
+			if ( eventTargetTagName && eventTargetTagName.toLowerCase() === 'select' ) {
 
 				var eventType = event.type,
 					// ENTER and ESC keys
@@ -222,20 +225,5 @@
 		document.addEventListener( 'focus', changesInputList, true );
 
 
-		// matches() polyfill - just in case ...
-		if (!Element.prototype.matches) {
-		    Element.prototype.matches = 
-		        Element.prototype.matchesSelector || 
-		        Element.prototype.mozMatchesSelector ||
-		        Element.prototype.msMatchesSelector || 
-		        Element.prototype.oMatchesSelector || 
-		        Element.prototype.webkitMatchesSelector ||
-		        function(s) {
-		            var matches = (this.document || this.ownerDocument).querySelectorAll(s),
-		                i = matches.length;
-		            while (--i >= 0 && matches.item(i) !== this) {}
-		            return i > -1;
-		        };
-		}
 	}
 })();

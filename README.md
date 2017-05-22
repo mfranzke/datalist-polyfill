@@ -1,26 +1,28 @@
 # datalist-polyfill
 This is a minimal and library dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
-Tested in Safari, for which it's mainly meant for, as all of the others are already supporting it - quite - well: <http://caniuse.com/#feat=datalist>  
+Tested in Safari, for which it's mainly meant for, as nearly all of the others are already supporting it - quite - well: <http://caniuse.com/#feat=datalist>  
 No dependencies, written in plain JavaScript. Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
-*	Lightweight: 3.04 kB of JavaScript - less than 1.3 kB gzipped
-*	Fully flexible to change the data / `<option>`s
+*	Lightweight: 2.78 kB of JavaScript - less than 1.15 kB gzipped
+*	Fully flexible to change the datalist entries / `<option>`s
 *	Enables core keyboard controls like e.g. the up and down arrow keys, ESC and ENTER
 *	Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
 
 ## Core concepts
 The plugin was designed with the following concepts kept in mind:
 
-*	library dependency-free  
-*	DOM agnostic by event delegation  
-*	code accessibility / readability: because this is what developers even also should take care about regarding themselves
+*	library dependency-free
+*	Supporting DOM changes by event delegation
+*	code accessibility / readability: because this is what we as developers should even also take care about
+
+[![Dependency Status](https://gemnasium.com/badges/github.com/mfranzke/datalist-polyfill.svg)](https://gemnasium.com/github.com/mfranzke/datalist-polyfill)
 
 ## Installation
 Just integrate both the CSS and JavaScript file into your code - et voilà.
 
-You may optionally load via NPM or Bower-
+You may optionally load via NPM or Bower:
 
     $ npm install datalist-polyfill
     $ bower install datalist-polyfill
@@ -31,9 +33,9 @@ Nothing really, just plug it in, it will work out of the box.
 You'd like to set a title-Attribute on the datalist HTML tag, as this would get used as label for the first, disabled entry within the polyfilling select.
 
 ### dynamic HTML (or DHTML, if you like to be a little bit nostalgic)
-In case that you'd like to dynamically add or modify / build your HTML code, you're even also fine with this polyfill, as it's built with event delegation that makes your UI work with a glance - no function to call after DOM manipulation or something similar.
+In case that you'd like to dynamically add or modify / create your HTML code, you're even also good to go with this polyfill, as it's based on event delegation that makes your UI work with a glance - no function to call after DOM manipulation or something similar.
 
-### Changes to the available options
+### Changes to the available `option`s
 If you'd like to make a change to the integrated list of `<option>` elements, feel free to either remove or add them right away - the list would get generated on the fly after the user typed in something into the input field, so I've even also got you covered on this.
 
 You could even also disable `<option>` elements by the disabled attribute if necessary.
@@ -52,6 +54,9 @@ See the polyfill in action either by downloading / forking this repo and have a 
 Supported by Christian and Johannes.
 
 ## Changelog
+
+### Version 1.1.2 - 2017/05/14
+Further simplified the code, so that we could even skip the .matches() polyfill. Yeah. And documentation updates.
 
 ### Version 1.1.1 - 2017/05/10
 fixed another simple bug that lead to an incorrect index being selected - let's skip this, as it's not even the standard behaviour

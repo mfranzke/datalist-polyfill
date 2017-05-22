@@ -1,6 +1,6 @@
 {
   "name": "datalist-polyfill",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "An extremely lightweight and library-dependency-free vanilla JavaScript datalist polyfill.",
   "main": "datalist-polyfill.js",
   "scripts": {
@@ -12,5 +12,17 @@
   },
   "author": "Maximilian Franzke",
   "license": "MIT",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "keywords": [
+  	"datalist",
+  	"autosuggest",
+  	"autosuggester",
+  	"suggest",
+  	"suggester",
+  	"select"
+  ],
+  "bugs": {
+	"url": "https://github.com/mfranzke/datalist-polyfill/issues"
+  },
+  "homepage": "https://github.com/mfranzke/datalist-polyfill"
 }
