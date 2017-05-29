@@ -5,7 +5,7 @@ Tested in Safari, for which it's mainly meant for, as nearly all of the others a
 No dependencies, written in plain JavaScript. Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
-*	Lightweight: 2.78 kB of JavaScript - less than 1.15 kB gzipped
+*	Lightweight: 3.26 kB of JavaScript - less than 1.58 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Enables core keyboard controls like e.g. the up and down arrow keys, ESC and ENTER
 *	Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
@@ -30,7 +30,9 @@ You may optionally load via NPM or Bower:
 ## API
 Nothing really, just plug it in, it will work out of the box.
 
-You'd like to set a title-Attribute on the datalist HTML tag, as this would get used as label for the first, disabled entry within the polyfilling select.
+We're even also enabling the [.options (for `datalist` elements)](https://developer.mozilla.org/en/docs/Web/API/HTMLDataListElement) and [.list (for `input` elements)](https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement) properties according to the specs.
+
+And you'd like to set a title-Attribute on the datalist HTML tag, as this would get used as label for the first, disabled entry within the polyfilling select.
 
 ### dynamic HTML (or DHTML, if you like to be a little bit nostalgic)
 In case that you'd like to dynamically add or modify / create your HTML code, you're even also good to go with this polyfill, as it's based on event delegation that makes your UI work with a glance - no function to call after DOM manipulation or something similar.
@@ -54,6 +56,9 @@ See the polyfill in action either by downloading / forking this repo and have a 
 Supported by Christian and Johannes.
 
 ## Changelog
+
+### Version 1.2.0 - 2017/05/29
+Added .options (for `datalist`s) and .list (for `input`s) properties according to the specs.
 
 ### Version 1.1.2 - 2017/05/14
 Further simplified the code, so that we could even skip the .matches() polyfill. Yeah. And documentation updates.

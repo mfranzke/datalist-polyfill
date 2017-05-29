@@ -17,7 +17,40 @@
 
 	// in case of that the feature doesn't exist, emulate it's functionality
 	if ( !nativedatalist ) {
-
+		
+		// emulate the two properties regarding the datalist and input elements
+		// list property / https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement
+		(function( constructor ) {
+		    if ( constructor &&
+		         constructor.prototype &&
+		         constructor.prototype.list === undefined ) {
+			         Object.defineProperty( constructor.prototype, 'list', {
+			            get: function() {
+				            if ( typeof( this ) === "object" && this instanceof constructor ) {
+				            	var list = this.getAttribute( 'list' );
+						
+								return document.getElementById( list );
+							}
+							return null;
+			            }
+			        });
+			    }
+			})( window.HTMLInputElement );
+		// options property / https://developer.mozilla.org/en/docs/Web/API/HTMLDataListElement
+		(function( constructor ) {
+		    if ( constructor &&
+		         constructor.prototype &&
+		         constructor.prototype.options === undefined ) {
+			         Object.defineProperty( constructor.prototype, 'options', {
+			            get: function() {
+				            if ( typeof( this ) === "object" && this instanceof constructor ) {
+				            	return this.getElementsByTagName( 'option' );
+							}
+			            }
+			        });
+			    }
+			})( window.HTMLElement );
+		
 		// function regarding the inputs interactions
 		var inputInputList = function( event ) {
 
