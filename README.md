@@ -57,6 +57,9 @@ Supported by Christian and Johannes.
 
 ## Changelog
 
+### Version 1.2.1 - 2017/05/29
+Simple code style modifications. Because style matters.
+
 ### Version 1.2.0 - 2017/05/29
 Added .options (for `datalist`s) and .list (for `input`s) properties according to the specs.
 

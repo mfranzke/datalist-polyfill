@@ -8,7 +8,7 @@
 * Elsewhere the functionality gets emulated by a select element.
 */
 
-(function() {
+( function() {
 	'use strict';
 
 	// feature detection
@@ -20,13 +20,13 @@
 		
 		// emulate the two properties regarding the datalist and input elements
 		// list property / https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement
-		(function( constructor ) {
+		( function( constructor ) {
 		    if ( constructor &&
 		         constructor.prototype &&
 		         constructor.prototype.list === undefined ) {
 			         Object.defineProperty( constructor.prototype, 'list', {
 			            get: function() {
-				            if ( typeof( this ) === "object" && this instanceof constructor ) {
+				            if ( typeof( this ) === 'object' && this instanceof constructor ) {
 				            	var list = this.getAttribute( 'list' );
 						
 								return document.getElementById( list );
@@ -37,13 +37,13 @@
 			    }
 			})( window.HTMLInputElement );
 		// options property / https://developer.mozilla.org/en/docs/Web/API/HTMLDataListElement
-		(function( constructor ) {
+		( function( constructor ) {
 		    if ( constructor &&
 		         constructor.prototype &&
 		         constructor.prototype.options === undefined ) {
 			         Object.defineProperty( constructor.prototype, 'options', {
 			            get: function() {
-				            if ( typeof( this ) === "object" && this instanceof constructor ) {
+				            if ( typeof( this ) === 'object' && this instanceof constructor ) {
 				            	return this.getElementsByTagName( 'option' );
 							}
 			            }
@@ -86,7 +86,7 @@
 							visible = false;
 
 						// if the input contains a value, than ...
-						if ( inputValue !== "" ) {
+						if ( inputValue !== '' ) {
 
 							// ... create an array out of the options list
 							var nodeArray = Array.prototype.slice.call( $dataListOptions );
@@ -99,7 +99,7 @@
 
 								// ... put this option into the fragment that is meant to get inserted into the select
 								// "Each option element that is a descendant of the datalist element, that is not disabled, and whose value is a string that isn't the empty string, represents a suggestion. Each suggestion has a value and a label." (W3C)
-							    if ( optionValue !== "" && optionValue.toLowerCase().indexOf( inputValue.toLowerCase() ) !== -1 && opt.disabled === false ) {
+							    if ( optionValue !== '' && optionValue.toLowerCase().indexOf( inputValue.toLowerCase() ) !== -1 && opt.disabled === false ) {
 								    opt.innerText = optionValue;
 								    
 								    newSelectValues.appendChild( opt );
@@ -154,7 +154,7 @@
 
 					var $dataListSelect = $dataList.getElementsByTagName('select')[0],
 						// either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur
-						visible = ( ( eventType === "focus" && event.target.value !== "" ) || ( event.relatedTarget && event.relatedTarget === $dataListSelect ) ),
+						visible = ( ( eventType === 'focus' && event.target.value !== '' ) || ( event.relatedTarget && event.relatedTarget === $dataListSelect ) ),
 						message = $dataList.title;
 
 					// creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
@@ -170,7 +170,7 @@
 						$dataListSelect.setAttribute( 'role', 'listbox' );
 
 						// the select should get positioned underneath the input field ...
-						$dataListSelect.style.marginLeft = "-" + rects[0].width + "px";
+						$dataListSelect.style.marginLeft = '-' + rects[0].width + 'px';
 						$dataListSelect.style.marginTop = rects[0].height + 'px';
 						$dataListSelect.style.minWidth = rects[0].width + 'px';
 
@@ -206,12 +206,12 @@
 					
 					// bind the keyup event on the related dalalists input
 					switch( eventType ) {
-						case "focus":
+						case 'focus':
 							$eventTarget.addEventListener( 'keyup', inputInputList );
 							
 							$eventTarget.addEventListener( 'blur', changesInputList, true );
 						break;
-						case "blur":
+						case 'blur':
 							$eventTarget.removeEventListener( 'keyup', inputInputList );
 							
 							$eventTarget.removeEventListener( 'blur', changesInputList, true );
@@ -233,10 +233,10 @@
 
 				var eventType = event.type,
 					// ENTER and ESC keys
-					visible = ( eventType === "keyup" && ( event.keyCode !== 13 && event.keyCode !== 27 ) );
+					visible = ( eventType === 'keyup' && ( event.keyCode !== 13 && event.keyCode !== 27 ) );
 				
 				// change event or enter key
-				if ( eventType === "change" || ( eventType === "keyup" && event.keyCode === 13 ) ) {
+				if ( eventType === 'change' || ( eventType === 'keyup' && event.keyCode === 13 ) ) {
 
 					var list = $eventTarget.parentNode.id,
 						$inputList = document.querySelector('input[list="' + list + '"]'),
