@@ -7,20 +7,35 @@
 </head>
 <body>
 	
-	<label for="colour">What's your favorite colour:</label>
-	<input type="text" name="colour" id="colour" value="" list="colourlist">
-	<datalist id="colourlist" title="Suggestions to choose from">
-		<option value="Black">
-		<option value="Blue">
-		<option value="Blue'ish" disabled>
-		<option value="Cyan">
-		<option value="Dark Green">
-		<option value="Green">
-		<option value="Grey">
-		<option value="Orange">
-		<option value="Red">
-		<option value="Yellow">
-	</datalist>
+	<fieldset>
+		<legend>What's your favorite animal</legend>
+		
+		<label for="animal">Animal:</label>
+		<input type="text" name="animal" id="animal" value="" list="animallist">
+		<datalist id="animallist" title="Suggestions to choose from">
+			<option value="Cat">
+			<option value="Cow">
+			<option value="Dog">
+			<option value="Horse">
+			<option value="Lion">
+			<option value="Pig" disabled>
+			<option value="Zebra">
+		</datalist>
+	</fieldset>
+	
+	<fieldset>
+		<legend>Whom you'd like to reach out to</legend>
+		
+		<label for="email">Email address(es):</label>
+		<input type="email" name="email" id="email" value="" list="emaillist" multiple>
+		<datalist id="emaillist" title="Email addresses suggestions to choose from">
+			<option value="info@davidhasselhoffonline.com">
+			<option value="john@doe">
+			<option value="kenny@southpark.cc.com" disabled>
+			<option value="moss.m@reynholm.co.uk">
+			<option value="star-lord@galaxy.gov">
+		</datalist>
+	</fieldset>
 
 	
 	<script type="text/javascript" src="datalist-polyfill.js"></script>

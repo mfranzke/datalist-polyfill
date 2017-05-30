@@ -83,7 +83,16 @@
 							inputValue = $eventTarget.value,
 							newSelectValues = document.createDocumentFragment(),
 							disabledValues = document.createDocumentFragment(),
-							visible = false;
+							visible = false,
+							multipleEmails = ( $eventTarget.type === 'email' && $eventTarget.multiple );
+						
+						// in case of type=email and multiple attribute, we would need to split the inputs value into pieces
+						if ( multipleEmails ) {
+							var multipleEntries = inputValue.split( ',' ),
+								relevantIndex = multipleEntries.length - 1;
+							
+							inputValue = multipleEntries[ relevantIndex ].trim();
+						}
 
 						// if the input contains a value, than ...
 						if ( inputValue !== '' ) {
@@ -244,7 +253,16 @@
 
 					// input the selects value into the input on a change within the list
 					if ( $inputList !== null && eventTargetValue.length > 0 && eventTargetValue !== message ) {
-						$inputList.value = eventTargetValue;
+						var inputListValue = $inputList.value,
+							lastSeperator,
+							multipleEmails = ( $inputList.type === 'email' && $inputList.multiple );
+						
+						// in case of type=email and multiple attribute, we need to set up the resulting inputs value differently
+						if ( multipleEmails && ( lastSeperator = inputListValue.lastIndexOf(',') ) > -1 ) {
+							$inputList.value = inputListValue.slice( 0, lastSeperator ) + ',' + eventTargetValue;
+						} else {
+							$inputList.value = eventTargetValue;
+						}
 					}
 				}
 
