@@ -5,11 +5,12 @@ Tested in Safari, for which it's mainly meant for, as nearly all of the others a
 No dependencies, written in plain JavaScript. Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
-*	Lightweight: 3.43 kB of JavaScript - less than 1.68 kB gzipped
+*	Lightweight: 3.52 kB of JavaScript - less than 1.72 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	`input[type=email]` elements multiple attribute
 	*	properties `.options` for `datalist` elements and `.list` for `input` elements
+	*	right to left text-direction
 *	Enables core keyboard controls like e.g. the up and down arrow keys, `ESC` and `ENTER`
 *	Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
 
@@ -49,7 +50,7 @@ You could even also disable `<option>` elements by adding the `disabled` attribu
 See the polyfill in action either by downloading / forking this repo and have a look at `demo.html`, or at the hosted demo on JSFiddle: <https://jsfiddle.net/mfranzke/s6awjfze/>
 
 ## things to keep in mind
-*	The demo HTML code is meant to be simple - I do know that things like a surrounding `<form>` are missing. But lets focus on the relevant tags that this polyfill is all about for the demo.
+*	The demo HTML code is meant to be simple - I do know that things like a surrounding `<form>` are missing, and I've left the latin letters and english expressions even also for the right to left text-direction example. But lets focus on the relevant tags that this polyfill is all about for the demo.
 *	After I thought it through and even also did some experiments, I've finally chosen the `<select>` element to polyfill the functionality of the `<datalist>` functionality, as it brought most of the functionality, whereas I accepted that it doesn't behave and doesn't look totally equally.  
 	*	As I wanted to mainly focus on native elements in the most low level / simple way instead of visually emulating a list and than afterwards regain all of the functionality via a lot of JavaScript logic, I've ended up with this element, that even also knows how to play nicely with nested `<option>` elements.
 	*	I even also tried its `multiple` attribute, as this is most likely even already what you're up to regarding appearance, but it does result in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing ...
@@ -59,6 +60,9 @@ See the polyfill in action either by downloading / forking this repo and have a 
 Supported by Christian and Johannes.
 
 ## Changelog
+
+### Version 1.4.0 - 2017/06/09
+Added RTL text-direction support
 
 ### Version 1.3.0 - 2017/05/30
 Added support for multiple email addresses, separated by comma. And again, updated documentation slightly. And demo accordingly.

@@ -149,7 +149,8 @@
 		var changesInputList = function( event ) {
 
 			var $eventTarget = event.target,
-				eventTargetTagName = $eventTarget.tagName;
+				eventTargetTagName = $eventTarget.tagName,
+				inputStyles = window.getComputedStyle( $eventTarget );
 
 			// check for whether the events target was an input datalist
 			if ( eventTargetTagName && eventTargetTagName.toLowerCase() === 'input' && $eventTarget.getAttribute('list') ) {
@@ -179,7 +180,12 @@
 						$dataListSelect.setAttribute( 'role', 'listbox' );
 
 						// the select should get positioned underneath the input field ...
-						$dataListSelect.style.marginLeft = '-' + rects[0].width + 'px';
+						if ( inputStyles.direction === "rtl" ) {
+							$dataListSelect.style.marginRight = '-' + rects[0].width + 'px';
+						} else {
+							$dataListSelect.style.marginLeft = '-' + rects[0].width + 'px';
+						}
+
 						$dataListSelect.style.marginTop = rects[0].height + 'px';
 						$dataListSelect.style.minWidth = rects[0].width + 'px';
 
