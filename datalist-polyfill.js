@@ -73,7 +73,7 @@
 
 						// on an ESC key press within the input, let's break here and hide the select
 						if ( event.keyCode === 27 ) {
-							$dataListSelect.classList.remove( 'visible' );
+							$dataListSelect.setAttributeNode( document.createAttribute( 'hidden' ) );
 							$dataListSelect.setAttribute( 'aria-hidden', true );
 
 							return;
@@ -132,7 +132,11 @@
 						}
 
 						// toggle the visibility of the select according to previous checks
-						$dataListSelect.classList.toggle( 'visible', visible );
+						if ( visible ) {
+							$dataListSelect.removeAttribute( 'hidden' );
+						} else {
+							$dataListSelect.setAttributeNode( document.createAttribute( 'hidden' ) );
+						}
 						$dataListSelect.setAttribute( 'aria-hidden', !visible );
 
 						// on arrow up or down keys, focus the select
@@ -174,6 +178,10 @@
 
 						$dataListSelect = document.createElement( 'select' );
 						
+						// set general styling related definitions
+						$dataListSelect.setAttributeNode( document.createAttribute( 'hidden' ) );
+						$dataListSelect.style.position = "absolute";
+
 						// WAI ARIA attributes
 						$dataListSelect.setAttribute( 'aria-hidden', true );
 						$dataListSelect.setAttribute( 'aria-live', 'polite' );
@@ -216,7 +224,11 @@
 					}
 
 					// toggle the visibility of the select according to previous checks
-					$dataListSelect.classList.toggle( 'visible', visible );
+					if ( visible ) {
+						$dataListSelect.removeAttribute( 'hidden' );
+					} else {
+						$dataListSelect.setAttributeNode( document.createAttribute( 'hidden' ) );
+					}
 					$dataListSelect.setAttribute( 'aria-hidden', !visible );
 					
 					// bind the keyup event on the related dalalists input
@@ -273,7 +285,11 @@
 				}
 
 				// toggle the visibility of the select according to previous checks
-				$eventTarget.classList.toggle( 'visible', visible );
+				if ( visible ) {
+					$eventTarget.removeAttribute( 'hidden' );
+				} else {
+					$eventTarget.setAttributeNode( document.createAttribute( 'hidden' ) );
+				}
 				$eventTarget.setAttribute( 'aria-hidden', !visible );
 			}
 		};

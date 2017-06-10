@@ -5,7 +5,7 @@ Tested in Safari, for which it's mainly meant for, as nearly all of the others a
 No dependencies, written in plain JavaScript. Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
-*	Lightweight: 3.52 kB of JavaScript - less than 1.72 kB gzipped
+*	Lightweight: 3.78 kB of JavaScript - less than 1.74 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	`input[type=email]` elements multiple attribute
@@ -60,6 +60,9 @@ See the polyfill in action either by downloading / forking this repo and have a 
 Supported by Christian and Johannes.
 
 ## Changelog
+
+### Version 1.5.0 - 2017/06/10
+Simplified the styling and got rid of the external CSS files / dependency. You could remove that one now. Yeah!
 
 ### Version 1.4.0 - 2017/06/09
 Added RTL text-direction support
