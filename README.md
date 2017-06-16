@@ -61,6 +61,9 @@ Supported by Christian, Johannes and Michael / @mischah. Thank you very much for
 
 ## Changelog
 
+### Version 1.6.1 - 2017/06/16
+Introduced speaking variables for the different keycodes. And implemented some feedback by flow. As well as additional code simplifications.
+
 ### Version 1.6.0 - 2017/06/16
 This is so far the biggest and greatest update ! Depending of the feedback by Michael the visual appearance has changed and will better emulate the expected layout as in other browsers (on non-touch interactions). That for the script is creating the polyfilling select as a multiple-selection type, which emulates the expected „form“ better. And better positioning as well as styling the polyfilling select according to the input field, like e.g. even also set the polyfilling selects border-radius equally as the one by the polyfilled input.
 

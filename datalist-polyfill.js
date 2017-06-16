@@ -1,7 +1,7 @@
 /*
 * datalist-polyfill.js - https://github.com/mfranzke/datalist-polyfill
 * @license Copyright(c) 2017 by Maximilian Franzke
-* Supported by Christian and Johannes - many thanks for that !
+* Supported by Christian, Johannes and Michael - many thanks for that !
 *//*
 * A lightweight and library dependency free vanilla JavaScript datalist polyfill.
 * Tests for native support of an inputs elements datalist functionality.
@@ -52,7 +52,12 @@
 			})( window.HTMLElement );
 		
 		// identify whether a select multiple is feasible
-		var selectMultiple = true;
+		var selectMultiple = true,
+		// introduced speaking variables for the different keycodes
+			keyENTER = 13,
+			keyESC = 27,
+			keyUP = 38,
+			keyDOWN = 40;
 			
 		// differentiate for touch interactions, adapted by https://medium.com/@david.gilbertson/the-only-way-to-detect-touch-with-javascript-7791a3346685
 		window.addEventListener( 'touchstart' , function onFirstTouch() {
@@ -82,9 +87,9 @@
 					if ( $dataListSelect !== undefined ) {
 
 						// on an ESC key press within the input, let's break here and hide the select
-						if ( event.keyCode === 27 ) {
+						if ( event.keyCode === keyESC ) {
 							$dataListSelect.setAttributeNode( document.createAttribute( 'hidden' ) );
-							$dataListSelect.setAttribute( 'aria-hidden', true );
+							$dataListSelect.setAttribute( 'aria-hidden', 'true' );
 
 							return;
 						}
@@ -149,10 +154,10 @@
 						} else {
 							$dataListSelect.setAttributeNode( document.createAttribute( 'hidden' ) );
 						}
-						$dataListSelect.setAttribute( 'aria-hidden', !visible );
+						$dataListSelect.setAttribute( 'aria-hidden', (!visible).toString() );
 
 						// on arrow up or down keys, focus the select
-						if ( event.keyCode === 38 || event.keyCode === 40 ) {
+						if ( event.keyCode === keyUP || event.keyCode === keyDOWN ) {
 
 							$dataListSelect.focus();
 						}
@@ -186,14 +191,13 @@
 					// creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
 					if ( $dataListSelect === undefined ) {
 						var rects = $eventTarget.getClientRects(),
-							inputStyle = window.getComputedStyle( $eventTarget ),
 						// measurements
-							inputStyleMarginRight = parseFloat( inputStyle.marginRight ),
-							inputStyleMarginLeft = parseFloat( inputStyle.marginLeft );
-						
+							inputStyleMarginRight = parseFloat( inputStyles.getPropertyValue( 'margin-right' ) ),
+							inputStyleMarginLeft = parseFloat( inputStyles.getPropertyValue( 'margin-left' ) );
+
 						$dataListSelect = document.createElement( 'select' );
 						if ( selectMultiple ) {
-							$dataListSelect.setAttribute( 'multiple', true );
+							$dataListSelect.setAttribute( 'multiple', 'true' );
 						}
 						
 						// set general styling related definitions
@@ -201,19 +205,19 @@
 						$dataListSelect.style.position = "absolute";
 
 						// WAI ARIA attributes
-						$dataListSelect.setAttribute( 'aria-hidden', true );
+						$dataListSelect.setAttribute( 'aria-hidden', 'true' );
 						$dataListSelect.setAttribute( 'aria-live', 'polite' );
 						$dataListSelect.setAttribute( 'role', 'listbox' );
 
 						// the select should get positioned underneath the input field ...
-						if ( inputStyles.direction === "rtl" ) {
+						if ( inputStyles.getPropertyValue( 'direction' ) === "rtl" ) {
 							$dataListSelect.style.marginRight = '-' + ( rects[0].width + inputStyleMarginLeft ) + 'px';
 						} else {
 							$dataListSelect.style.marginLeft = '-' + ( rects[0].width + inputStyleMarginRight ) + 'px';
 						}
 
 						// set the polyfilling selects border-radius equally as the one by the polyfilled input
-						$dataListSelect.style.borderRadius = inputStyle.borderRadius;
+						$dataListSelect.style.borderRadius = inputStyles.getPropertyValue( 'border-radius' );
 
 						$dataListSelect.style.marginTop = rects[0].height + 'px';
 						$dataListSelect.style.minWidth = rects[0].width + 'px';
@@ -259,7 +263,7 @@
 					} else {
 						$dataListSelect.setAttributeNode( document.createAttribute( 'hidden' ) );
 					}
-					$dataListSelect.setAttribute( 'aria-hidden', !visible );
+					$dataListSelect.setAttribute( 'aria-hidden', (!visible).toString() );
 					
 					// bind the keyup event on the related dalalists input
 					switch( eventType ) {
@@ -292,10 +296,10 @@
 					message = $datalist.title,
 					eventType = event.type,
 					// ENTER and ESC
-					visible = ( eventType === 'keyup' && ( event.keyCode !== 13 && event.keyCode !== 27 ) );
+					visible = ( eventType === 'keyup' && ( event.keyCode !== keyENTER && event.keyCode !== keyESC ) );
 				
 				// change or mouseup event or ENTER key
-				if ( eventType === 'change' || eventType === 'mouseup' || ( eventType === 'keyup' && event.keyCode === 13 ) ) {
+				if ( eventType === 'change' || eventType === 'mouseup' || ( eventType === 'keyup' && event.keyCode === keyENTER ) ) {
 
 					var list = $datalist.id,
 						$inputList = document.querySelector('input[list="' + list + '"]'),
@@ -325,7 +329,7 @@
 				} else {
 					$select.setAttributeNode( document.createAttribute( 'hidden' ) );
 				}
-				$select.setAttribute( 'aria-hidden', !visible );
+				$select.setAttribute( 'aria-hidden', (!visible).toString() );
 			}
 		};
 
