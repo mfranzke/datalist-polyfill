@@ -11,6 +11,7 @@ No dependencies, written in plain JavaScript. Released under the MIT License: <h
 	*	`input[type=email]` elements multiple attribute
 	*	properties `.options` for `datalist` elements and `.list` for `input` elements
 	*	right to left text-direction
+	*	non-touch and touch interactions
 *	Enables core keyboard controls like e.g. the up and down arrow keys, `ESC` and `ENTER`
 *	Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
 
@@ -36,7 +37,7 @@ Nothing really, just plug it in, it will work out of the box.
 
 We're even also enabling the [`.options` (for `datalist` elements)](https://developer.mozilla.org/en/docs/Web/API/HTMLDataListElement) and [`.list` (for `input` elements)](https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement) properties according to the specs.
 
-And you'd like to set a `title`-Attribute on the `<datalist>` HTML tag, as this would get used as label for the first, disabled entry within the polyfilling select.
+And you'd like to set a `title`-Attribute on the `<datalist>` HTML tag, as this would get used as label for the first, disabled entry within the polyfilling select on non-touch interactions.
 
 ### dynamic HTML (or DHTML, if you like to be a little bit nostalgic)
 In case that you'd like to dynamically add or modify / create your HTML code, you're even also good to go with this polyfill, as it's based on event delegation that makes your UI work easily - no (refresh) function to call after DOM manipulation or something similar.
@@ -53,13 +54,15 @@ See the polyfill in action either by downloading / forking this repo and have a 
 *	The demo HTML code is meant to be simple - I do know that things like a surrounding `<form>` are missing, and I've left the latin letters and english expressions even also for the right to left text-direction example. But lets focus on the relevant tags that this polyfill is all about for the demo.
 *	After I thought it through and even also did some experiments, I've finally chosen the `<select>` element to polyfill the functionality of the `<datalist>` functionality, as it brought most of the functionality, whereas I accepted that it doesn't behave and doesn't look totally equally.  
 	*	As I wanted to mainly focus on native elements in the most low level / simple way instead of visually emulating a list and than afterwards regain all of the functionality via a lot of JavaScript logic, I've ended up with this element, that even also knows how to play nicely with nested `<option>` elements.
-	*	I even also tried its `multiple` attribute, as this is most likely even already what you're up to regarding appearance, but it does result in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing ...
-	*	If you'd like to support oldies, but goldies like Internet Exlorer 9 and below, you'll even also need to include some `classlist` polyfill  
+	*	I've previously decided against using the `multiple` attribute, as I wanted to kind of strictly fulfill the form follows function concept - but a nice and fruitful discussion with Michael let me think that through again and change my mind (and attitude) on that, as this is most likely even already what you're up to regarding appearance. But it still does result in - surprise - the possibility for multiple selections, which I'm still thinking about whether I need to fix this or keep it as an easter egg ...
 
 ## Credits
-Supported by Christian and Johannes.
+Supported by Christian, Johannes and Michael / @mischah. Thank you very much for that, highly appreciated !
 
 ## Changelog
+
+### Version 1.6.0 - 2017/06/16
+This is so far the biggest and greatest update ! Depending of the feedback by Michael the visual appearance has changed and will better emulate the expected layout as in other browsers (on non-touch interactions). That for the script is creating the polyfilling select as a multiple-selection type, which emulates the expected „form“ better. And better positioning as well as styling the polyfilling select according to the input field, like e.g. even also set the polyfilling selects border-radius equally as the one by the polyfilled input.
 
 ### Version 1.5.0 - 2017/06/10
 Simplified the styling and got rid of the external CSS files / dependency. You could remove that one now. Yeah!

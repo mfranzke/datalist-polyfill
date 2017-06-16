@@ -51,14 +51,24 @@
 			    }
 			})( window.HTMLElement );
 		
+		// identify whether a select multiple is feasible
+		var selectMultiple = true;
+			
+		// differentiate for touch interactions, adapted by https://medium.com/@david.gilbertson/the-only-way-to-detect-touch-with-javascript-7791a3346685
+		window.addEventListener( 'touchstart' , function onFirstTouch() {
+			selectMultiple = false;
+			
+			window.removeEventListener( 'touchstart', onFirstTouch );
+		});
+		
 		// function regarding the inputs interactions
 		var inputInputList = function( event ) {
 
 			var $eventTarget = event.target,
-				eventTargetTagName = $eventTarget.tagName;
+				eventTargetTagName = $eventTarget.tagName.toLowerCase();
 
 			// check for whether the events target was an input datalist
-			if ( eventTargetTagName && eventTargetTagName.toLowerCase() === 'input' && $eventTarget.getAttribute('list') ) {
+			if ( eventTargetTagName && eventTargetTagName === 'input' && $eventTarget.getAttribute('list') ) {
 
 				var list = $eventTarget.getAttribute( 'list' ),
 					$dataList = document.getElementById( list );
@@ -124,8 +134,10 @@
 							// input the options fragment into the datalists select
 							$dataListSelect.appendChild( newSelectValues );
 							
-							// preselect best fitting index
-							$dataListSelect.selectedIndex = 0;
+							if ( !selectMultiple ) {
+								// preselect best fitting index
+								$dataListSelect.selectedIndex = 0;
+							}
 
 							// input the unused options as siblings next to the select
 							$dataList.appendChild( disabledValues );
@@ -153,11 +165,11 @@
 		var changesInputList = function( event ) {
 
 			var $eventTarget = event.target,
-				eventTargetTagName = $eventTarget.tagName,
+				eventTargetTagName = $eventTarget.tagName.toLowerCase(),
 				inputStyles = window.getComputedStyle( $eventTarget );
 
 			// check for whether the events target was an input datalist
-			if ( eventTargetTagName && eventTargetTagName.toLowerCase() === 'input' && $eventTarget.getAttribute('list') ) {
+			if ( eventTargetTagName && eventTargetTagName === 'input' && $eventTarget.getAttribute('list') ) {
 
 				var eventType = event.type,
 					list = $eventTarget.getAttribute( 'list' ),
@@ -174,9 +186,15 @@
 					// creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
 					if ( $dataListSelect === undefined ) {
 						var rects = $eventTarget.getClientRects(),
-							$message = document.createElement('option');
-
+							inputStyle = window.getComputedStyle( $eventTarget ),
+						// measurements
+							inputStyleMarginRight = parseFloat( inputStyle.marginRight ),
+							inputStyleMarginLeft = parseFloat( inputStyle.marginLeft );
+						
 						$dataListSelect = document.createElement( 'select' );
+						if ( selectMultiple ) {
+							$dataListSelect.setAttribute( 'multiple', true );
+						}
 						
 						// set general styling related definitions
 						$dataListSelect.setAttributeNode( document.createAttribute( 'hidden' ) );
@@ -189,26 +207,38 @@
 
 						// the select should get positioned underneath the input field ...
 						if ( inputStyles.direction === "rtl" ) {
-							$dataListSelect.style.marginRight = '-' + rects[0].width + 'px';
+							$dataListSelect.style.marginRight = '-' + ( rects[0].width + inputStyleMarginLeft ) + 'px';
 						} else {
-							$dataListSelect.style.marginLeft = '-' + rects[0].width + 'px';
+							$dataListSelect.style.marginLeft = '-' + ( rects[0].width + inputStyleMarginRight ) + 'px';
 						}
+
+						// set the polyfilling selects border-radius equally as the one by the polyfilled input
+						$dataListSelect.style.borderRadius = inputStyle.borderRadius;
 
 						$dataListSelect.style.marginTop = rects[0].height + 'px';
 						$dataListSelect.style.minWidth = rects[0].width + 'px';
 
-						// ... and it's first entry should contain the localized message to select an entry
-						$message.innerText = message;
-						// ... and disable this option, as it shouldn't get selected by the user
-						$message.disabled = true;
-						// ... and finally insert it into the select
-						$dataListSelect.appendChild( $message );
-
+						if ( !selectMultiple ) {
+							var $message = document.createElement('option');
+							
+							// ... and it's first entry should contain the localized message to select an entry
+							$message.innerText = message;
+							// ... and disable this option, as it shouldn't get selected by the user
+							$message.disabled = true;
+							// ... and finally insert it into the select
+							$dataListSelect.appendChild( $message );
+						}
+						
 						// add select to datalist element ...
 						$dataList.appendChild( $dataListSelect );
 
 						// ... and our upfollowing function to the change event
-						$dataListSelect.addEventListener( 'change', changeDataListSelect );
+						
+						if ( !selectMultiple ) {
+							$dataListSelect.addEventListener( 'change', changeDataListSelect );
+						} else {
+							$dataListSelect.addEventListener( 'mouseup', changeDataListSelect );
+						}
 						$dataListSelect.addEventListener( 'blur', changeDataListSelect );
 						$dataListSelect.addEventListener( 'keyup', changeDataListSelect );
 
@@ -252,45 +282,50 @@
 		var changeDataListSelect = function( event ) {
 
 			var $eventTarget = event.target,
-				eventTargetTagName = $eventTarget.tagName,
-				message = $eventTarget.parentNode.title;
+				eventTargetTagName = $eventTarget.tagName.toLowerCase();
 
-			// check for whether the events target was a select
-			if ( eventTargetTagName && eventTargetTagName.toLowerCase() === 'select' ) {
+			// check for whether the events target was a select or an option
+			if ( eventTargetTagName && ( eventTargetTagName === 'select' || eventTargetTagName === 'option' ) ) {
 
-				var eventType = event.type,
-					// ENTER and ESC keys
+				var $select = ( eventTargetTagName === 'select' ) ? $eventTarget : $eventTarget.parentNode,
+					$datalist = $select.parentNode,
+					message = $datalist.title,
+					eventType = event.type,
+					// ENTER and ESC
 					visible = ( eventType === 'keyup' && ( event.keyCode !== 13 && event.keyCode !== 27 ) );
 				
-				// change event or enter key
-				if ( eventType === 'change' || ( eventType === 'keyup' && event.keyCode === 13 ) ) {
+				// change or mouseup event or ENTER key
+				if ( eventType === 'change' || eventType === 'mouseup' || ( eventType === 'keyup' && event.keyCode === 13 ) ) {
 
-					var list = $eventTarget.parentNode.id,
+					var list = $datalist.id,
 						$inputList = document.querySelector('input[list="' + list + '"]'),
-						eventTargetValue = $eventTarget.value;
+						selectValue = $select.value;
 
 					// input the selects value into the input on a change within the list
-					if ( $inputList !== null && eventTargetValue.length > 0 && eventTargetValue !== message ) {
+					if ( $inputList !== null && selectValue.length > 0 && selectValue !== message ) {
 						var inputListValue = $inputList.value,
 							lastSeperator,
 							multipleEmails = ( $inputList.type === 'email' && $inputList.multiple );
 						
 						// in case of type=email and multiple attribute, we need to set up the resulting inputs value differently
 						if ( multipleEmails && ( lastSeperator = inputListValue.lastIndexOf(',') ) > -1 ) {
-							$inputList.value = inputListValue.slice( 0, lastSeperator ) + ',' + eventTargetValue;
+							$inputList.value = inputListValue.slice( 0, lastSeperator ) + ',' + selectValue;
 						} else {
-							$inputList.value = eventTargetValue;
+							$inputList.value = selectValue;
 						}
+						
+						// set the visibility to false afterwards, as we're done here
+						visible = false;
 					}
 				}
 
 				// toggle the visibility of the select according to previous checks
 				if ( visible ) {
-					$eventTarget.removeAttribute( 'hidden' );
+					$select.removeAttribute( 'hidden' );
 				} else {
-					$eventTarget.setAttributeNode( document.createAttribute( 'hidden' ) );
+					$select.setAttributeNode( document.createAttribute( 'hidden' ) );
 				}
-				$eventTarget.setAttribute( 'aria-hidden', !visible );
+				$select.setAttribute( 'aria-hidden', !visible );
 			}
 		};
 
