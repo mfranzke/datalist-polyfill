@@ -5,7 +5,7 @@ Tested in Safari, for which it's mainly meant for, as nearly all of the others a
 No dependencies, written in plain JavaScript. Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
-*	Lightweight: 3.78 kB of JavaScript - less than 1.74 kB gzipped
+*	Lightweight: 4.42 kB of JavaScript - less than 2 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	`input[type=email]` elements multiple attribute
@@ -60,6 +60,9 @@ See the polyfill in action either by downloading / forking this repo and have a 
 Supported by Christian, Johannes and Michael / @mischah. Thank you very much for that, highly appreciated !
 
 ## Changelog
+
+### Version 1.6.2 - 2017/06/28
+Optimized the behavior to select the entries within the polyfilling `select[multiple]` on using the up and down arrow keys from the polyfilled `input[list]`.
 
 ### Version 1.6.1 - 2017/06/16
 Introduced speaking variables for the different keycodes. And implemented some feedback by flow. As well as additional code simplifications.

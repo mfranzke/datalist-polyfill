@@ -138,10 +138,24 @@
 
 							// input the options fragment into the datalists select
 							$dataListSelect.appendChild( newSelectValues );
+
+							var firstEntry = 0,
+								lastEntry = $dataListSelect.options.length - 1;
 							
 							if ( !selectMultiple ) {
 								// preselect best fitting index
-								$dataListSelect.selectedIndex = 0;
+								$dataListSelect.selectedIndex = firstEntry;
+								
+							} else if ( $dataListSelect.selectedIndex === -1 ) {
+								
+								switch( event.keyCode ) {
+									case keyUP:
+										$dataListSelect.selectedIndex = lastEntry;
+									break;
+									case keyDOWN:
+										$dataListSelect.selectedIndex = firstEntry;
+									break;
+								}
 							}
 
 							// input the unused options as siblings next to the select
