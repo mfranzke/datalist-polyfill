@@ -94,7 +94,7 @@
 							return;
 						}
 
-						var $dataListOptions = $dataList.querySelectorAll( 'option[value]' ),
+						var $dataListOptions = $dataList.getElementsByTagName( 'option' ),
 							inputValue = $eventTarget.value,
 							newSelectValues = document.createDocumentFragment(),
 							disabledValues = document.createDocumentFragment(),
@@ -124,7 +124,18 @@
 								// ... put this option into the fragment that is meant to get inserted into the select
 								// "Each option element that is a descendant of the datalist element, that is not disabled, and whose value is a string that isn't the empty string, represents a suggestion. Each suggestion has a value and a label." (W3C)
 							    if ( optionValue !== '' && optionValue.toLowerCase().indexOf( inputValue.toLowerCase() ) !== -1 && opt.disabled === false ) {
-								    opt.innerText = optionValue;
+								    
+								    // manipulating the option inner text, that would get displayed
+								    var label = opt.label || opt.innerText.trim(),
+								    	labelValueSeperator = ' / ',
+								    	labelOptionPart = label.substr(0, optionValue.length + labelValueSeperator.length),
+								    	optionPart = optionValue + labelValueSeperator;
+
+								    if ( label !== optionValue && labelOptionPart !== optionPart ) {
+									    
+									    // the label should be either value / label in case of that they are different, or just the option elements value
+									    opt.label = ( label ) ? optionValue + labelValueSeperator + label : optionValue;
+								    }
 								    
 								    newSelectValues.appendChild( opt );
 

@@ -5,13 +5,14 @@ Tested in Safari, for which it's mainly meant for, as nearly all of the others a
 No dependencies, written in plain JavaScript. Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
-*	Lightweight: 4.42 kB of JavaScript - less than 2 kB gzipped
+*	Lightweight: 4.54 kB of JavaScript - less than 2 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	`input[type=email]` elements multiple attribute
 	*	properties `.options` for `datalist` elements and `.list` for `input` elements
 	*	right to left text-direction
 	*	non-touch and touch interactions
+	*	different forms of `option` declarations
 *	Enables core keyboard controls like e.g. the up and down arrow keys, `ESC` and `ENTER`
 *	Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
 
@@ -60,6 +61,9 @@ See the polyfill in action either by downloading / forking this repo and have a 
 Supported by Christian, Johannes and Michael / @mischah. Thank you very much for that, highly appreciated !
 
 ## Changelog
+
+### Version 1.7.0 - 2017/06/29
+As mentioned by @aFarkas [within his review](https://github.com/h5bp/html5please/issues/18), `option` elements could be of some different formats. This release especially follows [the spec](https://www.w3.org/TR/html5/forms.html#the-datalist-element) regarding the aspect that "Each suggestion has a value and a label.". 
 
 ### Version 1.6.2 - 2017/06/28
 Optimized the behavior to select the entries within the polyfilling `select[multiple]` on using the up and down arrow keys from the polyfilled `input[list]`.

@@ -51,6 +51,28 @@
 		</datalist>
 	</fieldset>
 
+	<fieldset>
+		<legend>Different option declarations</legend>
+
+		<code>
+			&lt;option value=&quot;option 1&quot;&gt;<br>
+			&lt;option&gt;option 2&lt;/option&gt;<br>
+			&lt;option value=&quot;option value 3&quot;&gt;option label 3&lt;/option&gt;<br>
+			&lt;option value=&quot;option value 4&quot; label=&quot;option label 4&quot;&gt;
+		</code>
+
+		<p>thank you @aFarkas for your great overview: <a href="https://github.com/h5bp/html5please/issues/18">https://github.com/h5bp/html5please/issues/18</a></p>
+		
+		<label for="animal">Options:</label>	
+		<input type="text" name="options" id="options" value="" list="optionlist">
+		<datalist id="optionlist" title="Choose an option">
+			<option value="option 1">
+			<option>option 2</option>
+			<option value="option value 3">option label 3</option>
+			<option value="option value 4" label="option label 4">
+		</datalist>
+	</fieldset>
+
 	
 	<script type="text/javascript" src="datalist-polyfill.js"></script>
 
