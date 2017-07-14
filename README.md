@@ -5,9 +5,11 @@ Tested in Safari, for which it's mainly meant for, as nearly all of the others a
 No dependencies, written in plain JavaScript. Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
-*	Lightweight: 4.54 kB of JavaScript - less than 2 kB gzipped
+*	Lightweight: 4.61 kB of JavaScript - less than 1.73 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
+	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
+	*	... while leaving the others like color or date related, as those would most likely need another polyfill to „work“ correctly or have a meaningful UI
 	*	`input[type=email]` elements multiple attribute
 	*	properties `.options` for `datalist` elements and `.list` for `input` elements
 	*	right to left text-direction
@@ -61,6 +63,9 @@ See the polyfill in action either by downloading / forking this repo and have a 
 Supported by Christian, Johannes and Michael / @mischah. Thank you very much for that, highly appreciated !
 
 ## Changelog
+
+### Version 1.8.0 - 2017/07/14
+Restricted the polyfill to only work with relevant input types; we’d like to exclude the ones that even already need another polyfill to „work“ correctly or have a meaningful UI, like e.g. color or date-related ones, as those polyfills should handle the support of the datalist themselves depending on their own functionality.
 
 ### Version 1.7.0 - 2017/06/29
 As mentioned by @aFarkas [within his review](https://github.com/h5bp/html5please/issues/18), `option` elements could be of some different formats. This release especially follows [the spec](https://www.w3.org/TR/html5/forms.html#the-datalist-element) regarding the aspect that "Each suggestion has a value and a label.". 

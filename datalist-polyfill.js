@@ -53,11 +53,14 @@
 		
 		// identify whether a select multiple is feasible
 		var selectMultiple = true,
+		
 		// introduced speaking variables for the different keycodes
 			keyENTER = 13,
 			keyESC = 27,
 			keyUP = 38,
-			keyDOWN = 40;
+			keyDOWN = 40,
+			
+			supportedTypes = [ 'text', 'email', 'number', 'search', 'tel', 'url' ];
 			
 		// differentiate for touch interactions, adapted by https://medium.com/@david.gilbertson/the-only-way-to-detect-touch-with-javascript-7791a3346685
 		window.addEventListener( 'touchstart' , function onFirstTouch() {
@@ -196,10 +199,11 @@
 
 			var $eventTarget = event.target,
 				eventTargetTagName = $eventTarget.tagName.toLowerCase(),
+				inputType = $eventTarget.type,
 				inputStyles = window.getComputedStyle( $eventTarget );
 
-			// check for whether the events target was an input datalist
-			if ( eventTargetTagName && eventTargetTagName === 'input' && $eventTarget.getAttribute('list') ) {
+			// check for whether the events target was an input datalist and whether it's of one of the supported input types defined above
+			if ( eventTargetTagName && eventTargetTagName === 'input' && $eventTarget.getAttribute('list') && supportedTypes.indexOf( inputType ) > -1 ) {
 
 				var eventType = event.type,
 					list = $eventTarget.getAttribute( 'list' ),
