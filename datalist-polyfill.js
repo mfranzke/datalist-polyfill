@@ -128,17 +128,22 @@
 								// "Each option element that is a descendant of the datalist element, that is not disabled, and whose value is a string that isn't the empty string, represents a suggestion. Each suggestion has a value and a label." (W3C)
 							    if ( optionValue !== '' && optionValue.toLowerCase().indexOf( inputValue.toLowerCase() ) !== -1 && opt.disabled === false ) {
 								    
-								    // manipulating the option inner text, that would get displayed
-								    var label = opt.label || opt.innerText.trim(),
+								    var label = opt.label,
 								    	labelValueSeperator = ' / ',
 								    	labelOptionPart = label.substr(0, optionValue.length + labelValueSeperator.length),
 								    	optionPart = optionValue + labelValueSeperator;
 
-								    if ( label !== optionValue && labelOptionPart !== optionPart ) {
+								    // the innertext should be value / label in case of that they are different
+								    if ( label && label !== optionValue && labelOptionPart !== optionPart ) {
+									    opt.innerText = optionValue + labelValueSeperator + label;
 									    
-									    // the label should be either value / label in case of that they are different, or just the option elements value
-									    opt.label = ( label ) ? optionValue + labelValueSeperator + label : optionValue;
-								    }
+									    // remove the label attribute, as it's being displayed differently on desktop and iOS Safari for our construct
+									    opt.setAttribute( 'data-label', opt.getAttribute( 'label' ) );
+									    opt.removeAttribute( 'label' );
+									} else // manipulating the option inner text, that would get displayed
+								    if ( !opt.innerText.trim() ) {
+									    opt.innerText = optionValue;
+									}
 								    
 								    newSelectValues.appendChild( opt );
 

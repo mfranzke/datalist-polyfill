@@ -5,7 +5,7 @@ Tested in Safari, for which it's mainly meant for, as nearly all of the others a
 No dependencies, written in plain JavaScript. Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
-*	Lightweight: 4.61 kB of JavaScript - less than 1.73 kB gzipped
+*	Lightweight: 4.7 kB of JavaScript, around 1.75 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
@@ -63,6 +63,9 @@ See the polyfill in action either by downloading / forking this repo and have a 
 Supported by Christian, Johannes and Michael / @mischah. Thank you very much for that, highly appreciated !
 
 ## Changelog
+
+### Version 1.8.1 - 2017/07/18
+Bugfix regarding the handling of the label values.
 
 ### Version 1.8.0 - 2017/07/14
 Restricted the polyfill to only work with relevant input types; we’d like to exclude the ones that even already need another polyfill to „work“ correctly or have a meaningful UI, like e.g. color or date-related ones, as those polyfills should handle the support of the datalist themselves depending on their own functionality.
