@@ -52,7 +52,7 @@
 			})( window.HTMLElement );
 		
 		// identify whether a select multiple is feasible
-		var selectMultiple = true,
+		var touched = false,
 		
 		// introduced speaking variables for the different keycodes
 			keyENTER = 13,
@@ -64,7 +64,7 @@
 			
 		// differentiate for touch interactions, adapted by https://medium.com/@david.gilbertson/the-only-way-to-detect-touch-with-javascript-7791a3346685
 		window.addEventListener( 'touchstart' , function onFirstTouch() {
-			selectMultiple = false;
+			touched = true;
 			
 			window.removeEventListener( 'touchstart', onFirstTouch );
 		});
@@ -97,7 +97,7 @@
 							return;
 						}
 
-						var $dataListOptions = $dataList.getElementsByTagName( 'option' ),
+						var $dataListOptions = $dataList.querySelectorAll( 'option:not([disabled].message)' ),
 							inputValue = $eventTarget.value,
 							newSelectValues = document.createDocumentFragment(),
 							disabledValues = document.createDocumentFragment(),
@@ -158,10 +158,14 @@
 							// input the options fragment into the datalists select
 							$dataListSelect.appendChild( newSelectValues );
 
-							var firstEntry = 0,
-								lastEntry = $dataListSelect.options.length - 1;
+							var dataListSelectOptionsLength = $dataListSelect.options.length,
+								firstEntry = 0,
+								lastEntry = dataListSelectOptionsLength - 1;
 							
-							if ( !selectMultiple ) {
+							$dataListSelect.size = ( dataListSelectOptionsLength > 10 ) ? 10 : dataListSelectOptionsLength;
+							$dataListSelect.multiple = ( !touched && dataListSelectOptionsLength < 2 );
+							
+							if ( touched ) {
 								// preselect best fitting index
 								$dataListSelect.selectedIndex = firstEntry;
 								
@@ -230,21 +234,21 @@
 							inputStyleMarginLeft = parseFloat( inputStyles.getPropertyValue( 'margin-left' ) );
 
 						$dataListSelect = document.createElement( 'select' );
-						if ( selectMultiple ) {
-							$dataListSelect.setAttribute( 'multiple', 'true' );
-						}
 						
 						// set general styling related definitions
 						$dataListSelect.setAttributeNode( document.createAttribute( 'hidden' ) );
-						$dataListSelect.style.position = "absolute";
+						$dataListSelect.style.position = 'absolute';
 
 						// WAI ARIA attributes
 						$dataListSelect.setAttribute( 'aria-hidden', 'true' );
 						$dataListSelect.setAttribute( 'aria-live', 'polite' );
 						$dataListSelect.setAttribute( 'role', 'listbox' );
+						if ( !touched ) {
+							$dataListSelect.setAttribute( 'aria-multiselectable', 'false' );
+						}
 
 						// the select should get positioned underneath the input field ...
-						if ( inputStyles.getPropertyValue( 'direction' ) === "rtl" ) {
+						if ( inputStyles.getPropertyValue( 'direction' ) === 'rtl' ) {
 							$dataListSelect.style.marginRight = '-' + ( rects[0].width + inputStyleMarginLeft ) + 'px';
 						} else {
 							$dataListSelect.style.marginLeft = '-' + ( rects[0].width + inputStyleMarginRight ) + 'px';
@@ -256,13 +260,15 @@
 						$dataListSelect.style.marginTop = rects[0].height + 'px';
 						$dataListSelect.style.minWidth = rects[0].width + 'px';
 
-						if ( !selectMultiple ) {
+						if ( touched ) {
 							var $message = document.createElement('option');
-							
+
 							// ... and it's first entry should contain the localized message to select an entry
 							$message.innerText = message;
 							// ... and disable this option, as it shouldn't get selected by the user
 							$message.disabled = true;
+							// ... and assign a dividable class to it
+							$message.classList.add( 'message' );
 							// ... and finally insert it into the select
 							$dataListSelect.appendChild( $message );
 						}
@@ -272,7 +278,7 @@
 
 						// ... and our upfollowing function to the change event
 						
-						if ( !selectMultiple ) {
+						if ( touched ) {
 							$dataListSelect.addEventListener( 'change', changeDataListSelect );
 						} else {
 							$dataListSelect.addEventListener( 'mouseup', changeDataListSelect );

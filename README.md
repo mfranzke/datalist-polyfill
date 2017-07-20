@@ -5,7 +5,7 @@ Tested in Safari, for which it's mainly meant for, as nearly all of the others a
 No dependencies, written in plain JavaScript. Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
-*	Lightweight: 4.7 kB of JavaScript, around 1.75 kB gzipped
+*	Lightweight: 4.8 kB of JavaScript, around 1.82 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
@@ -57,12 +57,15 @@ See the polyfill in action either by downloading / forking this repo and have a 
 *	The demo HTML code is meant to be simple - I do know that things like a surrounding `<form>` are missing, and I've left the latin letters and english expressions even also for the right to left text-direction example. But lets focus on the relevant tags that this polyfill is all about for the demo.
 *	After I thought it through and even also did some experiments, I've finally chosen the `<select>` element to polyfill the functionality of the `<datalist>` functionality, as it brought most of the functionality, whereas I accepted that it doesn't behave and doesn't look totally equally.  
 	*	As I wanted to mainly focus on native elements in the most low level / simple way instead of visually emulating a list and than afterwards regain all of the functionality via a lot of JavaScript logic, I've ended up with this element, that even also knows how to play nicely with nested `<option>` elements.
-	*	I've previously decided against using the `multiple` attribute, as I wanted to kind of strictly fulfill the form follows function concept - but a nice and fruitful discussion with Michael let me think that through again and change my mind (and attitude) on that, as this is most likely even already what you're up to regarding appearance. But it still does result in - surprise - the possibility for multiple selections, which I'm still thinking about whether I need to fix this or keep it as an easter egg ...
+	*	I even also tried its `multiple` attribute, as this is most likely even already what you're up to regarding appearance, but it does violate the form follows function concept and results in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing ... Than the `size` attribute came to my attention, which much better fits the requirements and behaves as designed quite perfectly.
 
 ## Credits
 Supported by Christian, Johannes and Michael / @mischah. Thank you very much for that, highly appreciated !
 
 ## Changelog
+
+### Version 1.9.0 - 2017/06/20
+Regarding the changes out of release version 1.6.0 to emulate the expected UI quite nicely, I was still struggling with using that hacky solution (`multiple` attribute) and even also of how to prevent multiple selections on the polyfilling select. Actually the attribute `size` came to my attention, which much better fits the requirements and behaves as designed quite perfectly. Chapeau!
 
 ### Version 1.8.1 - 2017/07/18
 Bugfix regarding the handling of the label values.
