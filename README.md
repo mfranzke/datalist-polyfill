@@ -64,7 +64,10 @@ Supported by Christian, Johannes and Michael / @mischah. Thank you very much for
 
 ## Changelog
 
-### Version 1.9.0 - 2017/06/20
+### Version 1.10.0 - 2017/08/16
+Added the ability to open the datalist on the up and down keys even in case that no value has been provided - this seems to be intentionally and even also adapts the behavior by supporting browsers.
+
+### Version 1.9.0 - 2017/07/20
 Regarding the changes out of release version 1.6.0 to emulate the expected UI quite nicely, I was still struggling with using that hacky solution (`multiple` attribute) and even also of how to prevent multiple selections on the polyfilling select. Actually the attribute `size` came to my attention, which much better fits the requirements and behaves as designed quite perfectly. Chapeau!
 
 ### Version 1.8.1 - 2017/07/18

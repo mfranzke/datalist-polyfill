@@ -102,7 +102,8 @@
 							newSelectValues = document.createDocumentFragment(),
 							disabledValues = document.createDocumentFragment(),
 							visible = false,
-							multipleEmails = ( $eventTarget.type === 'email' && $eventTarget.multiple );
+							multipleEmails = ( $eventTarget.type === 'email' && $eventTarget.multiple ),
+							keyOpen = ( event.keyCode === keyUP || event.keyCode === keyDOWN );
 						
 						// in case of type=email and multiple attribute, we would need to split the inputs value into pieces
 						if ( multipleEmails ) {
@@ -113,7 +114,7 @@
 						}
 
 						// if the input contains a value, than ...
-						if ( inputValue !== '' ) {
+						if ( inputValue !== '' || keyOpen ) {
 
 							// ... create an array out of the options list
 							var nodeArray = Array.prototype.slice.call( $dataListOptions );
@@ -126,7 +127,7 @@
 
 								// ... put this option into the fragment that is meant to get inserted into the select
 								// "Each option element that is a descendant of the datalist element, that is not disabled, and whose value is a string that isn't the empty string, represents a suggestion. Each suggestion has a value and a label." (W3C)
-							    if ( optionValue !== '' && optionValue.toLowerCase().indexOf( inputValue.toLowerCase() ) !== -1 && opt.disabled === false ) {
+							    if ( optionValue !== '' && ( optionValue.toLowerCase().indexOf( inputValue.toLowerCase() ) !== -1 || keyOpen ) && opt.disabled === false ) {
 								    
 								    var label = opt.label,
 								    	labelValueSeperator = ' / ',
@@ -194,7 +195,7 @@
 						$dataListSelect.setAttribute( 'aria-hidden', (!visible).toString() );
 
 						// on arrow up or down keys, focus the select
-						if ( event.keyCode === keyUP || event.keyCode === keyDOWN ) {
+						if ( keyOpen ) {
 
 							$dataListSelect.focus();
 						}
