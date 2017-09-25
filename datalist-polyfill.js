@@ -127,7 +127,13 @@
 
 								// ... put this option into the fragment that is meant to get inserted into the select
 								// "Each option element that is a descendant of the datalist element, that is not disabled, and whose value is a string that isn't the empty string, represents a suggestion. Each suggestion has a value and a label." (W3C)
-							    if ( optionValue !== '' && ( optionValue.toLowerCase().indexOf( inputValue.toLowerCase() ) !== -1 || keyOpen ) && opt.disabled === false ) {
+							    if ( optionValue !== '' && optionValue.toLowerCase().indexOf( inputValue.toLowerCase() ) !== -1 && opt.disabled === false ) {
+								    
+								console.log(optionValue);
+							    
+							    console.log(inputValue);
+							    
+							    console.log(optionValue.toLowerCase().indexOf( inputValue.toLowerCase() ));
 								    
 								    var label = opt.label,
 								    	labelValueSeperator = ' / ',

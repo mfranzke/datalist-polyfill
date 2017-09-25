@@ -43,7 +43,7 @@ We're even also enabling the [`.options` (for `datalist` elements)](https://deve
 And you'd like to set a `title`-Attribute on the `<datalist>` HTML tag, as this would get used as label for the first, disabled entry within the polyfilling select on non-touch interactions.
 
 ### dynamic HTML (or DHTML, if you like to be a little bit nostalgic)
-In case that you'd like to dynamically add or modify / create your HTML code, you're even also good to go with this polyfill, as it's based on event delegation that makes your UI work easily - no (refresh) function to call after DOM manipulation or something similar.
+In case that you'd like to dynamically add or modify / create your HTML code, you're even also good to go with this polyfill, as it's based on event delegation that makes your UI work easily - no refresh nor reinit function to call after DOM manipulation or something similar.
 
 ### Changes to the available `option` elements
 If you'd like to make a change to the integrated list of `<option>` elements, feel free to either remove or add them right away - the list would get generated on the fly after the user typed in something into the `<input>` field, so I've even also got you covered on this.
@@ -63,6 +63,9 @@ See the polyfill in action either by downloading / forking this repo and have a 
 Supported by Christian, Johannes and Michael / @mischah. Thank you very much for that, highly appreciated !
 
 ## Changelog
+
+### Version 1.10.1- 2017/09/25
+Simple bugfix, that came up through the latest implementation on the up and down arrow keys.
 
 ### Version 1.10.0 - 2017/08/16
 Added the ability to open the datalist on the up and down keys even in case that no value has been provided - this seems to be intentionally and even also adapts the behavior by supporting browsers.
