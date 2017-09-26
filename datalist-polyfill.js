@@ -76,7 +76,7 @@
 				eventTargetTagName = $eventTarget.tagName.toLowerCase();
 
 			// check for whether the events target was an input datalist
-			if ( eventTargetTagName && eventTargetTagName === 'input' && $eventTarget.getAttribute('list') ) {
+			if ( eventTargetTagName && eventTargetTagName === 'input' && $eventTarget.getAttribute( 'list' ) ) {
 
 				var list = $eventTarget.getAttribute( 'list' ),
 					$dataList = document.getElementById( list );
@@ -128,12 +128,6 @@
 								// ... put this option into the fragment that is meant to get inserted into the select
 								// "Each option element that is a descendant of the datalist element, that is not disabled, and whose value is a string that isn't the empty string, represents a suggestion. Each suggestion has a value and a label." (W3C)
 							    if ( optionValue !== '' && optionValue.toLowerCase().indexOf( inputValue.toLowerCase() ) !== -1 && opt.disabled === false ) {
-								    
-								console.log(optionValue);
-							    
-							    console.log(inputValue);
-							    
-							    console.log(optionValue.toLowerCase().indexOf( inputValue.toLowerCase() ));
 								    
 								    var label = opt.label,
 								    	labelValueSeperator = ' / ',
@@ -198,7 +192,7 @@
 						} else {
 							$dataListSelect.setAttributeNode( document.createAttribute( 'hidden' ) );
 						}
-						$dataListSelect.setAttribute( 'aria-hidden', (!visible).toString() );
+						$dataListSelect.setAttribute( 'aria-hidden', ( !visible ).toString() );
 
 						// on arrow up or down keys, focus the select
 						if ( keyOpen ) {
@@ -219,7 +213,7 @@
 				inputStyles = window.getComputedStyle( $eventTarget );
 
 			// check for whether the events target was an input datalist and whether it's of one of the supported input types defined above
-			if ( eventTargetTagName && eventTargetTagName === 'input' && $eventTarget.getAttribute('list') && supportedTypes.indexOf( inputType ) > -1 ) {
+			if ( eventTargetTagName && eventTargetTagName === 'input' && $eventTarget.getAttribute( 'list' ) && supportedTypes.indexOf( inputType ) > -1 ) {
 
 				var eventType = event.type,
 					list = $eventTarget.getAttribute( 'list' ),
@@ -268,7 +262,7 @@
 						$dataListSelect.style.minWidth = rects[0].width + 'px';
 
 						if ( touched ) {
-							var $message = document.createElement('option');
+							var $message = document.createElement( 'option' );
 
 							// ... and it's first entry should contain the localized message to select an entry
 							$message.innerText = message;
@@ -349,7 +343,7 @@
 				if ( eventType === 'change' || eventType === 'mouseup' || ( eventType === 'keyup' && event.keyCode === keyENTER ) ) {
 
 					var list = $datalist.id,
-						$inputList = document.querySelector('input[list="' + list + '"]'),
+						$inputList = document.querySelector( 'input[list="' + list + '"]' ),
 						selectValue = $select.value;
 
 					// input the selects value into the input on a change within the list
@@ -359,7 +353,7 @@
 							multipleEmails = ( $inputList.type === 'email' && $inputList.multiple );
 						
 						// in case of type=email and multiple attribute, we need to set up the resulting inputs value differently
-						if ( multipleEmails && ( lastSeperator = inputListValue.lastIndexOf(',') ) > -1 ) {
+						if ( multipleEmails && ( lastSeperator = inputListValue.lastIndexOf( ',' ) ) > -1 ) {
 							$inputList.value = inputListValue.slice( 0, lastSeperator ) + ',' + selectValue;
 						} else {
 							$inputList.value = selectValue;

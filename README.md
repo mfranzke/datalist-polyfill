@@ -64,6 +64,9 @@ Supported by Christian, Johannes and Michael / @mischah. Thank you very much for
 
 ## Changelog
 
+### Version 1.10.2- 2017/09/26
+Simple corrections.
+
 ### Version 1.10.1- 2017/09/25
 Simple bugfix, that came up through the latest implementation on the up and down arrow keys.
 
