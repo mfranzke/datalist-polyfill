@@ -58,11 +58,15 @@ See the polyfill in action either by downloading / forking this repo and have a 
 *	After I thought it through and even also did some experiments, I've finally chosen the `<select>` element to polyfill the functionality of the `<datalist>` functionality, as it brought most of the functionality, whereas I accepted that it doesn't behave and doesn't look totally equally.  
 	*	As I wanted to mainly focus on native elements in the most low level / simple way instead of visually emulating a list and than afterwards regain all of the functionality via a lot of JavaScript logic, I've ended up with this element, that even also knows how to play nicely with nested `<option>` elements.
 	*	I even also tried its `multiple` attribute, as this is most likely even already what you're up to regarding appearance, but it does violate the form follows function concept and results in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing ... Than the `size` attribute came to my attention, which much better fits the requirements and behaves as designed quite perfectly.
+*	This polyfill wouldn't work for Microsoft Internet Explorer 9 (at the moment), as this one is slightly more complicated (thanks for mentioning @ailintom with #2).
 
 ## Credits
 Supported by Christian, Johannes and Michael / @mischah. Thank you very much for that, highly appreciated !
 
 ## Changelog
+
+### Version 1.10.3- 2017/10/07
+Added a comment regarding IE9 - and some simple code styling.
 
 ### Version 1.10.2- 2017/09/26
 Simple corrections.

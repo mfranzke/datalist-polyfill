@@ -84,7 +84,7 @@
 				// still check for an existing instance
 				if ( $dataList !== null ) {
 
-					var $dataListSelect = $dataList.getElementsByTagName('select')[0];
+					var $dataListSelect = $dataList.getElementsByTagName( 'select' )[0];
 
 					// still check for an existing instance
 					if ( $dataListSelect !== undefined ) {
@@ -131,7 +131,7 @@
 								    
 								    var label = opt.label,
 								    	labelValueSeperator = ' / ',
-								    	labelOptionPart = label.substr(0, optionValue.length + labelValueSeperator.length),
+								    	labelOptionPart = label.substr( 0, optionValue.length + labelValueSeperator.length ),
 								    	optionPart = optionValue + labelValueSeperator;
 
 								    // the innertext should be value / label in case of that they are different
@@ -222,7 +222,7 @@
 				// still check for an existing instance
 				if ( $dataList !== null ) {
 
-					var $dataListSelect = $dataList.getElementsByTagName('select')[0],
+					var $dataListSelect = $dataList.getElementsByTagName( 'select' )[0],
 						// either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur
 						visible = ( ( eventType === 'focus' && event.target.value !== '' ) || ( event.relatedTarget && event.relatedTarget === $dataListSelect ) ),
 						message = $dataList.title;
@@ -304,7 +304,7 @@
 					} else {
 						$dataListSelect.setAttributeNode( document.createAttribute( 'hidden' ) );
 					}
-					$dataListSelect.setAttribute( 'aria-hidden', (!visible).toString() );
+					$dataListSelect.setAttribute( 'aria-hidden', ( !visible ).toString() );
 					
 					// bind the keyup event on the related dalalists input
 					switch( eventType ) {
@@ -370,7 +370,7 @@
 				} else {
 					$select.setAttributeNode( document.createAttribute( 'hidden' ) );
 				}
-				$select.setAttribute( 'aria-hidden', (!visible).toString() );
+				$select.setAttribute( 'aria-hidden', ( !visible ).toString() );
 			}
 		};
 
