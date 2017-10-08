@@ -60,6 +60,7 @@
 			keyUP = 38,
 			keyDOWN = 40,
 			
+		// and defining the different input types that are supported by this polyfill
 			supportedTypes = [ 'text', 'email', 'number', 'search', 'tel', 'url' ];
 			
 		// differentiate for touch interactions, adapted by https://medium.com/@david.gilbertson/the-only-way-to-detect-touch-with-javascript-7791a3346685
@@ -84,7 +85,7 @@
 				// still check for an existing instance
 				if ( $dataList !== null ) {
 
-					var $dataListSelect = $dataList.getElementsByTagName( 'select' )[0];
+					var $dataListSelect = $dataList.getElementsByClassName( 'polyfilling' )[0];
 
 					// still check for an existing instance
 					if ( $dataListSelect !== undefined ) {
@@ -97,7 +98,7 @@
 							return;
 						}
 
-						var $dataListOptions = $dataList.querySelectorAll( 'option:not([disabled].message)' ),
+						var $dataListOptions = $dataList.querySelectorAll( 'option:not([disabled]):not(.message)' ),
 							inputValue = $eventTarget.value,
 							newSelectValues = document.createDocumentFragment(),
 							disabledValues = document.createDocumentFragment(),
@@ -182,8 +183,10 @@
 								}
 							}
 
-							// input the unused options as siblings next to the select
-							$dataList.appendChild( disabledValues );
+							// input the unused options as siblings next to the select - and differentiate in between the regular, and the IE9 fix syntax upfront
+							var $dataListAppend = $dataList.getElementsByClassName( 'ie9_fix' )[0] || $dataList;
+							
+							$dataListAppend.appendChild( disabledValues );
 						}
 
 						// toggle the visibility of the select according to previous checks
@@ -222,7 +225,7 @@
 				// still check for an existing instance
 				if ( $dataList !== null ) {
 
-					var $dataListSelect = $dataList.getElementsByTagName( 'select' )[0],
+					var $dataListSelect = $dataList.getElementsByClassName( 'polyfilling' )[0],
 						// either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur
 						visible = ( ( eventType === 'focus' && event.target.value !== '' ) || ( event.relatedTarget && event.relatedTarget === $dataListSelect ) ),
 						message = $dataList.title;
@@ -235,6 +238,9 @@
 							inputStyleMarginLeft = parseFloat( inputStyles.getPropertyValue( 'margin-left' ) );
 
 						$dataListSelect = document.createElement( 'select' );
+						
+						// setting a class for easier selecting that select afterwards
+						$dataListSelect.setAttribute( 'class', 'polyfilling' );
 						
 						// set general styling related definitions
 						$dataListSelect.setAttributeNode( document.createAttribute( 'hidden' ) );
@@ -269,7 +275,7 @@
 							// ... and disable this option, as it shouldn't get selected by the user
 							$message.disabled = true;
 							// ... and assign a dividable class to it
-							$message.classList.add( 'message' );
+							$message.setAttribute( 'class', 'message' );
 							// ... and finally insert it into the select
 							$dataListSelect.appendChild( $message );
 						}
@@ -282,7 +288,7 @@
 						if ( touched ) {
 							$dataListSelect.addEventListener( 'change', changeDataListSelect );
 						} else {
-							$dataListSelect.addEventListener( 'mouseup', changeDataListSelect );
+							$dataListSelect.addEventListener( 'click', changeDataListSelect );
 						}
 						$dataListSelect.addEventListener( 'blur', changeDataListSelect );
 						$dataListSelect.addEventListener( 'keyup', changeDataListSelect );
@@ -306,17 +312,17 @@
 					}
 					$dataListSelect.setAttribute( 'aria-hidden', ( !visible ).toString() );
 					
-					// bind the keyup event on the related dalalists input
+					// bind the keyup event on the related datalists input
 					switch( eventType ) {
 						case 'focus':
 							$eventTarget.addEventListener( 'keyup', inputInputList );
 							
-							$eventTarget.addEventListener( 'blur', changesInputList, true );
+							$eventTarget.addEventListener( 'focusOut', changesInputList, true );
 						break;
 						case 'blur':
 							$eventTarget.removeEventListener( 'keyup', inputInputList );
 							
-							$eventTarget.removeEventListener( 'blur', changesInputList, true );
+							$eventTarget.removeEventListener( 'focusOut', changesInputList, true );
 						break;
 					}
 				}
@@ -340,14 +346,14 @@
 					visible = ( eventType === 'keyup' && ( event.keyCode !== keyENTER && event.keyCode !== keyESC ) );
 				
 				// change or mouseup event or ENTER key
-				if ( eventType === 'change' || eventType === 'mouseup' || ( eventType === 'keyup' && event.keyCode === keyENTER ) ) {
+				if ( eventType === 'change' || eventType === 'click' || ( eventType === 'keyup' && event.keyCode === keyENTER ) ) {
 
 					var list = $datalist.id,
 						$inputList = document.querySelector( 'input[list="' + list + '"]' ),
 						selectValue = $select.value;
 
 					// input the selects value into the input on a change within the list
-					if ( $inputList !== null && selectValue.length > 0 && selectValue !== message ) {
+					if ( $inputList !== null && typeof( selectValue ) !== 'undefined' && selectValue.length > 0 && selectValue !== message ) {
 						var inputListValue = $inputList.value,
 							lastSeperator,
 							multipleEmails = ( $inputList.type === 'email' && $inputList.multiple );

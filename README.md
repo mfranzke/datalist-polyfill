@@ -5,7 +5,7 @@ Tested in Safari, for which it's mainly meant for, as nearly all of the others a
 No dependencies, written in plain JavaScript. Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
-*	Lightweight: 4.8 kB of JavaScript, around 1.82 kB gzipped
+*	Lightweight: 5.048 kB of JavaScript, around 2.2 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
@@ -15,6 +15,7 @@ No dependencies, written in plain JavaScript. Released under the MIT License: <h
 	*	right to left text-direction
 	*	non-touch and touch interactions
 	*	different forms of `option` declarations
+	*	both Safari and Internet Explorer (IE9+) browsers
 *	Enables core keyboard controls like e.g. the up and down arrow keys, `ESC` and `ENTER`
 *	Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
 
@@ -50,6 +51,35 @@ If you'd like to make a change to the integrated list of `<option>` elements, fe
 
 You could even also disable `<option>` elements by adding the `disabled` attribute to the `<option>` HTML tag if necessary.
 
+### Microsoft Internet Explorer
+#### Internet Explorer 10-
+You'll need the declaration for the standard `hidden` attribute, that you might even already have included in case you're using [`normalize.css`](https://github.com/necolas/normalize.css/). Elsewhere, just adapt it from there:
+```css
+/**
+ * Add the correct display in IE 10-.
+ */
+
+[hidden] {
+  display: none;
+}
+```
+
+#### Internet Explorer 9
+In case you'd like to support especially IE9, you'll need to add a nesting `select` element wrapped by a conditional comment into the `datalist` element.
+```html
+<datalist id="animallist_ie" title="Choose a suggestion">
+	<!--[if IE 9]><select disabled style="display:none" class="ie9_fix"><![endif]-->
+		<option value="Cat">
+		<option value="Cow">
+		<option value="Dog">
+		<option value="Horse">
+		<option value="Lion">
+		<option value="Pig" disabled>
+		<option value="Zebra">
+	<!--[if IE 9]></select><![endif]-->
+</datalist>
+```
+
 ## Demo
 See the polyfill in action either by downloading / forking this repo and have a look at `demo.html`, or at the hosted demo on JSFiddle: <https://jsfiddle.net/mfranzke/s6awjfze/>
 
@@ -58,12 +88,14 @@ See the polyfill in action either by downloading / forking this repo and have a 
 *	After I thought it through and even also did some experiments, I've finally chosen the `<select>` element to polyfill the functionality of the `<datalist>` functionality, as it brought most of the functionality, whereas I accepted that it doesn't behave and doesn't look totally equally.  
 	*	As I wanted to mainly focus on native elements in the most low level / simple way instead of visually emulating a list and than afterwards regain all of the functionality via a lot of JavaScript logic, I've ended up with this element, that even also knows how to play nicely with nested `<option>` elements.
 	*	I even also tried its `multiple` attribute, as this is most likely even already what you're up to regarding appearance, but it does violate the form follows function concept and results in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing ... Than the `size` attribute came to my attention, which much better fits the requirements and behaves as designed quite perfectly.
-*	This polyfill wouldn't work for Microsoft Internet Explorer 9 (at the moment), as this one is slightly more complicated (thanks for mentioning @ailintom with #2).
 
 ## Credits
-Supported by Christian, Johannes and Michael / @mischah. Thank you very much for that, highly appreciated !
+Supported by Christian, Johannes, @ailintom, @Kravimir and @mischah. Thank you very much for that, highly appreciated !
 
 ## Changelog
+
+### Version 1.11.0- 2017/09/26
+I'm very thankful for @ailintom mentioning the missing IE9 support with #GH-2, which is still relevant (at least and maybe foremost) for the Windows Vista users. Additionally @Kravimir thankfully brought to my attention, that IE9 handles the `option` subelements quite restricted - so I've added a section regarding IE9 support to the demo page with the additional two lines of HTML, that you'll need to add in case you also need / want to still support IE9 in your projects, as well as changed the JavaScript code to even also support IE9.
 
 ### Version 1.10.3- 2017/10/07
 Added a comment regarding IE9 - and some simple code styling.
