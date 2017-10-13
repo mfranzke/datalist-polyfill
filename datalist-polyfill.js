@@ -57,7 +57,7 @@
   // identify whether a select multiple is feasible
   var touched = false,
 
-    // introduced speaking variables for the different keycodes
+    // speaking variables for the different keycodes
     keyENTER = 13,
     keyESC = 27,
     keyUP = 38,
@@ -140,7 +140,7 @@
                     labelOptionPart = label.substr(0, optionValue.length + labelValueSeperator.length),
                     optionPart = optionValue + labelValueSeperator;
 
-                  // the innertext should be value / label in case of that they are different
+                  // the innertext should be value / label in case they are different
                   if (label && label !== optionValue && labelOptionPart !== optionPart) {
                     opt.innerText = optionValue + labelValueSeperator + label;
 
