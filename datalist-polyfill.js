@@ -13,7 +13,7 @@
   'use strict';
 
   // feature detection
-  var nativedatalist = !!( 'list' in document.createElement('input') ) &&
+  var nativedatalist = ( 'list' in document.createElement('input') ) &&
     !!( document.createElement('datalist') && window.HTMLDataListElement );
 
   // in case of that the feature doesn't exist, emulate it's functionality
@@ -273,16 +273,16 @@
           dataListSelect.style.minWidth = rects[0].width + 'px';
 
           if (touched) {
-            var message = document.createElement('option');
+            var messageElement = document.createElement('option');
 
             // ... and it's first entry should contain the localized message to select an entry
-            message.innerText = message;
+            messageElement.innerText = message;
             // ... and disable this option, as it shouldn't get selected by the user
-            message.disabled = true;
+            messageElement.disabled = true;
             // ... and assign a dividable class to it
-            message.setAttribute('class', 'message');
+            messageElement.setAttribute('class', 'message');
             // ... and finally insert it into the select
-            dataListSelect.appendChild(message);
+            dataListSelect.appendChild(messageElement);
           }
 
           // add select to datalist element ...
