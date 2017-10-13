@@ -13,7 +13,7 @@
   'use strict';
 
   // feature detection
-  var nativedatalist = ( 'list' in document.createElement('input') ) &&
+  var nativedatalist = ('list' in document.createElement('input')) &&
     !!( document.createElement('datalist') && window.HTMLDataListElement );
 
   // in case of that the feature doesn't exist, emulate it's functionality
@@ -106,8 +106,8 @@
             newSelectValues = document.createDocumentFragment(),
             disabledValues = document.createDocumentFragment(),
             visible = false,
-            multipleEmails = ( eventTarget.type === 'email' && eventTarget.multiple ),
-            keyOpen = ( event.keyCode === keyUP || event.keyCode === keyDOWN );
+            multipleEmails = (eventTarget.type === 'email' && eventTarget.multiple),
+            keyOpen = (event.keyCode === keyUP || event.keyCode === keyDOWN);
 
           // in case of type=email and multiple attribute, we would need to split the inputs value into pieces
           if (multipleEmails) {
@@ -169,8 +169,8 @@
               firstEntry = 0,
               lastEntry = dataListSelectOptionsLength - 1;
 
-            dataListSelect.size = ( dataListSelectOptionsLength > 10 ) ? 10 : dataListSelectOptionsLength;
-            dataListSelect.multiple = ( !touched && dataListSelectOptionsLength < 2 );
+            dataListSelect.size = (dataListSelectOptionsLength > 10) ? 10 : dataListSelectOptionsLength;
+            dataListSelect.multiple = (!touched && dataListSelectOptionsLength < 2);
 
             if (touched) {
               // preselect best fitting index
@@ -200,7 +200,7 @@
           } else {
             dataListSelect.setAttributeNode(document.createAttribute('hidden'));
           }
-          dataListSelect.setAttribute('aria-hidden', ( !visible ).toString());
+          dataListSelect.setAttribute('aria-hidden', (!visible).toString());
 
           // on arrow up or down keys, focus the select
           if (keyOpen) {
@@ -232,7 +232,7 @@
 
         var dataListSelect = dataList.getElementsByClassName('polyfilling')[0],
           // either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur
-          visible = ( ( eventType === 'focus' && event.target.value !== '' ) || ( event.relatedTarget && event.relatedTarget === dataListSelect ) ),
+          visible = ((eventType === 'focus' && event.target.value !== '') || (event.relatedTarget && event.relatedTarget === dataListSelect)),
           message = dataList.title;
 
         // creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
@@ -261,9 +261,9 @@
 
           // the select should get positioned underneath the input field ...
           if (inputStyles.getPropertyValue('direction') === 'rtl') {
-            dataListSelect.style.marginRight = '-' + ( rects[0].width + inputStyleMarginLeft ) + 'px';
+            dataListSelect.style.marginRight = '-' + (rects[0].width + inputStyleMarginLeft) + 'px';
           } else {
-            dataListSelect.style.marginLeft = '-' + ( rects[0].width + inputStyleMarginRight ) + 'px';
+            dataListSelect.style.marginLeft = '-' + (rects[0].width + inputStyleMarginRight) + 'px';
           }
 
           // set the polyfilling selects border-radius equally as the one by the polyfilled input
@@ -315,7 +315,7 @@
         } else {
           dataListSelect.setAttributeNode(document.createAttribute('hidden'));
         }
-        dataListSelect.setAttribute('aria-hidden', ( !visible ).toString());
+        dataListSelect.setAttribute('aria-hidden', (!visible).toString());
 
         // bind the keyup event on the related datalists input
         switch (eventType) {
@@ -341,17 +341,17 @@
       eventTargetTagName = eventTarget.tagName.toLowerCase();
 
     // check for whether the events target was a select or an option
-    if (eventTargetTagName && ( eventTargetTagName === 'select' || eventTargetTagName === 'option' )) {
+    if (eventTargetTagName && (eventTargetTagName === 'select' || eventTargetTagName === 'option')) {
 
-      var select = ( eventTargetTagName === 'select' ) ? eventTarget : eventTarget.parentNode,
+      var select = (eventTargetTagName === 'select') ? eventTarget : eventTarget.parentNode,
         datalist = select.parentNode,
         message = datalist.title,
         eventType = event.type,
         // ENTER and ESC
-        visible = ( eventType === 'keyup' && ( event.keyCode !== keyENTER && event.keyCode !== keyESC ) );
+        visible = (eventType === 'keyup' && (event.keyCode !== keyENTER && event.keyCode !== keyESC));
 
       // change or mouseup event or ENTER key
-      if (eventType === 'change' || eventType === 'click' || ( eventType === 'keyup' && event.keyCode === keyENTER )) {
+      if (eventType === 'change' || eventType === 'click' || (eventType === 'keyup' && event.keyCode === keyENTER)) {
 
         var list = datalist.id,
           inputList = document.querySelector('input[list="' + list + '"]'),
@@ -361,10 +361,10 @@
         if (inputList !== null && typeof( selectValue ) !== 'undefined' && selectValue.length > 0 && selectValue !== message) {
           var inputListValue = inputList.value,
             lastSeperator,
-            multipleEmails = ( inputList.type === 'email' && inputList.multiple );
+            multipleEmails = (inputList.type === 'email' && inputList.multiple);
 
           // in case of type=email and multiple attribute, we need to set up the resulting inputs value differently
-          if (multipleEmails && ( lastSeperator = inputListValue.lastIndexOf(',') ) > -1) {
+          if (multipleEmails && (lastSeperator = inputListValue.lastIndexOf(',') ) > -1) {
             inputList.value = inputListValue.slice(0, lastSeperator) + ',' + selectValue;
           } else {
             inputList.value = selectValue;
@@ -381,7 +381,7 @@
       } else {
         select.setAttributeNode(document.createAttribute('hidden'));
       }
-      select.setAttribute('aria-hidden', ( !visible ).toString());
+      select.setAttribute('aria-hidden', (!visible).toString());
     }
   };
 
