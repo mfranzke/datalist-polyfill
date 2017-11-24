@@ -5,7 +5,7 @@ Tested in Safari, for which it's mainly meant for, as nearly all of the others a
 No dependencies, written in plain JavaScript. Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
-*	Lightweight: 5.048 kB of JavaScript, around 2.2 kB gzipped
+*	Lightweight: 5.3 kB of JavaScript, around 2.2 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
@@ -94,16 +94,19 @@ Supported by Christian, Johannes, @ailintom, @Kravimir and @mischah. Thank you v
 
 ## Changelog
 
-### Version 1.11.0- 2017/09/26
+### Version 1.11.1 - 2017/11/24
+@hryamzik thankfully mentioned by #GH-7 that the polyfilling `select` gets positioned incorrectly in case of the `input[list]` element being styled as a block-level element.
+
+### Version 1.11.0 - 2017/09/26
 I'm very thankful for @ailintom mentioning the missing IE9 support with #GH-2, which is still relevant (at least and maybe foremost) for the Windows Vista users. Additionally @Kravimir thankfully brought to my attention, that IE9 handles the `option` subelements quite restricted - so I've added a section regarding IE9 support to the demo page with the additional two lines of HTML, that you'll need to add in case you also need / want to still support IE9 in your projects, as well as changed the JavaScript code to even also support IE9.
 
-### Version 1.10.3- 2017/10/07
+### Version 1.10.3 - 2017/10/07
 Added a comment regarding IE9 - and some simple code styling.
 
-### Version 1.10.2- 2017/09/26
+### Version 1.10.2 - 2017/09/26
 Simple corrections.
 
-### Version 1.10.1- 2017/09/25
+### Version 1.10.1 - 2017/09/25
 Simple bugfix, that came up through the latest implementation on the up and down arrow keys.
 
 ### Version 1.10.0 - 2017/08/16
