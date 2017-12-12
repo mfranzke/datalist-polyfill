@@ -29,7 +29,7 @@ The plugin was designed with the following concepts kept in mind:
 [![Dependency Status](https://gemnasium.com/badges/github.com/mfranzke/datalist-polyfill.svg)](https://gemnasium.com/github.com/mfranzke/datalist-polyfill)
 
 ## Installation
-Just integrate both the CSS and JavaScript file into your code - et voilà.
+Just integrate the JavaScript file into your code - et voilà.
 
 You may optionally load via NPM or Bower:
 
