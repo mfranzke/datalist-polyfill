@@ -94,6 +94,10 @@ Supported by Christian, Johannes, @ailintom, @Kravimir and @mischah. Thank you v
 
 ## Changelog
 
+### Next Version
+@mertenhanisch has styled the code according to more "standard" formatting
+@mertenhanisch also improved the wording of the documenation, which is awesome
+
 ### Version 1.11.1 - 2017/11/24
 @hryamzik thankfully mentioned by #GH-7 that the polyfilling `select` gets positioned incorrectly in case of the `input[list]` element being styled as a block-level element.
 
