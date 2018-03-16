@@ -260,20 +260,20 @@
           }
 
           // the select should get positioned underneath the input field ...
-          if ( inputStyles.getPropertyValue( 'display' ) === 'block' ) {
-            $dataListSelect.style.marginTop = '-' + inputStyles.getPropertyValue( 'margin-bottom' );
+          if (inputStyles.getPropertyValue('display') === 'block') {
+            $dataListSelect.style.marginTop = '-' + inputStyles.getPropertyValue('margin-bottom');
           } else {
-            if ( inputStyles.getPropertyValue( 'direction' ) === 'rtl' ) {
-              dataListSelect.style.marginRight = '-' + ( rects[0].width + inputStyleMarginLeft ) + 'px';
+            if (inputStyles.getPropertyValue('direction') === 'rtl') {
+              dataListSelect.style.marginRight = '-' + (rects[0].width + inputStyleMarginLeft) + 'px';
             } else {
-              dataListSelect.style.marginLeft = '-' + ( rects[0].width + inputStyleMarginRight ) + 'px';
+              dataListSelect.style.marginLeft = '-' + (rects[0].width + inputStyleMarginRight) + 'px';
             }
 
             $dataListSelect.style.marginTop = rects[0].height + 'px';
           }
 
           // set the polyfilling selects border-radius equally as the one by the polyfilled input
-          $dataListSelect.style.borderRadius = inputStyles.getPropertyValue( 'border-radius' );
+          $dataListSelect.style.borderRadius = inputStyles.getPropertyValue('border-radius');
           $dataListSelect.style.minWidth = rects[0].width + 'px';
 
           if (touched) {
