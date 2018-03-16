@@ -1,30 +1,30 @@
 # datalist-polyfill
-This is a minimal and library dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
+This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
-Tested in Safari, for which it's mainly meant for, as nearly all of the others are already supporting it - quite - well: <http://caniuse.com/#feat=datalist>  
-No dependencies, written in plain JavaScript. Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
+Tested in Safari, which it's mainly meant for, as nearly all of the other browsers support it quite well: <http://caniuse.com/#feat=datalist>  
+Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
 *	Lightweight: 5.3 kB of JavaScript, around 2.2 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
-	*	... while leaving the others like color or date related, as those would most likely need another polyfill to „work“ correctly or have a meaningful UI
-	*	`input[type=email]` elements multiple attribute
+	*	... while leaving the others like color or date related, as those would most likely need another polyfill to work correctly or have a meaningful UI
+	*	`input[type=email]` element's `multiple` attribute
 	*	properties `.options` for `datalist` elements and `.list` for `input` elements
 	*	right to left text-direction
 	*	non-touch and touch interactions
-	*	different forms of `option` declarations
+	*	different types of `option` declarations
 	*	both Safari and Internet Explorer (IE9+) browsers
-*	Enables core keyboard controls like e.g. the up and down arrow keys, `ESC` and `ENTER`
+*	Enables core keyboard controls such as the up and down arrow keys, `ESC`, and `ENTER`
 *	Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
 
 ## Core concepts
 The plugin was designed with the following concepts kept in mind:
 
-*	library dependency-free
+*	dependency-free
 *	Supporting DOM changes by event delegation
-*	code accessibility / readability: because this is what we as developers should even also take care about
+*	code accessibility / readability
 
 [![Dependency Status](https://gemnasium.com/badges/github.com/mfranzke/datalist-polyfill.svg)](https://gemnasium.com/github.com/mfranzke/datalist-polyfill)
 
@@ -39,21 +39,21 @@ You may optionally load via NPM or Bower:
 ## API
 Nothing really, just plug it in, it will work out of the box.
 
-We're even also enabling the [`.options` (for `datalist` elements)](https://developer.mozilla.org/en/docs/Web/API/HTMLDataListElement) and [`.list` (for `input` elements)](https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement) properties according to the specs.
+This package is also enabling the [`.options` (for `datalist` elements)](https://developer.mozilla.org/en/docs/Web/API/HTMLDataListElement) and [`.list` (for `input` elements)](https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement) properties according to the specs.
 
-And you'd like to set a `title`-Attribute on the `<datalist>` HTML tag, as this would get used as label for the first, disabled entry within the polyfilling select on non-touch interactions.
+If you set a `title`-Attribute on the `<datalist>` HTML tag, it would get used as label for the first disabled entry within the polyfilling select on non-touch interactions.
 
 ### dynamic HTML (or DHTML, if you like to be a little bit nostalgic)
-In case that you'd like to dynamically add or modify / create your HTML code, you're even also good to go with this polyfill, as it's based on event delegation that makes your UI work easily - no refresh nor reinit function to call after DOM manipulation or something similar.
+In case that you'd like to dynamically add or modify / create your HTML code, you're good to go with this polyfill, as it's based on event delegation that makes your UI work easily - no refresh nor reinit function to call after DOM manipulation or something similar.
 
 ### Changes to the available `option` elements
-If you'd like to make a change to the integrated list of `<option>` elements, feel free to either remove or add them right away - the list would get generated on the fly after the user typed in something into the `<input>` field, so I've even also got you covered on this.
+If you'd like to make a change to the integrated list of `<option>` elements, feel free to either remove or add them right away - the list would get generated on the fly after the user typed in something into the `<input>` field, so you're covered on this.
 
-You could even also disable `<option>` elements by adding the `disabled` attribute to the `<option>` HTML tag if necessary.
+You can also disable `<option>` elements by adding the `disabled` attribute to the `<option>` HTML tag if necessary.
 
 ### Microsoft Internet Explorer
 #### Internet Explorer 10-
-You'll need the declaration for the standard `hidden` attribute, that you might even already have included in case you're using [`normalize.css`](https://github.com/necolas/normalize.css/). Elsewhere, just adapt it from there:
+You'll need the declaration for the standard `hidden` attribute, that you might already have included in case you're using [`normalize.css`](https://github.com/necolas/normalize.css/). Otherwise just adapt it from there:
 ```css
 /**
  * Add the correct display in IE 10-.
@@ -65,7 +65,7 @@ You'll need the declaration for the standard `hidden` attribute, that you might 
 ```
 
 #### Internet Explorer 9
-In case you'd like to support especially IE9, you'll need to add a nesting `select` element wrapped by a conditional comment into the `datalist` element.
+In case you'd like to support IE9, you'll need to add a nesting `select` element wrapped by a conditional comment into the `datalist` element.
 ```html
 <datalist id="animallist_ie" title="Choose a suggestion">
 	<!--[if IE 9]><select disabled style="display:none" class="ie9_fix"><![endif]-->
@@ -84,10 +84,10 @@ In case you'd like to support especially IE9, you'll need to add a nesting `sele
 See the polyfill in action either by downloading / forking this repo and have a look at `demo.html`, or at the hosted demo on JSFiddle: <https://jsfiddle.net/mfranzke/s6awjfze/>
 
 ## things to keep in mind
-*	The demo HTML code is meant to be simple - I do know that things like a surrounding `<form>` are missing, and I've left the latin letters and english expressions even also for the right to left text-direction example. But lets focus on the relevant tags that this polyfill is all about for the demo.
-*	After I thought it through and even also did some experiments, I've finally chosen the `<select>` element to polyfill the functionality of the `<datalist>` functionality, as it brought most of the functionality, whereas I accepted that it doesn't behave and doesn't look totally equally.  
-	*	As I wanted to mainly focus on native elements in the most low level / simple way instead of visually emulating a list and than afterwards regain all of the functionality via a lot of JavaScript logic, I've ended up with this element, that even also knows how to play nicely with nested `<option>` elements.
-	*	I even also tried its `multiple` attribute, as this is most likely even already what you're up to regarding appearance, but it does violate the form follows function concept and results in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing ... Than the `size` attribute came to my attention, which much better fits the requirements and behaves as designed quite perfectly.
+*	The demo HTML code is meant to be simple - I do know that things like a surrounding `<form>` are missing, and I've left the latin letters and english expressions for the right to left text-direction example. But lets focus on the relevant tags that this polyfill is all about for the demo.
+*	After I thought it through and did some experiments, I've finally chosen the `<select>` element to polyfill the `<datalist>`, as it brought most of the functionality, whereas I accepted that it doesn't behave and doesn't look equally.  
+	*	As I wanted to mainly focus on native elements in the most low level / simple way instead of visually emulating a list and than afterwards regain all of the functionality via a lot of JavaScript logic, I've ended up with this element, that knows how to play nicely with nested `<option>` elements.
+	*	I tried its `multiple` attribute, as this is most likely already what you're up to regarding appearance, but it does violate the form-follows-function concept and results in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing... Then the `size` attribute came to my attention, which much better fits the requirements and behaves as designed quite perfectly.
 
 ## Credits
 Supported by Christian, Johannes, @ailintom, @Kravimir and @mischah. Thank you very much for that, highly appreciated !
