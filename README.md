@@ -10,7 +10,7 @@ Released under the MIT License: <http://www.opensource.org/licenses/mit-license.
 *	Supporting:
 	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
 	*	... while leaving the others like color or date related, as those would most likely need another polyfill to work correctly or have a meaningful UI
-	*	`input[type=email]` element's multiple attributes
+	*	`input[type=email]` element's `multiple` attribute
 	*	properties `.options` for `datalist` elements and `.list` for `input` elements
 	*	right to left text-direction
 	*	non-touch and touch interactions
