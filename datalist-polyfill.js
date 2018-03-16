@@ -1,7 +1,7 @@
 /*
 * datalist-polyfill.js - https://github.com/mfranzke/datalist-polyfill
 * @license Copyright(c) 2017 by Maximilian Franzke
-* Supported by Christian, Johannes and Michael - many thanks for that !
+* Supported by Christian, Johannes, @ailintom, @Kravimir, Michael and @hryamzik - many thanks for that !
 */
 /*
 * A lightweight and library dependency free vanilla JavaScript datalist polyfill.
@@ -260,17 +260,21 @@
           }
 
           // the select should get positioned underneath the input field ...
-          if (inputStyles.getPropertyValue('direction') === 'rtl') {
-            dataListSelect.style.marginRight = '-' + (rects[0].width + inputStyleMarginLeft) + 'px';
+          if ( inputStyles.getPropertyValue( 'display' ) === 'block' ) {
+            $dataListSelect.style.marginTop = '-' + inputStyles.getPropertyValue( 'margin-bottom' );
           } else {
-            dataListSelect.style.marginLeft = '-' + (rects[0].width + inputStyleMarginRight) + 'px';
+            if ( inputStyles.getPropertyValue( 'direction' ) === 'rtl' ) {
+              dataListSelect.style.marginRight = '-' + ( rects[0].width + inputStyleMarginLeft ) + 'px';
+            } else {
+              dataListSelect.style.marginLeft = '-' + ( rects[0].width + inputStyleMarginRight ) + 'px';
+            }
+
+            $dataListSelect.style.marginTop = rects[0].height + 'px';
           }
 
           // set the polyfilling selects border-radius equally as the one by the polyfilled input
-          dataListSelect.style.borderRadius = inputStyles.getPropertyValue('border-radius');
-
-          dataListSelect.style.marginTop = rects[0].height + 'px';
-          dataListSelect.style.minWidth = rects[0].width + 'px';
+          $dataListSelect.style.borderRadius = inputStyles.getPropertyValue( 'border-radius' );
+          $dataListSelect.style.minWidth = rects[0].width + 'px';
 
           if (touched) {
             var messageElement = document.createElement('option');
