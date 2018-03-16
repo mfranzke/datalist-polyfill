@@ -1,7 +1,7 @@
 # datalist-polyfill
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
-Tested in Safari, which it's mainly meant for, as nearly all of the other browsers are already supporting it, quite well: <http://caniuse.com/#feat=datalist>  
+Tested in Safari, which it's mainly meant for, as nearly all of the other browsers support it quite well: <http://caniuse.com/#feat=datalist>  
 Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
@@ -10,13 +10,13 @@ Released under the MIT License: <http://www.opensource.org/licenses/mit-license.
 *	Supporting:
 	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
 	*	... while leaving the others like color or date related, as those would most likely need another polyfill to work correctly or have a meaningful UI
-	*	`input[type=email]` elements multiple attributes
+	*	`input[type=email]` element's multiple attributes
 	*	properties `.options` for `datalist` elements and `.list` for `input` elements
 	*	right to left text-direction
 	*	non-touch and touch interactions
 	*	different types of `option` declarations
 	*	both Safari and Internet Explorer (IE9+) browsers
-*	Enables core keyboard controls, e.g. the up and down arrow keys, `ESC` and `ENTER`
+*	Enables core keyboard controls such as the up and down arrow keys, `ESC`, and `ENTER`
 *	Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
 
 ## Core concepts
@@ -41,13 +41,13 @@ Nothing really, just plug it in, it will work out of the box.
 
 This package is also enabling the [`.options` (for `datalist` elements)](https://developer.mozilla.org/en/docs/Web/API/HTMLDataListElement) and [`.list` (for `input` elements)](https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement) properties according to the specs.
 
-If you set a `title`-Attribute on the `<datalist>` HTML tag, it would get used as label for the first, disabled, entry within the polyfilling select on non-touch interactions.
+If you set a `title`-Attribute on the `<datalist>` HTML tag, it would get used as label for the first disabled entry within the polyfilling select on non-touch interactions.
 
 ### dynamic HTML (or DHTML, if you like to be a little bit nostalgic)
 In case that you'd like to dynamically add or modify / create your HTML code, you're good to go with this polyfill, as it's based on event delegation that makes your UI work easily - no refresh nor reinit function to call after DOM manipulation or something similar.
 
 ### Changes to the available `option` elements
-If you'd like to make a change to the integrated list of `<option>` elements, feel free to either remove or add them right away - the list would get generated on the fly after the user typed in something into the `<input>` field, so you are covered on this.
+If you'd like to make a change to the integrated list of `<option>` elements, feel free to either remove or add them right away - the list would get generated on the fly after the user typed in something into the `<input>` field, so you're covered on this.
 
 You can also disable `<option>` elements by adding the `disabled` attribute to the `<option>` HTML tag if necessary.
 

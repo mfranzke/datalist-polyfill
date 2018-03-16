@@ -147,8 +147,8 @@
                     // remove the label attribute, as it's being displayed differently on desktop and iOS Safari for our construct
                     opt.setAttribute('data-label', opt.getAttribute('label'));
                     opt.removeAttribute('label');
-                  } else // manipulating the option inner text, that would get displayed
-                  if (!opt.innerText.trim()) {
+                  } else if (!opt.innerText.trim()) {
+                    // manipulating the option inner text, that would get displayed
                     opt.innerText = optionValue;
                   }
 
