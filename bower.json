@@ -1,7 +1,7 @@
 {
     "name": "datalist-polyfill",
 	"description": "An extremely lightweight and library-dependency-free vanilla JavaScript datalist polyfill.",
-    "version": "1.11.1",
+    "version": "1.11.2",
     "homepage": "https://github.com/mfranzke/datalist-polyfill",
     "authors": [{
         "name": "Maximilian Franzke",
