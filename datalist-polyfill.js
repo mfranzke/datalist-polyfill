@@ -21,19 +21,6 @@
     return false;
   }
 
-  //Customevent for IE
-  (function () {
-    if ( typeof window.CustomEvent === "function" ) return false; //If not IE
-    function CustomEvent ( event, params ) {
-      params = params || { bubbles: false, cancelable: false, detail: undefined };
-      var evt = document.createEvent( 'CustomEvent' );
-      evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
-      return evt;
-    }
-    CustomEvent.prototype = window.Event.prototype;
-    window.CustomEvent = CustomEvent;
-  })();
-
   // emulate the two properties regarding the datalist and input elements
   // list property / https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement
   (function(constructor) {
@@ -386,7 +373,9 @@
           } else {
             inputList.value = selectValue;
           }
-          $inputList.dispatchEvent(new CustomEvent("input", {"bubbles":true, "cancelable": true}));
+          $inputList.dispatchEvent(new Event("input", {
+            bubbles:true
+          }));
           // set the visibility to false afterwards, as we're done here
           visible = false;
         }
