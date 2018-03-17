@@ -16,6 +16,7 @@ Released under the MIT License: <http://www.opensource.org/licenses/mit-license.
 	*	non-touch and touch interactions
 	*	different types of `option` declarations
 	*	both Safari and Internet Explorer (IE9+) browsers
+	*	emits "input" event when item in the `datalist` is selected
 *	Enables core keyboard controls such as the up and down arrow keys, `ESC`, and `ENTER`
 *	Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
 
