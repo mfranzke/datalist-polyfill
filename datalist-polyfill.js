@@ -373,7 +373,7 @@
           } else {
             inputList.value = selectValue;
           }
-          $inputList.dispatchEvent(new Event("input", {
+          inputList.dispatchEvent(new Event('input', {
             bubbles:true
           }));
           // set the visibility to false afterwards, as we're done here
