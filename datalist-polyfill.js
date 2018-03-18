@@ -373,9 +373,18 @@
           } else {
             inputList.value = selectValue;
           }
-          inputList.dispatchEvent(new Event('input', {
-            bubbles:true
-          }));
+          
+          // create and dispatch the input event; divided for IE9 usage
+          if (typeof(Event) === 'function') {
+            var evt = new Event('input', {
+	            bubbles:true
+	          });
+		      } else {
+			      var evt = document.createEvent('Event');
+			      evt.initEvent('input', true, false);
+		      }
+          inputList.dispatchEvent(evt);
+          
           // set the visibility to false afterwards, as we're done here
           visible = false;
         }
