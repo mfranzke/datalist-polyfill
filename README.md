@@ -91,9 +91,12 @@ See the polyfill in action either by downloading / forking this repo and have a 
 	*	I tried its `multiple` attribute, as this is most likely already what you're up to regarding appearance, but it does violate the form-follows-function concept and results in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing... Then the `size` attribute came to my attention, which much better fits the requirements and behaves as designed quite perfectly.
 
 ## Credits
-Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah and @hryamzik. Thank you very much for that, highly appreciated !
+Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik and @ottoville. Thank you very much for that, highly appreciated !
 
 ## Changelog
+
+### Version 1.12.0 - 2018/03/18
+@ottoville thankfully contributed by mentioning and implementing the feature of emitting an event when item in datalist is selected
 
 ### Version 1.11.2 - 2018/03/17
 @mertenhanisch has styled the code according to more "standard" formatting and also improved the wording of the documentation, which is awesome. And @mitchhentges thankfully supports on reviewing your great community support and ensures to the keep the wheels turning on the development of this projects. Many kudos to the both of you !!!
