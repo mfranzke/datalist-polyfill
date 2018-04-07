@@ -5,18 +5,18 @@ Tested in Safari, which it's mainly meant for, as nearly all of the other browse
 Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
-*	Lightweight: 5.3 kB of JavaScript, around 2.2 kB gzipped
+*	Lightweight: 5.25 kB of JavaScript, around 2.33 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
 	*	... while leaving the others like color or date related, as those would most likely need another polyfill to work correctly or have a meaningful UI
-	*	`input[type=email]` element's `multiple` attribute
+	*	`input[type=email]` elements `multiple` attribute
 	*	properties `.options` for `datalist` elements and `.list` for `input` elements
 	*	right to left text-direction
 	*	non-touch and touch interactions
 	*	different types of `option` declarations
 	*	both Safari and Internet Explorer (IE9+) browsers
-	*	emits "input" event when item in the `datalist` is selected
+*	Emits "input" event when item in the `datalist` is selected
 *	Enables core keyboard controls such as the up and down arrow keys, `ESC`, and `ENTER`
 *	Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
 
@@ -94,6 +94,9 @@ See the polyfill in action either by downloading / forking this repo and have a 
 Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik and @ottoville. Thank you very much for that, highly appreciated !
 
 ## Changelog
+
+### Version 1.12.1 - 2018/04/07
+simple (code) style changes (plus added editorconfig to keep it that way) and typo 
 
 ### Version 1.12.0 - 2018/03/18
 @ottoville thankfully contributed by mentioning and implementing the feature of emitting an event when item in datalist is selected

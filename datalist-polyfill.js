@@ -365,7 +365,8 @@
         if (inputList !== null && typeof( selectValue ) !== 'undefined' && selectValue.length > 0 && selectValue !== message) {
           var inputListValue = inputList.value,
             lastSeperator,
-            multipleEmails = (inputList.type === 'email' && inputList.multiple);
+            multipleEmails = (inputList.type === 'email' && inputList.multiple),
+            evt;
 
           // in case of type=email and multiple attribute, we need to set up the resulting inputs value differently
           if (multipleEmails && (lastSeperator = inputListValue.lastIndexOf(',') ) > -1) {
@@ -373,18 +374,18 @@
           } else {
             inputList.value = selectValue;
           }
-          
+
           // create and dispatch the input event; divided for IE9 usage
           if (typeof(Event) === 'function') {
-            var evt = new Event('input', {
+            evt = new Event('input', {
               bubbles:true
             });
           } else {
-            var evt = document.createEvent('Event');
+            evt = document.createEvent('Event');
             evt.initEvent('input', true, false);
           }
           inputList.dispatchEvent(evt);
-          
+
           // set the visibility to false afterwards, as we're done here
           visible = false;
         }
