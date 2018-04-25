@@ -87,7 +87,7 @@ In case you'd like to support IE9, you'll need to add a nesting `select` element
 ```
 
 ## Demo
-See the polyfill in action either by downloading / forking this repo and have a look at `demo.html`, or at the hosted demo on JSFiddle: <https://mfranzke.github.io/datalist-polyfill/demo.html>
+See the polyfill in action either by downloading / forking this repo and have a look at `demo.html`, or at the hosted demo: <https://mfranzke.github.io/datalist-polyfill/demo.html>
 
 ## things to keep in mind
 *	The demo HTML code is meant to be simple - I do know that things like a surrounding `<form>` are missing, and I've left the latin letters and english expressions for the right to left text-direction example. But lets focus on the relevant tags that this polyfill is all about for the demo.
