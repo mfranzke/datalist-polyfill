@@ -1,4 +1,9 @@
 # datalist-polyfill
+
+
+[![npm](https://img.shields.io/npm/v/datalist-polyfill.svg)](https://www.npmjs.com/package/datalist-polyfill)
+
+
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
 Tested in Safari, which it's mainly meant for, as nearly all of the other browsers support it quite well: <http://caniuse.com/#feat=datalist>  
