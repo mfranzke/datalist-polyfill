@@ -87,7 +87,7 @@ In case you'd like to support IE9, you'll need to add a nesting `select` element
 ```
 
 ## Demo
-See the polyfill in action either by downloading / forking this repo and have a look at `demo.html`, or at the hosted demo: <https://mfranzke.github.io/datalist-polyfill/demo.html>
+See the polyfill in action either by downloading / forking this repo and have a look at `demo.html`, or at the hosted demo on JSFiddle: <https://mfranzke.github.io/datalist-polyfill/demo.html>
 
 ## things to keep in mind
 *	The demo HTML code is meant to be simple - I do know that things like a surrounding `<form>` are missing, and I've left the latin letters and english expressions for the right to left text-direction example. But lets focus on the relevant tags that this polyfill is all about for the demo.
@@ -96,9 +96,12 @@ See the polyfill in action either by downloading / forking this repo and have a 
 	*	I tried its `multiple` attribute, as this is most likely already what you're up to regarding appearance, but it does violate the form-follows-function concept and results in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing... Then the `size` attribute came to my attention, which much better fits the requirements and behaves as designed quite perfectly.
 
 ## Credits
-Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik and @ottoville. Thank you very much for that, highly appreciated !
+Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville and @IceCreamYou. Thank you very much for that, highly appreciated !
 
 ## Changelog
+
+### Version 1.12.2 - 2018/05/01
+Thank you @IceCreamYou for fixing the case sensitive focusOut -> focusout event name
 
 ### Version 1.12.1 - 2018/04/07
 simple (code) style changes (plus added editorconfig to keep it that way) and typo 
