@@ -326,12 +326,12 @@
           case 'focus':
             eventTarget.addEventListener('keyup', inputInputList);
 
-            eventTarget.addEventListener('focusOut', changesInputList, true);
+            eventTarget.addEventListener('focusout', changesInputList, true);
             break;
           case 'blur':
             eventTarget.removeEventListener('keyup', inputInputList);
 
-            eventTarget.removeEventListener('focusOut', changesInputList, true);
+            eventTarget.removeEventListener('focusout', changesInputList, true);
             break;
         }
       }
