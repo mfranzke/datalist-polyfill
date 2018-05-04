@@ -96,9 +96,12 @@ See the polyfill in action either by downloading / forking this repo and have a 
 	*	I tried its `multiple` attribute, as this is most likely already what you're up to regarding appearance, but it does violate the form-follows-function concept and results in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing... Then the `size` attribute came to my attention, which much better fits the requirements and behaves as designed quite perfectly.
 
 ## Credits
-Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville and @IceCreamYou. Thank you very much for that, highly appreciated !
+Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou and @wlekin. Thank you very much for that, highly appreciated !
 
 ## Changelog
+
+### Version 1.12.3 - 2018/05/04
+@wlekin thankfully mentioned (extracted to #GH-15) that the polyfilling `select` gets positioned incorrectly underneath the `input[list]` element on iOS.
 
 ### Version 1.12.2 - 2018/05/01
 Thank you @IceCreamYou for fixing the case sensitive focusOut -> focusout event name
