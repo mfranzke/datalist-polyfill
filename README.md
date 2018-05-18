@@ -3,6 +3,8 @@
 
 [![npm](https://img.shields.io/npm/v/datalist-polyfill.svg)](https://www.npmjs.com/package/datalist-polyfill)
 
+Dependency status: [![pipeline status](https://gitlab.com/mfranzke/datalist-polyfill/badges/master/pipeline.svg)](https://gitlab.com/mfranzke/datalist-polyfill/commits/master)
+
 
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
@@ -31,8 +33,6 @@ The plugin was designed with the following concepts kept in mind:
 *	dependency-free
 *	Supporting DOM changes by event delegation
 *	code accessibility / readability
-
-[![Dependency Status](https://gemnasium.com/badges/github.com/mfranzke/datalist-polyfill.svg)](https://gemnasium.com/github.com/mfranzke/datalist-polyfill)
 
 ## Installation
 Just integrate the JavaScript file into your code - et voilà.
