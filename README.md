@@ -3,8 +3,7 @@
 
 [![npm](https://img.shields.io/npm/v/datalist-polyfill.svg)](https://www.npmjs.com/package/datalist-polyfill)
 
-Dependency status: [![pipeline status](https://gitlab.com/mfranzke/datalist-polyfill/badges/master/pipeline.svg)](https://gitlab.com/mfranzke/datalist-polyfill/commits/master)
-
+[![dependencies Status](https://david-dm.org/mfranzke/datalist-polyfill/status.svg)](https://david-dm.org/mfranzke/datalist-polyfill)
 
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
