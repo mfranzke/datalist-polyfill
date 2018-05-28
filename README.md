@@ -11,7 +11,7 @@ Tested in Safari, which it's mainly meant for, as nearly all of the other browse
 Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
-*	Lightweight: 5.25 kB of JavaScript, around 2.33 kB gzipped
+*	Lightweight: 5.52 kB of JavaScript, around 2.35 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
@@ -22,6 +22,7 @@ Released under the MIT License: <http://www.opensource.org/licenses/mit-license.
 	*	non-touch and touch interactions
 	*	different types of `option` declarations
 	*	both Safari and Internet Explorer (IE9+) browsers
+	* controlling the display of differing `value` and `label` values
 *	Emits "input" event when item in the `datalist` is selected
 *	Enables core keyboard controls such as the up and down arrow keys, `ESC`, and `ENTER`
 *	Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
@@ -55,6 +56,9 @@ In case that you'd like to dynamically add or modify / create your HTML code, yo
 If you'd like to make a change to the integrated list of `<option>` elements, feel free to either remove or add them right away - the list would get generated on the fly after the user typed in something into the `<input>` field, so you're covered on this.
 
 You can also disable `<option>` elements by adding the `disabled` attribute to the `<option>` HTML tag if necessary.
+
+### Differing `value` and `label` values
+As the browser vendors (Google Chrome vs. the others) don't seem to be aligned on this topic, I've decided to enable the `label`-attribute to serve as the definitive label being displayed, even if a value is being defined differing from the label. On different `value` and `text` values, both of them would get displayed within the suggestions, as Google Chrome does it. But if you define a differing `label`-attribute, its value would get displayed exclusively (as all the other browsers do it) to give you some flexibility on how to define those suggestions. Check out the „Different ways of defining an option“ section on the demo page regarding this topic.
 
 ### Microsoft Internet Explorer
 #### Internet Explorer 10-
@@ -90,104 +94,13 @@ See the polyfill in action either by downloading / forking this repo and have a 
 
 ## things to keep in mind
 *	The demo HTML code is meant to be simple - I do know that things like a surrounding `<form>` are missing, and I've left the latin letters and english expressions for the right to left text-direction example. But lets focus on the relevant tags that this polyfill is all about for the demo.
+*   iOS Safari handles the `label`-attribute different from Safari on Mac OS. This is being equalized during the handling of the `label`-attributes-value for differing `value` and `label` values.
 *	After I thought it through and did some experiments, I've finally chosen the `<select>` element to polyfill the `<datalist>`, as it brought most of the functionality, whereas I accepted that it doesn't behave and doesn't look equally.  
 	*	As I wanted to mainly focus on native elements in the most low level / simple way instead of visually emulating a list and than afterwards regain all of the functionality via a lot of JavaScript logic, I've ended up with this element, that knows how to play nicely with nested `<option>` elements.
 	*	I tried its `multiple` attribute, as this is most likely already what you're up to regarding appearance, but it does violate the form-follows-function concept and results in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing... Then the `size` attribute came to my attention, which much better fits the requirements and behaves as designed quite perfectly.
 
 ## Credits
-Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou and @wlekin. Thank you very much for that, highly appreciated !
-
-## Changelog
-
-### Version 1.12.3 - 2018/05/04
-@wlekin thankfully mentioned (extracted to #GH-15) that the polyfilling `select` gets positioned incorrectly underneath the `input[list]` element on iOS.
-
-### Version 1.12.2 - 2018/05/01
-Thank you @IceCreamYou for fixing the case sensitive focusOut -> focusout event name
-
-### Version 1.12.1 - 2018/04/07
-simple (code) style changes (plus added editorconfig to keep it that way) and typo 
-
-### Version 1.12.0 - 2018/03/18
-@ottoville thankfully contributed by mentioning and implementing the feature of emitting an event when item in datalist is selected
-
-### Version 1.11.2 - 2018/03/17
-@mertenhanisch has styled the code according to more "standard" formatting and also improved the wording of the documentation, which is awesome. And @mitchhentges thankfully supports on reviewing your great community support and ensures to the keep the wheels turning on the development of this projects. Many kudos to the both of you !!!
-
-### Version 1.11.1 - 2017/11/24
-@hryamzik thankfully mentioned by #GH-7 that the polyfilling `select` gets positioned incorrectly in case of the `input[list]` element being styled as a block-level element.
-
-### Version 1.11.0 - 2017/09/26
-I'm very thankful for @ailintom mentioning the missing IE9 support with #GH-2, which is still relevant (at least and maybe foremost) for the Windows Vista users. Additionally @Kravimir thankfully brought to my attention, that IE9 handles the `option` subelements quite restricted - so I've added a section regarding IE9 support to the demo page with the additional two lines of HTML, that you'll need to add in case you also need / want to still support IE9 in your projects, as well as changed the JavaScript code to even also support IE9.
-
-### Version 1.10.3 - 2017/10/07
-Added a comment regarding IE9 - and some simple code styling.
-
-### Version 1.10.2 - 2017/09/26
-Simple corrections.
-
-### Version 1.10.1 - 2017/09/25
-Simple bugfix, that came up through the latest implementation on the up and down arrow keys.
-
-### Version 1.10.0 - 2017/08/16
-Added the ability to open the datalist on the up and down keys even in case that no value has been provided - this seems to be intentionally and even also adapts the behavior by supporting browsers.
-
-### Version 1.9.0 - 2017/07/20
-Regarding the changes out of release version 1.6.0 to emulate the expected UI quite nicely, I was still struggling with using that hacky solution (`multiple` attribute) and even also of how to prevent multiple selections on the polyfilling select. Actually the attribute `size` came to my attention, which much better fits the requirements and behaves as designed quite perfectly. Chapeau!
-
-### Version 1.8.1 - 2017/07/18
-Bugfix regarding the handling of the label values.
-
-### Version 1.8.0 - 2017/07/14
-Restricted the polyfill to only work with relevant input types; we’d like to exclude the ones that even already need another polyfill to „work“ correctly or have a meaningful UI, like e.g. color or date-related ones, as those polyfills should handle the support of the datalist themselves depending on their own functionality.
-
-### Version 1.7.0 - 2017/06/29
-As mentioned by @aFarkas [within his review](https://github.com/h5bp/html5please/issues/18), `option` elements could be of some different formats. This release especially follows [the spec](https://www.w3.org/TR/html5/forms.html#the-datalist-element) regarding the aspect that "Each suggestion has a value and a label.". 
-
-### Version 1.6.2 - 2017/06/28
-Optimized the behavior to select the entries within the polyfilling `select[multiple]` on using the up and down arrow keys from the polyfilled `input[list]`.
-
-### Version 1.6.1 - 2017/06/16
-Introduced speaking variables for the different keycodes. And implemented some feedback by flow. As well as additional code simplifications.
-
-### Version 1.6.0 - 2017/06/16
-This is so far the biggest and greatest update ! Depending of the feedback by Michael the visual appearance has changed and will better emulate the expected layout as in other browsers (on non-touch interactions). That for the script is creating the polyfilling select as a multiple-selection type, which emulates the expected „form“ better. And better positioning as well as styling the polyfilling select according to the input field, like e.g. even also set the polyfilling selects border-radius equally as the one by the polyfilled input.
-
-### Version 1.5.0 - 2017/06/10
-Simplified the styling and got rid of the external CSS files / dependency. You could remove that one now. Yeah!
-
-### Version 1.4.0 - 2017/06/09
-Added RTL text-direction support
-
-### Version 1.3.0 - 2017/05/30
-Added support for multiple email addresses, separated by comma. And again, updated documentation slightly. And demo accordingly.
-
-### Version 1.2.1 - 2017/05/29
-Simple code style modifications. Because style matters.
-
-### Version 1.2.0 - 2017/05/29
-Added .options (for `datalist` elements) and .list (for `input` elements) properties according to the specs.
-
-### Version 1.1.2 - 2017/05/14
-Further simplified the code, so that we could even skip the `.matches()` polyfill. Yeah. And documentation updates.
-
-### Version 1.1.1 - 2017/05/10
-fixed another simple bug that lead to an incorrect index being selected - let's skip this, as it's not even the standard behaviour
-
-### Version 1.1.0 - 2017/05/09
-some small corrections
-
-### Version 1.0.3 - 2017/05/09
-better preselection on entries within the dropdown depending on the inputs value
-
-### Version 1.0.2 - 2017/05/08
-added a `package.json` file
-
-### Version 1.0.1 - 2017/05/08
-Small, but important typo. :-) Thanks Fyrd for mentioning this.
-
-### Version 1.0.0 - 2017/05/04
-First release.
+Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou, @wlekin and @eddr. Thank you very much for that, highly appreciated !
 
 ## Tested with
 

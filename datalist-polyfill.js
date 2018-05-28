@@ -1,7 +1,7 @@
 /*
 * datalist-polyfill.js - https://github.com/mfranzke/datalist-polyfill
 * @license Copyright(c) 2017 by Maximilian Franzke
-* Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, Michael, @hryamzik, @ottoville, @IceCreamYou and @wlekin - many thanks for that !
+* Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, Michael, @hryamzik, @ottoville, @IceCreamYou, @wlekin and @eddr - many thanks for that !
 */
 /*
 * A lightweight and library dependency free vanilla JavaScript datalist polyfill.
@@ -62,6 +62,9 @@
     keyESC = 27,
     keyUP = 38,
     keyDOWN = 40,
+
+    // defining the text / value seperator for displaying the value and text values
+    textValueSeperator = ' / ',
 
     // and defining the different input types that are supported by this polyfill
     supportedTypes = ['text', 'email', 'number', 'search', 'tel', 'url'];
@@ -135,21 +138,18 @@
                 if (optionValue !== '' && optionValue.toLowerCase()
                     .indexOf(inputValue.toLowerCase()) !== -1 && opt.disabled === false) {
 
-                  var label = opt.label,
-                    labelValueSeperator = ' / ',
-                    labelOptionPart = label.substr(0, optionValue.length + labelValueSeperator.length),
-                    optionPart = optionValue + labelValueSeperator;
+                  var label = opt.getAttribute('label'),
+                    text = opt.text,
+                    textOptionPart = text.substr(0, optionValue.length + textValueSeperator.length),
+                    optionPart = optionValue + textValueSeperator;
 
-                  // the innertext should be value / label in case they are different
-                  if (label && label !== optionValue && labelOptionPart !== optionPart) {
-                    opt.innerText = optionValue + labelValueSeperator + label;
+                  // the innertext should be value / text in case they are different
+                  if (text && !label && text !== optionValue && textOptionPart !== optionPart) {
+                    opt.innerText = optionValue + textValueSeperator + text;
 
-                    // remove the label attribute, as it's being displayed differently on desktop and iOS Safari for our construct
-                    opt.setAttribute('data-label', opt.getAttribute('label'));
-                    opt.removeAttribute('label');
-                  } else if (!opt.innerText.trim()) {
+                  } else if (!opt.text) {
                     // manipulating the option inner text, that would get displayed
-                    opt.innerText = optionValue;
+                    opt.innerText = label || optionValue;
                   }
 
                   newSelectValues.appendChild(opt);
