@@ -2,8 +2,8 @@
 
 
 [![npm](https://img.shields.io/npm/v/datalist-polyfill.svg)](https://www.npmjs.com/package/datalist-polyfill)
-
 [![dependencies Status](https://david-dm.org/mfranzke/datalist-polyfill/status.svg)](https://david-dm.org/mfranzke/datalist-polyfill)
+[![](https://data.jsdelivr.com/v1/package/npm/datalist-polyfill/badge)](https://www.jsdelivr.com/package/npm/datalist-polyfill)
 
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
