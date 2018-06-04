@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- #GH-16 correction as an enhancement to the current functionality
+
+## [1.13.1] - 2018-06-04
+### Changed
+- Some code refactoring, nothing really serious
+By the way, it was polyfills 1st birthday one month ago. Yeah !!!
 
 ## [1.13.0] - 2018-05-28
 ### Added

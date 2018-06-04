@@ -67,7 +67,11 @@
     textValueSeperator = ' / ',
 
     // and defining the different input types that are supported by this polyfill
-    supportedTypes = ['text', 'email', 'number', 'search', 'tel', 'url'];
+    supportedTypes = ['text', 'email', 'number', 'search', 'tel', 'url'],
+
+    // classes for elements
+    classNameInput = 'polyfilled',
+    classNamePolyfillingSelect = 'polyfilling';
 
   // differentiate for touch interactions, adapted by https://medium.com/@david.gilbertson/the-only-way-to-detect-touch-with-javascript-7791a3346685
   window.addEventListener('touchstart', function onFirstTouch() {
@@ -91,15 +95,14 @@
       // still check for an existing instance
       if (dataList !== null) {
 
-        var dataListSelect = dataList.getElementsByClassName('polyfilling')[0];
+        var dataListSelect = dataList.getElementsByClassName(classNamePolyfillingSelect)[0];
 
         // still check for an existing instance
         if (dataListSelect !== undefined) {
 
-          // on an ESC key press within the input, let's break here and hide the select
+          // on an ESC key press within the input, let's break here and hide the datalist select
           if (event.keyCode === keyESC) {
-            dataListSelect.setAttributeNode(document.createAttribute('hidden'));
-            dataListSelect.setAttribute('aria-hidden', 'true');
+            toggleVisibility(dataListSelect, false);
 
             return;
           }
@@ -130,37 +133,37 @@
             nodeArray.sort(function(a, b) {
               return a.value.localeCompare(b.value);
             })
-              .forEach(function(opt) {
-                var optionValue = opt.value;
+            .forEach(function(opt) {
+              var optionValue = opt.value;
 
-                // ... put this option into the fragment that is meant to get inserted into the select
-                // "Each option element that is a descendant of the datalist element, that is not disabled, and whose value is a string that isn't the empty string, represents a suggestion. Each suggestion has a value and a label." (W3C)
-                if (optionValue !== '' && optionValue.toLowerCase()
-                    .indexOf(inputValue.toLowerCase()) !== -1 && opt.disabled === false) {
+              // ... put this option into the fragment that is meant to get inserted into the select
+              // "Each option element that is a descendant of the datalist element, that is not disabled, and whose value is a string that isn't the empty string, represents a suggestion. Each suggestion has a value and a label." (W3C)
+              if (optionValue !== '' && optionValue.toLowerCase()
+                  .indexOf(inputValue.toLowerCase()) !== -1 && opt.disabled === false) {
 
-                  var label = opt.getAttribute('label'),
-                    text = opt.text,
-                    textOptionPart = text.substr(0, optionValue.length + textValueSeperator.length),
-                    optionPart = optionValue + textValueSeperator;
+                var label = opt.getAttribute('label'),
+                  text = opt.text,
+                  textOptionPart = text.substr(0, optionValue.length + textValueSeperator.length),
+                  optionPart = optionValue + textValueSeperator;
 
-                  // the innertext should be value / text in case they are different
-                  if (text && !label && text !== optionValue && textOptionPart !== optionPart) {
-                    opt.innerText = optionValue + textValueSeperator + text;
+                // the innertext should be value / text in case they are different
+                if (text && !label && text !== optionValue && textOptionPart !== optionPart) {
+                  opt.innerText = optionValue + textValueSeperator + text;
 
-                  } else if (!opt.text) {
-                    // manipulating the option inner text, that would get displayed
-                    opt.innerText = label || optionValue;
-                  }
-
-                  newSelectValues.appendChild(opt);
-
-                  // ... and set the state of the select to get displayed in that case
-                  visible = true;
-                } else {
-                  // ... or put this option that isn't relevant to the users into the fragment that is supposed to get inserted outside of the select
-                  disabledValues.appendChild(opt);
+                } else if (!opt.text) {
+                  // manipulating the option inner text, that would get displayed
+                  opt.innerText = label || optionValue;
                 }
-              });
+
+                newSelectValues.appendChild(opt);
+
+                // ... and set the state of the select to get displayed in that case
+                visible = true;
+              } else {
+                // ... or put this option that isn't relevant to the users into the fragment that is supposed to get inserted outside of the select
+                disabledValues.appendChild(opt);
+              }
+            });
 
             // input the options fragment into the datalists select
             dataListSelect.appendChild(newSelectValues);
@@ -194,13 +197,8 @@
             dataListAppend.appendChild(disabledValues);
           }
 
-          // toggle the visibility of the select according to previous checks
-          if (visible) {
-            dataListSelect.removeAttribute('hidden');
-          } else {
-            dataListSelect.setAttributeNode(document.createAttribute('hidden'));
-          }
-          dataListSelect.setAttribute('aria-hidden', (!visible).toString());
+          // toggle the visibility of the datalist select according to previous checks
+          toggleVisibility(dataListSelect, visible);
 
           // on arrow up or down keys, focus the select
           if (keyOpen) {
@@ -230,9 +228,9 @@
       // still check for an existing instance
       if (dataList !== null) {
 
-        var dataListSelect = dataList.getElementsByClassName('polyfilling')[0],
+        var dataListSelect = dataList.getElementsByClassName(classNamePolyfillingSelect)[0],
           // either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur
-          visible = ((eventType === 'focus' && event.target.value !== '') || (event.relatedTarget && event.relatedTarget === dataListSelect)),
+          visible = (((eventType === 'focus' && eventTarget.value !== '') || (event.relatedTarget && event.relatedTarget === dataListSelect)) && dataListSelect && dataListSelect.options && dataListSelect.options.length),
           message = dataList.title;
 
         // creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
@@ -245,14 +243,15 @@
           dataListSelect = document.createElement('select');
 
           // setting a class for easier selecting that select afterwards
-          dataListSelect.setAttribute('class', 'polyfilling');
+          dataListSelect.setAttribute('class', classNamePolyfillingSelect);
 
           // set general styling related definitions
-          dataListSelect.setAttributeNode(document.createAttribute('hidden'));
           dataListSelect.style.position = 'absolute';
 
+          // initially hiding the datalist select
+          toggleVisibility(dataListSelect, false);
+
           // WAI ARIA attributes
-          dataListSelect.setAttribute('aria-hidden', 'true');
           dataListSelect.setAttribute('aria-live', 'polite');
           dataListSelect.setAttribute('role', 'listbox');
           if (!touched) {
@@ -301,8 +300,10 @@
           }
           dataListSelect.addEventListener('blur', changeDataListSelect);
           dataListSelect.addEventListener('keyup', changeDataListSelect);
+        }
 
-
+        // test for whether this input has already been enhanced by the polyfill
+        if (!new RegExp(' ' + classNameInput + ' ').test(' ' + eventTarget.className + ' ')) {
           // plus we'd like to prevent autocomplete on the input datalist field
           eventTarget.setAttribute('autocomplete', 'off');
 
@@ -311,29 +312,27 @@
           eventTarget.setAttribute('aria-haspopup', 'true');
           eventTarget.setAttribute('aria-autocomplete', 'list');
           eventTarget.setAttribute('aria-owns', list);
+
+          // bind the keyup event on the related datalists input
+          switch (eventType) {
+            case 'focus':
+              eventTarget.addEventListener('keyup', inputInputList);
+
+              eventTarget.addEventListener('focusout', changesInputList, true);
+              break;
+            case 'blur':
+              eventTarget.removeEventListener('keyup', inputInputList);
+
+              eventTarget.removeEventListener('focusout', changesInputList, true);
+              break;
+          }
+
+          // add class for identifying that this input is even already being polyfilled
+          eventTarget.className += ' ' + classNameInput;
         }
 
-        // toggle the visibility of the select according to previous checks
-        if (visible) {
-          dataListSelect.removeAttribute('hidden');
-        } else {
-          dataListSelect.setAttributeNode(document.createAttribute('hidden'));
-        }
-        dataListSelect.setAttribute('aria-hidden', (!visible).toString());
-
-        // bind the keyup event on the related datalists input
-        switch (eventType) {
-          case 'focus':
-            eventTarget.addEventListener('keyup', inputInputList);
-
-            eventTarget.addEventListener('focusout', changesInputList, true);
-            break;
-          case 'blur':
-            eventTarget.removeEventListener('keyup', inputInputList);
-
-            eventTarget.removeEventListener('focusout', changesInputList, true);
-            break;
-        }
+        // toggle the visibility of the datalist select according to previous checks
+        toggleVisibility(dataListSelect, visible);
       }
     }
   };
@@ -391,14 +390,19 @@
         }
       }
 
-      // toggle the visibility of the select according to previous checks
-      if (visible) {
-        select.removeAttribute('hidden');
-      } else {
-        select.setAttributeNode(document.createAttribute('hidden'));
-      }
-      select.setAttribute('aria-hidden', (!visible).toString());
+      // toggle the visibility of the datalist select according to previous checks
+      toggleVisibility(select, visible);
     }
+  };
+
+  // toggle the visibility of the datalist select
+  var toggleVisibility = function(dataListSelect, visible) {
+    if (visible) {
+      dataListSelect.removeAttribute('hidden');
+    } else {
+      dataListSelect.setAttributeNode(document.createAttribute('hidden'));
+    }
+    dataListSelect.setAttribute('aria-hidden', (!visible).toString());
   };
 
   // binding the focus event - matching the input[list]s happens in the function afterwards

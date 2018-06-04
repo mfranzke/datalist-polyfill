@@ -1,6 +1,6 @@
 {
   "name": "datalist-polyfill",
-  "version": "1.13.0",
+  "version": "1.13.1",
   "description": "A lightweight and dependency-free vanilla JavaScript datalist polyfill.",
   "main": "datalist-polyfill.js",
   "scripts": {

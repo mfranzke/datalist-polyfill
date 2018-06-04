@@ -11,7 +11,7 @@ Tested in Safari, which it's mainly meant for, as nearly all of the other browse
 Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
 
 ## Features
-*	Lightweight: 5.52 kB of JavaScript, around 2.35 kB gzipped
+*	Lightweight: 5.24 kB of JavaScript, around 2.35 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
