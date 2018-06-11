@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - #GH-16 correction as an enhancement to the current functionality
 
+## [1.13.2] - 2018-06-11
+### Changed
+- Focusing the input[list] after selecting a suggestion, as in #GH-18
+
 ## [1.13.1] - 2018-06-04
 ### Changed
 - Some code refactoring, nothing really serious

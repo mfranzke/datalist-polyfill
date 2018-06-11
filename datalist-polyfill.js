@@ -385,6 +385,9 @@
           }
           inputList.dispatchEvent(evt);
 
+          // finally focusing the input, as other browser do it as well
+          inputList.focus();
+
           // set the visibility to false afterwards, as we're done here
           visible = false;
         }
