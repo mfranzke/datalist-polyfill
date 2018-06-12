@@ -1,7 +1,7 @@
 /*
 * datalist-polyfill.js - https://github.com/mfranzke/datalist-polyfill
 * @license Copyright(c) 2017 by Maximilian Franzke
-* Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, Michael, @hryamzik, @ottoville, @IceCreamYou, @wlekin and @eddr - many thanks for that !
+* Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou, @wlekin, @eddr and @beebee1987 - many thanks for that !
 */
 /*
 * A lightweight and library dependency free vanilla JavaScript datalist polyfill.
@@ -80,6 +80,39 @@
     window.removeEventListener('touchstart', onFirstTouch);
   });
 
+
+  // for observing any changes to the option elements within the datalist elements, define MutationObserver initially
+  var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+
+  // define a new observer
+  if (typeof(MutationObserver) !== 'undefined') {
+    var obs = new MutationObserver(function(mutations) {
+      var datalistNeedsAnUpdate = false;
+
+      // look through all mutations that just occured
+      for(var i=0; i<mutations.length; ++i) {
+
+        // look through all added nodes of this mutation
+        for(var j=0; j<mutations[i].addedNodes.length; ++j) {
+          if (mutations[i].target.tagName.toLowerCase() === 'datalist') {
+            datalistNeedsAnUpdate = mutations[i].target;
+          }
+        }
+      }
+
+      if (datalistNeedsAnUpdate) {
+        var input = document.querySelector('[list="' + datalistNeedsAnUpdate.id + '"]');
+
+        if (input.value !== '') {
+          var dataList = datalistNeedsAnUpdate;
+
+          prepOptions(dataList, input);
+          toggleVisibility(dataList.getElementsByClassName(classNamePolyfillingSelect)[0]);
+        }
+      }
+    });
+  }
+
   // function regarding the inputs interactions
   var inputInputList = function(event) {
 
@@ -95,7 +128,7 @@
       // still check for an existing instance
       if (dataList !== null) {
 
-        var dataListSelect = dataList.getElementsByClassName(classNamePolyfillingSelect)[0];
+        var dataListSelect = dataList.getElementsByClassName(classNamePolyfillingSelect)[0] || setUpPolyfillingSelect(eventTarget, dataList);
 
         // still check for an existing instance
         if (dataListSelect !== undefined) {
@@ -107,73 +140,17 @@
             return;
           }
 
-          var dataListOptions = dataList.querySelectorAll('option:not([disabled]):not(.message)'),
-            inputValue = eventTarget.value,
-            newSelectValues = document.createDocumentFragment(),
-            disabledValues = document.createDocumentFragment(),
-            visible = false,
-            multipleEmails = (eventTarget.type === 'email' && eventTarget.multiple),
+          var inputValue = eventTarget.value,
             keyOpen = (event.keyCode === keyUP || event.keyCode === keyDOWN);
-
-          // in case of type=email and multiple attribute, we would need to split the inputs value into pieces
-          if (multipleEmails) {
-            var multipleEntries = inputValue.split(','),
-              relevantIndex = multipleEntries.length - 1;
-
-            inputValue = multipleEntries[relevantIndex].trim();
-          }
 
           // if the input contains a value, than ...
           if (inputValue !== '' || keyOpen) {
 
-            // ... create an array out of the options list
-            var nodeArray = Array.prototype.slice.call(dataListOptions);
-
-            // ... sort all entries and
-            nodeArray.sort(function(a, b) {
-              return a.value.localeCompare(b.value);
-            })
-            .forEach(function(opt) {
-              var optionValue = opt.value;
-
-              // ... put this option into the fragment that is meant to get inserted into the select
-              // "Each option element that is a descendant of the datalist element, that is not disabled, and whose value is a string that isn't the empty string, represents a suggestion. Each suggestion has a value and a label." (W3C)
-              if (optionValue !== '' && optionValue.toLowerCase()
-                  .indexOf(inputValue.toLowerCase()) !== -1 && opt.disabled === false) {
-
-                var label = opt.getAttribute('label'),
-                  text = opt.text,
-                  textOptionPart = text.substr(0, optionValue.length + textValueSeperator.length),
-                  optionPart = optionValue + textValueSeperator;
-
-                // the innertext should be value / text in case they are different
-                if (text && !label && text !== optionValue && textOptionPart !== optionPart) {
-                  opt.innerText = optionValue + textValueSeperator + text;
-
-                } else if (!opt.text) {
-                  // manipulating the option inner text, that would get displayed
-                  opt.innerText = label || optionValue;
-                }
-
-                newSelectValues.appendChild(opt);
-
-                // ... and set the state of the select to get displayed in that case
-                visible = true;
-              } else {
-                // ... or put this option that isn't relevant to the users into the fragment that is supposed to get inserted outside of the select
-                disabledValues.appendChild(opt);
-              }
-            });
-
-            // input the options fragment into the datalists select
-            dataListSelect.appendChild(newSelectValues);
+            prepOptions(dataList, eventTarget);
 
             var dataListSelectOptionsLength = dataListSelect.options.length,
               firstEntry = 0,
               lastEntry = dataListSelectOptionsLength - 1;
-
-            dataListSelect.size = (dataListSelectOptionsLength > 10) ? 10 : dataListSelectOptionsLength;
-            dataListSelect.multiple = (!touched && dataListSelectOptionsLength < 2);
 
             if (touched) {
               // preselect best fitting index
@@ -191,14 +168,10 @@
               }
             }
 
-            // input the unused options as siblings next to the select - and differentiate in between the regular, and the IE9 fix syntax upfront
-            var dataListAppend = dataList.getElementsByClassName('ie9_fix')[0] || dataList;
-
-            dataListAppend.appendChild(disabledValues);
           }
 
           // toggle the visibility of the datalist select according to previous checks
-          toggleVisibility(dataListSelect, visible);
+          toggleVisibility(dataListSelect);
 
           // on arrow up or down keys, focus the select
           if (keyOpen) {
@@ -210,16 +183,93 @@
     }
   };
 
+  // function for preparing and sorting the options/suggestions
+  var prepOptions = function(dataList, input) {
+
+    if (typeof(obs) !== 'undefined') {
+      obs.disconnect();
+    }
+
+    var dataListSelect = dataList.getElementsByClassName(classNamePolyfillingSelect)[0] || setUpPolyfillingSelect(input, dataList),
+      dataListOptions = dataList.querySelectorAll('option:not([disabled]):not(.message)'),
+      inputValue = input.value,
+      newSelectValues = document.createDocumentFragment(),
+      disabledValues = document.createDocumentFragment(),
+      multipleEmails = (input.type === 'email' && input.multiple);
+
+    // in case of type=email and multiple attribute, we would need to split the inputs value into pieces
+    if (multipleEmails) {
+      var multipleEntries = inputValue.split(','),
+        relevantIndex = multipleEntries.length - 1;
+
+      inputValue = multipleEntries[relevantIndex].trim();
+    }
+
+    // ... create an array out of the options list
+    var nodeArray = Array.prototype.slice.call(dataListOptions);
+
+    // ... sort all entries and
+    nodeArray.sort(function(a, b) {
+      return a.value.localeCompare(b.value);
+    })
+    .forEach(function(opt) {
+      var optionValue = opt.value;
+
+      // ... put this option into the fragment that is meant to get inserted into the select
+      // "Each option element that is a descendant of the datalist element, that is not disabled, and whose value is a string that isn't the empty string, represents a suggestion. Each suggestion has a value and a label." (W3C)
+      if (optionValue !== '' && optionValue.toLowerCase()
+          .indexOf(inputValue.toLowerCase()) !== -1 && opt.disabled === false) {
+
+        var label = opt.getAttribute('label'),
+          text = opt.text,
+          textOptionPart = text.substr(0, optionValue.length + textValueSeperator.length),
+          optionPart = optionValue + textValueSeperator;
+
+        // the innertext should be value / text in case they are different
+        if (text && !label && text !== optionValue && textOptionPart !== optionPart) {
+          opt.innerText = optionValue + textValueSeperator + text;
+
+        } else if (!opt.text) {
+          // manipulating the option inner text, that would get displayed
+          opt.innerText = label || optionValue;
+        }
+
+        newSelectValues.appendChild(opt);
+      } else {
+        // ... or put this option that isn't relevant to the users into the fragment that is supposed to get inserted outside of the select
+        disabledValues.appendChild(opt);
+      }
+    });
+
+    // input the options fragment into the datalists select
+    dataListSelect.appendChild(newSelectValues);
+
+    var dataListSelectOptionsLength = dataListSelect.options.length;
+
+    dataListSelect.size = (dataListSelectOptionsLength > 10) ? 10 : dataListSelectOptionsLength;
+    dataListSelect.multiple = (!touched && dataListSelectOptionsLength < 2);
+
+    // input the unused options as siblings next to the select - and differentiate in between the regular, and the IE9 fix syntax upfront
+    var dataListAppend = dataList.getElementsByClassName('ie9_fix')[0] || dataList;
+
+    dataListAppend.appendChild(disabledValues);
+
+    if (typeof(obs) !== 'undefined') {
+      obs.observe(dataList, {
+        childList: true
+      });
+    }
+
+  };
+
   // focus or blur events
   var changesInputList = function(event) {
 
     var eventTarget = event.target,
-      eventTargetTagName = eventTarget.tagName.toLowerCase(),
-      inputType = eventTarget.type,
-      inputStyles = window.getComputedStyle(eventTarget);
+      eventTargetTagName = eventTarget.tagName.toLowerCase();
 
     // check for whether the events target was an input datalist and whether it's of one of the supported input types defined above
-    if (eventTargetTagName && eventTargetTagName === 'input' && eventTarget.getAttribute('list') && supportedTypes.indexOf(inputType) > -1) {
+    if (eventTargetTagName && eventTargetTagName === 'input' && eventTarget.getAttribute('list')) {
 
       var eventType = event.type,
         list = eventTarget.getAttribute('list'),
@@ -227,84 +277,14 @@
 
       // still check for an existing instance
       if (dataList !== null) {
-
-        var dataListSelect = dataList.getElementsByClassName(classNamePolyfillingSelect)[0],
-          // either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur
-          visible = (((eventType === 'focus' && eventTarget.value !== '') || (event.relatedTarget && event.relatedTarget === dataListSelect)) && dataListSelect && dataListSelect.options && dataListSelect.options.length),
-          message = dataList.title;
-
         // creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
-        if (dataListSelect === undefined) {
-          var rects = eventTarget.getClientRects(),
-            // measurements
-            inputStyleMarginRight = parseFloat(inputStyles.getPropertyValue('margin-right')),
-            inputStyleMarginLeft = parseFloat(inputStyles.getPropertyValue('margin-left'));
-
-          dataListSelect = document.createElement('select');
-
-          // setting a class for easier selecting that select afterwards
-          dataListSelect.setAttribute('class', classNamePolyfillingSelect);
-
-          // set general styling related definitions
-          dataListSelect.style.position = 'absolute';
-
-          // initially hiding the datalist select
-          toggleVisibility(dataListSelect, false);
-
-          // WAI ARIA attributes
-          dataListSelect.setAttribute('aria-live', 'polite');
-          dataListSelect.setAttribute('role', 'listbox');
-          if (!touched) {
-            dataListSelect.setAttribute('aria-multiselectable', 'false');
-          }
-
-          // the select should get positioned underneath the input field ...
-          if (inputStyles.getPropertyValue('display') === 'block') {
-            dataListSelect.style.marginTop = '-' + inputStyles.getPropertyValue('margin-bottom');
-          } else {
-            if (inputStyles.getPropertyValue('direction') === 'rtl') {
-              dataListSelect.style.marginRight = '-' + (rects[0].width + inputStyleMarginLeft) + 'px';
-            } else {
-              dataListSelect.style.marginLeft = '-' + (rects[0].width + inputStyleMarginRight) + 'px';
-            }
-
-            dataListSelect.style.marginTop = parseInt((rects[0].height + (eventTarget.offsetTop - dataList.offsetTop)), 10) + 'px';
-          }
-
-          // set the polyfilling selects border-radius equally as the one by the polyfilled input
-          dataListSelect.style.borderRadius = inputStyles.getPropertyValue('border-radius');
-          dataListSelect.style.minWidth = rects[0].width + 'px';
-
-          if (touched) {
-            var messageElement = document.createElement('option');
-
-            // ... and it's first entry should contain the localized message to select an entry
-            messageElement.innerText = message;
-            // ... and disable this option, as it shouldn't get selected by the user
-            messageElement.disabled = true;
-            // ... and assign a dividable class to it
-            messageElement.setAttribute('class', 'message');
-            // ... and finally insert it into the select
-            dataListSelect.appendChild(messageElement);
-          }
-
-          // add select to datalist element ...
-          dataList.appendChild(dataListSelect);
-
-          // ... and our upfollowing function to the change event
-
-          if (touched) {
-            dataListSelect.addEventListener('change', changeDataListSelect);
-          } else {
-            dataListSelect.addEventListener('click', changeDataListSelect);
-          }
-          dataListSelect.addEventListener('blur', changeDataListSelect);
-          dataListSelect.addEventListener('keyup', changeDataListSelect);
-        }
+        var dataListSelect = dataList.getElementsByClassName(classNamePolyfillingSelect)[0] || setUpPolyfillingSelect(eventTarget, dataList),
+          // either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur - and check for general existance of any option as suggestions
+          visible = (((eventType === 'focus' && eventTarget.value !== '') || (event.relatedTarget && event.relatedTarget === dataListSelect)) && dataListSelect && dataListSelect.options && dataListSelect.options.length);
 
         // test for whether this input has already been enhanced by the polyfill
         if (!new RegExp(' ' + classNameInput + ' ').test(' ' + eventTarget.className + ' ')) {
-          // plus we'd like to prevent autocomplete on the input datalist field
+          // we'd like to prevent autocomplete on the input datalist field
           eventTarget.setAttribute('autocomplete', 'off');
 
           // WAI ARIA attributes
@@ -333,6 +313,87 @@
 
         // toggle the visibility of the datalist select according to previous checks
         toggleVisibility(dataListSelect, visible);
+      }
+    }
+  };
+
+  // define function for setting up the polyfilling select
+  var setUpPolyfillingSelect = function(input, dataList) {
+    var inputType = input.type;
+
+    if (supportedTypes.indexOf(inputType) > -1) {
+
+      // still check for an existing instance
+      if (dataList !== null) {
+
+        var message = dataList.title,
+          rects = input.getClientRects(),
+          // measurements
+          inputStyles = window.getComputedStyle(input),
+          inputStyleMarginRight = parseFloat(inputStyles.getPropertyValue('margin-right')),
+          inputStyleMarginLeft = parseFloat(inputStyles.getPropertyValue('margin-left')),
+          dataListSelect = document.createElement('select');
+
+        // setting a class for easier selecting that select afterwards
+        dataListSelect.setAttribute('class', classNamePolyfillingSelect);
+
+        // set general styling related definitions
+        dataListSelect.style.position = 'absolute';
+
+        // initially hiding the datalist select
+        toggleVisibility(dataListSelect, false);
+
+        // WAI ARIA attributes
+        dataListSelect.setAttribute('aria-live', 'polite');
+        dataListSelect.setAttribute('role', 'listbox');
+        if (!touched) {
+          dataListSelect.setAttribute('aria-multiselectable', 'false');
+        }
+
+        // the select should get positioned underneath the input field ...
+        if (inputStyles.getPropertyValue('display') === 'block') {
+          dataListSelect.style.marginTop = '-' + inputStyles.getPropertyValue('margin-bottom');
+        } else {
+          if (inputStyles.getPropertyValue('direction') === 'rtl') {
+            dataListSelect.style.marginRight = '-' + (rects[0].width + inputStyleMarginLeft) + 'px';
+          } else {
+            dataListSelect.style.marginLeft = '-' + (rects[0].width + inputStyleMarginRight) + 'px';
+          }
+
+          dataListSelect.style.marginTop = parseInt((rects[0].height + (input.offsetTop - dataList.offsetTop)), 10) + 'px';
+        }
+
+        // set the polyfilling selects border-radius equally as the one by the polyfilled input
+        dataListSelect.style.borderRadius = inputStyles.getPropertyValue('border-radius');
+        dataListSelect.style.minWidth = rects[0].width + 'px';
+
+        if (touched) {
+          var messageElement = document.createElement('option');
+
+          // ... and it's first entry should contain the localized message to select an entry
+          messageElement.innerText = message;
+          // ... and disable this option, as it shouldn't get selected by the user
+          messageElement.disabled = true;
+          // ... and assign a dividable class to it
+          messageElement.setAttribute('class', 'message');
+          // ... and finally insert it into the select
+          dataListSelect.appendChild(messageElement);
+        }
+
+        // add select to datalist element ...
+        dataList.appendChild(dataListSelect);
+
+        // ... and our upfollowing function to the change event
+
+        if (touched) {
+          dataListSelect.addEventListener('change', changeDataListSelect);
+        } else {
+          dataListSelect.addEventListener('click', changeDataListSelect);
+        }
+        dataListSelect.addEventListener('blur', changeDataListSelect);
+        dataListSelect.addEventListener('keyup', changeDataListSelect);
+
+        return dataListSelect;
       }
     }
   };
@@ -385,7 +446,7 @@
           }
           inputList.dispatchEvent(evt);
 
-          // finally focusing the input, as other browser do it as well
+          // finally focusing the input, as other browser do this as well
           inputList.focus();
 
           // set the visibility to false afterwards, as we're done here
@@ -400,6 +461,10 @@
 
   // toggle the visibility of the datalist select
   var toggleVisibility = function(dataListSelect, visible) {
+    if (visible === undefined) {
+     visible = (dataListSelect && dataListSelect.options && dataListSelect.options.length);
+    }
+
     if (visible) {
       dataListSelect.removeAttribute('hidden');
     } else {

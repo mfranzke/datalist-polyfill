@@ -1,12 +1,18 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.14.0] - 2018-06-12
 ### Added
-- #GH-16 correction as an enhancement to the current functionality
+- Added MutationObserver to even also capture changes to the option elements as a correction to enhance the current functionality (#GH-16).
+
+### Changed
+- Changed some URLs from HTTP to the new kid on the block: HTTPS. Nice ! ;-)
+- Additionally did some necessary updates to the documentation.
 
 ## [1.13.2] - 2018-06-11
 ### Changed

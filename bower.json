@@ -1,7 +1,7 @@
 {
   "name": "datalist-polyfill",
   "description": "An extremely lightweight and library-dependency-free vanilla JavaScript datalist polyfill.",
-  "version": "1.13.2",
+  "version": "1.14.0",
   "homepage": "https://github.com/mfranzke/datalist-polyfill",
   "authors": [{
     "name": "Maximilian Franzke",
@@ -18,7 +18,7 @@
   ],
   "licenses": [{
     "type": "MIT",
-    "url": "http://www.opensource.org/licenses/mit-license.php"
+    "url": "https://opensource.org/licenses/mit-license.php"
   }],
   "ignore": [
     "bower.json",

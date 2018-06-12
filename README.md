@@ -7,11 +7,12 @@
 
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
-Tested in Safari, which it's mainly meant for, as nearly all of the other browsers support it quite well: <http://caniuse.com/#feat=datalist>  
-Released under the MIT License: <http://www.opensource.org/licenses/mit-license.php>
+* Mainly built for Safari, as nearly all of the other browsers support it quite well: <https://caniuse.com/#feat=datalist>
+* Released under the MIT License: <https://opensource.org/licenses/mit-license.php>
+* Made in Germany. And supported by so many great people from all over this planet - see "Credits" accordingly.
 
 ## Features
-*	Lightweight: 5.24 kB of JavaScript, around 2.35 kB gzipped
+*	Lightweight: 5.94 kB of minified JavaScript, around 2.59 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
@@ -31,7 +32,7 @@ Released under the MIT License: <http://www.opensource.org/licenses/mit-license.
 The plugin was designed with the following concepts kept in mind:
 
 *	dependency-free
-*	Supporting DOM changes by event delegation
+*	Supporting DOM changes by event delegation and MutationObserver
 *	code accessibility / readability
 
 ## Installation
@@ -50,7 +51,7 @@ This package is also enabling the [`.options` (for `datalist` elements)](https:/
 If you set a `title`-Attribute on the `<datalist>` HTML tag, it would get used as label for the first disabled entry within the polyfilling select on non-touch interactions.
 
 ### dynamic HTML (or DHTML, if you like to be a little bit nostalgic)
-In case that you'd like to dynamically add or modify / create your HTML code, you're good to go with this polyfill, as it's based on event delegation that makes your UI work easily - no refresh nor reinit function to call after DOM manipulation or something similar.
+In case that you'd like to dynamically add or modify / create your HTML code, you're good to go with this polyfill, as it's based on event delegation and additionally using MutationObserver (IE11+) that makes your UI work easily - no refresh nor reinit function to call after DOM manipulation or something similar.
 
 ### Changes to the available `option` elements
 If you'd like to make a change to the integrated list of `<option>` elements, feel free to either remove or add them right away - the list would get generated on the fly after the user typed in something into the `<input>` field, so you're covered on this.
@@ -100,7 +101,7 @@ See the polyfill in action either by downloading / forking this repo and have a 
 	*	I tried its `multiple` attribute, as this is most likely already what you're up to regarding appearance, but it does violate the form-follows-function concept and results in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing... Then the `size` attribute came to my attention, which much better fits the requirements and behaves as designed quite perfectly.
 
 ## Credits
-Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou, @wlekin and @eddr. Thank you very much for that, highly appreciated !
+Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou, @wlekin, @eddr and @beebee1987. Thank you very much for that, highly appreciated !
 
 ## Tested with
 
@@ -114,6 +115,8 @@ Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kra
 *	iOS
 	*	iPad Pro / 10.2, Mobile Safari 10.0
 	*	iPhone 6 Plus / 10.3, Mobile Safari 10.0
+*	Windows
+	*	Windows 7 SP1, Internet Explorer 9.0.8112.16421
 
 ## Outro
 Personally I even also do like the "keep it simple" approach provided within the W3C specs even already:
