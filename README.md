@@ -87,19 +87,7 @@ You'll need the declaration for the standard `hidden` attribute, that you might 
 
 #### Internet Explorer 9
 In case you'd like to support IE9, you'll need to add a nesting `select` element wrapped by a conditional comment into the `datalist` element.
-```html
-<datalist id="animallist_ie" title="Choose a suggestion">
-	<!--[if IE 9]><select disabled style="display:none" class="ie9_fix"><![endif]-->
-		<option value="Cat">
-		<option value="Cow">
-		<option value="Dog">
-		<option value="Horse">
-		<option value="Lion">
-		<option value="Pig" disabled>
-		<option value="Zebra">
-	<!--[if IE 9]></select><![endif]-->
-</datalist>
-```
+Please have a look at the [demo page](https://mfranzke.github.io/datalist-polyfill/demo.html) accordingly, the code is being mentioned within the `Internet Explorer 9 support` section.
 
 ## Demo
 See the polyfill in action either by downloading / forking this repo and have a look at `demo.html`, or at the hosted demo: <https://mfranzke.github.io/datalist-polyfill/demo.html>
