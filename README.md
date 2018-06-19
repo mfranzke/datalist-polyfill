@@ -1,14 +1,25 @@
+[npm]: https://npmjs.com/package/datalist-polyfill "datalist polyfill – on NPM"
+[jsdelivr]: https://www.jsdelivr.com/package/npm/datalist-polyfill "datalist polyfill – on jsDelivr"
+[david-dm]: https://david-dm.org/mfranzke/datalist-polyfill "datalist polyfill – on david-dm"
+[mit]: https://opensource.org/licenses/mit-license.php
+[npm-badge]: https://img.shields.io/npm/v/datalist-polyfill.svg "npm version"
+[downl-badge]: https://img.shields.io/npm/dt/datalist-polyfill.svg "Count of total downloads – NPM"
+[jsdelivr-badge]: https://data.jsdelivr.com/v1/package/npm/datalist-polyfill/badge "Count of total downloads – jsDelivr"
+[dependency-badge]: https://david-dm.org/mfranzke/datalist-polyfill/status.svg "Count of dependencies"
+[license-badge]: https://img.shields.io/npm/l/datalist-polyfill.svg "license badge"
+
+
 # datalist-polyfill
 
-
-[![npm](https://img.shields.io/npm/v/datalist-polyfill.svg)](https://www.npmjs.com/package/datalist-polyfill)
-[![dependencies Status](https://david-dm.org/mfranzke/datalist-polyfill/status.svg)](https://david-dm.org/mfranzke/datalist-polyfill)
-[![](https://data.jsdelivr.com/v1/package/npm/datalist-polyfill/badge)](https://www.jsdelivr.com/package/npm/datalist-polyfill)
+[![datalist-polyfill on Npmjs][npm-badge]][npm]
+[![Total downloads ~ Npmjs][downl-badge]][npm]
+[![jsDelivr CDN downloads][jsdelivr-badge]][jsdelivr]
+[![dependencies Status][dependency-badge]][david-dm]
 
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
 * Mainly built for Safari, as nearly all of the other browsers support it quite well: <https://caniuse.com/#feat=datalist>
-* Released under the MIT License: <https://opensource.org/licenses/mit-license.php>
+* Released under the [![MIT license][license-badge]][mit]
 * Made in Germany. And supported by so many great people from all over this planet - see "Credits" accordingly.
 
 ## Features
