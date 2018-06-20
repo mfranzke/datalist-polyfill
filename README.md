@@ -23,7 +23,7 @@ This is a minimal and dependency-free vanilla JavaScript polyfill for the awesom
 * Made in Germany. And supported by so many great people from all over this planet - see "Credits" accordingly.
 
 ## Features
-*	Lightweight: 5.94 kB of minified JavaScript, around 2.59 kB gzipped
+*	Lightweight: 5.96 kB of minified JavaScript, around 2.58 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
@@ -77,7 +77,8 @@ As the browser vendors (Google Chrome vs. the others) don't seem to be aligned o
 You'll need the declaration for the standard `hidden` attribute, that you might already have included in case you're using [`normalize.css`](https://github.com/necolas/normalize.css/). Otherwise just adapt it from there:
 ```css
 /**
- * Add the correct display in IE 10-.
+ * Add the correct
+ * display in IE 10-
  */
 
 [hidden] {

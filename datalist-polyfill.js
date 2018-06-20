@@ -133,51 +133,52 @@
         // still check for an existing instance
         if (dataListSelect !== undefined) {
 
-          // on an ESC key press within the input, let's break here and hide the datalist select
-          if (event.keyCode === keyESC) {
-            toggleVisibility(dataListSelect, false);
+          var visible = false;
 
-            return;
-          }
+          // on an ESC or ENTER key press within the input, let's break here and afterwards hide the datalist select
+          if (event.keyCode !== keyESC && event.keyCode !== keyENTER) {
 
-          var inputValue = eventTarget.value,
-            keyOpen = (event.keyCode === keyUP || event.keyCode === keyDOWN);
+            var inputValue = eventTarget.value,
+              keyOpen = (event.keyCode === keyUP || event.keyCode === keyDOWN);
 
-          // if the input contains a value, than ...
-          if (inputValue !== '' || keyOpen) {
+            // if the input contains a value, than ...
+            if (inputValue !== '' || keyOpen) {
 
-            prepOptions(dataList, eventTarget);
+              prepOptions(dataList, eventTarget);
 
-            var dataListSelectOptionsLength = dataListSelect.options.length,
-              firstEntry = 0,
-              lastEntry = dataListSelectOptionsLength - 1;
+              var dataListSelectOptionsLength = dataListSelect.options.length,
+                firstEntry = 0,
+                lastEntry = dataListSelectOptionsLength - 1;
 
-            if (touched) {
-              // preselect best fitting index
-              dataListSelect.selectedIndex = firstEntry;
+              if (touched) {
+                // preselect best fitting index
+                dataListSelect.selectedIndex = firstEntry;
 
-            } else if (dataListSelect.selectedIndex === -1) {
+              } else if (dataListSelect.selectedIndex === -1) {
 
-              switch (event.keyCode) {
-                case keyUP:
-                  dataListSelect.selectedIndex = lastEntry;
-                  break;
-                case keyDOWN:
-                  dataListSelect.selectedIndex = firstEntry;
-                  break;
+                switch (event.keyCode) {
+                  case keyUP:
+                    dataListSelect.selectedIndex = lastEntry;
+                    break;
+                  case keyDOWN:
+                    dataListSelect.selectedIndex = firstEntry;
+                    break;
+                }
               }
-            }
 
+              visible = true;
+
+              // on arrow up or down keys, focus the select
+              if (keyOpen) {
+
+                dataListSelect.focus();
+              }
+
+            }
           }
 
           // toggle the visibility of the datalist select according to previous checks
-          toggleVisibility(dataListSelect);
-
-          // on arrow up or down keys, focus the select
-          if (keyOpen) {
-
-            dataListSelect.focus();
-          }
+          toggleVisibility(dataListSelect, visible);
         }
       }
     }
@@ -280,7 +281,7 @@
         // creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
         var dataListSelect = dataList.getElementsByClassName(classNamePolyfillingSelect)[0] || setUpPolyfillingSelect(eventTarget, dataList),
           // either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur - and check for general existance of any option as suggestions
-          visible = (((eventType === 'focus' && eventTarget.value !== '') || (event.relatedTarget && event.relatedTarget === dataListSelect)) && dataListSelect && dataListSelect.options && dataListSelect.options.length);
+          visible = (((eventType === 'focus' && eventTarget.value !== '') || (event.relatedTarget && event.relatedTarget === dataListSelect)) && dataListSelect && dataListSelect.querySelector('option:not(:disabled)'));
 
         // test for whether this input has already been enhanced by the polyfill
         if (!new RegExp(' ' + classNameInput + ' ').test(' ' + eventTarget.className + ' ')) {
@@ -462,7 +463,7 @@
   // toggle the visibility of the datalist select
   var toggleVisibility = function(dataListSelect, visible) {
     if (visible === undefined) {
-     visible = (dataListSelect && dataListSelect.options && dataListSelect.options.length);
+     visible = (dataListSelect && dataListSelect.querySelector('option:not(:disabled)'));
     }
 
     if (visible) {

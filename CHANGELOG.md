@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.14.1] - 2018-06-20
+### Added
+- Hiding the polyfilling select on pressing ENTER, which is equal to the behaviour on typing ESC.
+- Added more badges to the readme. I'm loving badges.
+
+### Changed
+- Made some necessary changes to enhance the current demo page by the minimum amount of relevant HTML tags that should be included within every page (and even also added the IE related meta tag due to backwards compatibility).
+
+### Removed
+- Removed some sample code out of the readme page due to the new NPM websites layout.
+
+### Fixed
+- The determination of option elements within the polyfilling select has incorrectly even also included `:disabled` elements.
+
 ## [1.14.0] - 2018-06-12
 ### Added
 - Added MutationObserver to even also capture changes to the option elements as a correction to enhance the current functionality (#GH-16).
