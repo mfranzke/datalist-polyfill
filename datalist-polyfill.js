@@ -107,7 +107,7 @@
           var dataList = datalistNeedsAnUpdate;
 
           // prepare the options and toggle the visiblity afterwards
-          toggleVisibility(dataList.getElementsByClassName(classNamePolyfillingSelect)[0], prepOptions(dataList, eventTarget));
+          toggleVisibility(dataList.getElementsByClassName(classNamePolyfillingSelect)[0], prepOptions(dataList, input));
         }
       }
     });
@@ -284,7 +284,7 @@
         // creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
         var dataListSelect = dataList.getElementsByClassName(classNamePolyfillingSelect)[0] || setUpPolyfillingSelect(eventTarget, dataList),
           // either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur - and check for general existance of any option as suggestions
-          visible = (((eventType === 'focus' && eventTarget.value !== '') || (event.relatedTarget && event.relatedTarget === dataListSelect)) && dataListSelect && dataListSelect.querySelector('option:not(:disabled)'));
+          visible = (dataListSelect && dataListSelect.querySelector('option:not(:disabled)') && ((eventType === 'focus' && eventTarget.value !== '') || (event.relatedTarget && event.relatedTarget === dataListSelect)));
 
         // test for whether this input has already been enhanced by the polyfill
         if (!new RegExp(' ' + classNameInput + ' ').test(' ' + eventTarget.className + ' ')) {

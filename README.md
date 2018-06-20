@@ -119,8 +119,7 @@ Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kra
 	*	Windows 7 SP1, Internet Explorer 9.0.8112.16421
 
 ## Outro
-Personally I even also do like the "keep it simple" approach provided within the W3C specs even already:
-<https://www.w3.org/TR/html5/forms.html#the-datalist-element>
+Personally I even also do like the "keep it simple" approach provided within the [W3C specs](https://www.w3.org/TR/html5/forms.html#the-datalist-element) even already.
 
 But on the other hand this leads to an additional visible field, but doesn't emulate the (hopefully, fingers crossed) upcoming x-browser implementation and leaves unnecessary syntax for all of the clients that wouldn't even need it (anymore).
 

@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.14.3] - 2018-06-20
+### Changed
+- Changed the order in a comparsion as this simplifies the response.
+
+### Fixed
+- Sadly another small bug slipped through today, it's about an incorrect variable being used.
+
 ## [1.14.2] - 2018-06-20
 ### Fixed
 - A small bug sadly slipped through that doesn't hide the polyfilling select on non-matching option elements regarding the value.
