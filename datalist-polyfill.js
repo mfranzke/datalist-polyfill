@@ -106,8 +106,8 @@
         if (input.value !== '') {
           var dataList = datalistNeedsAnUpdate;
 
-          prepOptions(dataList, input);
-          toggleVisibility(dataList.getElementsByClassName(classNamePolyfillingSelect)[0]);
+          // prepare the options and toggle the visiblity afterwards
+          toggleVisibility(dataList.getElementsByClassName(classNamePolyfillingSelect)[0], prepOptions(dataList, eventTarget));
         }
       }
     });
@@ -144,7 +144,10 @@
             // if the input contains a value, than ...
             if (inputValue !== '' || keyOpen) {
 
-              prepOptions(dataList, eventTarget);
+              // prepare the options
+              if (prepOptions(dataList, eventTarget)) {
+                visible = true;
+              }
 
               var dataListSelectOptionsLength = dataListSelect.options.length,
                 firstEntry = 0,
@@ -165,8 +168,6 @@
                     break;
                 }
               }
-
-              visible = true;
 
               // on arrow up or down keys, focus the select
               if (keyOpen) {
@@ -260,6 +261,8 @@
         childList: true
       });
     }
+
+    return dataListSelectOptionsLength;
 
   };
 

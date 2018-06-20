@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.14.2] - 2018-06-20
+### Fixed
+- A small bug sadly slipped through that doesn't hide the polyfilling select on non-matching option elements regarding the value.
+
 ## [1.14.1] - 2018-06-20
 ### Added
 - Hiding the polyfilling select on pressing ENTER, which is equal to the behaviour on typing ESC.
