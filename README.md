@@ -18,7 +18,7 @@
 
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
-* Mainly built for Safari, as nearly all of the other browsers support it quite well: <https://caniuse.com/#feat=datalist>
+* Mainly built for Safari (but supporting IE9 as well), as nearly all of the other browsers [support it quite nicely](https://caniuse.com/#feat=datalist)
 * Released under the [![MIT license][license-badge]][mit]
 * Made in Germany. And supported by so many great people from all over this planet - see "Credits" accordingly.
 
