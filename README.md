@@ -40,7 +40,7 @@ This is a minimal and dependency-free vanilla JavaScript polyfill for the awesom
 *	Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
 
 ## Core concepts
-The plugin was designed with the following concepts kept in mind:
+The polyfill was designed with the following concepts kept in mind:
 
 *	dependency-free
 *	Supporting DOM changes by event delegation and MutationObserver
@@ -73,7 +73,7 @@ You can also disable `<option>` elements by adding the `disabled` attribute to t
 As the browser vendors (Google Chrome vs. the others) don't seem to be aligned on this topic, I've decided to enable the `label`-attribute to serve as the definitive label being displayed, even if a value is being defined differing from the label. On different `value` and `text` values, both of them would get displayed within the suggestions, as Google Chrome does it. But if you define a differing `label`-attribute, its value would get displayed exclusively (as all the other browsers do it) to give you some flexibility on how to define those suggestions. Check out the „Different ways of defining an option“ section on the demo page regarding this topic.
 
 ### Microsoft Internet Explorer
-#### Internet Explorer 10-
+#### Internet Explorer 9
 You'll need the declaration for the standard `hidden` attribute, that you might already have included in case you're using [`normalize.css`](https://github.com/necolas/normalize.css/). Otherwise just adapt it from there:
 ```css
 /**
@@ -86,8 +86,7 @@ You'll need the declaration for the standard `hidden` attribute, that you might 
 }
 ```
 
-#### Internet Explorer 9
-In case you'd like to support IE9, you'll need to add a nesting `select` element wrapped by a conditional comment into the `datalist` element.
+And you need to add a nesting `select` element wrapped by a conditional comment into the `datalist` element.
 Please have a look at the [demo page](https://mfranzke.github.io/datalist-polyfill/demo.html) accordingly, the code is being mentioned within the `Internet Explorer 9 support` section.
 
 ## Demo
