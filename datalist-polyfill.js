@@ -284,7 +284,7 @@
         // creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
         var dataListSelect = dataList.getElementsByClassName(classNamePolyfillingSelect)[0] || setUpPolyfillingSelect(eventTarget, dataList),
           // either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur - and check for general existance of any option as suggestions
-          visible = (dataListSelect && dataListSelect.querySelector('option:not(:disabled)') && ((eventType === 'focus' && eventTarget.value !== '') || (event.relatedTarget && event.relatedTarget === dataListSelect)));
+          visible = (dataListSelect && dataListSelect.querySelector('option:not(:disabled)') && ((eventType === 'focusin' && eventTarget.value !== '') || (event.relatedTarget && event.relatedTarget === dataListSelect)));
 
         // test for whether this input has already been enhanced by the polyfill
         if (!new RegExp(' ' + classNameInput + ' ').test(' ' + eventTarget.className + ' ')) {
@@ -299,7 +299,7 @@
 
           // bind the keyup event on the related datalists input
           switch (eventType) {
-            case 'focus':
+            case 'focusin':
               eventTarget.addEventListener('keyup', inputInputList);
 
               eventTarget.addEventListener('focusout', changesInputList, true);
@@ -478,5 +478,5 @@
   };
 
   // binding the focus event - matching the input[list]s happens in the function afterwards
-  document.addEventListener('focus', changesInputList, true);
+  document.addEventListener('focusin', changesInputList, true);
 })();

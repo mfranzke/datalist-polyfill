@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.14.4] - 2018-06-21
+### Fixed
+- IE9: After choosing a suggestion out of the polyfilling select, the select itself wouldn't get hidden. (#GH-19)
+
 ## [1.14.3] - 2018-06-20
 ### Changed
 - Changed the order in a comparsion as this simplifies the response.
