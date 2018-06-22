@@ -4,7 +4,7 @@
 * Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou, @wlekin, @eddr and @beebee1987 - many thanks for that !
 */
 /*
-* A lightweight and library dependency free vanilla JavaScript datalist polyfill.
+* A minimal and dependency-free vanilla JavaScript datalist polyfill.
 * Tests for native support of an inputs elements datalist functionality.
 * Elsewhere the functionality gets emulated by a select element.
 */
@@ -12,21 +12,15 @@
 (function() {
   'use strict';
 
-  // feature detection
-  var nativedatalist = ('list' in document.createElement('input')) &&
-    !!( document.createElement('datalist') && window.HTMLDataListElement );
-
-  // in case of that the feature doesn't exist, emulate it's functionality
-  if (nativedatalist) {
+  // feature detection - let's break here, if it's even already supported
+  if ('list' in document.createElement('input') && !!( document.createElement('datalist') && window.HTMLDataListElement)) {
     return false;
   }
 
   // emulate the two properties regarding the datalist and input elements
   // list property / https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement
   (function(constructor) {
-    if (constructor &&
-      constructor.prototype &&
-      constructor.prototype.list === undefined) {
+    if (constructor && constructor.prototype && constructor.prototype.list === undefined) {
       Object.defineProperty(constructor.prototype, 'list', {
         get: function() {
           if (typeof( this ) === 'object' && this instanceof constructor) {
@@ -41,9 +35,7 @@
   })(window.HTMLInputElement);
   // options property / https://developer.mozilla.org/en/docs/Web/API/HTMLDataListElement
   (function(constructor) {
-    if (constructor &&
-      constructor.prototype &&
-      constructor.prototype.options === undefined) {
+    if (constructor && constructor.prototype && constructor.prototype.options === undefined) {
       Object.defineProperty(constructor.prototype, 'options', {
         get: function() {
           if (typeof( this ) === 'object' && this instanceof constructor) {
@@ -117,70 +109,64 @@
   var inputInputList = function(event) {
 
     var eventTarget = event.target,
-      eventTargetTagName = eventTarget.tagName.toLowerCase();
+      eventTargetTagName = eventTarget.tagName.toLowerCase(),
+      dataList = eventTarget.list;
 
-    // check for whether the events target was an input datalist
-    if (eventTargetTagName && eventTargetTagName === 'input' && eventTarget.getAttribute('list')) {
+    // check for whether the events target was an input datalist and still check for an existing instance
+    if (eventTargetTagName && eventTargetTagName === 'input' && dataList !== null) {
 
-      var list = eventTarget.getAttribute('list'),
-        dataList = document.getElementById(list);
+      var dataListSelect = dataList.getElementsByClassName(classNamePolyfillingSelect)[0] || setUpPolyfillingSelect(eventTarget, dataList);
 
       // still check for an existing instance
-      if (dataList !== null) {
+      if (dataListSelect !== undefined) {
 
-        var dataListSelect = dataList.getElementsByClassName(classNamePolyfillingSelect)[0] || setUpPolyfillingSelect(eventTarget, dataList);
+        var visible = false;
 
-        // still check for an existing instance
-        if (dataListSelect !== undefined) {
+        // on an ESC or ENTER key press within the input, let's break here and afterwards hide the datalist select
+        if (event.keyCode !== keyESC && event.keyCode !== keyENTER) {
 
-          var visible = false;
+          var inputValue = eventTarget.value,
+            keyOpen = (event.keyCode === keyUP || event.keyCode === keyDOWN);
 
-          // on an ESC or ENTER key press within the input, let's break here and afterwards hide the datalist select
-          if (event.keyCode !== keyESC && event.keyCode !== keyENTER) {
+          // if the input contains a value, than ...
+          if (inputValue !== '' || keyOpen) {
 
-            var inputValue = eventTarget.value,
-              keyOpen = (event.keyCode === keyUP || event.keyCode === keyDOWN);
-
-            // if the input contains a value, than ...
-            if (inputValue !== '' || keyOpen) {
-
-              // prepare the options
-              if (prepOptions(dataList, eventTarget)) {
-                visible = true;
-              }
-
-              var dataListSelectOptionsLength = dataListSelect.options.length,
-                firstEntry = 0,
-                lastEntry = dataListSelectOptionsLength - 1;
-
-              if (touched) {
-                // preselect best fitting index
-                dataListSelect.selectedIndex = firstEntry;
-
-              } else if (dataListSelect.selectedIndex === -1) {
-
-                switch (event.keyCode) {
-                  case keyUP:
-                    dataListSelect.selectedIndex = lastEntry;
-                    break;
-                  case keyDOWN:
-                    dataListSelect.selectedIndex = firstEntry;
-                    break;
-                }
-              }
-
-              // on arrow up or down keys, focus the select
-              if (keyOpen) {
-
-                dataListSelect.focus();
-              }
-
+            // prepare the options
+            if (prepOptions(dataList, eventTarget)) {
+              visible = true;
             }
-          }
 
-          // toggle the visibility of the datalist select according to previous checks
-          toggleVisibility(dataListSelect, visible);
+            var dataListSelectOptionsLength = dataListSelect.options.length,
+              firstEntry = 0,
+              lastEntry = dataListSelectOptionsLength - 1;
+
+            if (touched) {
+              // preselect best fitting index
+              dataListSelect.selectedIndex = firstEntry;
+
+            } else if (dataListSelect.selectedIndex === -1) {
+
+              switch (event.keyCode) {
+                case keyUP:
+                  dataListSelect.selectedIndex = lastEntry;
+                  break;
+                case keyDOWN:
+                  dataListSelect.selectedIndex = firstEntry;
+                  break;
+              }
+            }
+
+            // on arrow up or down keys, focus the select
+            if (keyOpen) {
+
+              dataListSelect.focus();
+            }
+
+          }
         }
+
+        // toggle the visibility of the datalist select according to previous checks
+        toggleVisibility(dataListSelect, visible);
       }
     }
   };
@@ -193,14 +179,13 @@
     }
 
     var dataListSelect = dataList.getElementsByClassName(classNamePolyfillingSelect)[0] || setUpPolyfillingSelect(input, dataList),
-      dataListOptions = dataList.querySelectorAll('option:not([disabled]):not(.message)'),
+      dataListOptions = dataList.querySelectorAll('option:not(:disabled)'),
       inputValue = input.value,
       newSelectValues = document.createDocumentFragment(),
-      disabledValues = document.createDocumentFragment(),
-      multipleEmails = (input.type === 'email' && input.multiple);
+      disabledValues = document.createDocumentFragment();
 
     // in case of type=email and multiple attribute, we would need to split the inputs value into pieces
-    if (multipleEmails) {
+    if (input.type === 'email' && input.multiple) {
       var multipleEntries = inputValue.split(','),
         relevantIndex = multipleEntries.length - 1;
 
@@ -270,62 +255,55 @@
   var changesInputList = function(event) {
 
     var eventTarget = event.target,
-      eventTargetTagName = eventTarget.tagName.toLowerCase();
+      eventTargetTagName = eventTarget.tagName.toLowerCase(),
+      dataList = eventTarget.list;
 
-    // check for whether the events target was an input datalist and whether it's of one of the supported input types defined above
-    if (eventTargetTagName && eventTargetTagName === 'input' && eventTarget.getAttribute('list')) {
+    // check for whether the events target was an input datalist and whether it's of one of the supported input types defined above and still check for an existing instance
+    if (eventTargetTagName && eventTargetTagName === 'input' && dataList !== null) {
 
       var eventType = event.type,
-        list = eventTarget.getAttribute('list'),
-        dataList = document.getElementById(list);
-
-      // still check for an existing instance
-      if (dataList !== null) {
         // creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
-        var dataListSelect = dataList.getElementsByClassName(classNamePolyfillingSelect)[0] || setUpPolyfillingSelect(eventTarget, dataList),
-          // either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur - and check for general existance of any option as suggestions
-          visible = (dataListSelect && dataListSelect.querySelector('option:not(:disabled)') && ((eventType === 'focusin' && eventTarget.value !== '') || (event.relatedTarget && event.relatedTarget === dataListSelect)));
+        dataListSelect = dataList.getElementsByClassName(classNamePolyfillingSelect)[0] || setUpPolyfillingSelect(eventTarget, dataList),
+        // either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur - and check for general existance of any option as suggestions
+        visible = (dataListSelect && dataListSelect.querySelector('option:not(:disabled)') && ((eventType === 'focusin' && eventTarget.value !== '') || (event.relatedTarget && event.relatedTarget === dataListSelect)));
 
-        // test for whether this input has already been enhanced by the polyfill
-        if (!new RegExp(' ' + classNameInput + ' ').test(' ' + eventTarget.className + ' ')) {
-          // we'd like to prevent autocomplete on the input datalist field
-          eventTarget.setAttribute('autocomplete', 'off');
+      // test for whether this input has already been enhanced by the polyfill
+      if (!new RegExp(' ' + classNameInput + ' ').test(' ' + eventTarget.className + ' ')) {
+        // we'd like to prevent autocomplete on the input datalist field
+        eventTarget.setAttribute('autocomplete', 'off');
 
-          // WAI ARIA attributes
-          eventTarget.setAttribute('role', 'textbox');
-          eventTarget.setAttribute('aria-haspopup', 'true');
-          eventTarget.setAttribute('aria-autocomplete', 'list');
-          eventTarget.setAttribute('aria-owns', list);
+        // WAI ARIA attributes
+        eventTarget.setAttribute('role', 'textbox');
+        eventTarget.setAttribute('aria-haspopup', 'true');
+        eventTarget.setAttribute('aria-autocomplete', 'list');
+        eventTarget.setAttribute('aria-owns', eventTarget.getAttribute('list'));
 
-          // bind the keyup event on the related datalists input
-          switch (eventType) {
-            case 'focusin':
-              eventTarget.addEventListener('keyup', inputInputList);
+        // bind the keyup event on the related datalists input
+        switch (eventType) {
+          case 'focusin':
+            eventTarget.addEventListener('keyup', inputInputList);
 
-              eventTarget.addEventListener('focusout', changesInputList, true);
-              break;
-            case 'blur':
-              eventTarget.removeEventListener('keyup', inputInputList);
+            eventTarget.addEventListener('focusout', changesInputList, true);
+            break;
+          case 'blur':
+            eventTarget.removeEventListener('keyup', inputInputList);
 
-              eventTarget.removeEventListener('focusout', changesInputList, true);
-              break;
-          }
-
-          // add class for identifying that this input is even already being polyfilled
-          eventTarget.className += ' ' + classNameInput;
+            eventTarget.removeEventListener('focusout', changesInputList, true);
+            break;
         }
 
-        // toggle the visibility of the datalist select according to previous checks
-        toggleVisibility(dataListSelect, visible);
+        // add class for identifying that this input is even already being polyfilled
+        eventTarget.className += ' ' + classNameInput;
       }
+
+      // toggle the visibility of the datalist select according to previous checks
+      toggleVisibility(dataListSelect, visible);
     }
   };
 
   // define function for setting up the polyfilling select
   var setUpPolyfillingSelect = function(input, dataList) {
-    var inputType = input.type;
-
-    if (supportedTypes.indexOf(inputType) > -1) {
+    if (supportedTypes.indexOf(input.type) > -1) {
 
       // still check for an existing instance
       if (dataList !== null) {
@@ -427,17 +405,13 @@
 
         // input the selects value into the input on a change within the list
         if (inputList !== null && typeof( selectValue ) !== 'undefined' && selectValue.length > 0 && selectValue !== message) {
-          var inputListValue = inputList.value,
-            lastSeperator,
-            multipleEmails = (inputList.type === 'email' && inputList.multiple),
+          var lastSeperator,
             evt;
 
           // in case of type=email and multiple attribute, we need to set up the resulting inputs value differently
-          if (multipleEmails && (lastSeperator = inputListValue.lastIndexOf(',') ) > -1) {
-            inputList.value = inputListValue.slice(0, lastSeperator) + ',' + selectValue;
-          } else {
+          inputList.value = (inputList.type === 'email' && inputList.multiple && (lastSeperator = inputList.value.lastIndexOf(',') ) > -1) ?
+            inputList.value.slice(0, lastSeperator) + ',' + selectValue :
             inputList.value = selectValue;
-          }
 
           // create and dispatch the input event; divided for IE9 usage
           if (typeof(Event) === 'function') {
@@ -465,10 +439,6 @@
 
   // toggle the visibility of the datalist select
   var toggleVisibility = function(dataListSelect, visible) {
-    if (visible === undefined) {
-     visible = (dataListSelect && dataListSelect.querySelector('option:not(:disabled)'));
-    }
-
     if (visible) {
       dataListSelect.removeAttribute('hidden');
     } else {
