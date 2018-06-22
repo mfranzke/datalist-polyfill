@@ -99,7 +99,7 @@
           var dataList = datalistNeedsAnUpdate;
 
           // prepare the options and toggle the visiblity afterwards
-          toggleVisibility(dataList.getElementsByClassName(classNamePolyfillingSelect)[0], prepOptions(dataList, input));
+          toggleVisibility(prepOptions(dataList, input), dataList.getElementsByClassName(classNamePolyfillingSelect)[0]);
         }
       }
     });
@@ -166,7 +166,7 @@
         }
 
         // toggle the visibility of the datalist select according to previous checks
-        toggleVisibility(dataListSelect, visible);
+        toggleVisibility(visible, dataListSelect);
       }
     }
   };
@@ -297,7 +297,7 @@
       }
 
       // toggle the visibility of the datalist select according to previous checks
-      toggleVisibility(dataListSelect, visible);
+      toggleVisibility(visible, dataListSelect);
     }
   };
 
@@ -323,7 +323,7 @@
         dataListSelect.style.position = 'absolute';
 
         // initially hiding the datalist select
-        toggleVisibility(dataListSelect, false);
+        toggleVisibility(false, dataListSelect);
 
         // WAI ARIA attributes
         dataListSelect.setAttribute('aria-live', 'polite');
@@ -433,12 +433,12 @@
       }
 
       // toggle the visibility of the datalist select according to previous checks
-      toggleVisibility(select, visible);
+      toggleVisibility(visible, select);
     }
   };
 
   // toggle the visibility of the datalist select
-  var toggleVisibility = function(dataListSelect, visible) {
+  var toggleVisibility = function(visible, dataListSelect) {
     if (visible) {
       dataListSelect.removeAttribute('hidden');
     } else {
