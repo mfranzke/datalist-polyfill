@@ -2,11 +2,13 @@
 [jsdelivr]: https://www.jsdelivr.com/package/npm/datalist-polyfill "datalist polyfill – on jsDelivr"
 [david-dm]: https://david-dm.org/mfranzke/datalist-polyfill "datalist polyfill – on david-dm"
 [mit]: https://opensource.org/licenses/mit-license.php
+[prettier]: https://github.com/prettier/prettier
 [npm-badge]: https://img.shields.io/npm/v/datalist-polyfill.svg "npm version"
 [downl-badge]: https://img.shields.io/npm/dt/datalist-polyfill.svg "Count of total downloads – NPM"
 [jsdelivr-badge]: https://data.jsdelivr.com/v1/package/npm/datalist-polyfill/badge "Count of total downloads – jsDelivr"
 [dependency-badge]: https://david-dm.org/mfranzke/datalist-polyfill/status.svg "Count of dependencies"
 [license-badge]: https://img.shields.io/npm/l/datalist-polyfill.svg "license badge"
+[prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
 
 
 # datalist-polyfill
@@ -15,6 +17,7 @@
 [![Total downloads ~ Npmjs][downl-badge]][npm]
 [![jsDelivr CDN downloads][jsdelivr-badge]][jsdelivr]
 [![dependencies Status][dependency-badge]][david-dm]
+[![code style: prettier][prettier-badge]][prettier]
 
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 

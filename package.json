@@ -1,7 +1,8 @@
 {
   "name": "datalist-polyfill",
   "version": "1.15.1",
-  "description": "A lightweight and dependency-free vanilla JavaScript datalist polyfill.",
+  "description":
+    "A lightweight and dependency-free vanilla JavaScript datalist polyfill.",
   "main": "datalist-polyfill.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,19 +15,22 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "keywords": [
-  	"datalist",
+    "datalist",
     "polyfill",
     "javascript",
     "html",
-  	"autosuggest",
-  	"autosuggester",
-  	"suggest",
-  	"suggester",
-  	"select"
+    "autosuggest",
+    "autosuggester",
+    "suggest",
+    "suggester",
+    "select"
   ],
   "bugs": {
-	"url": "https://github.com/mfranzke/datalist-polyfill/issues"
+    "url": "https://github.com/mfranzke/datalist-polyfill/issues"
   },
   "homepage": "https://github.com/mfranzke/datalist-polyfill",
-  "dependencies" : {}
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "1.13.6"
+  }
 }
