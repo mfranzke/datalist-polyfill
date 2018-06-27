@@ -34,9 +34,14 @@
     "xo": "^0.21.1"
   },
   "xo": {
-		"envs": ["browser"],
-		"prettier": true,
-		"esnext": false,
-		"var": "consecutive"
-	}
+    "envs": [
+      "browser"
+    ],
+    "prettier": true,
+    "esnext": false,
+    "rules": {
+      "one-var": 0,
+      "no-use-before-define": 0
+    }
+  }
 }
