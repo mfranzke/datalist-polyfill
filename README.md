@@ -1,32 +1,23 @@
 [npm]: https://npmjs.com/package/datalist-polyfill "datalist polyfill – on NPM"
-[jsdelivr]: https://www.jsdelivr.com/package/npm/datalist-polyfill "datalist polyfill – on jsDelivr"
-[david-dm]: https://david-dm.org/mfranzke/datalist-polyfill "datalist polyfill – on david-dm"
-[mit]: https://opensource.org/licenses/mit-license.php
-[prettier]: https://github.com/prettier/prettier
-[npm-badge]: https://img.shields.io/npm/v/datalist-polyfill.svg "npm version"
-[downl-badge]: https://img.shields.io/npm/dt/datalist-polyfill.svg "Count of total downloads – NPM"
-[jsdelivr-badge]: https://data.jsdelivr.com/v1/package/npm/datalist-polyfill/badge "Count of total downloads – jsDelivr"
-[dependency-badge]: https://david-dm.org/mfranzke/datalist-polyfill/status.svg "Count of dependencies"
-[license-badge]: https://img.shields.io/npm/l/datalist-polyfill.svg "license badge"
-[prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
 
 
 # datalist-polyfill
 
-[![datalist-polyfill on Npmjs][npm-badge]][npm]
-[![Total downloads ~ Npmjs][downl-badge]][npm]
-[![jsDelivr CDN downloads][jsdelivr-badge]][jsdelivr]
-[![dependencies Status][dependency-badge]][david-dm]
-[![code style: prettier][prettier-badge]][prettier]
+[![datalist-polyfill on Npmjs](https://img.shields.io/npm/v/datalist-polyfill.svg "npm version")][npm]
+[![Total downloads ~ Npmjs](https://img.shields.io/npm/dt/datalist-polyfill.svg "Count of total downloads – NPM")][npm]
+[![jsDelivr CDN downloads](https://data.jsdelivr.com/v1/package/npm/datalist-polyfill/badge "Count of total downloads – jsDelivr")](https://www.jsdelivr.com/package/npm/datalist-polyfill "datalist polyfill – on jsDelivr")
+[![dependencies Status](https://david-dm.org/mfranzke/datalist-polyfill/status.svg "Count of dependencies")](https://david-dm.org/mfranzke/datalist-polyfill "datalist polyfill – on david-dm")
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
 * Mainly built for Safari (but supporting IE9 as well), as nearly all of the other browsers [support it quite nicely](https://caniuse.com/#feat=datalist)
-* Released under the [![MIT license][license-badge]][mit]
+* Released under the [![MIT license](https://img.shields.io/npm/l/datalist-polyfill.svg "license badge")](https://opensource.org/licenses/mit-license.php)
 * Made in Germany. And supported by so many great people from all over this planet - see "Credits" accordingly.
 
 ## Features
-*	Lightweight: 5.76 kB of minified JavaScript, around 2.54 kB gzipped
+*	Lightweight: 5.67 kB of minified JavaScript, around 2.52 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...

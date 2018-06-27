@@ -1,11 +1,10 @@
 {
   "name": "datalist-polyfill",
   "version": "1.15.1",
-  "description":
-    "A lightweight and dependency-free vanilla JavaScript datalist polyfill.",
+  "description": "A lightweight and dependency-free vanilla JavaScript datalist polyfill.",
   "main": "datalist-polyfill.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "xo"
   },
   "repository": {
     "type": "git",
@@ -31,6 +30,13 @@
   "homepage": "https://github.com/mfranzke/datalist-polyfill",
   "dependencies": {},
   "devDependencies": {
-    "prettier": "1.13.6"
-  }
+    "prettier": "^1.13.6",
+    "xo": "^0.21.1"
+  },
+  "xo": {
+		"envs": ["browser"],
+		"prettier": true,
+		"esnext": false,
+		"var": "consecutive"
+	}
 }
