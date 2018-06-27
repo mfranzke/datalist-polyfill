@@ -87,14 +87,14 @@
 			var datalistNeedsAnUpdate = false;
 
 			// Look through all mutations that just occured
-			for (var i = 0; i < mutations.length; ++i) {
+			mutations.forEach(function(mutation) {
 				// Look through all added nodes of this mutation
-				for (var j = 0; j < mutations[i].addedNodes.length; ++j) {
-					if (mutations[i].target.tagName.toLowerCase() === 'datalist') {
-						datalistNeedsAnUpdate = mutations[i].target;
+				for (var j = 0; j < mutation.addedNodes.length; ++j) {
+					if (mutation.target.tagName.toLowerCase() === 'datalist') {
+						datalistNeedsAnUpdate = mutation.target;
 					}
 				}
-			}
+			});
 
 			if (datalistNeedsAnUpdate) {
 				var input = document.querySelector(
@@ -185,12 +185,9 @@
 			newSelectValues = document.createDocumentFragment(),
 			disabledValues = document.createDocumentFragment();
 
-		// In case of type=email and multiple attribute, we would need to split the inputs value into pieces
+		// In case of type=email and multiple attribute, we would need grab the last piece
 		if (input.type === 'email' && input.multiple) {
-			var multipleEntries = inputValue.split(','),
-				relevantIndex = multipleEntries.length - 1;
-
-			inputValue = multipleEntries[relevantIndex].trim();
+			inputValue = inputValue.substring(inputValue.lastIndexOf(',') + 1);
 		}
 
 		// ... create an array out of the options list
