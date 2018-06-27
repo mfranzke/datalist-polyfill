@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.16.0] - 2018-06-27
+### Added
+- Linting as well as security: prettier, xo, codacy
+- And their badges
+
+### Changed
+Made a lot of code changes in relation to what the previously mentioned linters reported. (e.g. #GH-23)
+
+### Security
+Made some code changes in relation to what the previously mentioned linters reported. (e.g. #GH-21, #GH-22)
+
 ## [1.15.1] - 2018-06-22
 ### Fixed
 - A previous checkin has broken the solution provided for #GH-16, so I've fixed this again.
