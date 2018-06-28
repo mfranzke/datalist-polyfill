@@ -26,7 +26,7 @@
 		if (
 			constructor &&
 			constructor.prototype &&
-			constructor.prototype.list === null
+			constructor.prototype.list === undefined
 		) {
 			Object.defineProperty(constructor.prototype, 'list', {
 				get: function() {
@@ -42,7 +42,7 @@
 		if (
 			constructor &&
 			constructor.prototype &&
-			constructor.prototype.options === null
+			constructor.prototype.options === undefined
 		) {
 			Object.defineProperty(constructor.prototype, 'options', {
 				get: function() {
@@ -131,7 +131,7 @@
 				setUpPolyfillingSelect(eventTarget, dataList);
 
 			// Still check for an existing instance
-			if (dataListSelect !== null) {
+			if (dataListSelect !== undefined) {
 				var visible = false,
 					inputValue = eventTarget.value,
 					keyOpen = event.keyCode === keyUP || event.keyCode === keyDOWN;

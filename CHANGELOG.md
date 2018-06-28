@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.16.1] - 2018-06-28
+### Fixed
+- Introduced a new bug by the fix for #GH-23. Reverted that one and corrected the ESLint rules settings. (#GH-24)
+
 ## [1.16.0] - 2018-06-27
 ### Added
 - Linting as well as security: prettier, xo, codacy
