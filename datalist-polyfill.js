@@ -284,7 +284,7 @@
 
 			// Test for whether this input has already been enhanced by the polyfill
 			if (
-				' ' + eventTarget.className + ' '.indexOf(' ' + classNameInput + ' ') <
+				(' ' + eventTarget.className + ' ').indexOf(' ' + classNameInput + ' ') <
 				0
 			) {
 				// We'd like to prevent autocomplete on the input datalist field
