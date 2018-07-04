@@ -54,7 +54,7 @@
 		}
 	})(window.HTMLElement);
 
-	// Identify whether a select multiple is feasible
+	// Define some global settings and configurations
 	var touched = false,
 		// Speaking variables for the different keycodes
 		keyENTER = 13,
@@ -154,13 +154,11 @@
 					if (touched) {
 						// Preselect best fitting index
 						dataListSelect.selectedIndex = firstEntry;
-					} else if (dataListSelect.selectedIndex === -1 && keyOpen) {
+					} else if (keyOpen) {
 						dataListSelect.selectedIndex =
 							event.keyCode === keyUP ? lastEntry : firstEntry;
-					}
 
-					// On arrow up or down keys, focus the select
-					if (keyOpen) {
+						// On arrow up or down keys, focus the select
 						dataListSelect.focus();
 					}
 				}
