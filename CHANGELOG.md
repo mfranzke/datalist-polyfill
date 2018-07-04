@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.16.2] - 2018-07-04
+### Fixed
+- Fixed a bug that lead to an incorrectly selected suggestion (first instead of last) while using the up key on the input element
+- Fix for `input[list]` elements with class attribute - thanks to @mricherzhagen for mentioning this and even also providing a solution by pull request #GH-25
+
 ## [1.16.1] - 2018-06-28
 ### Fixed
 - Introduced a new bug by the fix for #GH-23. Reverted that one and corrected the ESLint rules settings. (#GH-24)
