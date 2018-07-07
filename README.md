@@ -14,7 +14,7 @@
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
 * Mainly built for Safari (but supporting IE9 as well), as nearly all of the other browsers [support it quite nicely](https://caniuse.com/#feat=datalist)
-* Released under the [![MIT license](https://img.shields.io/npm/l/datalist-polyfill.svg "license badge")](https://opensource.org/licenses/mit-license.php)
+* Released under the [![MIT license](https://img.shields.io/npm/l/datalist-polyfill.svg "license badge")](https://opensource.org/licenses/mit-license.php) [![Greenkeeper badge](https://badges.greenkeeper.io/mfranzke/datalist-polyfill.svg)](https://greenkeeper.io/)
 * Made in Germany. And supported by so many great people from all over this planet - see "Credits" accordingly.
 
 ## Features
