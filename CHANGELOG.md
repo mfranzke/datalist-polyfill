@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.17.0] - 2018-07-07
+### Added
+- Include behavior on pressing Tab or other printable keys (#GH-#27)
+- Added Greenkeeper badge. I'm using this service to keep being updated on the dev dependencies.
+
 ## [1.16.2] - 2018-07-04
 ### Fixed
 - Fixed a bug that lead to an incorrectly selected suggestion (first instead of last) while using the up key on the input element
@@ -51,7 +56,7 @@ Made some code changes in relation to what the previously mentioned linters repo
 
 ## [1.14.1] - 2018-06-20
 ### Added
-- Hiding the polyfilling select on pressing ENTER, which is equal to the behaviour on typing ESC.
+- Hiding the polyfilling select on pressing ENTER, which is equal to the behavior on typing ESC.
 - Added more badges to the readme. I'm loving badges.
 
 ### Changed
@@ -198,7 +203,7 @@ This is so far the biggest and greatest update !
 
 ## [1.1.1] - 2017-05-10
 ### Fixed
-- fixed another simple bug that lead to an incorrect index being selected - let's skip this, as it's not even the standard behaviour
+- fixed another simple bug that lead to an incorrect index being selected - let's skip this, as it's not even the standard behavior
 
 ## [1.1.0] - 2017-05-09
 ### Fixed

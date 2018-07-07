@@ -1,10 +1,11 @@
 /*
 * Datalist polyfill - https://github.com/mfranzke/datalist-polyfill
 * @license Copyright(c) 2017 by Maximilian Franzke
-* Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou, @wlekin, @eddr and @beebee1987 - many thanks for that !
+* Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou, @wlekin, @eddr, @beebee1987 and @mricherzhagen - many thanks for that !
 */
 /*
 * A minimal and dependency-free vanilla JavaScript datalist polyfill.
+* Supports all standard's functionality as well as mimics other browsers behavior.
 * Tests for native support of an inputs elements datalist functionality.
 * Elsewhere the functionality gets emulated by a select element.
 */
@@ -284,8 +285,9 @@
 
 			// Test for whether this input has already been enhanced by the polyfill
 			if (
-				(' ' + eventTarget.className + ' ').indexOf(' ' + classNameInput + ' ') <
-				0
+				(' ' + eventTarget.className + ' ').indexOf(
+					' ' + classNameInput + ' '
+				) < 0
 			) {
 				// We'd like to prevent autocomplete on the input datalist field
 				eventTarget.setAttribute('autocomplete', 'off');
@@ -342,6 +344,9 @@
 
 				// Initially hiding the datalist select
 				toggleVisibility(false, dataListSelect);
+
+				// The select itself shouldn't be a possible target for tabbing
+				dataListSelect.setAttribute('tabindex', '-1');
 
 				// WAI ARIA attributes
 				dataListSelect.setAttribute('aria-live', 'polite');
@@ -400,14 +405,54 @@
 					dataListSelect.addEventListener('click', changeDataListSelect);
 				}
 				dataListSelect.addEventListener('blur', changeDataListSelect);
-				dataListSelect.addEventListener('keyup', changeDataListSelect);
+				dataListSelect.addEventListener('keydown', changeDataListSelect);
+				dataListSelect.addEventListener('keypress', datalistSelectKeyPress);
 
 				return dataListSelect;
 			}
 		}
 	};
 
-	// Function regarding changes to the datalist polyfilling created select
+	// Functions regarding changes to the datalist polyfilling created select
+	var datalistSelectKeyPress = function(event) {
+		var eventTarget = event.target,
+			eventTargetTagName = eventTarget.tagName.toLowerCase();
+
+		// Check for whether the events target was a select or an option
+		if (
+			eventTargetTagName &&
+			(eventTargetTagName === 'select' || eventTargetTagName === 'option')
+		) {
+			var select =
+					eventTargetTagName === 'select'
+						? eventTarget
+						: eventTarget.parentNode,
+				datalist = select.parentNode,
+				inputList = document.querySelector('input[list="' + datalist.id + '"]');
+
+			// Change or mouseup event or ENTER key
+			if (
+				inputList !== null &&
+				// Determine a relevant key - either printable characters (that would have a length of 1) or controlling like Backspace
+				event.key &&
+				(event.key === 'Backspace' || event.key.length === 1)
+			) {
+				inputList.focus();
+
+				if (event.key === 'Backspace') {
+					inputList.value = inputList.value.substr(
+						0,
+						inputList.value.length - 1
+					);
+				} else {
+					inputList.value += event.key;
+				}
+
+				prepOptions(datalist, inputList);
+			}
+		}
+	};
+
 	var changeDataListSelect = function(event) {
 		var eventTarget = event.target,
 			eventTargetTagName = eventTarget.tagName.toLowerCase();
@@ -422,57 +467,54 @@
 						? eventTarget
 						: eventTarget.parentNode,
 				datalist = select.parentNode,
+				inputList = document.querySelector('input[list="' + datalist.id + '"]'),
+				selectValue = select.value,
 				message = datalist.title,
 				eventType = event.type,
 				// ENTER and ESC
 				visible =
-					eventType === 'keyup' &&
+					eventType === 'keydown' &&
 					(event.keyCode !== keyENTER && event.keyCode !== keyESC);
 
-			// Change or mouseup event or ENTER key
+			// On change, click or ENTER or TAB key, input the selects value into the input on a change within the list
 			if (
-				eventType === 'change' ||
-				eventType === 'click' ||
-				(eventType === 'keyup' && event.keyCode === keyENTER)
+				inputList !== null &&
+				(eventType === 'change' ||
+					eventType === 'click' ||
+					(eventType === 'keydown' &&
+						(event.keyCode === keyENTER || event.key === 'Tab'))) &&
+				typeof selectValue !== 'undefined' &&
+				selectValue.length > 0 &&
+				selectValue !== message
 			) {
-				var list = datalist.id,
-					inputList = document.querySelector('input[list="' + list + '"]'),
-					selectValue = select.value;
+				var lastSeperator, evt;
 
-				// Input the selects value into the input on a change within the list
-				if (
-					inputList !== null &&
-					typeof selectValue !== 'undefined' &&
-					selectValue.length > 0 &&
-					selectValue !== message
-				) {
-					var lastSeperator, evt;
+				// In case of type=email and multiple attribute, we need to set up the resulting inputs value differently
+				inputList.value =
+					inputList.type === 'email' &&
+					inputList.multiple &&
+					(lastSeperator = inputList.value.lastIndexOf(',')) > -1
+						? inputList.value.slice(0, lastSeperator) + ',' + selectValue
+						: (inputList.value = selectValue);
 
-					// In case of type=email and multiple attribute, we need to set up the resulting inputs value differently
-					inputList.value =
-						inputList.type === 'email' &&
-						inputList.multiple &&
-						(lastSeperator = inputList.value.lastIndexOf(',')) > -1
-							? inputList.value.slice(0, lastSeperator) + ',' + selectValue
-							: (inputList.value = selectValue);
-
-					// Create and dispatch the input event; divided for IE9 usage
-					if (typeof Event === 'function') {
-						evt = new Event('input', {
-							bubbles: true
-						});
-					} else {
-						evt = document.createEvent('Event');
-						evt.initEvent('input', true, false);
-					}
-					inputList.dispatchEvent(evt);
-
-					// Finally focusing the input, as other browser do this as well
-					inputList.focus();
-
-					// Set the visibility to false afterwards, as we're done here
-					visible = false;
+				// Create and dispatch the input event; divided for IE9 usage
+				if (typeof Event === 'function') {
+					evt = new Event('input', {
+						bubbles: true
+					});
+				} else {
+					evt = document.createEvent('Event');
+					evt.initEvent('input', true, false);
 				}
+				inputList.dispatchEvent(evt);
+
+				// Finally focusing the input, as other browser do this as well
+				if (event.key !== 'Tab') {
+					inputList.focus();
+				}
+
+				// Set the visibility to false afterwards, as we're done here
+				visible = false;
 			}
 
 			// Toggle the visibility of the datalist select according to previous checks

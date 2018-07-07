@@ -15,12 +15,13 @@
 
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
+* Supports all standard's functionality as well as mimics other browsers behavior.
 * Mainly built for Safari (but supporting IE9 as well), as nearly all of the other browsers [support it quite nicely](https://caniuse.com/#feat=datalist)
 * Released under the MIT license
 * Made in Germany. And supported by so many great people from all over this planet - see "Credits" accordingly.
 
 ## Features
-*	Lightweight: 5.64 kB of minified JavaScript, around 2.49 kB gzipped
+*	Lightweight: 6.07 kB of minified JavaScript, around 2.59 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
