@@ -429,6 +429,9 @@
 						0,
 						inputList.value.length - 1
 					);
+
+					// Dispatch the input event on the related input[list]
+					dispatchInputEvent(inputList);
 				} else {
 					inputList.value += event.key;
 				}
@@ -466,7 +469,7 @@
 				datalistSelectValue.length > 0 &&
 				datalistSelectValue !== datalist.title
 			) {
-				var lastSeperator, evt;
+				var lastSeperator;
 
 				// In case of type=email and multiple attribute, we need to set up the resulting inputs value differently
 				inputList.value =
@@ -478,16 +481,8 @@
 							datalistSelectValue
 						: (inputList.value = datalistSelectValue);
 
-				// Create and dispatch the input event; divided for IE9 usage
-				if (typeof Event === 'function') {
-					evt = new Event('input', {
-						bubbles: true
-					});
-				} else {
-					evt = document.createEvent('Event');
-					evt.initEvent('input', true, false);
-				}
-				inputList.dispatchEvent(evt);
+				// Dispatch the input event on the related input[list]
+				dispatchInputEvent(inputList);
 
 				// Finally focusing the input, as other browser do this as well
 				if (event.key !== 'Tab') {
@@ -501,6 +496,21 @@
 			// Toggle the visibility of the datalist select according to previous checks
 			toggleVisibility(visible, datalistSelect);
 		}
+	};
+
+	// Create and dispatch the input event; divided for IE9 usage
+	var dispatchInputEvent = function(inputList) {
+		var evt;
+
+		if (typeof Event === 'function') {
+			evt = new Event('input', {
+				bubbles: true
+			});
+		} else {
+			evt = document.createEvent('Event');
+			evt.initEvent('input', true, false);
+		}
+		inputList.dispatchEvent(evt);
 	};
 
 	// Toggle the visibility of the datalist select

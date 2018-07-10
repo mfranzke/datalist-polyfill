@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.18.1] - 2018-07-10
+### Added
+- Dispatch the input event as well on the related `input[list]` on using the Backspace key within the polyfilling select
+
 ## [1.18.0] - 2018-07-10
 ### Changed
 - Defined the system-font for the demo-page
