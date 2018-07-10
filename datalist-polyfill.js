@@ -474,8 +474,8 @@
 					inputList.multiple &&
 					(lastSeperator = inputList.value.lastIndexOf(',')) > -1
 						? inputList.value.slice(0, lastSeperator) +
-						  ',' +
-						  datalistSelectValue
+							',' +
+							datalistSelectValue
 						: (inputList.value = datalistSelectValue);
 
 				// Create and dispatch the input event; divided for IE9 usage
