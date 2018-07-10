@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.18.0] - 2018-07-10
+### Changed
+- Defined the system-font for the demo-page
+- Renamed some variables to some more meaningful names
+- Cleanup on some unnecessary variables & comments
+
+### Removed
+- Removed an old separation in between eventTarget-Tagnames of select and option, that was integrated due to the mouse-event, which has been replaced again a while ago
+
 ## [1.17.0] - 2018-07-07
 ### Added
 - Include behavior on pressing Tab or other printable keys (#GH-#27)

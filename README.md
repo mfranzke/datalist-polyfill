@@ -21,7 +21,7 @@ This is a minimal and dependency-free vanilla JavaScript polyfill for the awesom
 * Made in Germany. And supported by so many great people from all over this planet - see "Credits" accordingly.
 
 ## Features
-*	Lightweight: 6.07 kB of minified JavaScript, around 2.59 kB gzipped
+*	Lightweight: 5.98 kB of minified JavaScript, around 2.54 kB gzipped
 *	Fully flexible to change the datalist entries / `<option>`s
 *	Supporting:
 	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
