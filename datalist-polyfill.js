@@ -477,8 +477,8 @@
 					inputList.multiple &&
 					(lastSeperator = inputList.value.lastIndexOf(',')) > -1
 						? inputList.value.slice(0, lastSeperator) +
-							',' +
-							datalistSelectValue
+						  ',' +
+						  datalistSelectValue
 						: (inputList.value = datalistSelectValue);
 
 				// Dispatch the input event on the related input[list]
