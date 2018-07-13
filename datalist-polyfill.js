@@ -13,10 +13,13 @@
 (function() {
 	'use strict';
 
+	// Performance: Set a local variable
+	var dcmnt = window.document;
+
 	// Feature detection - let's break here, if it's even already supported
 	if (
-		'list' in document.createElement('input') &&
-		Boolean(document.createElement('datalist') && window.HTMLDataListElement)
+		'list' in dcmnt.createElement('input') &&
+		Boolean(dcmnt.createElement('datalist') && window.HTMLDataListElement)
 	) {
 		return false;
 	}
@@ -32,7 +35,7 @@
 			Object.defineProperty(constructor.prototype, 'list', {
 				get: function() {
 					return typeof this === 'object' && this instanceof constructor
-						? document.getElementById(this.getAttribute('list'))
+						? dcmnt.getElementById(this.getAttribute('list'))
 						: null;
 				}
 			});
@@ -98,7 +101,7 @@
 			});
 
 			if (datalistNeedsAnUpdate) {
-				var input = document.querySelector(
+				var input = dcmnt.querySelector(
 					'[list="' + datalistNeedsAnUpdate.id + '"]'
 				);
 
@@ -179,8 +182,8 @@
 				datalist.getElementsByClassName(classNamePolyfillingSelect)[0] ||
 				setUpPolyfillingSelect(input, datalist),
 			inputValue = input.value,
-			newSelectValues = document.createDocumentFragment(),
-			disabledValues = document.createDocumentFragment();
+			newSelectValues = dcmnt.createDocumentFragment(),
+			disabledValues = dcmnt.createDocumentFragment();
 
 		// In case of type=email and multiple attribute, we would need grab the last piece
 		if (input.type === 'email' && input.multiple) {
@@ -320,7 +323,7 @@
 				var rects = input.getClientRects(),
 					// Measurements
 					inputStyles = window.getComputedStyle(input),
-					datalistSelect = document.createElement('select');
+					datalistSelect = dcmnt.createElement('select');
 
 				// Setting a class for easier identifying that select afterwards
 				datalistSelect.setAttribute('class', classNamePolyfillingSelect);
@@ -374,7 +377,7 @@
 				datalistSelect.style.minWidth = rects[0].width + 'px';
 
 				if (touched) {
-					var messageElement = document.createElement('option');
+					var messageElement = dcmnt.createElement('option');
 
 					// ... and it's first entry should contain the localized message to select an entry
 					messageElement.innerText = datalist.title;
@@ -414,7 +417,7 @@
 			datalistSelect.tagName.toLowerCase() === 'select'
 		) {
 			var datalist = datalistSelect.parentNode,
-				inputList = document.querySelector('input[list="' + datalist.id + '"]');
+				inputList = dcmnt.querySelector('input[list="' + datalist.id + '"]');
 
 			if (
 				inputList !== null &&
@@ -450,7 +453,7 @@
 			datalistSelect.tagName.toLowerCase() === 'select'
 		) {
 			var datalist = datalistSelect.parentNode,
-				inputList = document.querySelector('input[list="' + datalist.id + '"]'),
+				inputList = dcmnt.querySelector('input[list="' + datalist.id + '"]'),
 				datalistSelectValue = datalistSelect.value,
 				eventType = event.type,
 				// ENTER and ESC
@@ -507,7 +510,7 @@
 				bubbles: true
 			});
 		} else {
-			evt = document.createEvent('Event');
+			evt = dcmnt.createEvent('Event');
 			evt.initEvent('input', true, false);
 		}
 		inputList.dispatchEvent(evt);
@@ -518,11 +521,11 @@
 		if (visible) {
 			datalistSelect.removeAttribute('hidden');
 		} else {
-			datalistSelect.setAttributeNode(document.createAttribute('hidden'));
+			datalistSelect.setAttributeNode(dcmnt.createAttribute('hidden'));
 		}
 		datalistSelect.setAttribute('aria-hidden', (!visible).toString());
 	};
 
 	// Binding the focus event - matching the input[list]s happens in the function afterwards
-	document.addEventListener('focusin', changesInputList, true);
+	dcmnt.addEventListener('focusin', changesInputList, true);
 })();
