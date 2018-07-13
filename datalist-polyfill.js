@@ -493,6 +493,9 @@
 
 					// Set the visibility to false afterwards, as we're done here
 					visible = false;
+				} else if (eventType === 'keydown' && event.keyCode === keyESC) {
+					// In case of the ESC key being pressed, we still want to focus the input[list]
+					inputList.focus();
 				}
 
 				// Toggle the visibility of the datalist select according to previous checks
