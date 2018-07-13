@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.19.0] - 2018-07-13
+### Added
+- In case of the ESC key being pressed while focusing the polyfilling select, we still want to focus the `input[list]`
+
+### Changed
+- Performance: Set a local variable
+- Preparation for some automated testing
+- Changed and added some functionality to the description within the README file
+
 ## [1.18.1] - 2018-07-10
 ### Added
 - Dispatch the input event as well on the related `input[list]` on using the Backspace key within the polyfilling select
