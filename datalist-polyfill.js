@@ -118,7 +118,7 @@
 		});
 	}
 
-	// Function regarding the inputs interactions
+	// Function regarding the inputs interactions on keyup event
 	var inputInputList = function(event) {
 		var input = event.target,
 			datalist = input.list;
@@ -258,7 +258,7 @@
 		return datalistSelect.options;
 	};
 
-	// Focus or blur events
+	// Focusin and -out events
 	var changesInputList = function(event) {
 		var input = event.target,
 			datalist = input.list;
@@ -407,7 +407,7 @@
 		}
 	};
 
-	// Functions regarding changes to the datalist polyfilling created select
+	// Functions regarding changes to the datalist polyfilling created selects keypress
 	var datalistSelectKeyPress = function(event) {
 		var datalistSelect = event.target;
 
@@ -444,6 +444,7 @@
 		}
 	};
 
+	// Change, Click, Blur, Keydown
 	var changeDataListSelect = function(event) {
 		var datalistSelect = event.target;
 
