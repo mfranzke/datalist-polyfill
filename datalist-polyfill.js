@@ -460,44 +460,44 @@
 				visible =
 					eventType === 'keydown' &&
 					(event.keyCode !== keyENTER && event.keyCode !== keyESC);
+			if (inputList !== null) {
+				// On change, click or after pressing ENTER or TAB key, input the selects value into the input on a change within the list
+				if (
+					(eventType === 'change' ||
+						eventType === 'click' ||
+						(eventType === 'keydown' &&
+							(event.keyCode === keyENTER || event.key === 'Tab'))) &&
+					typeof datalistSelectValue !== 'undefined' &&
+					datalistSelectValue.length > 0 &&
+					datalistSelectValue !== datalist.title
+				) {
+					var lastSeperator;
 
-			// On change, click or after pressing ENTER or TAB key, input the selects value into the input on a change within the list
-			if (
-				inputList !== null &&
-				(eventType === 'change' ||
-					eventType === 'click' ||
-					(eventType === 'keydown' &&
-						(event.keyCode === keyENTER || event.key === 'Tab'))) &&
-				typeof datalistSelectValue !== 'undefined' &&
-				datalistSelectValue.length > 0 &&
-				datalistSelectValue !== datalist.title
-			) {
-				var lastSeperator;
+					// In case of type=email and multiple attribute, we need to set up the resulting inputs value differently
+					inputList.value =
+						inputList.type === 'email' &&
+						inputList.multiple &&
+						(lastSeperator = inputList.value.lastIndexOf(',')) > -1
+							? inputList.value.slice(0, lastSeperator) +
+							  ',' +
+							  datalistSelectValue
+							: (inputList.value = datalistSelectValue);
 
-				// In case of type=email and multiple attribute, we need to set up the resulting inputs value differently
-				inputList.value =
-					inputList.type === 'email' &&
-					inputList.multiple &&
-					(lastSeperator = inputList.value.lastIndexOf(',')) > -1
-						? inputList.value.slice(0, lastSeperator) +
-						  ',' +
-						  datalistSelectValue
-						: (inputList.value = datalistSelectValue);
+					// Dispatch the input event on the related input[list]
+					dispatchInputEvent(inputList);
 
-				// Dispatch the input event on the related input[list]
-				dispatchInputEvent(inputList);
+					// Finally focusing the input, as other browser do this as well
+					if (event.key !== 'Tab') {
+						inputList.focus();
+					}
 
-				// Finally focusing the input, as other browser do this as well
-				if (event.key !== 'Tab') {
-					inputList.focus();
+					// Set the visibility to false afterwards, as we're done here
+					visible = false;
 				}
 
-				// Set the visibility to false afterwards, as we're done here
-				visible = false;
+				// Toggle the visibility of the datalist select according to previous checks
+				toggleVisibility(visible, datalistSelect);
 			}
-
-			// Toggle the visibility of the datalist select according to previous checks
-			toggleVisibility(visible, datalistSelect);
 		}
 	};
 
