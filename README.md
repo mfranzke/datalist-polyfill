@@ -34,7 +34,14 @@ This is a minimal and dependency-free vanilla JavaScript polyfill for the awesom
 	*	both Safari and Internet Explorer (IE9+) browsers
 	* controlling the display of differing `value` and `label` values
 *	Emits "input" event when item in the `datalist` is selected
-*	Enables core keyboard controls such as the up and down arrow keys, `ESC`, and `ENTER`
+*	Enables core keyboard controls such as the
+	* on the `input`
+		* up and down arrow keys
+	* on the `select`
+		* `ESC`
+		* `ENTER`
+		* `BACKSPACE`
+		* pressing printable characters
 *	Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
 
 ## Core concepts
@@ -85,10 +92,10 @@ You'll need the declaration for the standard `hidden` attribute, that you might 
 ```
 
 And you need to add a nesting `select` element wrapped by a conditional comment into the `datalist` element.
-Please have a look at the [demo page](https://mfranzke.github.io/datalist-polyfill/demo.html) accordingly, the code is being mentioned within the `Internet Explorer 9 support` section.
+Please have a look at the [demo page](https://mfranzke.github.io/datalist-polyfill/demos/ie9/) accordingly, the code is being listed at the beginning.
 
 ## Demo
-See the polyfill in action either by downloading / forking this repo and have a look at `demo.html`, or at the hosted demo: <https://mfranzke.github.io/datalist-polyfill/demo.html>
+See the polyfill in action either by downloading / forking this repo and have a look at `demos/index.html` and `demos/ie9/index.html`, or at the hosted demo: <https://mfranzke.github.io/datalist-polyfill/demos/> and <https://mfranzke.github.io/datalist-polyfill/demos/ie9/>
 
 ## things to keep in mind
 *	The demo HTML code is meant to be simple - I do know that things like a surrounding `<form>` are missing, and I've left the latin letters and english expressions for the right to left text-direction example. But lets focus on the relevant tags that this polyfill is all about for the demo.

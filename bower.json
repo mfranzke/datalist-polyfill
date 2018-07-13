@@ -22,7 +22,8 @@
   }],
   "ignore": [
     "bower.json",
-    "demo.html",
+    "demos/index.html",
+    "demos/ie9/index.html",
     "readme.md"
   ]
 }
