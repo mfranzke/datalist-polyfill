@@ -195,7 +195,16 @@
 			.call(datalist.querySelectorAll('option:not(:disabled)'))
 			// ... sort all entries and
 			.sort(function(a, b) {
-				return a.value.localeCompare(b.value);
+				var aValue = a.value,
+					bValue = b.value;
+
+				// Using the knowledge that the values are URLs to allow the user to omit the scheme part and perform intelligent matching on the domain name
+				if (input.getAttribute('type') === 'url') {
+					aValue = aValue.replace(/(^\w+:|^)\/\//, '');
+					bValue = bValue.replace(/(^\w+:|^)\/\//, '');
+				}
+
+				return aValue.localeCompare(bValue);
 			})
 			.forEach(function(opt) {
 				var optionValue = opt.value;
