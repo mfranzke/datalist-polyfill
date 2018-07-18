@@ -21,20 +21,21 @@ This is a minimal and dependency-free vanilla JavaScript polyfill for the awesom
 * Made in Germany. And supported by so many great people from all over this planet - see "Credits" accordingly.
 
 ## Features
-*	Lightweight: 6.01 kB of minified JavaScript, around 2.55 kB gzipped
-*	Fully flexible to change the datalist entries / `<option>`s
-*	Supporting:
-	*	the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
-	*	... while leaving the others like color or date related, as those would most likely need another polyfill to work correctly or have a meaningful UI
-	*	`input[type=email]` elements `multiple` attribute
-	*	properties `.options` for `datalist` elements and `.list` for `input` elements
-	*	right to left text-direction
-	*	non-touch and touch interactions
-	*	different types of `option` declarations
-	*	both Safari and Internet Explorer (IE9+) browsers
+* Lightweight: 6.2 kB of minified JavaScript, around 2.63 kB gzipped
+* Fully flexible to change the datalist entries / `<option>`s
+* Supporting:
+	* the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
+	* ... while leaving the others like color or date related, as those would most likely need another polyfill to work correctly or have a meaningful UI
+	* `input[type=email]` elements `multiple` attribute
+	* properties `.options` for `datalist` elements and `.list` for `input` elements
+	* right to left text-direction
+	* non-touch and touch interactions
+	* different types of `option` declarations
+	* both Safari and Internet Explorer (IE9+) browsers
 	* controlling the display of differing `value` and `label` values
-*	Emits "input" event when item in the `datalist` is selected
-*	Enables core keyboard controls such as the
+	* on `input[type=url]` omitting the scheme part and performing intelligent matching on the domain name
+* Emits "input" event when item in the `datalist` is selected
+* Enables core keyboard controls such as the
 	* on the `input`
 		* up and down arrow keys
 	* on the `select`
@@ -42,14 +43,14 @@ This is a minimal and dependency-free vanilla JavaScript polyfill for the awesom
 		* `ENTER`
 		* `BACKSPACE`
 		* pressing printable characters
-*	Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
+* Implements the [WAI-ARIA design pattern](https://www.w3.org/TR/wai-aria-practices/)
 
 ## Core concepts
 The polyfill was designed with the following concepts kept in mind:
 
-*	dependency-free
-*	Supporting DOM changes by event delegation and MutationObserver
-*	code accessibility / readability
+* dependency-free
+* Supporting DOM changes by event delegation and MutationObserver
+* code accessibility / readability
 
 ## Installation
 Just integrate the JavaScript file into your code - et voilà.
@@ -98,29 +99,27 @@ Please have a look at the [demo page](https://mfranzke.github.io/datalist-polyfi
 See the polyfill in action either by downloading / forking this repo and have a look at `demos/index.html` and `demos/ie9/index.html`, or at the hosted demo: <https://mfranzke.github.io/datalist-polyfill/demos/> and <https://mfranzke.github.io/datalist-polyfill/demos/ie9/>
 
 ## things to keep in mind
-*	The demo HTML code is meant to be simple - I do know that things like a surrounding `<form>` are missing, and I've left the latin letters and english expressions for the right to left text-direction example. But lets focus on the relevant tags that this polyfill is all about for the demo.
-*   iOS Safari handles the `label`-attribute different from Safari on Mac OS. This is being equalized during the handling of the `label`-attributes-value for differing `value` and `label` values.
-*	After I thought it through and did some experiments, I've finally chosen the `<select>` element to polyfill the `<datalist>`, as it brought most of the functionality, whereas I accepted that it doesn't behave and doesn't look equally.  
-	*	As I wanted to mainly focus on native elements in the most low level / simple way instead of visually emulating a list and than afterwards regain all of the functionality via a lot of JavaScript logic, I've ended up with this element, that knows how to play nicely with nested `<option>` elements.
-	*	I tried its `multiple` attribute, as this is most likely already what you're up to regarding appearance, but it does violate the form-follows-function concept and results in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing... Then the `size` attribute came to my attention, which much better fits the requirements and behaves as designed quite perfectly.
+* The demo HTML code is meant to be simple - I do know that things like a surrounding `<form>` are missing, and I've left the latin letters and english expressions for the right to left text-direction example. But lets focus on the relevant tags that this polyfill is all about for the demo.
+* iOS Safari handles the `label`-attribute different from Safari on Mac OS. This is being equalized during the handling of the `label`-attributes-value for differing `value` and `label` values.
+* After I thought it through and did some experiments, I've finally chosen the `<select>` element to polyfill the `<datalist>`, as it brought most of the functionality, whereas I accepted that it doesn't behave and doesn't look equally.  
+	* As I wanted to mainly focus on native elements in the most low level / simple way instead of visually emulating a list and than afterwards regain all of the functionality via a lot of JavaScript logic, I've ended up with this element, that knows how to play nicely with nested `<option>` elements.
+	* I tried its `multiple` attribute, as this is most likely already what you're up to regarding appearance, but it does violate the form-follows-function concept and results in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing... Then the `size` attribute came to my attention, which much better fits the requirements and behaves as designed quite perfectly.
 
 ## Credits
 Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou, @wlekin, @eddr, @beebee1987 and @mricherzhagen. Thank you very much for that, highly appreciated !
 
 ## Tested with
 
-*	Mac
-	*	Mac OSX 10.12, Safari 10
-	*	Mac OSX 10.11, Safari 9
-	*	Mac OSX 10.10, Safari 8
-	*	Mac OSX 10.9, Safari 7
-	*	Mac OSX 10.8, Safari 6.2
-	*	Mac OSX 10.7, Safari 6
-*	iOS
-	*	iPad Pro / 10.2, Mobile Safari 10.0
-	*	iPhone 6 Plus / 10.3, Mobile Safari 10.0
-*	Windows
-	*	Windows 7 SP1, Internet Explorer 9.0.8112.16421
+* Mac
+	* Mac OSX 10.13, Safari 11
+	* Mac OSX 10.12, Safari 10
+	* Mac OSX 10.11, Safari 9
+* iOS
+	* iPhone 8 Simulator, Mobile Safari 11.0
+	* iPhone 7 Plus Simulator, Mobile Safari 10.0
+	* iPad Pro Simulator, Mobile Safari 9.3
+* Windows
+	* Windows 7 SP1, Internet Explorer 9.0.8112.16421
 
 ## Outro
 Personally I even also do like the "keep it simple" approach provided within the [W3C specs](https://www.w3.org/TR/html5/forms.html#the-datalist-element) even already.

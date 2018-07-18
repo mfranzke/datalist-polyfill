@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.20.0] - 2018-07-18
+### Changed
+- on `input[type=url]` omitting the scheme part and performing intelligent matching on the domain name (#GH-28)
+- README: Updated the tested browsers list as well as updated the Features section due to the updates by this release
+- Preparation for automated testing / splitting the demo page by regular and IE9
+
+### Fixed
+- IE9: Use .getAttribute for retrieving .type and .multiple values/existance (#GH-29)
+- list IDL attribute must return the current suggestions source element (#GH-30)
+
 ## [1.19.0] - 2018-07-13
 ### Added
 - In case of the ESC key being pressed while focusing the polyfilling select, we still want to focus the `input[list]`
