@@ -34,8 +34,9 @@
 		) {
 			Object.defineProperty(constructor.prototype, 'list', {
 				get: function() {
+					// The list IDL attribute must return the current suggestions source element, if any, or null otherwise.
 					return typeof this === 'object' && this instanceof constructor
-						? dcmnt.getElementById(this.getAttribute('list'))
+						? dcmnt.querySelector('datalist#' + this.getAttribute('list'))
 						: null;
 				}
 			});
