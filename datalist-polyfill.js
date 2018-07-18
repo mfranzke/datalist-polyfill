@@ -186,7 +186,11 @@
 			disabledValues = dcmnt.createDocumentFragment();
 
 		// In case of type=email and multiple attribute, we would need grab the last piece
-		if (input.type === 'email' && input.multiple) {
+		// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
+		if (
+			input.getAttribute('type') === 'email' &&
+			input.getAttribute('multiple') !== null
+		) {
 			inputValue = inputValue.substring(inputValue.lastIndexOf(',') + 1);
 		}
 
@@ -326,7 +330,8 @@
 	// Define function for setting up the polyfilling select
 	var setUpPolyfillingSelect = function(input, datalist) {
 		// Check for whether it's of one of the supported input types defined at the beginning
-		if (supportedTypes.indexOf(input.type) > -1) {
+		// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
+		if (supportedTypes.indexOf(input.getAttribute('type')) > -1) {
 			// Still check for an existing instance
 			if (datalist !== null) {
 				var rects = input.getClientRects(),
@@ -485,8 +490,9 @@
 
 					// In case of type=email and multiple attribute, we need to set up the resulting inputs value differently
 					inputList.value =
-						inputList.type === 'email' &&
-						inputList.multiple &&
+						// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
+						inputList.getAttribute('type') === 'email' &&
+						inputList.getAttribute('multiple') !== null &&
 						(lastSeperator = inputList.value.lastIndexOf(',')) > -1
 							? inputList.value.slice(0, lastSeperator) +
 							  ',' +
