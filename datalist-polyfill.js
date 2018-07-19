@@ -364,20 +364,20 @@
 					datalistSelect.style.marginTop =
 						'-' + inputStyles.getPropertyValue('margin-bottom');
 				} else {
-					if (inputStyles.getPropertyValue('direction') === 'rtl') {
-						datalistSelect.style.marginRight =
-							'-' +
-							(rects[0].width +
-								parseFloat(inputStyles.getPropertyValue('margin-left'))) +
-							'px';
-					} else {
-						datalistSelect.style.marginLeft =
-							'-' +
-							(rects[0].width +
-								parseFloat(inputStyles.getPropertyValue('margin-right'))) +
-							'px';
-					}
+					var direction =
+						inputStyles.getPropertyValue('direction') === 'rtl'
+							? 'right'
+							: 'left';
 
+					datalistSelect.style.setProperty(
+						'margin-' + direction,
+						'-' +
+							(rects[0].width +
+								parseFloat(
+									inputStyles.getPropertyValue('margin-' + direction)
+								)) +
+							'px'
+					);
 					datalistSelect.style.marginTop =
 						parseInt(
 							rects[0].height + (input.offsetTop - datalist.offsetTop),
