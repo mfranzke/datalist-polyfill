@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.20.1] - 2018-07-20
+### Changed
+- Code simplifications
+
+### Fixed
+-  Suggestions aren‘t working onclick any more #GH-31
+
 ## [1.20.0] - 2018-07-18
 ### Changed
 - on `input[type=url]` omitting the scheme part and performing intelligent matching on the domain name (#GH-28)
