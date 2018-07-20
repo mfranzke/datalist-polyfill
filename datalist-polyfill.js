@@ -461,7 +461,7 @@
 
 	// Change, Click, Blur, Keydown
 	var changeDataListSelect = function(event) {
-		var datalistSelect = event.target;
+		var datalistSelect = event.currentTarget;
 
 		// Check for whether the events target was a select
 		if (
