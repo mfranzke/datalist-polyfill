@@ -121,6 +121,13 @@ Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kra
 * Windows
 	* Windows 7 SP1, Internet Explorer 9.0.8112.16421
 
+### Big Thanks
+
+Cross-browser testing platform provided by [CrossBrowserTesting][crossbrowsertestinghomepage]
+
+
+[crossbrowsertestinghomepage]: https://crossbrowsertesting.com
+
 ## Outro
 Personally I even also do like the "keep it simple" approach provided within the [W3C specs](https://www.w3.org/TR/html5/forms.html#the-datalist-element) even already.
 
