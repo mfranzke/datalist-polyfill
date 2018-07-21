@@ -157,7 +157,7 @@
 					// ... preselect best fitting index
 					if (touched) {
 						datalistSelect.selectedIndex = firstEntry;
-					} else if (keyOpen) {
+					} else if (keyOpen && input.getAttribute('type') !== 'number') {
 						datalistSelect.selectedIndex =
 							event.keyCode === keyUP ? lastEntry : firstEntry;
 
