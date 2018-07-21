@@ -125,6 +125,8 @@ Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kra
 
 Cross-browser testing platform provided by [CrossBrowserTesting][crossbrowsertestinghomepage]
 
+[![CrossBrowserTesting](https://crossbrowsertesting.com/blog/wp-content/uploads/2017/09/cbt-wp-logo.png "CrossBrowserTesting")][crossbrowsertestinghomepage]
+
 
 [crossbrowsertestinghomepage]: https://crossbrowsertesting.com
 
