@@ -307,9 +307,7 @@
 						(event.relatedTarget && event.relatedTarget === datalistSelect));
 
 			// Test for whether this input has already been enhanced by the polyfill
-			if (
-				(' ' + input.className + ' ').indexOf(' ' + classNameInput + ' ') < 0
-			) {
+			if (!input.matches('.' + classNameInput)) {
 				// We'd like to prevent autocomplete on the input datalist field
 				input.setAttribute('autocomplete', 'off');
 
