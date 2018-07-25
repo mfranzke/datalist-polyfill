@@ -59,6 +59,12 @@
 		}
 	})(window.HTMLElement);
 
+	// .matches polyfill
+	// TODO: probably needs enhancement on the to supported browsers
+	if (!Element.prototype.matches) {
+		Element.prototype.matches = Element.prototype.msMatchesSelector;
+	}
+
 	// Define some global settings and configurations
 	var touched = false,
 		// Speaking variables for the different keycodes
@@ -274,6 +280,11 @@
 
 	// Focusin and -out events
 	var changesInputList = function(event) {
+		// Check for correct element on this event delegation
+		if (!event.target.matches('input[list]')) {
+			return;
+		}
+
 		var input = event.target,
 			datalist = input.list;
 
