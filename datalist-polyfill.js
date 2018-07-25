@@ -103,7 +103,7 @@
 
 			if (datalistNeedsAnUpdate) {
 				var input = dcmnt.querySelector(
-					'[list="' + datalistNeedsAnUpdate.id + '"]'
+					'input[list="' + datalistNeedsAnUpdate.id + '"]'
 				);
 
 				if (input.value !== '') {
