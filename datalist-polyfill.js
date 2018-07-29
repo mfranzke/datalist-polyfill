@@ -441,29 +441,29 @@
 			datalistSelect.tagName.toLowerCase() === 'select'
 		) {
 			var datalist = datalistSelect.parentNode,
-				inputList = dcmnt.querySelector('input[list="' + datalist.id + '"]');
+				input = dcmnt.querySelector('input[list="' + datalist.id + '"]');
 
 			if (
-				inputList !== null &&
+				input !== null &&
 				// Determine a relevant key - either printable characters (that would have a length of 1) or controlling like Backspace
 				event.key &&
 				(event.key === 'Backspace' || event.key.length === 1)
 			) {
-				inputList.focus();
+				input.focus();
 
 				if (event.key === 'Backspace') {
-					inputList.value = inputList.value.substr(
+					input.value = input.value.substr(
 						0,
-						inputList.value.length - 1
+						input.value.length - 1
 					);
 
 					// Dispatch the input event on the related input[list]
-					dispatchInputEvent(inputList);
+					dispatchInputEvent(input);
 				} else {
-					inputList.value += event.key;
+					input.value += event.key;
 				}
 
-				prepOptions(datalist, inputList);
+				prepOptions(datalist, input);
 			}
 		}
 	};
@@ -478,14 +478,14 @@
 			datalistSelect.tagName.toLowerCase() === 'select'
 		) {
 			var datalist = datalistSelect.parentNode,
-				inputList = dcmnt.querySelector('input[list="' + datalist.id + '"]'),
+				input = dcmnt.querySelector('input[list="' + datalist.id + '"]'),
 				datalistSelectValue = datalistSelect.value,
 				eventType = event.type,
 				// ENTER and ESC
 				visible =
 					eventType === 'keydown' &&
 					(event.keyCode !== keyENTER && event.keyCode !== keyESC);
-			if (inputList !== null) {
+			if (input !== null) {
 				// On change, click or after pressing ENTER or TAB key, input the selects value into the input on a change within the list
 				if (
 					(eventType === 'change' ||
@@ -499,29 +499,29 @@
 					var lastSeperator;
 
 					// In case of type=email and multiple attribute, we need to set up the resulting inputs value differently
-					inputList.value =
+					input.value =
 						// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
-						inputList.getAttribute('type') === 'email' &&
-						inputList.getAttribute('multiple') !== null &&
-						(lastSeperator = inputList.value.lastIndexOf(',')) > -1
-							? inputList.value.slice(0, lastSeperator) +
+						input.getAttribute('type') === 'email' &&
+						input.getAttribute('multiple') !== null &&
+						(lastSeperator = input.value.lastIndexOf(',')) > -1
+							? input.value.slice(0, lastSeperator) +
 							  ',' +
 							  datalistSelectValue
-							: (inputList.value = datalistSelectValue);
+							: (input.value = datalistSelectValue);
 
 					// Dispatch the input event on the related input[list]
-					dispatchInputEvent(inputList);
+					dispatchInputEvent(input);
 
 					// Finally focusing the input, as other browser do this as well
 					if (event.key !== 'Tab') {
-						inputList.focus();
+						input.focus();
 					}
 
 					// Set the visibility to false afterwards, as we're done here
 					visible = false;
 				} else if (eventType === 'keydown' && event.keyCode === keyESC) {
 					// In case of the ESC key being pressed, we still want to focus the input[list]
-					inputList.focus();
+					input.focus();
 				}
 
 				// Toggle the visibility of the datalist select according to previous checks
@@ -531,7 +531,7 @@
 	};
 
 	// Create and dispatch the input event; divided for IE9 usage
-	var dispatchInputEvent = function(inputList) {
+	var dispatchInputEvent = function(input) {
 		var evt;
 
 		if (typeof Event === 'function') {
@@ -542,7 +542,7 @@
 			evt = dcmnt.createEvent('Event');
 			evt.initEvent('input', true, false);
 		}
-		inputList.dispatchEvent(evt);
+		input.dispatchEvent(evt);
 	};
 
 	// Toggle the visibility of the datalist select
