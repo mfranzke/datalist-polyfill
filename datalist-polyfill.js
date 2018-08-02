@@ -128,54 +128,51 @@
 	// Function regarding the inputs interactions on keyup event
 	var inputInputList = function(event) {
 		var input = event.target,
-			datalist = input.list;
-
-		// Check for whether the events target was an input and still check for an existing instance of the datalist
-		if (
-			input.tagName &&
-			input.tagName.toLowerCase() === 'input' &&
-			datalist !== null
-		) {
+			datalist = input.list,
 			// Creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
-			var datalistSelect =
+			datalistSelect =
 				datalist.getElementsByClassName(classNamePolyfillingSelect)[0] ||
 				setUpPolyfillingSelect(input, datalist);
 
-			// Still check for an existing instance
-			if (datalistSelect !== undefined) {
-				var visible = false,
-					keyOpen = event.keyCode === keyUP || event.keyCode === keyDOWN;
+		// Check for whether the events target was an input and still check for an existing instance of the datalist and polyfilling select
+		if (
+			input.tagName.toLowerCase() !== 'input' ||
+			datalist === null ||
+			datalistSelect === undefined
+		) {
+			return;
+		}
+		var visible = false,
+			keyOpen = event.keyCode === keyUP || event.keyCode === keyDOWN;
 
-				// On an ESC or ENTER key press within the input, let's break here and afterwards hide the datalist select, but if the input contains a value or one of the opening keys have been pressed ...
-				if (
-					event.keyCode !== keyESC &&
-					event.keyCode !== keyENTER &&
-					(input.value !== '' || keyOpen)
-				) {
-					// ... prepare the options
-					if (prepOptions(datalist, input).length > 0) {
-						visible = true;
-					}
+		// On an ESC or ENTER key press within the input, let's break here and afterwards hide the datalist select, but if the input contains a value or one of the opening keys have been pressed ...
+		if (
+			event.keyCode !== keyESC &&
+			event.keyCode !== keyENTER &&
+			(input.value !== '' || keyOpen)
+		) {
+			// ... prepare the options
+			if (prepOptions(datalist, input).length > 0) {
+				visible = true;
+			}
 
-					var firstEntry = 0,
-						lastEntry = datalistSelect.options.length - 1;
+			var firstEntry = 0,
+				lastEntry = datalistSelect.options.length - 1;
 
-					// ... preselect best fitting index
-					if (touched) {
-						datalistSelect.selectedIndex = firstEntry;
-					} else if (keyOpen && input.getAttribute('type') !== 'number') {
-						datalistSelect.selectedIndex =
-							event.keyCode === keyUP ? lastEntry : firstEntry;
+			// ... preselect best fitting index
+			if (touched) {
+				datalistSelect.selectedIndex = firstEntry;
+			} else if (keyOpen && input.getAttribute('type') !== 'number') {
+				datalistSelect.selectedIndex =
+					event.keyCode === keyUP ? lastEntry : firstEntry;
 
-						// ... and on arrow up or down keys, focus the select
-						datalistSelect.focus();
-					}
-				}
-
-				// Toggle the visibility of the datalist select according to previous checks
-				toggleVisibility(visible, datalistSelect);
+				// ... and on arrow up or down keys, focus the select
+				datalistSelect.focus();
 			}
 		}
+
+		// Toggle the visibility of the datalist select according to previous checks
+		toggleVisibility(visible, datalistSelect);
 	};
 
 	// Function for preparing and sorting the options/suggestions
@@ -289,245 +286,227 @@
 			datalist = input.list;
 
 		// Check for whether the events target was an input and still check for an existing instance of the datalist
-		if (
-			input.tagName &&
-			input.tagName.toLowerCase() === 'input' &&
-			datalist !== null
-		) {
-			var eventType = event.type,
-				// Creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
-				datalistSelect =
-					datalist.getElementsByClassName(classNamePolyfillingSelect)[0] ||
-					setUpPolyfillingSelect(input, datalist),
-				// Either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur - and check for general existance of any option as suggestions
-				visible =
-					datalistSelect &&
-					datalistSelect.querySelector('option:not(:disabled)') &&
-					((eventType === 'focusin' && input.value !== '') ||
-						(event.relatedTarget && event.relatedTarget === datalistSelect));
+		if (input.tagName.toLowerCase() !== 'input' || datalist === null) {
+			return;
+		}
 
-			// Test for whether this input has already been enhanced by the polyfill
-			if (!input.matches('.' + classNameInput)) {
-				// We'd like to prevent autocomplete on the input datalist field
-				input.setAttribute('autocomplete', 'off');
+		var eventType = event.type,
+			// Creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
+			datalistSelect =
+				datalist.getElementsByClassName(classNamePolyfillingSelect)[0] ||
+				setUpPolyfillingSelect(input, datalist),
+			// Either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur - and check for general existance of any option as suggestions
+			visible =
+				datalistSelect &&
+				datalistSelect.querySelector('option:not(:disabled)') &&
+				((eventType === 'focusin' && input.value !== '') ||
+					(event.relatedTarget && event.relatedTarget === datalistSelect));
 
-				// WAI ARIA attributes
-				input.setAttribute('role', 'textbox');
-				input.setAttribute('aria-haspopup', 'true');
-				input.setAttribute('aria-autocomplete', 'list');
-				input.setAttribute('aria-owns', input.getAttribute('list'));
+		// Test for whether this input has already been enhanced by the polyfill
+		if (!input.matches('.' + classNameInput)) {
+			// We'd like to prevent autocomplete on the input datalist field
+			input.setAttribute('autocomplete', 'off');
 
-				// Bind the keyup event on the related datalists input
-				if (eventType === 'focusin') {
-					input.addEventListener('keyup', inputInputList);
+			// WAI ARIA attributes
+			input.setAttribute('role', 'textbox');
+			input.setAttribute('aria-haspopup', 'true');
+			input.setAttribute('aria-autocomplete', 'list');
+			input.setAttribute('aria-owns', input.getAttribute('list'));
 
-					input.addEventListener('focusout', changesInputList, true);
-				} else if (eventType === 'blur') {
-					input.removeEventListener('keyup', inputInputList);
+			// Bind the keyup event on the related datalists input
+			if (eventType === 'focusin') {
+				input.addEventListener('keyup', inputInputList);
 
-					input.removeEventListener('focusout', changesInputList, true);
-				}
+				input.addEventListener('focusout', changesInputList, true);
+			} else if (eventType === 'blur') {
+				input.removeEventListener('keyup', inputInputList);
 
-				// Add class for identifying that this input is even already being polyfilled
-				input.className += ' ' + classNameInput;
+				input.removeEventListener('focusout', changesInputList, true);
 			}
 
-			// Toggle the visibility of the datalist select according to previous checks
-			toggleVisibility(visible, datalistSelect);
+			// Add class for identifying that this input is even already being polyfilled
+			input.className += ' ' + classNameInput;
 		}
+
+		// Toggle the visibility of the datalist select according to previous checks
+		toggleVisibility(visible, datalistSelect);
 	};
 
 	// Define function for setting up the polyfilling select
 	var setUpPolyfillingSelect = function(input, datalist) {
 		// Check for whether it's of one of the supported input types defined at the beginning
 		// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
-		if (supportedTypes.indexOf(input.getAttribute('type')) > -1) {
-			// Still check for an existing instance
-			if (datalist !== null) {
-				var rects = input.getClientRects(),
-					// Measurements
-					inputStyles = window.getComputedStyle(input),
-					datalistSelect = dcmnt.createElement('select');
-
-				// Setting a class for easier identifying that select afterwards
-				datalistSelect.setAttribute('class', classNamePolyfillingSelect);
-
-				// Set general styling related definitions
-				datalistSelect.style.position = 'absolute';
-
-				// Initially hiding the datalist select
-				toggleVisibility(false, datalistSelect);
-
-				// The select itself shouldn't be a possible target for tabbing
-				datalistSelect.setAttribute('tabindex', '-1');
-
-				// WAI ARIA attributes
-				datalistSelect.setAttribute('aria-live', 'polite');
-				datalistSelect.setAttribute('role', 'listbox');
-				if (!touched) {
-					datalistSelect.setAttribute('aria-multiselectable', 'false');
-				}
-
-				// The select should get positioned underneath the input field ...
-				if (inputStyles.getPropertyValue('display') === 'block') {
-					datalistSelect.style.marginTop =
-						'-' + inputStyles.getPropertyValue('margin-bottom');
-				} else {
-					var direction =
-						inputStyles.getPropertyValue('direction') === 'rtl'
-							? 'right'
-							: 'left';
-
-					datalistSelect.style.setProperty(
-						'margin-' + direction,
-						'-' +
-							(rects[0].width +
-								parseFloat(
-									inputStyles.getPropertyValue('margin-' + direction)
-								)) +
-							'px'
-					);
-					datalistSelect.style.marginTop =
-						parseInt(
-							rects[0].height + (input.offsetTop - datalist.offsetTop),
-							10
-						) + 'px';
-				}
-
-				// Set the polyfilling selects border-radius equally to the one by the polyfilled input
-				datalistSelect.style.borderRadius = inputStyles.getPropertyValue(
-					'border-radius'
-				);
-				datalistSelect.style.minWidth = rects[0].width + 'px';
-
-				if (touched) {
-					var messageElement = dcmnt.createElement('option');
-
-					// ... and it's first entry should contain the localized message to select an entry
-					messageElement.innerText = datalist.title;
-					// ... and disable this option, as it shouldn't get selected by the user
-					messageElement.disabled = true;
-					// ... and assign a dividable class to it
-					messageElement.setAttribute('class', 'message');
-					// ... and finally insert it into the select
-					datalistSelect.appendChild(messageElement);
-				}
-
-				// Add select to datalist element ...
-				datalist.appendChild(datalistSelect);
-
-				// ... and our upfollowing functions to the related event
-				if (touched) {
-					datalistSelect.addEventListener('change', changeDataListSelect);
-				} else {
-					datalistSelect.addEventListener('click', changeDataListSelect);
-				}
-				datalistSelect.addEventListener('blur', changeDataListSelect);
-				datalistSelect.addEventListener('keydown', changeDataListSelect);
-				datalistSelect.addEventListener('keypress', datalistSelectKeyPress);
-
-				return datalistSelect;
-			}
+		// and still check for an existing instance
+		if (
+			supportedTypes.indexOf(input.getAttribute('type')) === -1 ||
+			datalist === null
+		) {
+			return;
 		}
+
+		var rects = input.getClientRects(),
+			// Measurements
+			inputStyles = window.getComputedStyle(input),
+			datalistSelect = dcmnt.createElement('select');
+
+		// Setting a class for easier identifying that select afterwards
+		datalistSelect.setAttribute('class', classNamePolyfillingSelect);
+
+		// Set general styling related definitions
+		datalistSelect.style.position = 'absolute';
+
+		// Initially hiding the datalist select
+		toggleVisibility(false, datalistSelect);
+
+		// The select itself shouldn't be a possible target for tabbing
+		datalistSelect.setAttribute('tabindex', '-1');
+
+		// WAI ARIA attributes
+		datalistSelect.setAttribute('aria-live', 'polite');
+		datalistSelect.setAttribute('role', 'listbox');
+		if (!touched) {
+			datalistSelect.setAttribute('aria-multiselectable', 'false');
+		}
+
+		// The select should get positioned underneath the input field ...
+		if (inputStyles.getPropertyValue('display') === 'block') {
+			datalistSelect.style.marginTop =
+				'-' + inputStyles.getPropertyValue('margin-bottom');
+		} else {
+			var direction =
+				inputStyles.getPropertyValue('direction') === 'rtl' ? 'right' : 'left';
+
+			datalistSelect.style.setProperty(
+				'margin-' + direction,
+				'-' +
+					(rects[0].width +
+						parseFloat(inputStyles.getPropertyValue('margin-' + direction))) +
+					'px'
+			);
+			datalistSelect.style.marginTop =
+				parseInt(rects[0].height + (input.offsetTop - datalist.offsetTop), 10) +
+				'px';
+		}
+
+		// Set the polyfilling selects border-radius equally to the one by the polyfilled input
+		datalistSelect.style.borderRadius = inputStyles.getPropertyValue(
+			'border-radius'
+		);
+		datalistSelect.style.minWidth = rects[0].width + 'px';
+
+		if (touched) {
+			var messageElement = dcmnt.createElement('option');
+
+			// ... and it's first entry should contain the localized message to select an entry
+			messageElement.innerText = datalist.title;
+			// ... and disable this option, as it shouldn't get selected by the user
+			messageElement.disabled = true;
+			// ... and assign a dividable class to it
+			messageElement.setAttribute('class', 'message');
+			// ... and finally insert it into the select
+			datalistSelect.appendChild(messageElement);
+		}
+
+		// Add select to datalist element ...
+		datalist.appendChild(datalistSelect);
+
+		// ... and our upfollowing functions to the related event
+		if (touched) {
+			datalistSelect.addEventListener('change', changeDataListSelect);
+		} else {
+			datalistSelect.addEventListener('click', changeDataListSelect);
+		}
+		datalistSelect.addEventListener('blur', changeDataListSelect);
+		datalistSelect.addEventListener('keydown', changeDataListSelect);
+		datalistSelect.addEventListener('keypress', datalistSelectKeyPress);
+
+		return datalistSelect;
 	};
 
 	// Functions regarding changes to the datalist polyfilling created selects keypress
 	var datalistSelectKeyPress = function(event) {
-		var datalistSelect = event.target;
+		var datalistSelect = event.target,
+			datalist = datalistSelect.parentNode,
+			input = dcmnt.querySelector('input[list="' + datalist.id + '"]');
 
-		// Check for whether the events target was a select
-		if (
-			datalistSelect.tagName &&
-			datalistSelect.tagName.toLowerCase() === 'select'
-		) {
-			var datalist = datalistSelect.parentNode,
-				input = dcmnt.querySelector('input[list="' + datalist.id + '"]');
+		// Check for whether the events target was a select or whether the input doesn't exist
+		if (datalistSelect.tagName.toLowerCase() !== 'select' || input === null) {
+			return;
+		}
 
-			if (
-				input !== null &&
-				// Determine a relevant key - either printable characters (that would have a length of 1) or controlling like Backspace
-				event.key &&
-				(event.key === 'Backspace' || event.key.length === 1)
-			) {
-				input.focus();
+		// Determine a relevant key - either printable characters (that would have a length of 1) or controlling like Backspace
+		if (event.key && (event.key === 'Backspace' || event.key.length === 1)) {
+			input.focus();
 
-				if (event.key === 'Backspace') {
-					input.value = input.value.substr(
-						0,
-						input.value.length - 1
-					);
+			if (event.key === 'Backspace') {
+				input.value = input.value.substr(0, input.value.length - 1);
 
-					// Dispatch the input event on the related input[list]
-					dispatchInputEvent(input);
-				} else {
-					input.value += event.key;
-				}
-
-				prepOptions(datalist, input);
+				// Dispatch the input event on the related input[list]
+				dispatchInputEvent(input);
+			} else {
+				input.value += event.key;
 			}
+
+			prepOptions(datalist, input);
 		}
 	};
 
 	// Change, Click, Blur, Keydown
 	var changeDataListSelect = function(event) {
-		var datalistSelect = event.currentTarget;
+		var datalistSelect = event.currentTarget,
+			datalist = datalistSelect.parentNode,
+			input = dcmnt.querySelector('input[list="' + datalist.id + '"]');
 
-		// Check for whether the events target was a select
-		if (
-			datalistSelect.tagName &&
-			datalistSelect.tagName.toLowerCase() === 'select'
-		) {
-			var datalist = datalistSelect.parentNode,
-				input = dcmnt.querySelector('input[list="' + datalist.id + '"]'),
-				datalistSelectValue = datalistSelect.value,
-				eventType = event.type,
-				// ENTER and ESC
-				visible =
-					eventType === 'keydown' &&
-					(event.keyCode !== keyENTER && event.keyCode !== keyESC);
-			if (input !== null) {
-				// On change, click or after pressing ENTER or TAB key, input the selects value into the input on a change within the list
-				if (
-					(eventType === 'change' ||
-						eventType === 'click' ||
-						(eventType === 'keydown' &&
-							(event.keyCode === keyENTER || event.key === 'Tab'))) &&
-					typeof datalistSelectValue !== 'undefined' &&
-					datalistSelectValue.length > 0 &&
-					datalistSelectValue !== datalist.title
-				) {
-					var lastSeperator;
-
-					// In case of type=email and multiple attribute, we need to set up the resulting inputs value differently
-					input.value =
-						// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
-						input.getAttribute('type') === 'email' &&
-						input.getAttribute('multiple') !== null &&
-						(lastSeperator = input.value.lastIndexOf(',')) > -1
-							? input.value.slice(0, lastSeperator) +
-							  ',' +
-							  datalistSelectValue
-							: (input.value = datalistSelectValue);
-
-					// Dispatch the input event on the related input[list]
-					dispatchInputEvent(input);
-
-					// Finally focusing the input, as other browser do this as well
-					if (event.key !== 'Tab') {
-						input.focus();
-					}
-
-					// Set the visibility to false afterwards, as we're done here
-					visible = false;
-				} else if (eventType === 'keydown' && event.keyCode === keyESC) {
-					// In case of the ESC key being pressed, we still want to focus the input[list]
-					input.focus();
-				}
-
-				// Toggle the visibility of the datalist select according to previous checks
-				toggleVisibility(visible, datalistSelect);
-			}
+		// Check for whether the events target was a select or whether the input doesn't exist
+		if (datalistSelect.tagName.toLowerCase() !== 'select' || input === null) {
+			return;
 		}
+
+		var datalistSelectValue = datalistSelect.value,
+			eventType = event.type,
+			// ENTER and ESC
+			visible =
+				eventType === 'keydown' &&
+				(event.keyCode !== keyENTER && event.keyCode !== keyESC);
+
+		// On change, click or after pressing ENTER or TAB key, input the selects value into the input on a change within the list
+		if (
+			(eventType === 'change' ||
+				eventType === 'click' ||
+				(eventType === 'keydown' &&
+					(event.keyCode === keyENTER || event.key === 'Tab'))) &&
+			typeof datalistSelectValue !== 'undefined' &&
+			datalistSelectValue.length > 0 &&
+			datalistSelectValue !== datalist.title
+		) {
+			var lastSeperator;
+
+			// In case of type=email and multiple attribute, we need to set up the resulting inputs value differently
+			input.value =
+				// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
+				input.getAttribute('type') === 'email' &&
+				input.getAttribute('multiple') !== null &&
+				(lastSeperator = input.value.lastIndexOf(',')) > -1
+					? input.value.slice(0, lastSeperator) + ',' + datalistSelectValue
+					: (input.value = datalistSelectValue);
+
+			// Dispatch the input event on the related input[list]
+			dispatchInputEvent(input);
+
+			// Finally focusing the input, as other browser do this as well
+			if (event.key !== 'Tab') {
+				input.focus();
+			}
+
+			// Set the visibility to false afterwards, as we're done here
+			visible = false;
+		} else if (eventType === 'keydown' && event.keyCode === keyESC) {
+			// In case of the ESC key being pressed, we still want to focus the input[list]
+			input.focus();
+		}
+
+		// Toggle the visibility of the datalist select according to previous checks
+		toggleVisibility(visible, datalistSelect);
 	};
 
 	// Create and dispatch the input event; divided for IE9 usage
