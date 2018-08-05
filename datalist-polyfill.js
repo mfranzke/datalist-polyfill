@@ -189,7 +189,7 @@
 			newSelectValues = dcmnt.createDocumentFragment(),
 			disabledValues = dcmnt.createDocumentFragment();
 
-		// In case of type=email and multiple attribute, we would need grab the last piece
+		// In case of type=email and multiple attribute, we would need to grab the last piece
 		// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
 		if (
 			input.getAttribute('type') === 'email' &&
@@ -462,8 +462,7 @@
 			return;
 		}
 
-		var datalistSelectValue = datalistSelect.value,
-			eventType = event.type,
+		var eventType = event.type,
 			// ENTER and ESC
 			visible =
 				eventType === 'keydown' &&
@@ -471,13 +470,11 @@
 
 		// On change, click or after pressing ENTER or TAB key, input the selects value into the input on a change within the list
 		if (
-			(eventType === 'change' ||
-				eventType === 'click' ||
-				(eventType === 'keydown' &&
-					(event.keyCode === keyENTER || event.key === 'Tab'))) &&
-			typeof datalistSelectValue !== 'undefined' &&
-			datalistSelectValue.length > 0 &&
-			datalistSelectValue !== datalist.title
+			eventType !== 'blur' &&
+			(eventType === 'keydown' &&
+				(event.keyCode === keyENTER || event.key === 'Tab')) &&
+			datalistSelect.value.length > 0 &&
+			datalistSelect.value !== datalist.title
 		) {
 			var lastSeperator;
 
@@ -487,8 +484,8 @@
 				input.getAttribute('type') === 'email' &&
 				input.getAttribute('multiple') !== null &&
 				(lastSeperator = input.value.lastIndexOf(',')) > -1
-					? input.value.slice(0, lastSeperator) + ',' + datalistSelectValue
-					: (input.value = datalistSelectValue);
+					? input.value.slice(0, lastSeperator) + ',' + datalistSelect.value
+					: (input.value = datalistSelect.value);
 
 			// Dispatch the input event on the related input[list]
 			dispatchInputEvent(input);
