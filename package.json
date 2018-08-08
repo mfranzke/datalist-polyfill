@@ -38,9 +38,7 @@
     "xo": "^0.22.0"
   },
   "xo": {
-    "envs": [
-      "browser"
-    ],
+    "envs": ["browser"],
     "prettier": true,
     "esnext": false,
     "rules": {
