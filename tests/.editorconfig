@@ -1,0 +1,6 @@
+# For more information about the properties used in
+# this file, please see the EditorConfig documentation:
+# https://editorconfig.org/
+
+[*.js]
+max_line_length = 120
