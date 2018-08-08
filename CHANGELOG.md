@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.21.0] - 2018-08-07
+
+### Added
+
+- Added testcases and added [crossbrowsertesting](https://crossbrowsertesting.com/) logo to README
+
+### Changed
+
+- increased specificity on one of the selectors according the usage in other parts of the code
+- Check for correct element on the `input`s event delegation
+- Simplified some code parts
+- Further aligned the naming conventions
+- code and complexity simplifications
+
+### Fixed
+
+- Arrow keys (top&down) disturb the general browser behaviour on number fields (#GH-32)
+
 ## [1.20.1] - 2018-07-20
 
 ### Changed
