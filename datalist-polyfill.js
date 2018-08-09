@@ -470,9 +470,10 @@
 
 		// On change, click or after pressing ENTER or TAB key, input the selects value into the input on a change within the list
 		if (
-			eventType !== 'blur' &&
-			(eventType === 'keydown' &&
-				(event.keyCode === keyENTER || event.key === 'Tab')) &&
+			(eventType === 'change' ||
+				eventType === 'click' ||
+				(eventType === 'keydown' &&
+					(event.keyCode === keyENTER || event.key === 'Tab'))) &&
 			datalistSelect.value.length > 0 &&
 			datalistSelect.value !== datalist.title
 		) {
