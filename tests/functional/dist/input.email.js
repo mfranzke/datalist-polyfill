@@ -155,8 +155,7 @@ describe('input field #' + field.fieldId, function() {
 			});
 		});
 	}
-	/*
-	// TODO: integrate this test regarding clicking the select entries correctly
+
 	it('should set the value on clicking on the suggestions select', function() {
 		// Delete the last byte to ensure that there's more than one option/suggestion
 		browser.keys('\uE003');
@@ -171,9 +170,11 @@ describe('input field #' + field.fieldId, function() {
 		expect(browser.isVisible('#' + field.fieldId + 'list select')).to.be.false;
 
 		// Check for the inputs values
-		expect(browser.getAttribute('#' + field.fieldId, 'value') === browser.getAttribute('#' + field.fieldId + 'list select option:checked', 'value')).to.be.true;
+		expect(
+			browser.getAttribute('#' + field.fieldId, 'value') ===
+				browser.getAttribute('#' + field.fieldId + 'list select option:checked', 'value')
+		).to.be.true;
 	});
-	*/
 });
 
 
