@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.21.2] - 2018-08-11
+
+### Added
+
+- Finally integrated the test regarding clicking the selects option elements, as this was actually previously prevented by the other bug fixed in the previous release
+
+### Fixed
+
+- Corrected the code style of the readme file again, as this got incorrectly reformatted previously
+
 ## [1.21.1] - 2018-08-09
 
 ### Fixed
