@@ -21,7 +21,7 @@ This is a minimal and dependency-free vanilla JavaScript polyfill for the awesom
 
 ## Features
 
-- Lightweight: 5.6 kB of minified JavaScript, around 2.22 kB gzipped
+- Lightweight: 5.6 kB of minified JavaScript, around 2.2 kB gzipped
 - Fully flexible to change the datalist entries / `<option>`s
 - Supporting:
   - the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
