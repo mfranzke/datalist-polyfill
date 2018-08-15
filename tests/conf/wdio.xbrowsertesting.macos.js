@@ -37,7 +37,7 @@ exports.config = {
 	specs: ['./tests/functional/dist/*.js'],
 	// Patterns to exclude.
 	exclude: [
-        // 'path/to/excluded/files'
+		// 'path/to/excluded/files'
 	],
 	//
 	// ============
@@ -71,7 +71,7 @@ exports.config = {
 			platform: 'Mac OSX 10.13',
 			browserName: 'Safari',
 			version: '11.0'
-		}/*,
+		} /*,
 		// TODO: Fix the test cases regarding older versions of safari/selenium
 		{
 			// maxInstances can get overwritten per capability. So if you have an in-house Selenium
