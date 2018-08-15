@@ -1,3 +1,5 @@
+/* global browser describe beforeEach it $ $$ */
+
 var expect = require('chai').expect;
 
 var keysSelect = [

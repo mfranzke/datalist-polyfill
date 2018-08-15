@@ -27,6 +27,8 @@ describe('input field #' + field.fieldId + ' - extended', function() {
 });
 
 
+/* global browser describe beforeEach it $ $$ */
+
 var expect = require('chai').expect;
 
 var keysSelect = [
