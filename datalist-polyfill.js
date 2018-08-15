@@ -34,9 +34,18 @@
 		) {
 			Object.defineProperty(constructor.prototype, 'list', {
 				get: function() {
-					// The list IDL attribute must return the current suggestions source element, if any, or null otherwise.
-					return typeof this === 'object' && this instanceof constructor
-						? dcmnt.querySelector('datalist#' + this.getAttribute('list'))
+					/*
+					According to the specs ...
+					"The list IDL attribute must return the current suggestions source element, if any, or null otherwise."
+					"If there is no list attribute, or if there is no element with that ID, or if the first element with that ID is not a datalist element, then there is no suggestions source element."
+					*/
+					var element = dcmnt.getElementById(this.getAttribute('list'));
+
+					return typeof this === 'object' &&
+						this instanceof constructor &&
+						element &&
+						element.matches('datalist')
+						? element
 						: null;
 				}
 			});
