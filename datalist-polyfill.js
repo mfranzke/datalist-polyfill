@@ -224,18 +224,26 @@
 				return aValue.localeCompare(bValue);
 			})
 			.forEach(function(opt) {
-				var optionValue = opt.value;
+				var optionValue = opt.value,
+					label = opt.getAttribute('label'),
+					text = opt.text;
 
-				// ... put this option into the fragment that is meant to get inserted into the select
-				// "Each option element that is a descendant of the datalist element, that is not disabled, and whose value is a string that isn't the empty string, represents a suggestion. Each suggestion has a value and a label." (W3C)
+				/* ... put this option into the fragment that is meant to get inserted into the select. Additionally according to the specs ...
+				"Each option element that is a descendant of the datalist element, that is not disabled, and whose value is a string that isn't the empty string, represents a suggestion. Each suggestion has a value and a label."
+				"If appropriate, the user agent should use the suggestion's label and value to identify the suggestion to the user."
+				*/
 				if (
-					optionValue !== '' &&
-					optionValue.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1 &&
+					((optionValue !== '' &&
+						optionValue.toLowerCase().indexOf(inputValue.toLowerCase()) !==
+							-1) ||
+						(label &&
+							label !== '' &&
+							label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) ||
+						(text !== '' &&
+							text.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1)) &&
 					opt.disabled === false
 				) {
-					var label = opt.getAttribute('label'),
-						text = opt.text,
-						textOptionPart = text.substr(
+					var textOptionPart = text.substr(
 							0,
 							optionValue.length + textValueSeperator.length
 						),
