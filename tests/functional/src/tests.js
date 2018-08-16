@@ -1,4 +1,5 @@
-/* global browser describe beforeEach it $ $$ */
+/* global browser $ $$ */
+/* eslint-env mocha */
 
 var expect = require('chai').expect;
 

@@ -3,7 +3,8 @@ var field = { fieldId: 'tel', initialValue: '-3', expectedAmount: 6, wrongValue:
 // @codekit-append 'tests.js';
 
 
-/* global browser describe beforeEach it $ $$ */
+/* global browser $ $$ */
+/* eslint-env mocha */
 
 var expect = require('chai').expect;
 

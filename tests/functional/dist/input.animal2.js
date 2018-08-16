@@ -3,7 +3,8 @@ var field = { fieldId: 'animal2', initialValue: 'Ca', expectedAmount: 2, wrongVa
 // @codekit-append 'tests.js';
 
 
-/* global browser describe beforeEach it $ $$ */
+/* global browser $ $$ */
+/* eslint-env mocha */
 
 var expect = require('chai').expect;
 
