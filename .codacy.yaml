@@ -3,3 +3,6 @@
    enabled: true
    exclude_paths:
      - 'tests/functional/dist/**'
+exclude_paths:
+  - 'tests/functional/src/**'
+  - '*.min.js'
