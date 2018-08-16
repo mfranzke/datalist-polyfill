@@ -1,0 +1,5 @@
+---
+ duplication:
+   enabled: true
+   exclude_paths:
+     - 'tests/functional/dist/**'
