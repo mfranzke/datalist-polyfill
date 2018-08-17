@@ -141,6 +141,42 @@ Cross-browser testing platform provided by [CrossBrowserTesting][crossbrowsertes
 
 [crossbrowsertestinghomepage]: https://crossbrowsertesting.com
 
+## Prospects
+
+The following problems are mainly reported and listed by caniuse as well as due to issues flagged on Github.
+
+<table>
+  <tr>
+    <th>Problem</th>
+    <th>iOS</th>
+    <th>Safari</th>
+    <th>IE9</th>
+    <th>IE11+</th>
+    <th>EDGE</th>
+    <th>Firefox</th>
+    <th>Chrome</th>
+    <th>Chrome WebView</th>
+  </tr>
+  <tr>
+    <th align="left">Basic functionality</th>
+    <td colspan="3" align="center">✔ <i>Polyfill</i></td>
+    <td colspan="4" align="center">✔</td>
+    <td align="center"><a href="https://github.com/mfranzke/datalist-polyfill/issues/33">#GH-33</a></td>
+  </tr>
+  <tr>
+    <th align="left"><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=773041">long lists of items are unscrollable resulting in unselectable options</a></th>
+    <td colspan="6">&nbsp;</td>
+    <td>fixed with v.70</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th align="left"><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/">No substring matching for the suggestions</a></th>
+    <td colspan="3">&nbsp;</td>
+    <td colspan="2" align="center"><a href="https://github.com/mfranzke/datalist-polyfill/issues/36">#GH-36</a></td>
+    <td colspan="3">&nbsp;</td>
+  </tr>
+</table>
+
 ## Outro
 
 Personally I even also do like the "keep it simple" approach provided within the [W3C specs](https://www.w3.org/TR/html5/forms.html#the-datalist-element) even already.
