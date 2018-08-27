@@ -7,23 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- #GH-36 / No substring matching for the suggestions
+## [1.22.0] - 2018-08-27
+
+### Added
+
+- Substring matching for the suggestions on both the `value` and the `text` values / #GH-36
 
 ## [1.21.2] - 2018-08-11
 
 ### Added
 
-- Finally integrated the test regarding clicking the selects option elements, as this was actually previously prevented by the other bug fixed in the previous release
+- Finally integrated the test regarding clicking the `select`s `option` elements, as this was actually previously prevented by the other bug fixed in the previous release
 
 ### Fixed
 
-- Corrected the code style of the readme file again, as this got incorrectly reformatted previously
+- Corrected the code style of the README file again, as this got incorrectly reformatted previously
 
 ## [1.21.1] - 2018-08-09
 
 ### Fixed
 
-- Suggestions aren‘t working onclick any more (#GH-35)
+- Suggestions aren‘t working onClick any more (#GH-35)
 
 ## [1.21.0] - 2018-08-08
 
