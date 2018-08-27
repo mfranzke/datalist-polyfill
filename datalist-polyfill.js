@@ -140,6 +140,25 @@
 		toggleVisibility(visible, datalistSelect);
 	};
 
+	// Check for whether this is a valid suggestion
+	var isValidSuggestion = function(option, inputValue) {
+		var optVal = option.value.toLowerCase(),
+			inptVal = inputValue.toLowerCase(),
+			label = option.getAttribute('label'),
+			text = option.text.toLowerCase();
+
+		/*
+		"Each option element that is a descendant of the datalist element, that is not disabled, and whose value is a string that isn't the empty string, represents a suggestion. Each suggestion has a value and a label."
+		"If appropriate, the user agent should use the suggestion's label and value to identify the suggestion to the user."
+		*/
+		return Boolean(
+			option.disabled === false &&
+				((optVal !== '' && optVal.indexOf(inptVal) !== -1) ||
+					(label && label.toLowerCase().indexOf(inptVal) !== -1) ||
+					(text !== '' && text.indexOf(inptVal) !== -1))
+		);
+	};
+
 	// Focusin and -out events
 	var changesInputList = function(event) {
 		// Check for correct element on this event delegation
@@ -244,21 +263,9 @@
 					label = opt.getAttribute('label'),
 					text = opt.text;
 
-				/* ... put this option into the fragment that is meant to get inserted into the select. Additionally according to the specs ...
-				"Each option element that is a descendant of the datalist element, that is not disabled, and whose value is a string that isn't the empty string, represents a suggestion. Each suggestion has a value and a label."
-				"If appropriate, the user agent should use the suggestion's label and value to identify the suggestion to the user."
-				*/
-				if (
-					((optionValue !== '' &&
-						optionValue.toLowerCase().indexOf(inputValue.toLowerCase()) !==
-							-1) ||
-						(label &&
-							label !== '' &&
-							label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) ||
-						(text !== '' &&
-							text.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1)) &&
-					opt.disabled === false
-				) {
+				// Put this option into the fragment that is meant to get inserted into the select. Additionally according to the specs ...
+				// TODO: This might get slightly changed/optimized in a future release
+				if (isValidSuggestion(opt, inputValue)) {
 					var textOptionPart = text.substr(
 							0,
 							optionValue.length + textValueSeperator.length
