@@ -25,7 +25,7 @@
 	}
 
 	// .matches polyfill
-	// TODO: probably needs enhancement on the to supported browsers
+	// TODO: probably needs enhancement on the expected to be supported browsers
 	if (!Element.prototype.matches) {
 		Element.prototype.matches = Element.prototype.msMatchesSelector;
 	}
@@ -174,8 +174,7 @@
 			return;
 		}
 
-		var eventType = event.type,
-			// Creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
+		var // Creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
 			datalistSelect =
 				datalist.getElementsByClassName(classNamePolyfillingSelect)[0] ||
 				setUpPolyfillingSelect(input, datalist),
@@ -183,7 +182,7 @@
 			visible =
 				datalistSelect &&
 				datalistSelect.querySelector('option:not(:disabled)') &&
-				((eventType === 'focusin' && input.value !== '') ||
+				((event.type === 'focusin' && input.value !== '') ||
 					(event.relatedTarget && event.relatedTarget === datalistSelect));
 
 		// Test for whether this input has already been enhanced by the polyfill
@@ -198,11 +197,11 @@
 			input.setAttribute('aria-owns', input.getAttribute('list'));
 
 			// Bind the keyup event on the related datalists input
-			if (eventType === 'focusin') {
+			if (event.type === 'focusin') {
 				input.addEventListener('keyup', inputInputList);
 
 				input.addEventListener('focusout', changesInputList, true);
-			} else if (eventType === 'blur') {
+			} else if (event.type === 'blur') {
 				input.removeEventListener('keyup', inputInputList);
 
 				input.removeEventListener('focusout', changesInputList, true);
