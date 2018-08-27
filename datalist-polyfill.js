@@ -13,14 +13,22 @@
 (function() {
 	'use strict';
 
-	// Performance: Set a local variable
-	var dcmnt = window.document;
+	// Performance: Set local variables
+	var dcmnt = window.document,
+		ua = window.navigator.userAgent,
+		// Feature detection
+		datalistSupported =
+			'list' in dcmnt.createElement('input') &&
+			Boolean(dcmnt.createElement('datalist') && window.HTMLDataListElement),
+		// IE & EDGE browser detection via UserAgent
+		// TODO: obviously ugly. But sadly necessary until Microsoft enhances the UX within EDGE (compare to https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/)
+		// adapted out of https://gist.github.com/gaboratorium/25f08b76eb82b1e7b91b01a0448f8b1d :
+		isGteIE11orEDGE = Boolean(
+			ua.indexOf('Trident/') !== -1 || ua.indexOf('Edge/') !== -1
+		);
 
-	// Feature detection - let's break here, if it's even already supported
-	if (
-		'list' in dcmnt.createElement('input') &&
-		Boolean(dcmnt.createElement('datalist') && window.HTMLDataListElement)
-	) {
+	// Let's break here, if it's even already supported ... and not IE11+ or EDGE
+	if (datalistSupported && !isGteIE11orEDGE) {
 		return false;
 	}
 
@@ -43,7 +51,9 @@
 		supportedTypes = ['text', 'email', 'number', 'search', 'tel', 'url'],
 		// Classes for elements
 		classNameInput = 'polyfilled',
-		classNamePolyfillingSelect = 'polyfilling';
+		classNamePolyfillingSelect = 'polyfilling',
+		// Defining a most likely unique polyfill string
+		uniquePolyfillString = '###[P0LYFlLLed]###';
 
 	// Differentiate for touch interactions, adapted by https://medium.com/@david.gilbertson/the-only-way-to-detect-touch-with-javascript-7791a3346685
 	window.addEventListener('touchstart', function onFirstTouch() {
@@ -94,27 +104,42 @@
 	var inputInputList = function(event) {
 		var input = event.target,
 			datalist = input.list,
+			keyOpen = event.keyCode === keyUP || event.keyCode === keyDOWN;
+
+		// Check for whether the events target was an input and still check for an existing instance of the datalist and polyfilling select
+		if (input.tagName.toLowerCase() !== 'input' || datalist === null) {
+			return;
+		}
+
+		// Handling IE11+ & EDGE
+		if (isGteIE11orEDGE) {
+			// On keypress check for value
+			if (
+				input.value !== '' &&
+				!keyOpen &&
+				event.keyCode !== keyENTER &&
+				event.keyCode !== keyESC
+			) {
+				updateIEOptions(input, datalist);
+
+				// TODO: Check whether this update is necessary depending on the options values
+				input.focus();
+			}
+			return;
+		}
+
+		var visible = false,
 			// Creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
 			datalistSelect =
 				datalist.getElementsByClassName(classNamePolyfillingSelect)[0] ||
 				setUpPolyfillingSelect(input, datalist);
 
-		// Check for whether the events target was an input and still check for an existing instance of the datalist and polyfilling select
-		if (
-			input.tagName.toLowerCase() !== 'input' ||
-			datalist === null ||
-			datalistSelect === undefined
-		) {
-			return;
-		}
-		var visible = false,
-			keyOpen = event.keyCode === keyUP || event.keyCode === keyDOWN;
-
 		// On an ESC or ENTER key press within the input, let's break here and afterwards hide the datalist select, but if the input contains a value or one of the opening keys have been pressed ...
 		if (
 			event.keyCode !== keyESC &&
 			event.keyCode !== keyENTER &&
-			(input.value !== '' || keyOpen)
+			(input.value !== '' || keyOpen) &&
+			datalistSelect !== undefined
 		) {
 			// ... prepare the options
 			if (prepOptions(datalist, input).length > 0) {
@@ -138,6 +163,56 @@
 
 		// Toggle the visibility of the datalist select according to previous checks
 		toggleVisibility(visible, datalistSelect);
+	};
+
+	// On keypress check all options for that as a substring, save the original value as a data-attribute and preset that inputs value (for sorting) for all option values (probably as well enhanced by a token)
+	var updateIEOptions = function(input, datalist) {
+		// Loop through the options
+		Array.prototype.slice.call(datalist.options, 0).forEach(function(option) {
+			var originalValue = option.dataset.originalvalue || option.value;
+
+			// In case of that the original value hasn't been saved as data so far, do that now
+			if (!option.dataset.originalvalue) {
+				option.dataset.originalvalue = originalValue;
+			}
+
+			// As we'd manipulate the value in the next step, we'd like to put in that value as either a label or text if none of those exist
+			if (!option.label && !option.text) {
+				option.label = originalValue;
+			}
+
+			/*
+			Check for whether the current option is a valid suggestion and replace its value by
+				- the current input string, as IE11+ and EDGE don't do substring, but only prefix matching
+				- followed by a unique string that should prevent any interferance
+				- and the original string, that is still necessary e.g. for sorting within the suggestions list
+			As the value is being inserted on users selection, we'll replace that one within the upfollowing inputInputListIE function
+			*/
+			option.value = isValidSuggestion(option, input.value)
+				? input.value + uniquePolyfillString + originalValue.toLowerCase()
+				: originalValue;
+		});
+	};
+
+	// Check for the input and probably replace by correct options elements value
+	var inputInputListIE = function(event) {
+		var input = event.target,
+			datalist = input.list;
+
+		if (
+			!input.matches('input[list]') ||
+			!input.matches('.' + classNameInput) ||
+			!datalist
+		) {
+			return;
+		}
+
+		// Query for related option
+		var option = datalist.querySelector('option[value="' + input.value + '"]');
+
+		if (option && option.dataset.originalvalue) {
+			input.value = option.dataset.originalvalue;
+		}
 	};
 
 	// Check for whether this is a valid suggestion
@@ -174,17 +249,6 @@
 			return;
 		}
 
-		var // Creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
-			datalistSelect =
-				datalist.getElementsByClassName(classNamePolyfillingSelect)[0] ||
-				setUpPolyfillingSelect(input, datalist),
-			// Either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur - and check for general existance of any option as suggestions
-			visible =
-				datalistSelect &&
-				datalistSelect.querySelector('option:not(:disabled)') &&
-				((event.type === 'focusin' && input.value !== '') ||
-					(event.relatedTarget && event.relatedTarget === datalistSelect));
-
 		// Test for whether this input has already been enhanced by the polyfill
 		if (!input.matches('.' + classNameInput)) {
 			// We'd like to prevent autocomplete on the input datalist field
@@ -201,15 +265,39 @@
 				input.addEventListener('keyup', inputInputList);
 
 				input.addEventListener('focusout', changesInputList, true);
+
+				if (isGteIE11orEDGE) {
+					input.addEventListener('input', inputInputListIE);
+				}
 			} else if (event.type === 'blur') {
 				input.removeEventListener('keyup', inputInputList);
 
 				input.removeEventListener('focusout', changesInputList, true);
+
+				if (isGteIE11orEDGE) {
+					input.removeEventListener('input', inputInputListIE);
+				}
 			}
 
 			// Add class for identifying that this input is even already being polyfilled
 			input.className += ' ' + classNameInput;
 		}
+
+		// Break here for IE11+ & EDGE
+		if (isGteIE11orEDGE) {
+			return;
+		}
+
+		var // Creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
+			datalistSelect =
+				datalist.getElementsByClassName(classNamePolyfillingSelect)[0] ||
+				setUpPolyfillingSelect(input, datalist),
+			// Either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur - and check for general existance of any option as suggestions
+			visible =
+				datalistSelect &&
+				datalistSelect.querySelector('option:not(:disabled)') &&
+				((event.type === 'focusin' && input.value !== '') ||
+					(event.relatedTarget && event.relatedTarget === datalistSelect));
 
 		// Toggle the visibility of the datalist select according to previous checks
 		toggleVisibility(visible, datalistSelect);
@@ -217,6 +305,11 @@
 
 	// Binding the focus event - matching the input[list]s happens in the function afterwards
 	dcmnt.addEventListener('focusin', changesInputList, true);
+
+	// Break here for IE11+ & EDGE
+	if (isGteIE11orEDGE) {
+		return;
+	}
 
 	// Function for preparing and sorting the options/suggestions
 	var prepOptions = function(datalist, input) {
