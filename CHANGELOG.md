@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.22.1] - 2018-08-27
+
+### Fixed
+
+- Escaping the user inputs value as doublequotes wouldn't work on the newly added IE11+ and EDGE functionality / #GH-40
+
 ## [1.22.0] - 2018-08-27
 
 ### Added
