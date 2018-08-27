@@ -24,50 +24,6 @@
 		return false;
 	}
 
-	// Emulate the two properties regarding the datalist and input elements
-	// list property / https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement
-	(function(constructor) {
-		if (
-			constructor &&
-			constructor.prototype &&
-			constructor.prototype.list === undefined
-		) {
-			Object.defineProperty(constructor.prototype, 'list', {
-				get: function() {
-					/*
-					According to the specs ...
-					"The list IDL attribute must return the current suggestions source element, if any, or null otherwise."
-					"If there is no list attribute, or if there is no element with that ID, or if the first element with that ID is not a datalist element, then there is no suggestions source element."
-					*/
-					var element = dcmnt.getElementById(this.getAttribute('list'));
-
-					return typeof this === 'object' &&
-						this instanceof constructor &&
-						element &&
-						element.matches('datalist')
-						? element
-						: null;
-				}
-			});
-		}
-	})(window.HTMLInputElement);
-	// Options property / https://developer.mozilla.org/en/docs/Web/API/HTMLDataListElement
-	(function(constructor) {
-		if (
-			constructor &&
-			constructor.prototype &&
-			constructor.prototype.options === undefined
-		) {
-			Object.defineProperty(constructor.prototype, 'options', {
-				get: function() {
-					return typeof this === 'object' && this instanceof constructor
-						? this.getElementsByTagName('option')
-						: null;
-				}
-			});
-		}
-	})(window.HTMLElement);
-
 	// .matches polyfill
 	// TODO: probably needs enhancement on the to supported browsers
 	if (!Element.prototype.matches) {
@@ -184,6 +140,66 @@
 		toggleVisibility(visible, datalistSelect);
 	};
 
+	// Focusin and -out events
+	var changesInputList = function(event) {
+		// Check for correct element on this event delegation
+		if (!event.target.matches('input[list]')) {
+			return;
+		}
+
+		var input = event.target,
+			datalist = input.list;
+
+		// Check for whether the events target was an input and still check for an existing instance of the datalist
+		if (input.tagName.toLowerCase() !== 'input' || datalist === null) {
+			return;
+		}
+
+		var eventType = event.type,
+			// Creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
+			datalistSelect =
+				datalist.getElementsByClassName(classNamePolyfillingSelect)[0] ||
+				setUpPolyfillingSelect(input, datalist),
+			// Either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur - and check for general existance of any option as suggestions
+			visible =
+				datalistSelect &&
+				datalistSelect.querySelector('option:not(:disabled)') &&
+				((eventType === 'focusin' && input.value !== '') ||
+					(event.relatedTarget && event.relatedTarget === datalistSelect));
+
+		// Test for whether this input has already been enhanced by the polyfill
+		if (!input.matches('.' + classNameInput)) {
+			// We'd like to prevent autocomplete on the input datalist field
+			input.setAttribute('autocomplete', 'off');
+
+			// WAI ARIA attributes
+			input.setAttribute('role', 'textbox');
+			input.setAttribute('aria-haspopup', 'true');
+			input.setAttribute('aria-autocomplete', 'list');
+			input.setAttribute('aria-owns', input.getAttribute('list'));
+
+			// Bind the keyup event on the related datalists input
+			if (eventType === 'focusin') {
+				input.addEventListener('keyup', inputInputList);
+
+				input.addEventListener('focusout', changesInputList, true);
+			} else if (eventType === 'blur') {
+				input.removeEventListener('keyup', inputInputList);
+
+				input.removeEventListener('focusout', changesInputList, true);
+			}
+
+			// Add class for identifying that this input is even already being polyfilled
+			input.className += ' ' + classNameInput;
+		}
+
+		// Toggle the visibility of the datalist select according to previous checks
+		toggleVisibility(visible, datalistSelect);
+	};
+
+	// Binding the focus event - matching the input[list]s happens in the function afterwards
+	dcmnt.addEventListener('focusin', changesInputList, true);
+
 	// Function for preparing and sorting the options/suggestions
 	var prepOptions = function(datalist, input) {
 		if (typeof obs !== 'undefined') {
@@ -290,63 +306,6 @@
 		}
 
 		return datalistSelect.options;
-	};
-
-	// Focusin and -out events
-	var changesInputList = function(event) {
-		// Check for correct element on this event delegation
-		if (!event.target.matches('input[list]')) {
-			return;
-		}
-
-		var input = event.target,
-			datalist = input.list;
-
-		// Check for whether the events target was an input and still check for an existing instance of the datalist
-		if (input.tagName.toLowerCase() !== 'input' || datalist === null) {
-			return;
-		}
-
-		var eventType = event.type,
-			// Creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
-			datalistSelect =
-				datalist.getElementsByClassName(classNamePolyfillingSelect)[0] ||
-				setUpPolyfillingSelect(input, datalist),
-			// Either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur - and check for general existance of any option as suggestions
-			visible =
-				datalistSelect &&
-				datalistSelect.querySelector('option:not(:disabled)') &&
-				((eventType === 'focusin' && input.value !== '') ||
-					(event.relatedTarget && event.relatedTarget === datalistSelect));
-
-		// Test for whether this input has already been enhanced by the polyfill
-		if (!input.matches('.' + classNameInput)) {
-			// We'd like to prevent autocomplete on the input datalist field
-			input.setAttribute('autocomplete', 'off');
-
-			// WAI ARIA attributes
-			input.setAttribute('role', 'textbox');
-			input.setAttribute('aria-haspopup', 'true');
-			input.setAttribute('aria-autocomplete', 'list');
-			input.setAttribute('aria-owns', input.getAttribute('list'));
-
-			// Bind the keyup event on the related datalists input
-			if (eventType === 'focusin') {
-				input.addEventListener('keyup', inputInputList);
-
-				input.addEventListener('focusout', changesInputList, true);
-			} else if (eventType === 'blur') {
-				input.removeEventListener('keyup', inputInputList);
-
-				input.removeEventListener('focusout', changesInputList, true);
-			}
-
-			// Add class for identifying that this input is even already being polyfilled
-			input.className += ' ' + classNameInput;
-		}
-
-		// Toggle the visibility of the datalist select according to previous checks
-		toggleVisibility(visible, datalistSelect);
 	};
 
 	// Define function for setting up the polyfilling select
@@ -549,6 +508,47 @@
 		datalistSelect.setAttribute('aria-hidden', (!visible).toString());
 	};
 
-	// Binding the focus event - matching the input[list]s happens in the function afterwards
-	dcmnt.addEventListener('focusin', changesInputList, true);
+	// Emulate the two properties regarding the datalist and input elements
+	// list property / https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement
+	(function(constructor) {
+		if (
+			constructor &&
+			constructor.prototype &&
+			constructor.prototype.list === undefined
+		) {
+			Object.defineProperty(constructor.prototype, 'list', {
+				get: function() {
+					/*
+					According to the specs ...
+					"The list IDL attribute must return the current suggestions source element, if any, or null otherwise."
+					"If there is no list attribute, or if there is no element with that ID, or if the first element with that ID is not a datalist element, then there is no suggestions source element."
+					*/
+					var element = dcmnt.getElementById(this.getAttribute('list'));
+
+					return typeof this === 'object' &&
+						this instanceof constructor &&
+						element &&
+						element.matches('datalist')
+						? element
+						: null;
+				}
+			});
+		}
+	})(window.HTMLInputElement);
+	// Options property / https://developer.mozilla.org/en/docs/Web/API/HTMLDataListElement
+	(function(constructor) {
+		if (
+			constructor &&
+			constructor.prototype &&
+			constructor.prototype.options === undefined
+		) {
+			Object.defineProperty(constructor.prototype, 'options', {
+				get: function() {
+					return typeof this === 'object' && this instanceof constructor
+						? this.getElementsByTagName('option')
+						: null;
+				}
+			});
+		}
+	})(window.HTMLElement);
 })();
