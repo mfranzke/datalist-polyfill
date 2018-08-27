@@ -15,7 +15,7 @@
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
 - Supports all standard's functionality as well as mimics other browsers behavior.
-- Mainly built for Safari (but supporting IE9 as well), as nearly all of the other browsers [support it quite nicely](https://caniuse.com/#feat=datalist)
+- Mitigating the [different levels of support](https://caniuse.com/#feat=datalist) both by Safari and IE9+ as well as EDGE
 - Released under the MIT license
 - Made in Germany. And supported by so many great people from all over this planet - see "Credits" accordingly.
 
@@ -34,6 +34,7 @@ This is a minimal and dependency-free vanilla JavaScript polyfill for the awesom
   - both Safari and Internet Explorer (IE9+) browsers
   - controlling the display of differing `value` and `label` values
   - on `input[type=url]` omitting the scheme part and performing intelligent matching on the domain name
+  - substring matching on both the `value` and the `text` values
 - Emits "input" event when item in the `datalist` is selected
 - Enables core keyboard controls such as the
   - on the `input`
@@ -132,6 +133,7 @@ Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kra
   - iPad Pro Simulator, Mobile Safari 9.3
 - Windows
   - Windows 7 SP1, Internet Explorer 9.0.8112.16421
+  - Windows 8.1, Internet Explorer 11.0.9600.19101
 
 ### Big Thanks
 
@@ -141,9 +143,9 @@ Cross-browser testing platform provided by [CrossBrowserTesting][crossbrowsertes
 
 [crossbrowsertestinghomepage]: https://crossbrowsertesting.com
 
-## Prospects
+## Prospects & functionality overview
 
-The following problems are mainly reported and listed by caniuse as well as due to issues flagged on Github.
+The following problems are mainly reported and [listed on caniuse](https://caniuse.com/#feat=datalist) as well as due to issues flagged on Github.
 
 <table>
   <tr>
@@ -171,9 +173,9 @@ The following problems are mainly reported and listed by caniuse as well as due 
   </tr>
   <tr>
     <th align="left"><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/">No substring matching for the suggestions</a></th>
-    <td colspan="3">&nbsp;</td>
-    <td colspan="2" align="center"><a href="https://github.com/mfranzke/datalist-polyfill/issues/36">#GH-36</a></td>
-    <td colspan="3">&nbsp;</td>
+    <td colspan="3">✔</td>
+    <td colspan="2" align="center">✔ by <a href="https://github.com/mfranzke/datalist-polyfill/issues/36">#GH-36</a></td>
+    <td colspan="3">✔</td>
   </tr>
 </table>
 
