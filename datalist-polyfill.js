@@ -207,8 +207,10 @@
 			return;
 		}
 
-		// Query for related option
-		var option = datalist.querySelector('option[value="' + input.value + '"]');
+		// Query for related option - and escaping the value as doublequotes wouldn't work
+		var option = datalist.querySelector(
+			'option[value="' + input.value.replace(/\\([\s\S])|(")/g, '\\$1$2') + '"]'
+		);
 
 		if (option && option.dataset.originalvalue) {
 			input.value = option.dataset.originalvalue;
