@@ -168,13 +168,13 @@ The following problems are mainly reported and [listed on caniuse](https://caniu
   <tr>
     <th align="left"><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=773041">long lists of items are unscrollable resulting in unselectable options</a></th>
     <td colspan="6">&nbsp;</td>
-    <td>fixed with v.70</td>
+    <td>✔ fixed with v.69</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <th align="left"><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/">No substring matching for the suggestions</a></th>
     <td colspan="3">✔</td>
-    <td colspan="2" align="center">✔ by <a href="https://github.com/mfranzke/datalist-polyfill/issues/36">#GH-36</a></td>
+    <td colspan="2" align="center">✔ by <a href="https://github.com/mfranzke/datalist-polyfill/issues/39">#GH-39</a></td>
     <td colspan="3">✔</td>
   </tr>
 </table>
