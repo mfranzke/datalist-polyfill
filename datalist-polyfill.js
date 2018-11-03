@@ -415,7 +415,8 @@
 		// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
 		// and still check for an existing instance
 		if (
-			supportedTypes.indexOf(input.getAttribute('type')) === -1 ||
+			(input.getAttribute('type') &&
+				supportedTypes.indexOf(input.getAttribute('type')) === -1) ||
 			datalist === null
 		) {
 			return;
