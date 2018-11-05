@@ -65,7 +65,7 @@ You may optionally load via NPM or Bower:
 
 ## API
 
-Nothing really, just plug it in, it will work out of the box.
+Nothing really, just plug it in, it -will- should work out of the box.
 
 This package is also enabling the [`.options` (for `datalist` elements)](https://developer.mozilla.org/en/docs/Web/API/HTMLDataListElement) and [`.list` (for `input` elements)](https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement) properties according to the specs.
 
@@ -116,6 +116,7 @@ See the polyfill in action either by downloading / forking this repo and have a 
 - After I thought it through and did some experiments, I've finally chosen the `<select>` element to polyfill the `<datalist>`, as it brought most of the functionality, whereas I accepted that it doesn't behave and doesn't look equally.
   - As I wanted to mainly focus on native elements in the most low level / simple way instead of visually emulating a list and than afterwards regain all of the functionality via a lot of JavaScript logic, I've ended up with this element, that knows how to play nicely with nested `<option>` elements.
   - I tried its `multiple` attribute, as this is most likely already what you're up to regarding appearance, but it does violate the form-follows-function concept and results in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing... Then the `size` attribute came to my attention, which much better fits the requirements and behaves as designed quite perfectly.
+- Let the `datalist` element be a direct follower of the `input` element - and don't nest it into the `label` in case that you're doing so with the `input` (which you nevertheless shouldn't do in general, but hey, gods great zoo is great).
 
 ## Credits
 
