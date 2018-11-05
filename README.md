@@ -169,7 +169,7 @@ The following problems are mainly reported and [listed on caniuse](https://caniu
   <tr>
     <th align="left"><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=773041">long lists of items are unscrollable resulting in unselectable options</a></th>
     <td colspan="6">&nbsp;</td>
-    <td>✔ fixed with v.69</td>
+    <td><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=773041" target="_blank">fixed with v.69</a></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
