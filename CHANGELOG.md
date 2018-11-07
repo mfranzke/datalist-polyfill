@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.22.2] - 2018-11-03
+
+### Changed
+
+- Added comment regarding the structure of the HTML code / #GH-44 & #GH-45
+
+### Fixed
+
+- Preventing a JS error on no `type`-attribute being provided for the `input`-element / #GH-45
+
 ## [1.22.1] - 2018-08-27
 
 ### Fixed
