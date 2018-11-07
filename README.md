@@ -65,7 +65,7 @@ You may optionally load via NPM or Bower:
 
 ## API
 
-Nothing really, just plug it in, it -will- should work out of the box.
+Nothing really, just plug it in, it ~~will~~ should work out of the box.
 
 This package is also enabling the [`.options` (for `datalist` elements)](https://developer.mozilla.org/en/docs/Web/API/HTMLDataListElement) and [`.list` (for `input` elements)](https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement) properties according to the specs.
 
