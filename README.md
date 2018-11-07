@@ -36,7 +36,7 @@ This is a minimal and dependency-free vanilla JavaScript polyfill for the awesom
   - on `input[type=url]` omitting the scheme part and performing intelligent matching on the domain name
   - substring matching on both the `value` and the `text` values
 - Emits "input" event when item in the `datalist` is selected
-- Enables core keyboard controls such as the
+- Enables core keyboard controls such as
   - on the `input`
     - up and down arrow keys
   - on the `select`
