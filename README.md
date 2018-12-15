@@ -12,6 +12,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d1f98a2d1fd44c41b7ad5c7670d8cdcd)](https://app.codacy.com/app/mfranzke/datalist-polyfill?utm_source=github.com&utm_medium=referral&utm_content=mfranzke/datalist-polyfill&utm_campaign=badger)
 [![Greenkeeper badge](https://badges.greenkeeper.io/mfranzke/datalist-polyfill.svg)](https://greenkeeper.io/)
 
+**Update:** Safari TP seems to support datalist pretty nicely. Yeah !!! Exciting news!
+
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
 - Supports all standard's functionality as well as mimics other browsers behavior.
@@ -36,7 +38,7 @@ This is a minimal and dependency-free vanilla JavaScript polyfill for the awesom
   - on `input[type=url]` omitting the scheme part and performing intelligent matching on the domain name
   - substring matching on both the `value` and the `text` values
 - Emits "input" event when item in the `datalist` is selected
-- Enables core keyboard controls such as the
+- Enables core keyboard controls such as
   - on the `input`
     - up and down arrow keys
   - on the `select`
@@ -151,9 +153,10 @@ The following problems are mainly reported and [listed on caniuse](https://caniu
 <table>
   <tr>
     <th>Problem</th>
+    <th>IE9</th>
     <th>iOS</th>
     <th>Safari</th>
-    <th>IE9</th>
+    <th>Safari TP</th>
     <th>IE11+</th>
     <th>EDGE</th>
     <th>Firefox</th>
@@ -163,20 +166,20 @@ The following problems are mainly reported and [listed on caniuse](https://caniu
   <tr>
     <th align="left">Basic functionality</th>
     <td colspan="3" align="center">✔ <i>Polyfill</i></td>
-    <td colspan="4" align="center">✔</td>
+    <td colspan="5" align="center">✔</td>
     <td align="center"><a href="https://github.com/mfranzke/datalist-polyfill/issues/33">#GH-33</a></td>
   </tr>
   <tr>
     <th align="left"><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=773041">long lists of items are unscrollable resulting in unselectable options</a></th>
-    <td colspan="6">&nbsp;</td>
-    <td><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=773041" target="_blank">fixed with v.69</a></td>
+    <td colspan="7">&nbsp;</td>
+    <td align="center"><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=773041" target="_blank">fixed with v.69</a></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <th align="left"><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/">No substring matching for the suggestions</a></th>
-    <td colspan="3">✔</td>
+    <td colspan="4" align="center">✔</td>
     <td colspan="2" align="center">✔ by <a href="https://github.com/mfranzke/datalist-polyfill/issues/39">#GH-39</a></td>
-    <td colspan="3">✔</td>
+    <td colspan="3" align="center">✔</td>
   </tr>
 </table>
 
