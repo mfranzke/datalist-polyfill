@@ -172,14 +172,20 @@ The following problems are mainly reported and [listed on caniuse](https://caniu
   </tr>
   <tr>
     <th align="left"><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=773041">long lists of items are unscrollable resulting in unselectable options</a></th>
-    <td colspan="7">&nbsp;</td>
+    <td colspan="7" align="center">✔</td>
     <td align="center"><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=773041" target="_blank">fixed with v.69</a></td>
-    <td>&nbsp;</td>
+    <td align="center">✔</td>
   </tr>
   <tr>
     <th align="left"><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/">No substring matching for the suggestions</a></th>
     <td colspan="4" align="center">✔</td>
     <td colspan="2" align="center">✔ by <a href="https://github.com/mfranzke/datalist-polyfill/issues/39">#GH-39</a></td>
+    <td colspan="3" align="center">✔</td>
+  </tr>
+  <tr>
+    <th align="left"><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/20066595/">`datalist` popups gets &quot;emptied&quot; when receiving focus via tab</a></th>
+    <td colspan="5" align="center">✔</td>
+    <td align="center"><a href="https://github.com/mfranzke/datalist-polyfill/issues/49">#GH-49</a></td>
     <td colspan="3" align="center">✔</td>
   </tr>
 </table>
