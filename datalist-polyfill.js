@@ -252,36 +252,7 @@
 
 		// Test for whether this input has already been enhanced by the polyfill
 		if (!input.matches('.' + classNameInput)) {
-			// We'd like to prevent autocomplete on the input datalist field
-			input.setAttribute('autocomplete', 'off');
-
-			// WAI ARIA attributes
-			input.setAttribute('role', 'textbox');
-			input.setAttribute('aria-haspopup', 'true');
-			input.setAttribute('aria-autocomplete', 'list');
-			input.setAttribute('aria-owns', input.getAttribute('list'));
-
-			// Bind the keyup event on the related datalists input
-			if (event.type === 'focusin') {
-				input.addEventListener('keyup', inputInputList);
-
-				input.addEventListener('focusout', changesInputList, true);
-
-				if (isGteIE11 || isEDGE) {
-					input.addEventListener('input', inputInputListIE);
-				}
-			} else if (event.type === 'blur') {
-				input.removeEventListener('keyup', inputInputList);
-
-				input.removeEventListener('focusout', changesInputList, true);
-
-				if (isGteIE11 || isEDGE) {
-					input.removeEventListener('input', inputInputListIE);
-				}
-			}
-
-			// Add class for identifying that this input is even already being polyfilled
-			input.className += ' ' + classNameInput;
+			prepareInput(input, event.type);
 		}
 
 		// #GH-49: Microsoft EDGE / datalist popups get "emptied" when receiving focus via tabbing
@@ -310,6 +281,40 @@
 
 		// Toggle the visibility of the datalist select according to previous checks
 		toggleVisibility(visible, datalistSelect);
+	};
+
+	// Prepare the input
+	var prepareInput = function(input, eventType) {
+		// We'd like to prevent autocomplete on the input datalist field
+		input.setAttribute('autocomplete', 'off');
+
+		// WAI ARIA attributes
+		input.setAttribute('role', 'textbox');
+		input.setAttribute('aria-haspopup', 'true');
+		input.setAttribute('aria-autocomplete', 'list');
+		input.setAttribute('aria-owns', input.getAttribute('list'));
+
+		// Bind the keyup event on the related datalists input
+		if (eventType === 'focusin') {
+			input.addEventListener('keyup', inputInputList);
+
+			input.addEventListener('focusout', changesInputList, true);
+
+			if (isGteIE11 || isEDGE) {
+				input.addEventListener('input', inputInputListIE);
+			}
+		} else if (eventType === 'blur') {
+			input.removeEventListener('keyup', inputInputList);
+
+			input.removeEventListener('focusout', changesInputList, true);
+
+			if (isGteIE11 || isEDGE) {
+				input.removeEventListener('input', inputInputListIE);
+			}
+		}
+
+		// Add class for identifying that this input is even already being polyfilled
+		input.className += ' ' + classNameInput;
 	};
 
 	// Binding the focus event - matching the input[list]s happens in the function afterwards
