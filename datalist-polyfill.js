@@ -1,14 +1,14 @@
 /*
-* Datalist polyfill - https://github.com/mfranzke/datalist-polyfill
-* @license Copyright(c) 2017 by Maximilian Franzke
-* Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou, @wlekin, @eddr, @beebee1987 and @mricherzhagen - many thanks for that !
-*/
+ * Datalist polyfill - https://github.com/mfranzke/datalist-polyfill
+ * @license Copyright(c) 2017 by Maximilian Franzke
+ * Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou, @wlekin, @eddr, @beebee1987 and @mricherzhagen - many thanks for that !
+ */
 /*
-* A minimal and dependency-free vanilla JavaScript datalist polyfill.
-* Supports all standard's functionality as well as mimics other browsers behavior.
-* Tests for native support of an inputs elements datalist functionality.
-* Elsewhere the functionality gets emulated by a select element.
-*/
+ * A minimal and dependency-free vanilla JavaScript datalist polyfill.
+ * Supports all standard's functionality as well as mimics other browsers behavior.
+ * Tests for native support of an inputs elements datalist functionality.
+ * Elsewhere the functionality gets emulated by a select element.
+ */
 
 (function() {
 	'use strict';
