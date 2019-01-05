@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.23.0] - 2019-01-05
+
+### Added
+
+- Microsoft EDGE / datalist popups get "emptied" when receiving focus via tabbing / #GH-49
+
+### Changed
+
+- Updated webdriver.io testing framework to version 5
+- Updated some aspects within the `README` file as well as announced some upcoming bigger changes regarding and to cheer the recognized basic support of `datalist` elements within Apple Safari browser.
+- Refactoring to prevent a „Function has a complexity of 21.“
+- Some simple reformatting of the code according to prettier
+
 ## [1.22.2] - 2018-11-03
 
 ### Changed
