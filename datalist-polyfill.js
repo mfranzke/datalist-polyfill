@@ -23,12 +23,11 @@
 		// IE & EDGE browser detection via UserAgent
 		// TODO: obviously ugly. But sadly necessary until Microsoft enhances the UX within EDGE (compare to https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/)
 		// adapted out of https://gist.github.com/gaboratorium/25f08b76eb82b1e7b91b01a0448f8b1d :
-		isGteIE11orEDGE = Boolean(
-			ua.indexOf('Trident/') !== -1 || ua.indexOf('Edge/') !== -1
-		);
+		isGteIE11 = Boolean(ua.indexOf('Trident/') !== -1),
+		isEDGE = Boolean(ua.indexOf('Edge/') !== -1);
 
 	// Let's break here, if it's even already supported ... and not IE11+ or EDGE
-	if (datalistSupported && !isGteIE11orEDGE) {
+	if (datalistSupported && !isGteIE11 && !isEDGE) {
 		return false;
 	}
 
@@ -112,7 +111,7 @@
 		}
 
 		// Handling IE11+ & EDGE
-		if (isGteIE11orEDGE) {
+		if (isGteIE11 || isEDGE) {
 			// On keypress check for value
 			if (
 				input.value !== '' &&
@@ -268,7 +267,7 @@
 
 				input.addEventListener('focusout', changesInputList, true);
 
-				if (isGteIE11orEDGE) {
+				if (isGteIE11 || isEDGE) {
 					input.addEventListener('input', inputInputListIE);
 				}
 			} else if (event.type === 'blur') {
@@ -276,7 +275,7 @@
 
 				input.removeEventListener('focusout', changesInputList, true);
 
-				if (isGteIE11orEDGE) {
+				if (isGteIE11 || isEDGE) {
 					input.removeEventListener('input', inputInputListIE);
 				}
 			}
@@ -285,8 +284,16 @@
 			input.className += ' ' + classNameInput;
 		}
 
+		// #GH-49: Microsoft EDGE / datalist popups get "emptied" when receiving focus via tabbing
+		if (isEDGE && event.type === 'focusin') {
+			// Set the value of the first option to it's value - this actually triggers a redraw of the complete list
+			var firstOption = input.list.options[0];
+
+			firstOption.value = firstOption.value;
+		}
+
 		// Break here for IE11+ & EDGE
-		if (isGteIE11orEDGE) {
+		if (isGteIE11 || isEDGE) {
 			return;
 		}
 
@@ -309,7 +316,7 @@
 	dcmnt.addEventListener('focusin', changesInputList, true);
 
 	// Break here for IE11+ & EDGE
-	if (isGteIE11orEDGE) {
+	if (isGteIE11 || isEDGE) {
 		return;
 	}
 
