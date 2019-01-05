@@ -185,7 +185,7 @@ The following problems are mainly reported and [listed on caniuse](https://caniu
   <tr>
     <th align="left"><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/20066595/">`datalist` popups gets &quot;emptied&quot; when receiving focus via tab</a></th>
     <td colspan="5" align="center">✔</td>
-    <td align="center"><a href="https://github.com/mfranzke/datalist-polyfill/issues/49">#GH-49</a></td>
+    <td align="center">✔ by <a href="https://github.com/mfranzke/datalist-polyfill/issues/49">#GH-49</a></td>
     <td colspan="3" align="center">✔</td>
   </tr>
 </table>
