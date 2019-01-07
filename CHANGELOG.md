@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.23.1] - 2019-01-07
+
+### Fixed
+
+- JavaScript bug in IE9 and corrected the handling of the browsers towards IE10+ / #GH-50
+
 ## [1.23.0] - 2019-01-05
 
 ### Added
