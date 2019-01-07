@@ -23,11 +23,11 @@
 		// IE & EDGE browser detection via UserAgent
 		// TODO: obviously ugly. But sadly necessary until Microsoft enhances the UX within EDGE (compare to https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/)
 		// adapted out of https://gist.github.com/gaboratorium/25f08b76eb82b1e7b91b01a0448f8b1d :
-		isGteIE11 = Boolean(ua.indexOf('Trident/') !== -1),
+		isGteIE10 = Boolean(ua.match(/Trident\/[6-7]\./)),
 		isEDGE = Boolean(ua.indexOf('Edge/') !== -1);
 
-	// Let's break here, if it's even already supported ... and not IE11+ or EDGE
-	if (datalistSupported && !isGteIE11 && !isEDGE) {
+	// Let's break here, if it's even already supported ... and not IE10+ or EDGE
+	if (datalistSupported && !isGteIE10 && !isEDGE) {
 		return false;
 	}
 
@@ -110,8 +110,8 @@
 			return;
 		}
 
-		// Handling IE11+ & EDGE
-		if (isGteIE11 || isEDGE) {
+		// Handling IE10+ & EDGE
+		if (isGteIE10 || isEDGE) {
 			// On keypress check for value
 			if (
 				input.value !== '' &&
@@ -182,7 +182,7 @@
 
 			/*
 			Check for whether the current option is a valid suggestion and replace its value by
-				- the current input string, as IE11+ and EDGE don't do substring, but only prefix matching
+				- the current input string, as IE10+ and EDGE don't do substring, but only prefix matching
 				- followed by a unique string that should prevent any interferance
 				- and the original string, that is still necessary e.g. for sorting within the suggestions list
 			As the value is being inserted on users selection, we'll replace that one within the upfollowing inputInputListIE function
@@ -263,8 +263,8 @@
 			firstOption.value = firstOption.value;
 		}
 
-		// Break here for IE11+ & EDGE
-		if (isGteIE11 || isEDGE) {
+		// Break here for IE10+ & EDGE
+		if (isGteIE10 || isEDGE) {
 			return;
 		}
 
@@ -300,7 +300,7 @@
 
 			input.addEventListener('focusout', changesInputList, true);
 
-			if (isGteIE11 || isEDGE) {
+			if (isGteIE10 || isEDGE) {
 				input.addEventListener('input', inputInputListIE);
 			}
 		} else if (eventType === 'blur') {
@@ -308,7 +308,7 @@
 
 			input.removeEventListener('focusout', changesInputList, true);
 
-			if (isGteIE11 || isEDGE) {
+			if (isGteIE10 || isEDGE) {
 				input.removeEventListener('input', inputInputListIE);
 			}
 		}
@@ -320,8 +320,8 @@
 	// Binding the focus event - matching the input[list]s happens in the function afterwards
 	dcmnt.addEventListener('focusin', changesInputList, true);
 
-	// Break here for IE11+ & EDGE
-	if (isGteIE11 || isEDGE) {
+	// Break here for IE10+ & EDGE
+	if (isGteIE10 || isEDGE) {
 		return;
 	}
 
