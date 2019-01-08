@@ -123,7 +123,7 @@ See the polyfill in action either by downloading / forking this repo and have a 
 
 ## Credits
 
-Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou, @wlekin, @eddr, @beebee1987 and @mricherzhagen. Thank you very much for that, highly appreciated !
+Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou, @wlekin, @eddr, @beebee1987, @mricherzhagen, @acespace90, @damien-git and @nexces. Thank you very much for that, highly appreciated !
 
 ## Tested with
 
