@@ -586,6 +586,11 @@
 				input.focus();
 			}
 
+			// #GH-51 / Prevent the form to be submitted on selecting a value via ENTER key within the select
+			if (event.keyCode === keyENTER) {
+				event.preventDefault();
+			}
+
 			// Set the visibility to false afterwards, as we're done here
 			visible = false;
 		} else if (eventType === 'keydown' && event.keyCode === keyESC) {
