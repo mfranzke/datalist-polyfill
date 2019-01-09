@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.23.2] - 2019-01-08
+
+### Fixed
+
+- Prevent the form to be submitted on selecting a value via ENTER key within the select / #GH-51
+
 ## [1.23.1] - 2019-01-07
 
 ### Fixed
