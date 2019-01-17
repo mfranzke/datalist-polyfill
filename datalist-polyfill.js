@@ -576,7 +576,7 @@
 				input.getAttribute('multiple') !== null &&
 				(lastSeperator = input.value.lastIndexOf(',')) > -1
 					? input.value.slice(0, lastSeperator) + ',' + datalistSelect.value
-					: (input.value = datalistSelect.value);
+					: datalistSelect.value;
 
 			// Dispatch the input event on the related input[list]
 			dispatchInputEvent(input);
