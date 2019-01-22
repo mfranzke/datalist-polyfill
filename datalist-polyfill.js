@@ -86,7 +86,7 @@
 					'input[list="' + datalistNeedsAnUpdate.id + '"]'
 				);
 
-				if (input.value !== '') {
+				if (getInputValue(input) !== '') {
 					// Prepare the options and toggle the visiblity afterwards
 					toggleVisibility(
 						prepOptions(datalistNeedsAnUpdate, input).length,
@@ -114,7 +114,7 @@
 		if (isGteIE10 || isEDGE) {
 			// On keypress check for value
 			if (
-				input.value !== '' &&
+				getInputValue(input) !== '' &&
 				!keyOpen &&
 				event.keyCode !== keyENTER &&
 				event.keyCode !== keyESC
@@ -137,7 +137,7 @@
 		if (
 			event.keyCode !== keyESC &&
 			event.keyCode !== keyENTER &&
-			(input.value !== '' || keyOpen) &&
+			(getInputValue(input) !== '' || keyOpen) &&
 			datalistSelect !== undefined
 		) {
 			// ... prepare the options
@@ -166,6 +166,8 @@
 
 	// On keypress check all options for that as a substring, save the original value as a data-attribute and preset that inputs value (for sorting) for all option values (probably as well enhanced by a token)
 	var updateIEOptions = function(input, datalist) {
+		var inputValue = getInputValue(input);
+
 		// Loop through the options
 		Array.prototype.slice.call(datalist.options, 0).forEach(function(option) {
 			var originalValue = option.dataset.originalvalue || option.value;
@@ -187,8 +189,8 @@
 				- and the original string, that is still necessary e.g. for sorting within the suggestions list
 			As the value is being inserted on users selection, we'll replace that one within the upfollowing inputInputListIE function
 			*/
-			option.value = isValidSuggestion(option, input.value)
-				? input.value + uniquePolyfillString + originalValue.toLowerCase()
+			option.value = isValidSuggestion(option, inputValue)
+				? inputValue + uniquePolyfillString + originalValue.toLowerCase()
 				: originalValue;
 		});
 	};
@@ -208,11 +210,11 @@
 
 		// Query for related option - and escaping the value as doublequotes wouldn't work
 		var option = datalist.querySelector(
-			'option[value="' + input.value.replace(/\\([\s\S])|(")/g, '\\$1$2') + '"]'
+			'option[value="' + getInputValue(input).replace(/\\([\s\S])|(")/g, '\\$1$2') + '"]'
 		);
 
 		if (option && option.dataset.originalvalue) {
-			input.value = option.dataset.originalvalue;
+			setInputValue(input, option.dataset.originalvalue);
 		}
 	};
 
@@ -276,7 +278,7 @@
 			visible =
 				datalistSelect &&
 				datalistSelect.querySelector('option:not(:disabled)') &&
-				((event.type === 'focusin' && input.value !== '') ||
+				((event.type === 'focusin' && getInputValue(input) !== '') ||
 					(event.relatedTarget && event.relatedTarget === datalistSelect));
 
 		// Toggle the visibility of the datalist select according to previous checks
@@ -317,6 +319,30 @@
 		input.className += ' ' + classNameInput;
 	};
 
+	// Get the input value for dividing regular and mail types
+	var getInputValue = function(input) {
+		// In case of type=email and multiple attribute, we would need to grab the last piece
+		// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
+		return (
+			input.getAttribute('type') === 'email' &&
+			input.getAttribute('multiple') !== null
+		) ? input.value.substring(input.value.lastIndexOf(',') + 1) : input.value;
+	};
+
+	// Set the input value for dividing regular and mail types
+	var setInputValue = function(input, datalistSelectValue) {
+		var lastSeperator;
+
+		// In case of type=email and multiple attribute, we need to set up the resulting inputs value differently
+		input.value =
+			// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
+			input.getAttribute('type') === 'email' &&
+			input.getAttribute('multiple') !== null &&
+			(lastSeperator = input.value.lastIndexOf(',')) > -1
+				? input.value.slice(0, lastSeperator) + ',' + datalistSelectValue
+				: datalistSelectValue;
+	};
+
 	// Binding the focus event - matching the input[list]s happens in the function afterwards
 	dcmnt.addEventListener('focusin', changesInputList, true);
 
@@ -335,18 +361,9 @@
 			datalistSelect =
 				datalist.getElementsByClassName(classNamePolyfillingSelect)[0] ||
 				setUpPolyfillingSelect(input, datalist),
-			inputValue = input.value,
+			inputValue = getInputValue(input),
 			newSelectValues = dcmnt.createDocumentFragment(),
 			disabledValues = dcmnt.createDocumentFragment();
-
-		// In case of type=email and multiple attribute, we would need to grab the last piece
-		// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
-		if (
-			input.getAttribute('type') === 'email' &&
-			input.getAttribute('multiple') !== null
-		) {
-			inputValue = inputValue.substring(inputValue.lastIndexOf(',') + 1);
-		}
 
 		// Create an array out of the options list
 		Array.prototype.slice
@@ -567,16 +584,7 @@
 			datalistSelect.value.length > 0 &&
 			datalistSelect.value !== datalist.title
 		) {
-			var lastSeperator;
-
-			// In case of type=email and multiple attribute, we need to set up the resulting inputs value differently
-			input.value =
-				// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
-				input.getAttribute('type') === 'email' &&
-				input.getAttribute('multiple') !== null &&
-				(lastSeperator = input.value.lastIndexOf(',')) > -1
-					? input.value.slice(0, lastSeperator) + ',' + datalistSelect.value
-					: datalistSelect.value;
+			setInputValue(input, datalistSelect.value);
 
 			// Dispatch the input event on the related input[list]
 			dispatchInputEvent(input);
