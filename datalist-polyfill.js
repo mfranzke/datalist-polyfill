@@ -111,7 +111,8 @@
 		}
 
 		// Handling IE10+ & EDGE
-		if (isGteIE10 || isEDGE) {
+		// As only EDGE doesn't trigger the input event after selecting an item via mouse, we need to differentiate here
+		if (isGteIE10 || (isEDGE && input.type === 'text')) {
 			// On keypress check for value
 			if (
 				getInputValue(input) !== '' &&
@@ -302,7 +303,8 @@
 
 			input.addEventListener('focusout', changesInputList, true);
 
-			if (isGteIE10 || isEDGE) {
+			// As only EDGE doesn't trigger the input event after selecting an item via mouse, we need to differentiate here
+			if (isGteIE10 || (isEDGE && input.type === 'text')) {
 				input.addEventListener('input', inputInputListIE);
 			}
 		} else if (eventType === 'blur') {
@@ -310,7 +312,8 @@
 
 			input.removeEventListener('focusout', changesInputList, true);
 
-			if (isGteIE10 || isEDGE) {
+			// As only EDGE doesn't trigger the input event after selecting an item via mouse, we need to differentiate here
+			if (isGteIE10 || (isEDGE && input.type === 'text')) {
 				input.removeEventListener('input', inputInputListIE);
 			}
 		}
