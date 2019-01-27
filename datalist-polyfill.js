@@ -111,14 +111,15 @@
 		}
 
 		// Handling IE10+ & EDGE
-		// As only EDGE doesn't trigger the input event after selecting an item via mouse, we need to differentiate here
-		if (isGteIE10 || (isEDGE && input.type === 'text')) {
+		if (isGteIE10 || isEDGE) {
 			// On keypress check for value
 			if (
 				getInputValue(input) !== '' &&
 				!keyOpen &&
 				event.keyCode !== keyENTER &&
-				event.keyCode !== keyESC
+				event.keyCode !== keyESC &&
+				// As only EDGE doesn't trigger the input event after selecting an item via mouse, we need to differentiate here
+				(isGteIE10 || input.type === 'text')
 			) {
 				updateIEOptions(input, datalist);
 
