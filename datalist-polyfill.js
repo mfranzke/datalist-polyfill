@@ -172,11 +172,14 @@
 
 		// Loop through the options
 		Array.prototype.slice.call(datalist.options, 0).forEach(function(option) {
-			var originalValue = option.dataset.originalvalue || option.value;
+			// We're using .getAttribute instead of .dataset here for IE10
+			var dataOriginalvalue = option.getAttribute('data-originalvalue'),
+				originalValue = dataOriginalvalue || option.value;
 
 			// In case of that the original value hasn't been saved as data so far, do that now
-			if (!option.dataset.originalvalue) {
-				option.dataset.originalvalue = originalValue;
+			if (!dataOriginalvalue) {
+				// We're using .setAttribute instead of .dataset here for IE10
+				option.setAttribute('data-originalvalue', originalValue);
 			}
 
 			// As we'd manipulate the value in the next step, we'd like to put in that value as either a label or text if none of those exist
@@ -215,8 +218,9 @@
 			'option[value="' + getInputValue(input).replace(/\\([\s\S])|(")/g, '\\$1$2') + '"]'
 		);
 
-		if (option && option.dataset.originalvalue) {
-			setInputValue(input, option.dataset.originalvalue);
+		// We're using .getAttribute instead of .dataset here for IE10
+		if (option && option.getAttribute('data-originalvalue')) {
+			setInputValue(input, option.getAttribute('data-originalvalue'));
 		}
 	};
 
