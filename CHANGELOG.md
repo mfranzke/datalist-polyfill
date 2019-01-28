@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Safari TP seems to support the `datalist` element at least basically. Yeah !!! Exciting news! I'm planning to release a new major version soon to both cheer as well as accommodate their implementation.
+
+## [1.23.3] - 2019-01-28
+
+### Changed
+
+- update xo to version 0.24.0
+
+### Fixed
+
+- No substring matching for multiple emailadress suggestions in IE10+ and EDGE / #GH-54
+- EDGE: Incorrect handling of non-text input fields / #GH-55
+- IE10: Changes by #39 break script execution due to usage of .dataset / #GH-56
+- Some simple corrections, like e.g. removing incorrectly set `multiple` attributes
+
 ## [1.23.2] - 2019-01-08
 
 ### Fixed
