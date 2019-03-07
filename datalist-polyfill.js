@@ -126,6 +126,7 @@
 				// TODO: Check whether this update is necessary depending on the options values
 				input.focus();
 			}
+
 			return;
 		}
 
@@ -215,7 +216,9 @@
 
 		// Query for related option - and escaping the value as doublequotes wouldn't work
 		var option = datalist.querySelector(
-			'option[value="' + getInputValue(input).replace(/\\([\s\S])|(")/g, '\\$1$2') + '"]'
+			'option[value="' +
+				getInputValue(input).replace(/\\([\s\S])|(")/g, '\\$1$2') +
+				'"]'
 		);
 
 		// We're using .getAttribute instead of .dataset here for IE10
@@ -331,10 +334,10 @@
 	var getInputValue = function(input) {
 		// In case of type=email and multiple attribute, we would need to grab the last piece
 		// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
-		return (
-			input.getAttribute('type') === 'email' &&
+		return input.getAttribute('type') === 'email' &&
 			input.getAttribute('multiple') !== null
-		) ? input.value.substring(input.value.lastIndexOf(',') + 1) : input.value;
+			? input.value.substring(input.value.lastIndexOf(',') + 1)
+			: input.value;
 	};
 
 	// Set the input value for dividing regular and mail types
@@ -531,6 +534,7 @@
 		} else {
 			datalistSelect.addEventListener('click', changeDataListSelect);
 		}
+
 		datalistSelect.addEventListener('blur', changeDataListSelect);
 		datalistSelect.addEventListener('keydown', changeDataListSelect);
 		datalistSelect.addEventListener('keypress', datalistSelectKeyPress);
@@ -630,6 +634,7 @@
 			evt = dcmnt.createEvent('Event');
 			evt.initEvent('input', true, false);
 		}
+
 		input.dispatchEvent(evt);
 	};
 
@@ -640,6 +645,7 @@
 		} else {
 			datalistSelect.setAttributeNode(dcmnt.createAttribute('hidden'));
 		}
+
 		datalistSelect.setAttribute('aria-hidden', (!visible).toString());
 	};
 
@@ -670,6 +676,7 @@
 			});
 		}
 	})(window.HTMLInputElement);
+
 	// Options property / https://developer.mozilla.org/en/docs/Web/API/HTMLDataListElement
 	(function(constructor) {
 		if (
