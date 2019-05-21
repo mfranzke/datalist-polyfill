@@ -30,11 +30,13 @@
   "homepage": "https://github.com/mfranzke/datalist-polyfill",
   "dependencies": {},
   "devDependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^6.0.0",
+    "@wdio/cli": "^5.8.5",
+    "@wdio/dot-reporter": "^5.7.8",
+    "@wdio/local-runner": "^5.8.6",
+    "@wdio/mocha-framework": "^5.8.1",
+    "@wdio/sync": "^5.8.6",
     "prettier": "^1.13.6",
-    "wdio-mocha-framework": "^0.6.2",
-    "webdriverio": "^5.0.0",
+    "webdriverio": "^5.8.5",
     "xo": "^0.24.0"
   },
   "xo": {
