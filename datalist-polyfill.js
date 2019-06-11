@@ -73,11 +73,11 @@
 
 			// Look through all mutations that just occured
 			mutations.forEach(function(mutation) {
-				// Look through all added nodes of this mutation
-				for (var j = 0; j < mutation.addedNodes.length; ++j) {
-					if (mutation.target.tagName.toLowerCase() === 'datalist') {
-						datalistNeedsAnUpdate = mutation.target;
-					}
+				// Check if any of the mutated nodes was a datalist
+				if (mutation.target instanceof HTMLElement &&
+				    mutation.target.tagName.toLowerCase() === "datalist" &&
+                    		    mutation.addedNodes.length > 1) {
+				    datalistNeedsAnUpdate = mutation.target;
 				}
 			});
 
