@@ -1,7 +1,7 @@
 /* global browser $ $$ */
 /* eslint-env mocha */
 
-var expect = require('chai').expect;
+const assert = require('assert');
 
 var keysSelect = [
 	{ keyName: 'ESC', unicodeChars: '\uE00C' },
@@ -15,27 +15,27 @@ browser.url('index.html');
 
 describe('input field #' + field.fieldId, function() {
 	beforeEach(function() {
-		browser.waitForVisible('#' + field.fieldId, 8000);
+		$('#' + field.fieldId).waitForDisplayed(5000);
 
 		// Setting a value within the input field
-		browser.setValue('#' + field.fieldId, field.initialValue);
+		$('#' + field.fieldId).setValue(field.initialValue);
 
 		// Select should be visible
-		expect(browser.isVisible('#' + field.fieldId + 'list select')).to.be.true;
+		assert.ok($('#' + field.fieldId + 'list select').isDisplayed());
 	});
 	it('should provide suggestions after inserting the value "' + field.initialValue + '"', function() {
 		// Assert number of results
-		expect($$('#' + field.fieldId + 'list select option:not(:disabled)')).to.have.lengthOf(1);
+		assert.lengthOf($$('#' + field.fieldId + 'list select option:not(:disabled)'), 1);
 	});
 	it('should not provide suggestions after inserting the value "' + field.wrongValue + '"', function() {
 		// Setting a value within the input field
 		$('#' + field.fieldId).setValue(field.wrongValue);
 
 		// Select should not be visible
-		expect(browser.isVisible('#' + field.fieldId + 'list select')).to.be.false;
+		assert.isNotOk($('#' + field.fieldId + 'list select').isDisplayed());
 
 		// Assert number of results
-		expect($$('#' + field.fieldId + 'list select option:not(:disabled)')).to.have.lengthOf(0);
+		assert.lengthOf($$('#' + field.fieldId + 'list select option:not(:disabled)'), 0);
 	});
 	it(
 		'should provide suggestions after inserting the value "' +
@@ -45,10 +45,10 @@ describe('input field #' + field.fieldId, function() {
 			browser.keys('\uE003');
 
 			// Assert number of results
-			expect($$('#' + field.fieldId + 'list select option:not(:disabled)')).to.have.lengthOf(field.expectedAmount);
+			assert.lengthOf($$('#' + field.fieldId + 'list select option:not(:disabled)'), field.expectedAmount);
 
 			// Select should be visible
-			expect(browser.isVisible('#' + field.fieldId + 'list select')).to.be.true;
+			assert.ok($('#' + field.fieldId + 'list select').isDisplayed());
 
 			// Setting a value within the input field
 			browser
@@ -57,7 +57,7 @@ describe('input field #' + field.fieldId, function() {
 				.keys('\uE003');
 
 			// Select should not be visible
-			expect(browser.isVisible('#' + field.fieldId + 'list select')).to.be.false;
+			assert.isNotOk($('#' + field.fieldId + 'list select').isDisplayed());
 		}
 	);
 	keysInput.forEach(function(actKey) {
@@ -65,21 +65,21 @@ describe('input field #' + field.fieldId, function() {
 			browser.keys(actKey.unicodeChars);
 
 			// Select should be visible
-			expect(browser.isVisible('#' + field.fieldId + 'list select')).to.be.true;
+			assert.ok($('#' + field.fieldId + 'list select').isDisplayed());
 
 			if (field.fieldId === 'number') {
 				// Check for whether the select has focus
-				expect(browser.hasFocus('#' + field.fieldId + 'list select')).to.be.false;
+				assert.isNotOk($('#' + field.fieldId + 'list select').isFocused());
 			} else {
 				// Check for whether the select has focus
-				expect(browser.hasFocus('#' + field.fieldId + 'list select')).to.be.true;
+				assert.ok($('#' + field.fieldId + 'list select').isFocused());
 
 				// Check for the selected element
 				var options = $$('#' + field.fieldId + 'list select option:not(:disabled)'),
 					optionsLength = options.length,
 					option = actKey.keyName === 'DOWN' ? options[0] : options[optionsLength - 1];
 
-				expect(option.isSelected()).to.be.true;
+				assert.ok(option.isSelected());
 			}
 		});
 	});
@@ -87,43 +87,43 @@ describe('input field #' + field.fieldId, function() {
 	if (field.fieldId !== 'number') {
 		keysSelect.forEach(function(actKey) {
 			it('datalists element should work with the key "' + actKey.keyName + '"', function() {
-				var inputInitialValue = browser.getAttribute('#' + field.fieldId, 'value');
+				var inputInitialValue = $('#' + field.fieldId).isDisplayed('value');
 
 				// Focus the select
 				browser.keys('\uE015');
 
 				// Check for whether the select has focus
-				expect(browser.hasFocus('#' + field.fieldId + 'list select')).to.be.true;
+				assert.ok($('#' + field.fieldId + 'list select').isFocused());
 
 				// Press the key to test
 				browser.keys(actKey.unicodeChars);
 
 				// Check for whether the select has focus
-				expect(browser.hasFocus('#' + field.fieldId + 'list select')).to.be.false;
+				assert.isNotOk($('#' + field.fieldId + 'list select').isFocused());
 
 				// Check for visibility
 				if (actKey.keyName === 'BACKSPACE') {
-					expect(browser.isVisible('#' + field.fieldId + 'list select')).to.be.true;
+					assert.ok($('#' + field.fieldId + 'list select').isDisplayed());
 				} else {
-					expect(browser.isVisible('#' + field.fieldId + 'list select')).to.be.false;
+					assert.isNotOk($('#' + field.fieldId + 'list select').isDisplayed());
 				}
 
 				// Check for the inputs values
 				switch (actKey.keyName) {
 					case 'ESC':
-						expect(browser.getAttribute('#' + field.fieldId, 'value') === inputInitialValue).to.be.true;
+						assert.ok($('#' + field.fieldId).getAttribute('value') === inputInitialValue);
 						break;
 					case 'BACKSPACE':
-						expect(
-							browser.getAttribute('#' + field.fieldId, 'value') ===
+						assert.ok(
+							$('#' + field.fieldId).getAttribute('value') ===
 								inputInitialValue.substr(0, inputInitialValue.length - 1)
-						).to.be.true;
+						);
 						break;
 					default:
-						expect(
-							browser.getAttribute('#' + field.fieldId, 'value') ===
-								browser.getAttribute('#' + field.fieldId + 'list select option:checked', 'value')
-						).to.be.true;
+						assert.ok(
+							$('#' + field.fieldId).getAttribute('value') ===
+								$('#' + field.fieldId + 'list select option:checked').getAttribute('value')
+						);
 						break;
 				}
 			});
@@ -135,18 +135,18 @@ describe('input field #' + field.fieldId, function() {
 		browser.keys('\uE003');
 
 		// Click the selected element with the suggestions select
-		browser.click('#' + field.fieldId + 'list select');
+		$('#' + field.fieldId + 'list select').click();
 
 		// Check for whether the select has focus
-		expect(browser.hasFocus('#' + field.fieldId + 'list select')).to.be.false;
+		assert.isNotOk($('#' + field.fieldId + 'list select').isFocused());
 
 		// Check for visibility
-		expect(browser.isVisible('#' + field.fieldId + 'list select')).to.be.false;
+		assert.isNotOk($('#' + field.fieldId + 'list select').isDisplayed());
 
 		// Check for the inputs values
-		expect(
-			browser.getAttribute('#' + field.fieldId, 'value') ===
-				browser.getAttribute('#' + field.fieldId + 'list select option:checked', 'value')
-		).to.be.true;
+		assert.ok(
+			$('#' + field.fieldId).getAttribute('value') ===
+				$('#' + field.fieldId + 'list select option:checked').getAttribute('value')
+		);
 	});
 });
