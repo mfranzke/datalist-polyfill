@@ -128,6 +128,7 @@ See the polyfill in action either by downloading / forking this repo and have a 
   - As I wanted to mainly focus on native elements in the most low level / simple way instead of visually emulating a list and than afterwards regain all of the functionality via a lot of JavaScript logic, I've ended up with this element, that knows how to play nicely with nested `<option>` elements.
   - I tried its `multiple` attribute, as this is most likely already what you're up to regarding appearance, but it does violate the form-follows-function concept and results in - surprise - the possibility for multiple selections, which isn't always `<datalist>` elements kind of thing... Then the `size` attribute came to my attention, which much better fits the requirements and behaves as designed quite perfectly.
 - Let the `datalist` element be a direct follower of the `input` element - and don't nest it into the `label` in case that you're doing so with the `input` (which you nevertheless shouldn't do in general, but hey, gods great zoo is great).
+- If embedding a webview within an iOS app, you should be using `WKWebView` instead of `UIWebView`, as it supports `datalist` right natively and the latter even also leads to a JavaScript error (thanks to @jscho13 for mentioning this).
 
 ## Credits
 
@@ -164,8 +165,9 @@ The following problems are mainly reported and [listed on caniuse](https://caniu
     <th>Problem</th>
     <th>IE9</th>
     <th>iOS</th>
-    <th>Safari</th>
-    <th>Safari TP</th>
+    <th>Safari < 12.1</th>
+    <th>iOS WebView</th>
+    <th>Safari >= 12.1</th>
     <th>IE11+</th>
     <th>EDGE</th>
     <th>Firefox</th>
@@ -175,24 +177,25 @@ The following problems are mainly reported and [listed on caniuse](https://caniu
   <tr>
     <th align="left">Basic functionality</th>
     <td colspan="3" align="center">✔ <i>Polyfill</i></td>
+    <td align="center">✔ via WKWebView</td>
     <td colspan="5" align="center">✔</td>
     <td align="center"><a href="https://github.com/mfranzke/datalist-polyfill/issues/33">#GH-33</a></td>
   </tr>
   <tr>
     <th align="left"><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=773041">long lists of items are unscrollable resulting in unselectable options</a></th>
-    <td colspan="7" align="center">✔</td>
+    <td colspan="8" align="center">✔</td>
     <td align="center"><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=773041" target="_blank">fixed with v.69</a></td>
     <td align="center">✔</td>
   </tr>
   <tr>
     <th align="left"><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/">No substring matching for the suggestions</a></th>
-    <td colspan="4" align="center">✔</td>
+    <td colspan="5" align="center">✔</td>
     <td colspan="2" align="center">✔ by <a href="https://github.com/mfranzke/datalist-polyfill/issues/39">#GH-39</a></td>
     <td colspan="3" align="center">✔</td>
   </tr>
   <tr>
     <th align="left"><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/20066595/">`datalist` popups gets &quot;emptied&quot; when receiving focus via tab</a></th>
-    <td colspan="5" align="center">✔</td>
+    <td colspan="6" align="center">✔</td>
     <td align="center">✔ by <a href="https://github.com/mfranzke/datalist-polyfill/issues/49">#GH-49</a></td>
     <td colspan="3" align="center">✔</td>
   </tr>
