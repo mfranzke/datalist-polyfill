@@ -1,7 +1,7 @@
 /*
  * Datalist polyfill - https://github.com/mfranzke/datalist-polyfill
  * @license Copyright(c) 2017 by Maximilian Franzke
- * Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou, @wlekin, @eddr, @beebee1987, @mricherzhagen, @acespace90, @damien-git, @nexces and @Sora2455 - many thanks for that !
+ * Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kravimir, @mischah, @hryamzik, @ottoville, @IceCreamYou, @wlekin, @eddr, @beebee1987, @mricherzhagen, @acespace90, @damien-git, @nexces, @Sora2455 and @jscho13 - many thanks for that !
  */
 /*
  * A minimal and dependency-free vanilla JavaScript datalist polyfill.
