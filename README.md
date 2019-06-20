@@ -12,7 +12,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d1f98a2d1fd44c41b7ad5c7670d8cdcd)](https://app.codacy.com/app/mfranzke/datalist-polyfill?utm_source=github.com&utm_medium=referral&utm_content=mfranzke/datalist-polyfill&utm_campaign=badger)
 [![Greenkeeper badge](https://badges.greenkeeper.io/mfranzke/datalist-polyfill.svg)](https://greenkeeper.io/)
 
-**Update:** Safari TP supports the `datalist` element at least basically, and [its functionality will be included within the next release of Safari both for iOS and MacOS X](https://developer.apple.com/documentation/safari_release_notes/safari_12_1_release_notes#3130314). Yeah !!! Exciting news!
+**Update:** Safari now supports the `datalist` element at least basically, as [announced earlier this year with the latest release of Safari both for iOS and MacOS X](https://developer.apple.com/documentation/safari_release_notes/safari_12_1_release_notes#3130314). Yeah !!! Exciting news!
 I'm planning to release a new major version soon to both cheer as well as accommodate their implementation.
 
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
