@@ -98,6 +98,14 @@ That for the optimizations on substring matching for Microsoft EDGE specifically
 
 There might be possible solutions to even also achieve the expected behaviour on non-text-input elements - even though that I only could think about ugly solutions that I don't want to have within the polyfill and that might even also break existing CSS & JS architecture / selectors.
 
+#### Microsoft Internet Explorer 10 & 11 and Microsoft EDGE
+
+As mentioned with #GH-63, related to aspects reported via #36 and #39 (and in [Microsoft EDGEs platform issues](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/)), it doesn't work in IE 10 & 11 as well as in EDGE to "Search both the value and label, using substring matching; currently it searches both the value and label, but uses prefix matching".
+
+As requested with #36 we wanted to even also enrich the experience within the "newest" IE versions (10 & 11) and EDGE browsers that provided basic support, but not the substring matching for users input. In this case the technical solution has been to manipulate the values in a way that the browser could actually handle that functionality as well, by including the users input at the beginning of the value after a substring matching to the original value, followed by a unique string for preventing any inconsistencies, followed by the original value itself, in this case for the sorting of the entries (this is mainly done in the `updateIEOptions` function around line 191 to 200 of the code).
+
+This actually leads to a different behavior for the developers on the `value` property of each `option` elements within the `datalist` element for IE & EDGE, but on the other hand provides a better UX for IE & EDGE users by a consistent behavior for the user.
+
 #### Microsoft Internet Explorer 9
 
 You'll need the declaration for the standard `hidden` attribute, that you might already have included in case you're using [`normalize.css`](https://github.com/necolas/normalize.css/). Otherwise just adapt it from there:
