@@ -88,6 +88,10 @@ You can also disable `<option>` elements by adding the `disabled` attribute to t
 
 As the browser vendors (Google Chrome vs. the others) don't seem to be aligned on this topic, I've decided to enable the `label`-attribute to serve as the definitive label being displayed, even if a value is being defined differing from the label. On different `value` and `text` values, both of them would get displayed within the suggestions, as Google Chrome does it. But if you define a differing `label`-attribute, its value would get displayed exclusively (as all the other browsers do it) to give you some flexibility on how to define those suggestions. Check out the „Different ways of defining an option“ section on the demo page regarding this topic.
 
+### `value` property on the `option` elements for IE 10 & IE 11 and EDGE
+
+As explained in detail below in the section "Microsoft Internet Explorer 10 & 11 and Microsoft EDGE", for fixing missing behaviour in IE 10+ and EDGE we're manipulating the `value` for the `option` elements in those browser so you can't access them securely as a getter, but would need to take the original values out of `data-originalvalue`.
+
 ### Microsoft Internet Explorer
 
 #### Microsoft EDGE
@@ -100,9 +104,9 @@ There might be possible solutions to even also achieve the expected behaviour on
 
 #### Microsoft Internet Explorer 10 & 11 and Microsoft EDGE
 
-As mentioned with #GH-63, related to aspects reported via #36 and #39 (and in [Microsoft EDGEs platform issues](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/)), it doesn't work in IE 10 & 11 as well as in EDGE to "Search both the value and label, using substring matching; currently it searches both the value and label, but uses prefix matching".
+As mentioned with #GH-63, related to aspects reported via #GH-36 and #GH-39 (and in [Microsoft EDGEs platform issues](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/)), it doesn't work in IE 10 & 11 as well as in EDGE to "Search both the value and label, using substring matching; currently it searches both the value and label, but uses prefix matching".
 
-As requested with #36 we wanted to even also enrich the experience within the "newest" IE versions (10 & 11) and EDGE browsers that provided basic support, but not the substring matching for users input. In this case the technical solution has been to manipulate the values in a way that the browser could actually handle that functionality as well, by including the users input at the beginning of the value after a substring matching to the original value, followed by a unique string for preventing any inconsistencies, followed by the original value itself, in this case for the sorting of the entries (this is mainly done in the `updateIEOptions` function around line 191 to 200 of the code).
+As requested with #GH-36 we wanted to even also enrich the experience within the "newest" IE versions (10 & 11) and EDGE browsers that provided basic support, but not the substring matching for users input. In this case the technical solution has been to manipulate the values in a way that the browser could actually handle that functionality as well, by including the users input at the beginning of the value after a substring matching to the original value, followed by a unique string for preventing any inconsistencies, followed by the original value itself, in this case for the sorting of the entries (this is mainly done in the `updateIEOptions` function around line 191 to 200 of the code).
 
 This actually leads to a different behavior for the developers on the `value` property of each `option` elements within the `datalist` element for IE & EDGE, but on the other hand provides a better UX for IE & EDGE users by a consistent behavior for the user.
 
