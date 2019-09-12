@@ -90,7 +90,7 @@ As the browser vendors (Google Chrome vs. the others) don't seem to be aligned o
 
 ### `value` property on the `option` elements for IE 10 & IE 11 and EDGE
 
-As explained in detail below in the section "Microsoft Internet Explorer 10 & 11 and Microsoft EDGE", for fixing missing behaviour in IE 10+ and EDGE we're manipulating the `value` for the `option` elements in those browser so you can't access them securely as a getter, but would need to take the original values out of `data-originalvalue`.
+As explained in detail below in the section ["Microsoft Internet Explorer 10 & 11 and Microsoft EDGE"](#microsoft-internet-explorer-10--11-and-microsoft-edge), for fixing missing behaviour in IE 10+ and EDGE we're manipulating the `value` for the `option` elements in those browser so you can't access them securely as a getter, but would need to take the original values out of `data-originalvalue`.
 
 ### Microsoft Internet Explorer
 
@@ -98,7 +98,7 @@ As explained in detail below in the section "Microsoft Internet Explorer 10 & 11
 
 Microsoft EDGE doesn't trigger the `input` event any more after selecting an item via mouseclick (on `input` elements other than type of `text`), even though that IE11 still did, nevermind ...
 
-That for the optimizations on substring matching for Microsoft EDGE specifically by #GH-39 (as explained further in the following "Microsoft Internet Explorer 10 & 11 and Microsoft EDGE" section) need to get restricted to `input[type="text"]` elements even only.
+That for the optimizations on substring matching for Microsoft EDGE specifically by #GH-39 (as explained further in the following ["Microsoft Internet Explorer 10 & 11 and Microsoft EDGE"](#microsoft-internet-explorer-10--11-and-microsoft-edge) section) need to get restricted to `input[type="text"]` elements even only.
 
 There might be possible solutions to even also achieve the expected behaviour on non-text-input elements - even though that I only could think about ugly solutions that I don't want to have within the polyfill and that might even also break existing CSS & JS architecture / selectors.
 
