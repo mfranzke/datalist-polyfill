@@ -10,43 +10,23 @@
  * Elsewhere the functionality gets emulated by a select element.
  */
 
-function getInternetExplorerVersion()
-{
-    // adapted out of https://gist.github.com/gaboratorium/25f08b76eb82b1e7b91b01a0448f8b1d :
-    var ua = window.navigator.userAgent;
-    var msie = ua.indexOf("MSIE ");
-    if (msie > 0) {
-      // IE 10 or older => return version number
-      return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
-    }
-
-    var trident = ua.indexOf("Trident/");
-    if (trident > 0) {
-      // IE 11 => return version number
-      var rv = ua.indexOf("rv:");
-      return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
-    }
-    return -1;
-}
-
-function isEdge()
-{
-    return Boolean(window.navigator.userAgent.indexOf("Edge/") !== -1);
-}
-
 (function() {
 	'use strict';
 
 	// Performance: Set local variables
 	var dcmnt = window.document,
+		ua = window.navigator.userAgent,
 		// Feature detection
 		datalistSupported =
 			'list' in dcmnt.createElement('input') &&
 			Boolean(dcmnt.createElement('datalist') && window.HTMLDataListElement),
 
+		// IE & EDGE browser detection via UserAgent
 		// TODO: obviously ugly. But sadly necessary until Microsoft enhances the UX within EDGE (compare to https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/)
-		isGteIE10 = getInternetExplorerVersion() >= 10,
-		isEDGE = isEdge();
+		// Tested against the following UA strings: http://useragentstring.com/pages/useragentstring.php?name=Internet+Explorer
+		// And adapted out of https://gist.github.com/gaboratorium/25f08b76eb82b1e7b91b01a0448f8b1d :
+		isGteIE10 = Boolean(ua.match(/MSIE\s1[0-1]./) || ua.match(/rv:11./)),
+		isEDGE = Boolean(ua.indexOf('Edge/') !== -1);
 
 	// Let's break here, if it's even already supported ... and not IE10+ or EDGE
 	if (datalistSupported && !isGteIE10 && !isEDGE) {
