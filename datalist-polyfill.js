@@ -188,9 +188,9 @@
 				option.label = originalValue;
 			}
 
-			/*
+			/* as mentioned in the discussion within #GH-63:
 			Check for whether the current option is a valid suggestion and replace its value by
-				- the current input string, as IE10+ and EDGE don't do substring, but only prefix matching
+				- the current input string, as IE10+ and EDGE don't do substring, but only prefix matching (#GH-36, #GH-39)
 				- followed by a unique string that should prevent any interferance
 				- and the original string, that is still necessary e.g. for sorting within the suggestions list
 			As the value is being inserted on users selection, we'll replace that one within the upfollowing inputInputListIE function
