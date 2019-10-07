@@ -510,7 +510,7 @@
 		datalistSelect.style.borderRadius = inputStyles.getPropertyValue(
 			'border-radius'
 		);
-		datalistSelect.style.minWidth = rects[0].width + 'px';
+		datalistSelect.style.width = rects[0].width + 'px';
 
 		if (touched) {
 			var messageElement = dcmnt.createElement('option');
