@@ -220,3 +220,5 @@ Personally I even also do like the "keep it simple" approach provided within the
 But on the other hand this leads to an additional visible field, but doesn't emulate the (hopefully, fingers crossed) upcoming x-browser implementation and leaves unnecessary syntax for all of the clients that wouldn't even need it (anymore).
 
 If you're trying out and using my work, feel free to contact me and give me any feedback. I'm curious about how it's gonna be used.
+
+And if you do like this polyfill, please consider even also having a look at the other polyfill we've developed: <https://github.com/mfranzke/loading-attribute-polyfill>
