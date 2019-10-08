@@ -20,10 +20,12 @@
 		datalistSupported =
 			'list' in dcmnt.createElement('input') &&
 			Boolean(dcmnt.createElement('datalist') && window.HTMLDataListElement),
+
 		// IE & EDGE browser detection via UserAgent
 		// TODO: obviously ugly. But sadly necessary until Microsoft enhances the UX within EDGE (compare to https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/)
-		// adapted out of https://gist.github.com/gaboratorium/25f08b76eb82b1e7b91b01a0448f8b1d :
-		isGteIE10 = Boolean(ua.match(/Trident\/[6-7]\./)),
+		// Tested against the following UA strings: http://useragentstring.com/pages/useragentstring.php?name=Internet+Explorer
+		// And adapted out of https://gist.github.com/gaboratorium/25f08b76eb82b1e7b91b01a0448f8b1d :
+		isGteIE10 = Boolean(ua.match(/MSIE\s1[0-1]./) || ua.match(/rv:11./)),
 		isEDGE = Boolean(ua.indexOf('Edge/') !== -1);
 
 	// Let's break here, if it's even already supported ... and not IE10+ or EDGE
