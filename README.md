@@ -15,10 +15,10 @@ I'm planning to release a new major version soon to both cheer as well as accomm
 
 This is a minimal and dependency-free vanilla JavaScript polyfill for the awesome datalist-functionality, that will bring joy and happiness into our lives :-)
 
-- Supports all standard's functionality as well as mimics other browsers behavior.
-- Mitigating the [different levels of support](https://caniuse.com/#feat=datalist) both by Safari and IE9+ as well as EDGE
-- Released under the MIT license
-- Made in Germany. And supported by so many great people from all over this planet - see "Credits" accordingly.
+- supports all standard's functionality as well as mimics other browsers behavior.
+- mitigating the [different levels of support](https://caniuse.com/#feat=datalist) both by Safari and IE9+ as well as Edge
+- released under the MIT license
+- made in Germany. And supported by so many great people from all over this planet - see "Credits" accordingly.
 
 ## Features
 
@@ -86,27 +86,27 @@ You can also disable `<option>` elements by adding the `disabled` attribute to t
 
 As the browser vendors (Google Chrome vs. the others) don't seem to be aligned on this topic, I've decided to enable the `label`-attribute to serve as the definitive label being displayed, even if a value is being defined differing from the label. On different `value` and `text` values, both of them would get displayed within the suggestions, as Google Chrome does it. But if you define a differing `label`-attribute, its value would get displayed exclusively (as all the other browsers do it) to give you some flexibility on how to define those suggestions. Check out the „Different ways of defining an option“ section on the demo page regarding this topic.
 
-### `value` property on the `option` elements for IE 10 & IE 11 and EDGE
+### `value` property on the `option` elements for Microsoft IE 10 & IE 11 and Edge
 
-As explained in detail below in the section ["Microsoft Internet Explorer 10 & 11 and Microsoft EDGE"](#microsoft-internet-explorer-10--11-and-microsoft-edge), for fixing missing behaviour in IE 10+ and EDGE we're manipulating the `value` for the `option` elements in those browser so you can't access them securely as a getter, but would need to take the original values out of `data-originalvalue`.
+As explained in detail below in the section ["Microsoft Internet Explorer 10 & 11 and Microsoft Edge"](#microsoft-internet-explorer-10--11-and-microsoft-edge), for fixing missing behaviour in IE 10+ and Edge we're manipulating the `value` for the `option` elements in those browser so you can't access them securely as a getter, but would need to take the original values out of `data-originalvalue`.
 
 ### Microsoft Internet Explorer
 
-#### Microsoft EDGE
+#### Microsoft Edge
 
-Microsoft EDGE doesn't trigger the `input` event any more after selecting an item via mouseclick (on `input` elements other than type of `text`), even though that IE11 still did, nevermind ...
+Microsoft Edge doesn't trigger the `input` event any more after selecting an item via mouseclick (on `input` elements other than type of `text`), even though that IE11 still did, nevermind ...
 
-That for the optimizations on substring matching for Microsoft EDGE specifically by #GH-39 (as explained further in the following ["Microsoft Internet Explorer 10 & 11 and Microsoft EDGE"](#microsoft-internet-explorer-10--11-and-microsoft-edge) section) need to get restricted to `input[type="text"]` elements even only.
+That for the optimizations on substring matching for Microsoft Edge specifically by #GH-39 (as explained further in the following ["Microsoft Internet Explorer 10 & 11 and Microsoft Edge"](#microsoft-internet-explorer-10--11-and-microsoft-edge) section) need to get restricted to `input[type="text"]` elements even only.
 
 There might be possible solutions to even also achieve the expected behaviour on non-text-input elements - even though that I only could think about ugly solutions that I don't want to have within the polyfill and that might even also break existing CSS & JS architecture / selectors.
 
-#### Microsoft Internet Explorer 10 & 11 and Microsoft EDGE
+#### Microsoft Internet Explorer 10 & 11 and Microsoft Edge
 
-As mentioned with #GH-63, related to aspects reported via #GH-36 and #GH-39 (and in [Microsoft EDGEs platform issues](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/)), it doesn't work in IE 10 & 11 as well as in EDGE to "Search both the value and label, using substring matching; currently it searches both the value and label, but uses prefix matching".
+As mentioned with #GH-63, related to aspects reported via #GH-36 and #GH-39 (and in [Microsoft Edges platform issues](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/)), it doesn't work in IE 10 & 11 as well as in Edge to "Search both the value and label, using substring matching; currently it searches both the value and label, but uses prefix matching".
 
-As requested with #GH-36 we wanted to even also enrich the experience within the "newest" IE versions (10 & 11) and EDGE browsers that provided basic support, but not the substring matching for users input. In this case the technical solution has been to manipulate the values in a way that the browser could actually handle that functionality as well, by including the users input at the beginning of the value after a substring matching to the original value, followed by a unique string for preventing any inconsistencies, followed by the original value itself, in this case for the sorting of the entries (this is mainly done in the `updateIEOptions` function around line 191 to 200 of the code).
+As requested with #GH-36 we wanted to even also enrich the experience within the "newest" IE versions (10 & 11) and Edge browsers that provided basic support, but not the substring matching for users input. In this case the technical solution has been to manipulate the values in a way that the browser could actually handle that functionality as well, by including the users input at the beginning of the value after a substring matching to the original value, followed by a unique string for preventing any inconsistencies, followed by the original value itself, in this case for the sorting of the entries (this is mainly done in the `updateIEOptions` function around line 191 to 200 of the code).
 
-This actually leads to a different behavior for the developers on the `value` property of each `option` elements within the `datalist` element for IE & EDGE, but on the other hand provides a better UX for IE & EDGE users by a consistent behavior for the user.
+This actually leads to a different behavior for the developers on the `value` property of each `option` elements within the `datalist` element for IE & Edge, but on the other hand provides a better UX for IE & Edge users by a consistent behavior for the user.
 
 #### Microsoft Internet Explorer 9
 
@@ -132,7 +132,7 @@ See the polyfill in action either by downloading / forking this repo and have a 
 
 ## things to keep in mind
 
-- The demo HTML code is meant to be simple - I do know that things like a surrounding `<form>` are missing, and I've left the latin letters and english expressions for the right to left text-direction example. But lets focus on the relevant tags that this polyfill is all about for the demo.
+- The HTML demo code is meant to be simple - I do know that things like a surrounding `<form>` are missing, and I've left the latin letters and english expressions for the right to left text-direction example. But lets focus on the relevant tags that this polyfill is all about for the demo.
 - iOS Safari handles the `label`-attribute different from Safari on Mac OS. This is being equalized during the handling of the `label`-attributes-value for differing `value` and `label` values.
 - After I thought it through and did some experiments, I've finally chosen the `<select>` element to polyfill the `<datalist>`, as it brought most of the functionality, whereas I accepted that it doesn't behave and doesn't look equally.
   - As I wanted to mainly focus on native elements in the most low level / simple way instead of visually emulating a list and than afterwards regain all of the functionality via a lot of JavaScript logic, I've ended up with this element, that knows how to play nicely with nested `<option>` elements.
@@ -147,9 +147,9 @@ Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kra
 ## Tested with
 
 - Mac
-  - Mac OSX 10.13, Safari 11
-  - Mac OSX 10.12, Safari 10
-  - Mac OSX 10.11, Safari 9
+  - macOS 10.13, Safari 11
+  - macOS 10.12, Safari 10
+  - macOS 10.11, Safari 9
 - iOS
   - iPhone 8 Simulator, Mobile Safari 11.0
   - iPhone 7 Plus Simulator, Mobile Safari 10.0
@@ -179,7 +179,7 @@ The following problems are mainly reported and [listed on caniuse](https://caniu
     <th>iOS WebView</th>
     <th>Safari >= 12.1</th>
     <th>IE11+</th>
-    <th>EDGE</th>
+    <th>Edge</th>
     <th>Firefox</th>
     <th>Chrome</th>
     <th>Chrome WebView</th>
