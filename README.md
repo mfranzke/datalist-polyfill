@@ -1,8 +1,8 @@
 # datalist-polyfill
 
 [![MIT license](https://img.shields.io/npm/l/datalist-polyfill.svg 'license badge')](https://opensource.org/licenses/mit-license.php)
-[![datalist-polyfill on Npmjs](https://img.shields.io/npm/v/datalist-polyfill.svg 'npm version')][https://npmjs.com/package/datalist-polyfill "datalist polyfill – on NPM"]
-[![Total downloads ~ Npmjs](https://img.shields.io/npm/dt/datalist-polyfill.svg 'Count of total downloads – NPM')][https://npmjs.com/package/datalist-polyfill "datalist polyfill – on NPM"]
+[![datalist-polyfill on Npmjs](https://img.shields.io/npm/v/datalist-polyfill.svg 'npm version')](https://npmjs.com/package/datalist-polyfill 'datalist polyfill – on NPM')
+[![Total downloads ~ Npmjs](https://img.shields.io/npm/dt/datalist-polyfill.svg 'Count of total downloads – NPM')](https://npmjs.com/package/datalist-polyfill 'datalist polyfill – on NPM')
 [![jsDelivr CDN downloads](https://data.jsdelivr.com/v1/package/npm/datalist-polyfill/badge 'Count of total downloads – jsDelivr')](https://www.jsdelivr.com/package/npm/datalist-polyfill 'datalist polyfill – on jsDelivr')
 [![dependencies Status](https://david-dm.org/mfranzke/datalist-polyfill/status.svg 'Count of dependencies')](https://david-dm.org/mfranzke/datalist-polyfill 'datalist polyfill – on david-dm')
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
