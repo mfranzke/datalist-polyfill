@@ -1,4 +1,4 @@
-
-tests/
-.editorconfig
-bower.json
+demos
+tests
+*.yml
+*.yaml
