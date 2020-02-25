@@ -1,4 +1,7 @@
-
-tests/
-.editorconfig
-bower.json
+demos
+tests
+*.yml
+*.yaml
+.gitignore
+.huskyrc
+commitlint.config.js
