@@ -11,6 +11,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Safari TP seems to support the `datalist` element at least basically. Yeah !!! Exciting news! I'm planning to release a new major version soon to both cheer as well as accommodate their implementation.
 
+## [1.24.0] - 2020-02-26
+
+### Added
+
+- Linking Apples changelog on the datalist feature to our readme
+- gitignore file
+- Docs: further mentioned IE10+ and EDGE specifics
+- .npmignore file
+- Commitlint & husky for CI
+
+### Changed
+
+- Updated webdriverio and xo dependencies
+- Reformatted the JS code
+- Removed pointless loop in the code PR #GH-61
+- Updated docs regarding browser support #GH-62
+
+### Fixed
+
+- Docs: filesize in the readme
+- fixed to have a "correct" minification #GH-58
+- Fix exception in IE9 emulator mode PR #GH-65
+- Badges displaying problems in some readers / compilers
+- Docs: optimizing on the typos and clearity
+
 ## [1.23.3] - 2019-01-28
 
 ### Changed
