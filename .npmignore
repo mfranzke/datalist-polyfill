@@ -2,3 +2,6 @@ demos
 tests
 *.yml
 *.yaml
+.gitignore
+.huskyrc
+commitlint.config.js
