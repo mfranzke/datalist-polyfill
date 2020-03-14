@@ -4,7 +4,7 @@
   "description": "A minimal and dependency-free vanilla JavaScript datalist polyfill. Supports all standard's functionality as well as mimics other browsers behavior.",
   "main": "datalist-polyfill.js",
   "scripts": {
-    "test": "xo"
+    "test": "xo datalist-polyfill.js"
   },
   "repository": {
     "type": "git",
