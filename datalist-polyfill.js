@@ -20,7 +20,6 @@
 		datalistSupported =
 			'list' in dcmnt.createElement('input') &&
 			Boolean(dcmnt.createElement('datalist') && window.HTMLDataListElement),
-
 		// IE & EDGE browser detection via UserAgent
 		// TODO: obviously ugly. But sadly necessary until Microsoft enhances the UX within EDGE (compare to https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/)
 		// Tested against the following UA strings: http://useragentstring.com/pages/useragentstring.php?name=Internet+Explorer
@@ -76,10 +75,12 @@
 			// Look through all mutations that just occured
 			mutations.forEach(function(mutation) {
 				// Check if any of the mutated nodes was a datalist
-				if (mutation.target instanceof HTMLElement &&
-				    mutation.target.tagName.toLowerCase() === "datalist" &&
-                    		    mutation.addedNodes.length > 1) {
-				    datalistNeedsAnUpdate = mutation.target;
+				if (
+					mutation.target instanceof HTMLElement &&
+					mutation.target.tagName.toLowerCase() === 'datalist' &&
+					mutation.addedNodes.length > 1
+				) {
+					datalistNeedsAnUpdate = mutation.target;
 				}
 			});
 
@@ -587,7 +588,7 @@
 			// ENTER and ESC
 			visible =
 				eventType === 'keydown' &&
-				(event.keyCode !== keyENTER && event.keyCode !== keyESC);
+				event.keyCode !== keyENTER && event.keyCode !== keyESC;
 
 		// On change, click or after pressing ENTER or TAB key, input the selects value into the input on a change within the list
 		if (
