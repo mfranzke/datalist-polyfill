@@ -4,4 +4,5 @@ tests
 *.yaml
 .gitignore
 .huskyrc
+config.codekit3
 commitlint.config.js

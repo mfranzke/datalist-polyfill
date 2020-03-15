@@ -1,7 +1,7 @@
 {
 	"name": "datalist-polyfill",
-	"description": "A minimal and dependency-free vanilla JavaScript datalist polyfill. Supports all standard's functionality as well as mimics other browsers behavior.",
-	"version": "1.23.3",
+	"description": "Minimal and dependency-free vanilla JS datalist polyfill. Supports all standard's functionality as well as mimics other browsers behavior.",
+	"version": "1.24.0",
 	"homepage": "https://github.com/mfranzke/datalist-polyfill",
 	"authors": [
 		{
@@ -12,6 +12,9 @@
 	],
 	"keywords": [
 		"datalist",
+		"polyfill",
+		"javascript",
+		"html",
 		"autosuggest",
 		"autosuggester",
 		"suggest",
@@ -26,8 +29,13 @@
 	],
 	"ignore": [
 		"bower.json",
-		"demos/index.html",
-		"demos/ie9/index.html",
-		"readme.md"
+		"demos",
+		"tests",
+		"*.yml",
+		"*.yaml",
+		".gitignore",
+		".huskyrc",
+		"config.codekit3",
+		"commitlint.config.js"
 	]
 }
