@@ -176,13 +176,13 @@
 
 		// Loop through the options
 		Array.prototype.slice.call(datalist.options, 0).forEach(function(option) {
-			// We're using .getAttribute instead of .dataset here for IE10
+			// We're using .getAttribute instead of .dataset here for IE10-
 			var dataOriginalvalue = option.getAttribute('data-originalvalue'),
 				originalValue = dataOriginalvalue || option.value;
 
 			// In case of that the original value hasn't been saved as data so far, do that now
 			if (!dataOriginalvalue) {
-				// We're using .setAttribute instead of .dataset here for IE10
+				// We're using .setAttribute instead of .dataset here for IE10-
 				option.setAttribute('data-originalvalue', originalValue);
 			}
 
@@ -224,7 +224,7 @@
 				'"]'
 		);
 
-		// We're using .getAttribute instead of .dataset here for IE10
+		// We're using .getAttribute instead of .dataset here for IE10-
 		if (option && option.getAttribute('data-originalvalue')) {
 			setInputValue(input, option.getAttribute('data-originalvalue'));
 		}
@@ -588,7 +588,8 @@
 			// ENTER and ESC
 			visible =
 				eventType === 'keydown' &&
-				event.keyCode !== keyENTER && event.keyCode !== keyESC;
+				event.keyCode !== keyENTER &&
+				event.keyCode !== keyESC;
 
 		// On change, click or after pressing ENTER or TAB key, input the selects value into the input on a change within the list
 		if (
