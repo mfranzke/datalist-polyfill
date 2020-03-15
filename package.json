@@ -39,6 +39,7 @@
     "@wdio/sync": "^5.20.1",
     "husky": "^4.2.3",
     "prettier": "^1.19.1",
+    "pretty-quick": "^2.0.1",
     "webdriverio": "^5.21.0",
     "xo": "^0.28.0"
   },
@@ -51,6 +52,11 @@
     "rules": {
       "one-var": 0,
       "no-use-before-define": 0
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
     }
   }
 }
