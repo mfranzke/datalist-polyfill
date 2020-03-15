@@ -17,8 +17,9 @@ This is a minimal and dependency-free vanilla JavaScript polyfill for the awesom
 
 - supports all standard's functionality as well as mimics other browsers behavior.
 - mitigating the [different levels of support](https://caniuse.com/#feat=datalist) both by Safari and IE9+ as well as Edge
-- released under the MIT license
-- made in Germany. And supported by so many great people from all over this planet - see "Credits" accordingly.
+- Released under the MIT license
+- Made in Germany. And supported by so many great people from all over this planet - see "Credits" accordingly.
+- Compatible down to Microsoft Internet Explorer 9
 
 ## Features
 
