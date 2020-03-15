@@ -1,14 +1,16 @@
 # datalist-polyfill
 
 [![MIT license](https://img.shields.io/npm/l/datalist-polyfill.svg 'license badge')](https://opensource.org/licenses/mit-license.php)
-[![datalist-polyfill on Npmjs](https://img.shields.io/npm/v/datalist-polyfill.svg 'npm version')](https://npmjs.com/package/datalist-polyfill 'datalist polyfill – on NPM')
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/datalist-polyfill)](https://bundlephobia.com/result?p=datalist-polyfill)
 [![Total downloads ~ Npmjs](https://img.shields.io/npm/dt/datalist-polyfill.svg 'Count of total downloads – NPM')](https://npmjs.com/package/datalist-polyfill 'datalist polyfill – on NPM')
 [![jsDelivr CDN downloads](https://data.jsdelivr.com/v1/package/npm/datalist-polyfill/badge 'Count of total downloads – jsDelivr')](https://www.jsdelivr.com/package/npm/datalist-polyfill 'datalist polyfill – on jsDelivr')
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d1f98a2d1fd44c41b7ad5c7670d8cdcd)](https://app.codacy.com/app/mfranzke/datalist-polyfill?utm_source=github.com&utm_medium=referral&utm_content=mfranzke/datalist-polyfill&utm_campaign=badger)
+[![datalist-polyfill on Npmjs](https://img.shields.io/npm/v/datalist-polyfill.svg 'npm version')](https://npmjs.com/package/datalist-polyfill 'datalist polyfill – on NPM')
+[![Greenkeeper badge](https://badges.greenkeeper.io/mfranzke/datalist-polyfill.svg)](https://greenkeeper.io/)
 [![dependencies Status](https://david-dm.org/mfranzke/datalist-polyfill/status.svg 'Count of dependencies')](https://david-dm.org/mfranzke/datalist-polyfill 'datalist polyfill – on david-dm')
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d1f98a2d1fd44c41b7ad5c7670d8cdcd)](https://app.codacy.com/app/mfranzke/datalist-polyfill?utm_source=github.com&utm_medium=referral&utm_content=mfranzke/datalist-polyfill&utm_campaign=badger)
-[![Greenkeeper badge](https://badges.greenkeeper.io/mfranzke/datalist-polyfill.svg)](https://greenkeeper.io/)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 **Update:** Safari now supports the `datalist` element at least basically, as [announced earlier this year with the latest release of Safari both for iOS and MacOS X](https://developer.apple.com/documentation/safari_release_notes/safari_12_1_release_notes#3130314). Yeah !!! Exciting news!
 I'm planning to release a new major version soon to both cheer as well as accommodate their implementation.
@@ -23,7 +25,7 @@ This is a minimal and dependency-free vanilla JavaScript polyfill for the awesom
 
 ## Features
 
-- Lightweight: 7.05 kB of minified JavaScript, around 2.6 kB gzipped
+- Lightweight (see the badge above)
 - Fully flexible to change the datalist entries / `<option>`s
 - Supporting:
   - the relevant input field types: `text`, `email`, `number`, `search`, `tel` and `url` ...
