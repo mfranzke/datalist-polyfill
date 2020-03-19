@@ -24,7 +24,7 @@
 		// TODO: obviously ugly. But sadly necessary until Microsoft enhances the UX within EDGE (compare to https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/)
 		// Tested against the following UA strings: http://useragentstring.com/pages/useragentstring.php?name=Internet+Explorer
 		// And adapted out of https://gist.github.com/gaboratorium/25f08b76eb82b1e7b91b01a0448f8b1d :
-		isGteIE10 = Boolean(ua.match(/MSIE\s1[0-1]./) || ua.match(/rv:11./)),
+		isGteIE10 = Boolean(ua.match(/MSIE\s1[01]./) || ua.match(/rv:11./)),
 		isEDGE = Boolean(ua.indexOf('Edge/') !== -1);
 
 	// Let's break here, if it's even already supported ... and not IE10+ or EDGE
@@ -191,7 +191,7 @@
 				option.label = originalValue;
 			}
 
-			/* as mentioned in the discussion within #GH-63:
+			/* As mentioned in the discussion within #GH-63:
 			Check for whether the current option is a valid suggestion and replace its value by
 				- the current input string, as IE10+ and EDGE don't do substring, but only prefix matching (#GH-36, #GH-39)
 				- followed by a unique string that should prevent any interferance
@@ -232,8 +232,8 @@
 
 	// Check for whether this is a valid suggestion
 	var isValidSuggestion = function(option, inputValue) {
-		var optVal = option.value.toLowerCase(),
-			inptVal = inputValue.toLowerCase(),
+		var optValue = option.value.toLowerCase(),
+			inptValue = inputValue.toLowerCase(),
 			label = option.getAttribute('label'),
 			text = option.text.toLowerCase();
 
@@ -243,9 +243,9 @@
 		*/
 		return Boolean(
 			option.disabled === false &&
-				((optVal !== '' && optVal.indexOf(inptVal) !== -1) ||
-					(label && label.toLowerCase().indexOf(inptVal) !== -1) ||
-					(text !== '' && text.indexOf(inptVal) !== -1))
+				((optValue !== '' && optValue.indexOf(inptValue) !== -1) ||
+					(label && label.toLowerCase().indexOf(inptValue) !== -1) ||
+					(text !== '' && text.indexOf(inptValue) !== -1))
 		);
 	};
 
@@ -339,7 +339,7 @@
 		// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
 		return input.getAttribute('type') === 'email' &&
 			input.getAttribute('multiple') !== null
-			? input.value.substring(input.value.lastIndexOf(',') + 1)
+			? input.value.slice(Math.max(0, input.value.lastIndexOf(',') + 1))
 			: input.value;
 	};
 
@@ -403,7 +403,7 @@
 				// Put this option into the fragment that is meant to get inserted into the select. Additionally according to the specs ...
 				// TODO: This might get slightly changed/optimized in a future release
 				if (isValidSuggestion(opt, inputValue)) {
-					var textOptionPart = text.substr(
+					var textOptionPart = text.slice(
 							0,
 							optionValue.length + textValueSeperator.length
 						),
@@ -416,10 +416,10 @@
 						text !== optionValue &&
 						textOptionPart !== optionPart
 					) {
-						opt.innerText = optionValue + textValueSeperator + text;
+						opt.textContent = optionValue + textValueSeperator + text;
 					} else if (!opt.text) {
 						// Manipulating the option inner text, that would get displayed
-						opt.innerText = label || optionValue;
+						opt.textContent = label || optionValue;
 					}
 
 					newSelectValues.appendChild(opt);
@@ -519,7 +519,7 @@
 			var messageElement = dcmnt.createElement('option');
 
 			// ... and it's first entry should contain the localized message to select an entry
-			messageElement.innerText = datalist.title;
+			messageElement.textContent = datalist.title;
 			// ... and disable this option, as it shouldn't get selected by the user
 			messageElement.disabled = true;
 			// ... and assign a dividable class to it
@@ -561,7 +561,7 @@
 			input.focus();
 
 			if (event.key === 'Backspace') {
-				input.value = input.value.substr(0, input.value.length - 1);
+				input.value = input.value.slice(0, -1);
 
 				// Dispatch the input event on the related input[list]
 				dispatchInputEvent(input);

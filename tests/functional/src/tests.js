@@ -9,7 +9,10 @@ var keysSelect = [
 	{ keyName: 'BACKSPACE', unicodeChars: '\uE003' },
 	{ keyName: 'TAB', unicodeChars: '\uE004' }
 ];
-var keysInput = [{ keyName: 'DOWN', unicodeChars: '\uE015' }, { keyName: 'UP', unicodeChars: '\uE013' }];
+var keysInput = [
+	{ keyName: 'DOWN', unicodeChars: '\uE015' },
+	{ keyName: 'UP', unicodeChars: '\uE013' }
+];
 
 browser.url('index.html');
 
@@ -114,10 +117,7 @@ describe('input field #' + field.fieldId, function() {
 						assert.ok($('#' + field.fieldId).getAttribute('value') === inputInitialValue);
 						break;
 					case 'BACKSPACE':
-						assert.ok(
-							$('#' + field.fieldId).getAttribute('value') ===
-								inputInitialValue.substr(0, inputInitialValue.length - 1)
-						);
+						assert.ok($('#' + field.fieldId).getAttribute('value') === inputInitialValue.slice(0, -1));
 						break;
 					default:
 						assert.ok(
