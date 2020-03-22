@@ -11,6 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Safari TP seems to support the `datalist` element at least basically. Yeah !!! Exciting news! I'm planning to release a new major version soon to both cheer as well as accommodate their implementation.
 
+## [1.24.3] - 2020-03-22
+
+### Changed
+
+- Updated webdriverio and prettier dependencies
+
+### Fixed
+
+- build: \*.min.js files should't get prettified
+
 ## [1.24.2] - 2020-03-19
 
 ### Added
