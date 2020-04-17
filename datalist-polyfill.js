@@ -10,7 +10,7 @@
  * Elsewhere the functionality gets emulated by a select element.
  */
 
-(function() {
+(function () {
 	'use strict';
 
 	// Performance: Set local variables
@@ -69,11 +69,11 @@
 
 	// Define a new observer
 	if (typeof MutationObserver !== 'undefined') {
-		obs = new MutationObserver(function(mutations) {
+		obs = new MutationObserver(function (mutations) {
 			var datalistNeedsAnUpdate = false;
 
 			// Look through all mutations that just occured
-			mutations.forEach(function(mutation) {
+			mutations.forEach(function (mutation) {
 				// Check if any of the mutated nodes was a datalist
 				if (
 					mutation.target instanceof HTMLElement &&
@@ -103,7 +103,7 @@
 	}
 
 	// Function regarding the inputs interactions on keyup event
-	var inputInputList = function(event) {
+	var inputInputList = function (event) {
 		var input = event.target,
 			datalist = input.list,
 			keyOpen = event.keyCode === keyUP || event.keyCode === keyDOWN;
@@ -171,11 +171,11 @@
 	};
 
 	// On keypress check all options for that as a substring, save the original value as a data-attribute and preset that inputs value (for sorting) for all option values (probably as well enhanced by a token)
-	var updateIEOptions = function(input, datalist) {
+	var updateIEOptions = function (input, datalist) {
 		var inputValue = getInputValue(input);
 
 		// Loop through the options
-		Array.prototype.slice.call(datalist.options, 0).forEach(function(option) {
+		Array.prototype.slice.call(datalist.options, 0).forEach(function (option) {
 			// We're using .getAttribute instead of .dataset here for IE10-
 			var dataOriginalvalue = option.getAttribute('data-originalvalue'),
 				originalValue = dataOriginalvalue || option.value;
@@ -205,7 +205,7 @@
 	};
 
 	// Check for the input and probably replace by correct options elements value
-	var inputInputListIE = function(event) {
+	var inputInputListIE = function (event) {
 		var input = event.target,
 			datalist = input.list;
 
@@ -231,7 +231,7 @@
 	};
 
 	// Check for whether this is a valid suggestion
-	var isValidSuggestion = function(option, inputValue) {
+	var isValidSuggestion = function (option, inputValue) {
 		var optValue = option.value.toLowerCase(),
 			inptValue = inputValue.toLowerCase(),
 			label = option.getAttribute('label'),
@@ -250,7 +250,7 @@
 	};
 
 	// Focusin and -out events
-	var changesInputList = function(event) {
+	var changesInputList = function (event) {
 		// Check for correct element on this event delegation
 		if (!event.target.matches('input[list]')) {
 			return;
@@ -298,7 +298,7 @@
 	};
 
 	// Prepare the input
-	var prepareInput = function(input, eventType) {
+	var prepareInput = function (input, eventType) {
 		// We'd like to prevent autocomplete on the input datalist field
 		input.setAttribute('autocomplete', 'off');
 
@@ -334,7 +334,7 @@
 	};
 
 	// Get the input value for dividing regular and mail types
-	var getInputValue = function(input) {
+	var getInputValue = function (input) {
 		// In case of type=email and multiple attribute, we would need to grab the last piece
 		// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
 		return input.getAttribute('type') === 'email' &&
@@ -344,7 +344,7 @@
 	};
 
 	// Set the input value for dividing regular and mail types
-	var setInputValue = function(input, datalistSelectValue) {
+	var setInputValue = function (input, datalistSelectValue) {
 		var lastSeperator;
 
 		// In case of type=email and multiple attribute, we need to set up the resulting inputs value differently
@@ -366,7 +366,7 @@
 	}
 
 	// Function for preparing and sorting the options/suggestions
-	var prepOptions = function(datalist, input) {
+	var prepOptions = function (datalist, input) {
 		if (typeof obs !== 'undefined') {
 			obs.disconnect();
 		}
@@ -383,7 +383,7 @@
 		Array.prototype.slice
 			.call(datalist.querySelectorAll('option:not(:disabled)'))
 			// ... sort all entries and
-			.sort(function(a, b) {
+			.sort(function (a, b) {
 				var aValue = a.value,
 					bValue = b.value;
 
@@ -395,7 +395,7 @@
 
 				return aValue.localeCompare(bValue);
 			})
-			.forEach(function(opt) {
+			.forEach(function (opt) {
 				var optionValue = opt.value,
 					label = opt.getAttribute('label'),
 					text = opt.text;
@@ -453,7 +453,7 @@
 	};
 
 	// Define function for setting up the polyfilling select
-	var setUpPolyfillingSelect = function(input, datalist) {
+	var setUpPolyfillingSelect = function (input, datalist) {
 		// Check for whether it's of one of the supported input types defined at the beginning
 		// Using .getAttribute here for IE9 purpose - elsewhere it wouldn't return the newer HTML5 values correctly
 		// and still check for an existing instance
@@ -546,7 +546,7 @@
 	};
 
 	// Functions regarding changes to the datalist polyfilling created selects keypress
-	var datalistSelectKeyPress = function(event) {
+	var datalistSelectKeyPress = function (event) {
 		var datalistSelect = event.target,
 			datalist = datalistSelect.parentNode,
 			input = dcmnt.querySelector('input[list="' + datalist.id + '"]');
@@ -574,7 +574,7 @@
 	};
 
 	// Change, Click, Blur, Keydown
-	var changeDataListSelect = function(event) {
+	var changeDataListSelect = function (event) {
 		var datalistSelect = event.currentTarget,
 			datalist = datalistSelect.parentNode,
 			input = dcmnt.querySelector('input[list="' + datalist.id + '"]');
@@ -627,7 +627,7 @@
 	};
 
 	// Create and dispatch the input event; divided for IE9 usage
-	var dispatchInputEvent = function(input) {
+	var dispatchInputEvent = function (input) {
 		var evt;
 
 		if (typeof Event === 'function') {
@@ -643,7 +643,7 @@
 	};
 
 	// Toggle the visibility of the datalist select
-	var toggleVisibility = function(visible, datalistSelect) {
+	var toggleVisibility = function (visible, datalistSelect) {
 		if (visible) {
 			datalistSelect.removeAttribute('hidden');
 		} else {
@@ -655,14 +655,14 @@
 
 	// Emulate the two properties regarding the datalist and input elements
 	// list property / https://developer.mozilla.org/en/docs/Web/API/HTMLInputElement
-	(function(constructor) {
+	(function (constructor) {
 		if (
 			constructor &&
 			constructor.prototype &&
 			constructor.prototype.list === undefined
 		) {
 			Object.defineProperty(constructor.prototype, 'list', {
-				get: function() {
+				get: function () {
 					/*
 					According to the specs ...
 					"The list IDL attribute must return the current suggestions source element, if any, or null otherwise."
@@ -682,14 +682,14 @@
 	})(window.HTMLInputElement);
 
 	// Options property / https://developer.mozilla.org/en/docs/Web/API/HTMLDataListElement
-	(function(constructor) {
+	(function (constructor) {
 		if (
 			constructor &&
 			constructor.prototype &&
 			constructor.prototype.options === undefined
 		) {
 			Object.defineProperty(constructor.prototype, 'options', {
-				get: function() {
+				get: function () {
 					return typeof this === 'object' && this instanceof constructor
 						? this.getElementsByTagName('option')
 						: null;
