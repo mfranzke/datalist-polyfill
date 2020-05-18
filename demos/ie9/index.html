@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>datalist polyfill demo</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<style>
+		/**
+		 * Add the correct display in IE 10-.
+		 * Adapted out of https://github.com/necolas/normalize.css/
+		 */
+
+		[hidden] {
+		  display: none;
+		}
+
+		/* these are demo related styles */
+		body {
+	  		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	  	}
+		input[type="email"] {
+			width: 400px;
+		}
+	</style>
+</head>
+<body>
+<form action="index.html" method="get">
+
+	<h2>Introduction - Internet Explorer 9</h2>
+
+	<p>Thanks to @Kravimir for mentioning the main IE9s problem (that is additionally outlined here: <a href="https://stackoverflow.com/questions/12394512/get-datalist-options-in-ie9-with-javascript">https://stackoverflow.com/questions/12394512/get-datalist-options-in-ie9-with-javascript</a>), that could be solved by wrapping the <code>option</code> elements:</p>
+
+	<code>
+		&lt;datalist id=&quot;animallist&quot; title=&quot;Choose a suggestion&quot;&gt;<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;!--[if IE 9]&gt;&lt;select disabled style=&quot;display:none&quot; class=&quot;ie9_fix&quot;&gt;&lt;![endif]--&gt;</strong><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;Cat&quot;&gt;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;Cow&quot;&gt;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;Dog&quot;&gt;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;Horse&quot;&gt;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;Lion&quot;&gt;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;Pig&quot; disabled&gt;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;Zebra&quot;&gt;<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;!--[if IE 9]&gt;&lt;/select&gt;&lt;![endif]--&gt;</strong><br>
+		&lt;/datalist&gt;
+	</code>
+
+	<h2>Basis</h2>
+
+	<fieldset>
+		<legend>What's your favorite animal</legend>
+
+		<label for="animal">Animal:</label>
+		<input type="text" name="animal" id="animal" value="" list="animallist" class="dtlst">
+		<datalist id="animallist" title="Choose a suggestion">
+			<!--[if IE 9]><select disabled style="display:none" class="ie9_fix"><![endif]-->
+				<option value="Cat">
+				<option value="Cow">
+				<option value="Dog">
+				<option value="Horse">
+				<option value="Lion">
+				<option value="Pig" disabled>
+				<option value="Zebra">
+			<!--[if IE 9]></select><![endif]-->
+		</datalist>
+	</fieldset>
+
+	<h2>Right to left</h2>
+
+	<fieldset dir="rtl">
+		<legend>What's your favorite animal</legend>
+
+		<label for="animal2">Animal:</label>
+		<input type="text" name="animal2" id="animal2" value="" list="animal2list">
+		<datalist id="animal2list" title="Choose a suggestion">
+			<!--[if IE 9]><select disabled style="display:none" class="ie9_fix"><![endif]-->
+				<option value="Cat">
+				<option value="Cow">
+				<option value="Dog">
+				<option value="Horse">
+				<option value="Lion">
+				<option value="Pig" disabled>
+				<option value="Zebra">
+			<!--[if IE 9]></select><![endif]-->
+		</datalist>
+	</fieldset>
+
+	<h2>Advanced</h2>
+
+	<h3>Different ways of defining an option</h3>
+
+	<fieldset>
+		<legend>Choose an option</legend>
+
+		<code>
+			&lt;option value=&quot;option 1&quot;&gt;<br>
+			&lt;option&gt;option 2&lt;/option&gt;<br>
+			&lt;!-- With an output similar to how Google Chrome displays the suggestion: displaying both the label as even also the value, that would get inserted into the form field --&gt;<br>
+			&lt;option value=&quot;option value 3&quot;&gt;option label 3&lt;/option&gt;<br>
+			 &lt;!-- With an output as the other browsers would display the suggestion: displaying the label, but inserting the value --&gt;<br>
+			&lt;option value=&quot;option value 4&quot; label=&quot;option label 4&quot;&gt;
+		</code>
+
+		<p>thank you @aFarkas for your great overview: <a href="https://github.com/h5bp/html5please/issues/18">https://github.com/h5bp/html5please/issues/18</a></p>
+
+		<label for="options">Options:</label>
+		<input type="text" name="options" id="options" value="" list="optionslist">
+		<datalist id="optionslist" title="Choose an option">
+			<!--[if IE 9]><select disabled style="display:none" class="ie9_fix"><![endif]-->
+				<option value="option 1">
+				<option>option 2</option>
+				<option value="option value 3">option label 3</option>
+				<option value="option value 4" label="option label 4">
+			<!--[if IE 9]></select><![endif]-->
+		</datalist>
+	</fieldset>
+
+	<h3>Input type email</h3>
+
+	<fieldset>
+		<legend>Whom you'd like to reach out to</legend>
+
+		<label for="email">Email address(es):</label>
+		<input type="email" name="email" id="email" value="" list="emaillist" multiple>
+		<datalist id="emaillist" title="Email addresses suggestions:">
+			<!--[if IE 9]><select disabled style="display:none" class="ie9_fix"><![endif]-->
+				<option value="info@davidhasselhoffonline.com">
+				<option value="john@doe">
+				<option value="kenny@southpark.cc.com" disabled>
+				<option value="moss.m@reynholm.co.uk">
+				<option value="star-lord@galaxy.gov">
+			<!--[if IE 9]></select><![endif]-->
+		</datalist>
+	</fieldset>
+
+	<h3>Input type number (with a bigger amount of options)</h3>
+
+	<fieldset>
+		<legend>Choose a number wisely</legend>
+
+		<label for="number">Number:</label>
+		<input type="number" name="number" id="number" value="" list="numberlist">
+		<datalist id="numberlist" title="Number suggestions:">
+			<!--[if IE 9]><select disabled style="display:none" class="ie9_fix"><![endif]-->
+				<option value="-1">
+				<option value="1">
+				<option value="2">
+				<option value="3">
+				<option value="5">
+				<option value="8">
+				<option value="13">
+				<option value="20">
+				<option value="40">
+				<option value="42">
+				<option value="100">
+				<option value="101">
+				<option value="102">
+				<option value="103">
+				<option value="104">
+				<option value="105">
+				<option value="106">
+				<option value="107">
+				<option value="108">
+				<option value="109">
+				<option value="110">
+				<option value="111">
+				<option value="112">
+				<option value="113">
+				<option value="114">
+				<option value="115">
+				<option value="116">
+				<option value="117">
+				<option value="118">
+				<option value="119">
+				<option value="120">
+				<option value="130">
+				<option value="140">
+				<option value="150">
+				<option value="200">
+				<option value="300">
+				<option value="400">
+				<option value="500">
+				<option value="1000">
+			<!--[if IE 9]></select><![endif]-->
+		</datalist>
+	</fieldset>
+
+	<h3>Input type search</h3>
+
+	<fieldset>
+		<legend>Please provide a search term</legend>
+
+		<label for="search">Search:</label>
+		<input type="search" name="search" id="search" value="" list="searchlist">
+		<datalist id="searchlist" title="Search suggestions:">
+			<!--[if IE 9]><select disabled style="display:none" class="ie9_fix"><![endif]-->
+				<option value="weather">
+				<option value="translate">
+				<option value="maps">
+				<option value="news">
+				<option value="calculator">
+				<option value="g">
+				<option value="youtube to mp3">
+				<option value="dictionary">
+				<option value="f">
+				<option value="translator">
+			<!--[if IE 9]></select><![endif]-->
+		</datalist>
+	</fieldset>
+
+	<h3>Input type tel</h3>
+
+	<fieldset>
+		<legend>Who you gonna call?</legend>
+
+		<label for="tel">Telephone no.:</label>
+		<input type="tel" name="tel" id="tel" value="" list="tellist">
+		<datalist id="tellist" title="Telephone no. suggestions:">
+			<!--[if IE 9]><select disabled style="display:none" class="ie9_fix"><![endif]-->
+				<option value="555-2323">
+				<option value="91-1892-221343">
+				<option value="206-709-3100">
+				<option value="44-020-7930-4832">
+				<option value="39-06-6982">
+				<option value="202-456-1111">
+			<!--[if IE 9]></select><![endif]-->
+		</datalist>
+	</fieldset>
+
+	<h3>Input type url</h3>
+
+	<fieldset>
+		<legend>What's your favorite website</legend>
+
+		<label for="url">URLs:</label>
+		<input type="url" name="url" id="url" value="" list="urllist">
+		<datalist id="urllist" title="URL suggestions:">
+			<!--[if IE 9]><select disabled style="display:none" class="ie9_fix"><![endif]-->
+				<option value="https://davidhasselhoffonline.com">
+				<option value="https://southpark.cc.com">
+				<option value="http://reynholm.co.uk">
+			<!--[if IE 9]></select><![endif]-->
+		</datalist>
+	</fieldset>
+
+	<button type="submit">Send</button>
+</form>
+
+
+	<script type="text/javascript" src="../../datalist-polyfill.js"></script>
+
+</body>
+</html>

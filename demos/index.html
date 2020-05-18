@@ -4,26 +4,21 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>datalist polyfill demo</title>
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<style>
-		/**
-		 * Add the correct display in IE 10-.
-		 * Adapted out of https://github.com/necolas/normalize.css/
-		 */
-
-		[hidden] {
-		  display: none;
-		}
-
 		/* these are demo related styles */
+		body {
+	  		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	  	}
 		input[type="email"] {
 			width: 400px;
 		}
 	</style>
 </head>
 <body>
+<form action="index.html" method="get">
 
 	<h2>Basis</h2>
 
@@ -31,7 +26,7 @@
 		<legend>What's your favorite animal</legend>
 
 		<label for="animal">Animal:</label>
-		<input type="text" name="animal" id="animal" value="" list="animallist">
+		<input type="text" name="animal" id="animal" value="" list="animallist" class="dtlst">
 		<datalist id="animallist" title="Choose a suggestion">
 			<option value="Cat">
 			<option value="Cow">
@@ -49,8 +44,8 @@
 		<legend>What's your favorite animal</legend>
 
 		<label for="animal2">Animal:</label>
-		<input type="text" name="animal2" id="animal2" value="" list="animallist2">
-		<datalist id="animallist2" title="Suggestions to choose from">
+		<input type="text" name="animal2" id="animal2" value="" list="animal2list">
+		<datalist id="animal2list" title="Choose a suggestion">
 			<option value="Cat">
 			<option value="Cow">
 			<option value="Dog">
@@ -59,43 +54,6 @@
 			<option value="Pig" disabled>
 			<option value="Zebra">
 		</datalist>
-	</fieldset>
-
-	<h2>Internet Explorer 9 support</h2>
-
-	<fieldset>
-		<legend>What's your favorite animal</legend>
-
-		<label for="animal_ie">Animal:</label>
-		<input type="text" name="animal_ie" id="animal_ie" value="" list="animallist_ie">
-		<datalist id="animallist_ie" title="Choose a suggestion">
-			<!--[if IE 9]><select disabled style="display:none" class="ie9_fix"><![endif]-->
-				<option value="Cat">
-				<option value="Cow">
-				<option value="Dog">
-				<option value="Horse">
-				<option value="Lion">
-				<option value="Pig" disabled>
-				<option value="Zebra">
-			<!--[if IE 9]></select><![endif]-->
-		</datalist>
-
-		<p>Thanks to @Kravimir for mentioning the main IE9s problem (that is additionally outlined here: <a href="https://stackoverflow.com/questions/12394512/get-datalist-options-in-ie9-with-javascript">https://stackoverflow.com/questions/12394512/get-datalist-options-in-ie9-with-javascript</a>), that could be solved by wrapping the <code>option</code> elements:</p>
-
-		<code>
-			&lt;datalist id=&quot;animallist&quot; title=&quot;Choose a suggestion&quot;&gt;<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;!--[if IE 9]&gt;&lt;select disabled style=&quot;display:none&quot; class=&quot;ie9_fix&quot;&gt;&lt;![endif]--&gt;</strong><br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;Cat&quot;&gt;<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;Cow&quot;&gt;<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;Dog&quot;&gt;<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;Horse&quot;&gt;<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;Lion&quot;&gt;<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;Pig&quot; disabled&gt;<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value=&quot;Zebra&quot;&gt;<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;!--[if IE 9]&gt;&lt;/select&gt;&lt;![endif]--&gt;</strong><br>
-			&lt;/datalist&gt;
-		</code>
-
 	</fieldset>
 
 	<h2>Advanced</h2>
@@ -116,9 +74,9 @@
 
 		<p>thank you @aFarkas for your great overview: <a href="https://github.com/h5bp/html5please/issues/18">https://github.com/h5bp/html5please/issues/18</a></p>
 
-		<label for="animal">Options:</label>
-		<input type="text" name="options" id="options" value="" list="optionlist">
-		<datalist id="optionlist" title="Choose an option">
+		<label for="options">Options:</label>
+		<input type="text" name="options" id="options" value="" list="optionslist">
+		<datalist id="optionslist" title="Choose an option">
 			<option value="option 1">
 			<option>option 2</option>
 			<option value="option value 3">option label 3</option>
@@ -148,8 +106,9 @@
 		<legend>Choose a number wisely</legend>
 
 		<label for="number">Number:</label>
-		<input type="number" name="number" id="number" value="" list="numberlist" multiple>
+		<input type="number" name="number" id="number" value="" list="numberlist">
 		<datalist id="numberlist" title="Number suggestions:">
+			<option value="-1">
 			<option value="1">
 			<option value="2">
 			<option value="3">
@@ -197,7 +156,7 @@
 		<legend>Please provide a search term</legend>
 
 		<label for="search">Search:</label>
-		<input type="search" name="search" id="search" value="" list="searchlist" multiple>
+		<input type="search" name="search" id="search" value="" list="searchlist">
 		<datalist id="searchlist" title="Search suggestions:">
 			<option value="weather">
 			<option value="translate">
@@ -218,7 +177,7 @@
 		<legend>Who you gonna call?</legend>
 
 		<label for="tel">Telephone no.:</label>
-		<input type="tel" name="tel" id="tel" value="" list="tellist" multiple>
+		<input type="tel" name="tel" id="tel" value="" list="tellist">
 		<datalist id="tellist" title="Telephone no. suggestions:">
 			<option value="555-2323">
 			<option value="91-1892-221343">
@@ -235,16 +194,19 @@
 		<legend>What's your favorite website</legend>
 
 		<label for="url">URLs:</label>
-		<input type="url" name="url" id="url" value="" list="urllist" multiple>
+		<input type="url" name="url" id="url" value="" list="urllist">
 		<datalist id="urllist" title="URL suggestions:">
 			<option value="https://davidhasselhoffonline.com">
 			<option value="https://southpark.cc.com">
-			<option value="https://reynholm.co.uk">
+			<option value="http://reynholm.co.uk">
 		</datalist>
 	</fieldset>
 
+	<button type="submit">Send</button>
+</form>
 
-	<script type="text/javascript" src="datalist-polyfill.js"></script>
+
+	<script type="text/javascript" src="../datalist-polyfill.js"></script>
 
 </body>
 </html>

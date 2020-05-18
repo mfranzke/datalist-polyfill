@@ -10,7 +10,8 @@
 [![datalist-polyfill on Npmjs](https://img.shields.io/npm/v/datalist-polyfill.svg?color=rgb%28237%2C%2028%2C%2036%29 "npm version")](https://npmjs.com/package/datalist-polyfill "datalist polyfill – on NPM")
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org) [![Join the chat at https://gitter.im/datalist-polyfill/community](https://badges.gitter.im/datalist-polyfill/community.svg)](https://gitter.im/datalist-polyfill/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![Join the chat at https://gitter.im/datalist-polyfill/community](https://badges.gitter.im/datalist-polyfill/community.svg)](https://gitter.im/datalist-polyfill/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 **Update:** Safari now supports the `datalist` element at least basically, as [announced earlier this year with the latest release of Safari both for iOS and MacOS X](https://developer.apple.com/documentation/safari_release_notes/safari_12_1_release_notes#3130314). Yeah !!! Exciting news!
 I'm planning to release a new major version soon to both cheer as well as accommodate their implementation.
