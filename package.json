@@ -38,8 +38,8 @@
     "@wdio/mocha-framework": "^6.1.8",
     "@wdio/sync": "^6.1.8",
     "husky": "^4.2.5",
-    "prettier": "^2.0.5",
-    "pretty-quick": "^2.0.1",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0",
     "webdriverio": "^6.1.12",
     "xo": "^0.30.0"
   },
