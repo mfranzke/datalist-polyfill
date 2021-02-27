@@ -29,52 +29,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated webdriverio and prettier dependencies
+- Updated `webdriverio` and `prettier` dependencies
 
 ### Fixed
 
-- build: \*.min.js files should't get prettified
+- build: `*.min.js` files should't get prettified
 
 ## [1.24.2] - 2020-03-19
 
 ### Added
 
-- improvement(prettier): run prettier when committing files
+- improvement(prettier): run `prettier` when committing files
 - a minzipped size badge
 
 ### Changed
 
-- Updated webdriverio dependency
+- Updated `webdriverio` dependency
 - improvement(prettier): prettified and optimized the file
 - Formatting and code & content optimizations
-- xo: added further rules for IE9 & IE10 compatibility
+- `xo`: added further rules for IE9 & IE10 compatibility
 
 ## [1.24.1] - 2020-03-15
 
 ### Changed
 
-- Updated webdriverio, commitlint, husky, prettier and xo dependencies
+- Updated `webdriverio`, `commitlint`, `husky`, `prettier` and `xo` dependencies
 - test(xo): specifying the JS filename explicitly
 - build the minified JS file again
 
 ### Fix
 
 - Corrected some metadata regarding the packages
-- build(packages): corrected metadata regarding files to ignore and updated bower.json
+- build(packages): corrected metadata regarding files to ignore and updated `bower.json`
 
 ## [1.24.0] - 2020-02-26
 
 ### Added
 
-- Linking Apples changelog on the datalist feature to our readme
-- gitignore file
+- Linking Apples changelog on the datalist feature from our readme
+- `.gitignore` file
 - Docs: further mentioned IE10+ and EDGE specifics
-- .npmignore file
-- Commitlint & husky for CI
+- `.npmignore` file
+- `Commitlint` & `husky` for CI
 
 ### Changed
 
-- Updated webdriverio and xo dependencies
+- Updated `webdriverio` and `xo` dependencies
 - Reformatted the JS code
 - Removed pointless loop in the code PR #GH-61
 - Updated docs regarding browser support #GH-62
@@ -91,20 +91,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- update xo to version 0.24.0
+- update `xo` to version 0.24.0
 
 ### Fixed
 
 - No substring matching for multiple emailadress suggestions in IE10+ and EDGE / #GH-54
 - EDGE: Incorrect handling of non-text input fields / #GH-55
-- IE10: Changes by #39 break script execution due to usage of .dataset / #GH-56
+- IE10: Changes by #39 break script execution due to usage of `.dataset` / #GH-56
 - Some simple corrections, like e.g. removing incorrectly set `multiple` attributes
 
 ## [1.23.2] - 2019-01-08
 
 ### Fixed
 
-- Prevent the form to be submitted on selecting a value via ENTER key within the select / #GH-51
+- Prevent the form to be submitted on selecting a value via `ENTER` key within the `select` / #GH-51
 
 ## [1.23.1] - 2019-01-07
 
@@ -116,14 +116,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Microsoft EDGE / datalist popups get "emptied" when receiving focus via tabbing / #GH-49
+- Microsoft EDGE / `datalist` popups get "emptied" when receiving focus via tabbing / #GH-49
 
 ### Changed
 
-- Updated webdriver.io testing framework to version 5
+- Updated `webdriver.io` testing framework to version 5
 - Updated some aspects within the `README` file as well as announced some upcoming bigger changes regarding and to cheer the recognized basic support of `datalist` elements within Apple Safari browser.
 - Refactoring to prevent a „Function has a complexity of 21.“
-- Some simple reformatting of the code according to prettier
+- Some simple reformatting of the code according to `prettier`
 
 ## [1.22.2] - 2018-11-03
 
@@ -155,19 +155,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Corrected the code style of the README file again, as this got incorrectly reformatted previously
+- Corrected the code style of the `README` file again, as this got incorrectly reformatted previously
 
 ## [1.21.1] - 2018-08-09
 
 ### Fixed
 
-- Suggestions aren‘t working onClick any more (#GH-35)
+- Suggestions aren‘t working `onClick` any more (#GH-35)
 
 ## [1.21.0] - 2018-08-08
 
 ### Added
 
-- Added testcases and added [crossbrowsertesting](https://crossbrowsertesting.com/) logo to README
+- Added testcases and added [crossbrowsertesting](https://crossbrowsertesting.com/) logo to `README`
 
 ### Changed
 
@@ -189,7 +189,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Suggestions aren‘t working onclick any more #GH-31
+- Suggestions aren‘t working `onclick` any more #GH-31
 
 ## [1.20.0] - 2018-07-18
 
@@ -201,7 +201,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- IE9: Use .getAttribute for retrieving .type and .multiple values/existance (#GH-29)
+- IE9: Use `.getAttribute` for retrieving `.type` and `.multiple` values/existance (#GH-29)
 - list IDL attribute must return the current suggestions source element (#GH-30)
 
 ## [1.19.0] - 2018-07-13
@@ -214,13 +214,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Performance: Set a local variable
 - Preparation for some automated testing
-- Changed and added some functionality to the description within the README file
+- Changed and added some functionality to the description within the `README` file
 
 ## [1.18.1] - 2018-07-10
 
 ### Added
 
-- Dispatch the input event as well on the related `input[list]` on using the Backspace key within the polyfilling select
+- Dispatch the input event as well on the related `input[list]` on using the `Backspace` key within the polyfilling `select`
 
 ## [1.18.0] - 2018-07-10
 
@@ -232,33 +232,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-- Removed an old separation in between eventTarget-Tagnames of select and option, that was integrated due to the mouse-event, which has been replaced again a while ago
+- Removed an old separation in between `eventTarget`-Tagnames of `select` and `option`, that was integrated due to the mouse-event, which has been replaced again a while ago
 
 ## [1.17.0] - 2018-07-07
 
 ### Added
 
-- Include behavior on pressing Tab or other printable keys (#GH-#27)
+- Include behavior on pressing `Tab` or other printable keys (#GH-#27)
 - Added Greenkeeper badge. I'm using this service to keep being updated on the dev dependencies.
 
 ## [1.16.2] - 2018-07-04
 
 ### Fixed
 
-- Fixed a bug that lead to an incorrectly selected suggestion (first instead of last) while using the up key on the input element
-- Fix for `input[list]` elements with class attribute - thanks to @mricherzhagen for mentioning this and even also providing a solution by pull request #GH-25
+- Fixed a bug that lead to an incorrectly selected suggestion (first instead of last) while using the up key on the `input` element
+- Fix for `input[list]` elements with `class` attribute - thanks to @mricherzhagen for mentioning this and even also providing a solution by pull request #GH-25
 
 ## [1.16.1] - 2018-06-28
 
 ### Fixed
 
-- Introduced a new bug by the fix for #GH-23. Reverted that one and corrected the ESLint rules settings. (#GH-24)
+- Introduced a new bug by the fix for #GH-23. Reverted that one and corrected the `ESLint` rules settings. (#GH-24)
 
 ## [1.16.0] - 2018-06-27
 
 ### Added
 
-- Linting as well as security: prettier, xo, codacy
+- Linting as well as security: `prettier`, `xo`, `codacy`
 - And their badges
 
 ### Changed
@@ -301,43 +301,43 @@ Made some code changes in relation to what the previously mentioned linters repo
 
 ### Fixed
 
-- A small bug sadly slipped through that doesn't hide the polyfilling select on non-matching option elements regarding the value.
+- A small bug sadly slipped through that doesn't hide the polyfilling `select` on non-matching option elements regarding the value.
 
 ## [1.14.1] - 2018-06-20
 
 ### Added
 
-- Hiding the polyfilling select on pressing ENTER, which is equal to the behavior on typing ESC.
-- Added more badges to the readme. I'm loving badges.
+- Hiding the polyfilling `select` on pressing `ENTER`, which is equal to the behavior on pressing `ESC`.
+- Added more badges to the `README`. I'm loving badges.
 
 ### Changed
 
-- Made some necessary changes to enhance the current demo page by the minimum amount of relevant HTML tags that should be included within every page (and even also added the IE related meta tag due to backwards compatibility).
+- Made some necessary changes to enhance the current demo page by the minimum amount of relevant `HTML` tags that should be included within every page (and even also added the IE related meta tag due to backwards compatibility).
 
 ### Removed
 
-- Removed some sample code out of the readme page due to the new NPM websites layout.
+- Removed some sample code out of the `README` page due to the new `NPM` websites layout.
 
 ### Fixed
 
-- The determination of option elements within the polyfilling select has incorrectly even also included `:disabled` elements.
+- The determination of `option` elements within the polyfilling `select` has incorrectly even also included `:disabled` elements.
 
 ## [1.14.0] - 2018-06-12
 
 ### Added
 
-- Added MutationObserver to even also capture changes to the option elements as a correction to enhance the current functionality (#GH-16).
+- Added `MutationObserver` to even also capture changes to the `option` elements as a correction to enhance the current functionality (#GH-16).
 
 ### Changed
 
-- Changed some URLs from HTTP to the new kid on the block: HTTPS. Nice ! ;-)
+- Changed some URLs from `HTTP` to the new kid on the block: `HTTPS`. Nice ! ;-)
 - Additionally did some necessary updates to the documentation.
 
 ## [1.13.2] - 2018-06-11
 
 ### Changed
 
-- Focusing the input[list] after selecting a suggestion, as in #GH-18
+- Focusing the `input[list]` after selecting a suggestion, as in #GH-18
 
 ## [1.13.1] - 2018-06-04
 
@@ -350,12 +350,12 @@ Made some code changes in relation to what the previously mentioned linters repo
 
 ### Added
 
-- Thanks to @eddr and @Kravimir for inspiring me via #GH-5 that there should be another possibility on defining value and label for the suggestions. As the browser vendors (GC vs. the others) don't seem to be aligned on this topic, I've decided to enable the label-attribute to serve as the definitive label being displayed, even if a value is being defined differing from the label. Check out the „Different ways of defining an option“ section on the demo page regarding this topic.
+- Thanks to @eddr and @Kravimir for inspiring me via #GH-5 that there should be another possibility on defining `value` and `label` for the suggestions. As the browser vendors (GC vs. the others) don't seem to be aligned on this topic, I've decided to enable the `label`-attribute to serve as the definitive label being displayed, even if a value is being defined differing from the label. Check out the „Different ways of defining an option“ section on the demo page regarding this topic.
 
 ### Changed
 
-- The docs. And changed (dependencies) and added (jsdelivr) badges. I like badges.
-- As well as extracted the CHANGELOG to an external file.
+- The docs. And changed (`dependencies`) and added (`jsdelivr`) badges. I like badges.
+- As well as extracted the `CHANGELOG` to an external file.
 
 ## [1.12.3] - 2018-05-04
 
@@ -367,19 +367,19 @@ Made some code changes in relation to what the previously mentioned linters repo
 
 ### Fixed
 
-- Thank you @IceCreamYou for fixing the case sensitive focusOut -> focusout event name
+- Thank you @IceCreamYou for fixing the case sensitive `focusOut` -> `focusout` event name
 
 ## [1.12.1] - 2018-04-07
 
 ### Changed
 
-- simple (code) style changes (plus added editorconfig to keep it that way) and typo
+- simple (code) style changes (plus added `.editorconfig` to keep it that way) and typo
 
 ## [1.12.0] - 2018-03-18
 
 ### Added
 
-- @ottoville thankfully contributed by mentioning and implementing the feature of emitting an event when item in datalist is selected
+- @ottoville thankfully contributed by mentioning and implementing the feature of emitting an event when item in `datalist` is selected
 
 ## [1.11.2] - 2018-03-17
 
@@ -444,7 +444,7 @@ Regarding the changes out of release version 1.6.0 to emulate the expected UI qu
 
 ### Changed
 
-- Restricted the polyfill to only work with relevant input types; we’d like to exclude the ones that even already need another polyfill to „work“ correctly or have a meaningful UI, like e.g. color or date-related ones, as those polyfills should handle the support of the datalist themselves depending on their own functionality.
+- Restricted the polyfill to only work with relevant input types; we’d like to exclude the ones that even already need another polyfill to „work“ correctly or have a meaningful UI, like e.g. `color` or `date`-related ones, as those polyfills should handle the support of the datalist themselves depending on their own functionality.
 
 ## [1.7.0] - 2017-06-29
 
@@ -462,7 +462,7 @@ Regarding the changes out of release version 1.6.0 to emulate the expected UI qu
 
 ### Changed
 
-- Introduced speaking variables for the different keycodes.
+- Introduced speaking variables for the different `keycodes`.
 - And implemented some feedback by flow.
 - As well as additional code simplifications.
 
@@ -472,8 +472,8 @@ Regarding the changes out of release version 1.6.0 to emulate the expected UI qu
 
 This is so far the biggest and greatest update !
 
-- Depending of the feedback by Michael the visual appearance has changed and will better emulate the expected layout as in other browsers (on non-touch interactions). That for the script is creating the polyfilling select as a multiple-selection type, which emulates the expected „form“ better.
-- And better positioning as well as styling the polyfilling select according to the input field, like e.g. even also set the polyfilling selects border-radius equally as the one by the polyfilled input.
+- Depending of the feedback by Michael the visual appearance has changed and will better emulate the expected layout as in other browsers (on non-touch interactions). That for the script is creating the polyfilling `select` as a `multiple`-selection type, which emulates the expected „form“ better.
+- And better positioning as well as styling the polyfilling `select` according to the `input` field, like e.g. even also set the polyfilling `select` elements `border-radius` equally as the one by the polyfilled `input`.
 
 ## [1.5.0] - 2017-06-10
 
@@ -485,7 +485,7 @@ This is so far the biggest and greatest update !
 
 ### Added
 
-- Added RTL text-direction support
+- Added `RTL` text-direction support
 
 ## [1.3.0] - 2017-05-30
 
@@ -507,7 +507,7 @@ This is so far the biggest and greatest update !
 
 ### Added
 
-- Added .options (for `datalist` elements) and .list (for `input` elements) properties according to the specs.
+- Added `.options` (for `datalist` elements) and `.list` (for `input` elements) properties according to the specs.
 
 ## [1.1.2] - 2017-05-22
 
@@ -532,7 +532,7 @@ This is so far the biggest and greatest update !
 
 ### Changed
 
-- better preselection on entries within the dropdown depending on the inputs value
+- better preselection on entries within the dropdown depending on the `input` elements value
 
 ## [1.0.2] - 2017-05-08
 
