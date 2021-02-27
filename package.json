@@ -4,7 +4,8 @@
   "description": "A minimal and dependency-free vanilla JavaScript datalist polyfill. Supports all standard's functionality as well as mimics other browsers behavior.",
   "main": "datalist-polyfill.js",
   "scripts": {
-    "test": "xo datalist-polyfill.js"
+    "test": "xo datalist-polyfill.js",
+    "validate:html": "html-validate demos/index.html"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,7 @@
     "@wdio/local-runner": "^6.1.12",
     "@wdio/mocha-framework": "^6.1.8",
     "@wdio/sync": "^6.1.8",
+    "html-validate": "^4.6.0",
     "husky": "^4.2.5",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
