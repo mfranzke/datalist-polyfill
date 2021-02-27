@@ -4,8 +4,9 @@
   "description": "A minimal and dependency-free vanilla JavaScript datalist polyfill. Supports all standard's functionality as well as mimics other browsers behavior.",
   "main": "datalist-polyfill.js",
   "scripts": {
-    "test": "xo datalist-polyfill.js",
+    "test": "run-p validate:* lint:*",
     "validate:html": "html-validate demos/index.html",
+    "lint:xo": "xo datalist-polyfill.js",
     "release:minor": "npm version minor -m 'build(release): new minor version' && git push && git push --tags && npm publish",
     "release:patch": "npm version patch -m 'build(release): new patch version' && git push && git push --tags && npm publish",
     "postinstall": "husky install",
@@ -44,6 +45,7 @@
     "@wdio/sync": "^6.1.8",
     "html-validate": "^4.6.0",
     "husky": "^5.1.1",
+    "npm-run-all": "^4.1.5",
     "pinst": "^2.1.6",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
