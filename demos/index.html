@@ -1,212 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>datalist polyfill demo</title>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>datalist polyfill demo</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
 
-	<style>
-		/* these are demo related styles */
-		body {
-	  		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-	  	}
-		input[type="email"] {
-			width: 400px;
-		}
-	</style>
-</head>
-<body>
-<form action="index.html" method="get">
+		<style>
+			/* these are demo related styles */
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+					Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+					"Segoe UI Symbol";
+			}
+			input[type="email"] {
+				width: 400px;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="index.html" method="get">
+			<h2>Basis</h2>
 
-	<h2>Basis</h2>
+			<fieldset>
+				<legend>What's your favorite animal</legend>
 
-	<fieldset>
-		<legend>What's your favorite animal</legend>
+				<label for="animal">Animal:</label>
+				<input
+					type="text"
+					name="animal"
+					id="animal"
+					value=""
+					list="animallist"
+					class="dtlst"
+				/>
+				<datalist id="animallist" title="Choose a suggestion">
+					<option value="Cat"></option>
+					<option value="Cow"></option>
+					<option value="Dog"></option>
+					<option value="Horse"></option>
+					<option value="Lion"></option>
+					<option value="Pig" disabled></option>
+					<option value="Zebra"></option>
+				</datalist>
+			</fieldset>
 
-		<label for="animal">Animal:</label>
-		<input type="text" name="animal" id="animal" value="" list="animallist" class="dtlst">
-		<datalist id="animallist" title="Choose a suggestion">
-			<option value="Cat">
-			<option value="Cow">
-			<option value="Dog">
-			<option value="Horse">
-			<option value="Lion">
-			<option value="Pig" disabled>
-			<option value="Zebra">
-		</datalist>
-	</fieldset>
+			<h2>Right to left</h2>
 
-	<h2>Right to left</h2>
+			<fieldset dir="rtl">
+				<legend>What's your favorite animal</legend>
 
-	<fieldset dir="rtl">
-		<legend>What's your favorite animal</legend>
+				<label for="animal2">Animal:</label>
+				<input
+					type="text"
+					name="animal2"
+					id="animal2"
+					value=""
+					list="animal2list"
+				/>
+				<datalist id="animal2list" title="Choose a suggestion">
+					<option value="Cat"></option>
+					<option value="Cow"></option>
+					<option value="Dog"></option>
+					<option value="Horse"></option>
+					<option value="Lion"></option>
+					<option value="Pig" disabled></option>
+					<option value="Zebra"></option>
+				</datalist>
+			</fieldset>
 
-		<label for="animal2">Animal:</label>
-		<input type="text" name="animal2" id="animal2" value="" list="animal2list">
-		<datalist id="animal2list" title="Choose a suggestion">
-			<option value="Cat">
-			<option value="Cow">
-			<option value="Dog">
-			<option value="Horse">
-			<option value="Lion">
-			<option value="Pig" disabled>
-			<option value="Zebra">
-		</datalist>
-	</fieldset>
+			<h2>Advanced</h2>
 
-	<h2>Advanced</h2>
+			<h3>Different ways of defining an option</h3>
 
-	<h3>Different ways of defining an option</h3>
+			<fieldset>
+				<legend>Choose an option</legend>
 
-	<fieldset>
-		<legend>Choose an option</legend>
+				<code>
+					&lt;option value=&quot;option 1&quot;&gt;<br />
+					&lt;option&gt;option 2&lt;/option&gt;<br />
+					&lt;!-- With an output similar to how Google Chrome displays the
+					suggestion: displaying both the label as even also the value, that
+					would get inserted into the form field --&gt;<br />
+					&lt;option value=&quot;option value 3&quot;&gt;option label
+					3&lt;/option&gt;<br />
+					&lt;!-- With an output as the other browsers would display the
+					suggestion: displaying the label, but inserting the value --&gt;<br />
+					&lt;option value=&quot;option value 4&quot; label=&quot;option label
+					4&quot;&gt;
+				</code>
 
-		<code>
-			&lt;option value=&quot;option 1&quot;&gt;<br>
-			&lt;option&gt;option 2&lt;/option&gt;<br>
-			&lt;!-- With an output similar to how Google Chrome displays the suggestion: displaying both the label as even also the value, that would get inserted into the form field --&gt;<br>
-			&lt;option value=&quot;option value 3&quot;&gt;option label 3&lt;/option&gt;<br>
-			 &lt;!-- With an output as the other browsers would display the suggestion: displaying the label, but inserting the value --&gt;<br>
-			&lt;option value=&quot;option value 4&quot; label=&quot;option label 4&quot;&gt;
-		</code>
+				<p>
+					thank you @aFarkas for your great overview:
+					<a href="https://github.com/h5bp/html5please/issues/18"
+						>https://github.com/h5bp/html5please/issues/18</a
+					>
+				</p>
 
-		<p>thank you @aFarkas for your great overview: <a href="https://github.com/h5bp/html5please/issues/18">https://github.com/h5bp/html5please/issues/18</a></p>
+				<label for="options">Options:</label>
+				<input
+					type="text"
+					name="options"
+					id="options"
+					value=""
+					list="optionslist"
+				/>
+				<datalist id="optionslist" title="Choose an option">
+					<option value="option 1"></option>
+					<option>option 2</option>
+					<option value="option value 3">option label 3</option>
+					<option value="option value 4" label="option label 4"></option>
+				</datalist>
+			</fieldset>
 
-		<label for="options">Options:</label>
-		<input type="text" name="options" id="options" value="" list="optionslist">
-		<datalist id="optionslist" title="Choose an option">
-			<option value="option 1">
-			<option>option 2</option>
-			<option value="option value 3">option label 3</option>
-			<option value="option value 4" label="option label 4">
-		</datalist>
-	</fieldset>
+			<h3>Input type email</h3>
 
-	<h3>Input type email</h3>
+			<fieldset>
+				<legend>Whom you'd like to reach out to</legend>
 
-	<fieldset>
-		<legend>Whom you'd like to reach out to</legend>
+				<label for="email">Email address(es):</label>
+				<input
+					type="email"
+					name="email"
+					id="email"
+					value=""
+					list="emaillist"
+					multiple
+				/>
+				<datalist id="emaillist" title="Email addresses suggestions:">
+					<option value="info@davidhasselhoffonline.com"></option>
+					<option value="john@doe"></option>
+					<option value="kenny@southpark.cc.com" disabled></option>
+					<option value="moss.m@reynholm.co.uk"></option>
+					<option value="star-lord@galaxy.gov"></option>
+				</datalist>
+			</fieldset>
 
-		<label for="email">Email address(es):</label>
-		<input type="email" name="email" id="email" value="" list="emaillist" multiple>
-		<datalist id="emaillist" title="Email addresses suggestions:">
-			<option value="info@davidhasselhoffonline.com">
-			<option value="john@doe">
-			<option value="kenny@southpark.cc.com" disabled>
-			<option value="moss.m@reynholm.co.uk">
-			<option value="star-lord@galaxy.gov">
-		</datalist>
-	</fieldset>
+			<h3>Input type number (with a bigger amount of options)</h3>
 
-	<h3>Input type number (with a bigger amount of options)</h3>
+			<fieldset>
+				<legend>Choose a number wisely</legend>
 
-	<fieldset>
-		<legend>Choose a number wisely</legend>
+				<label for="number">Number:</label>
+				<input
+					type="number"
+					name="number"
+					id="number"
+					value=""
+					list="numberlist"
+				/>
+				<datalist id="numberlist" title="Number suggestions:">
+					<option value="-1"></option>
+					<option value="1"></option>
+					<option value="2"></option>
+					<option value="3"></option>
+					<option value="5"></option>
+					<option value="8"></option>
+					<option value="13"></option>
+					<option value="20"></option>
+					<option value="40"></option>
+					<option value="42"></option>
+					<option value="100"></option>
+					<option value="101"></option>
+					<option value="102"></option>
+					<option value="103"></option>
+					<option value="104"></option>
+					<option value="105"></option>
+					<option value="106"></option>
+					<option value="107"></option>
+					<option value="108"></option>
+					<option value="109"></option>
+					<option value="110"></option>
+					<option value="111"></option>
+					<option value="112"></option>
+					<option value="113"></option>
+					<option value="114"></option>
+					<option value="115"></option>
+					<option value="116"></option>
+					<option value="117"></option>
+					<option value="118"></option>
+					<option value="119"></option>
+					<option value="120"></option>
+					<option value="130"></option>
+					<option value="140"></option>
+					<option value="150"></option>
+					<option value="200"></option>
+					<option value="300"></option>
+					<option value="400"></option>
+					<option value="500"></option>
+					<option value="1000"></option>
+				</datalist>
+			</fieldset>
 
-		<label for="number">Number:</label>
-		<input type="number" name="number" id="number" value="" list="numberlist">
-		<datalist id="numberlist" title="Number suggestions:">
-			<option value="-1">
-			<option value="1">
-			<option value="2">
-			<option value="3">
-			<option value="5">
-			<option value="8">
-			<option value="13">
-			<option value="20">
-			<option value="40">
-			<option value="42">
-			<option value="100">
-			<option value="101">
-			<option value="102">
-			<option value="103">
-			<option value="104">
-			<option value="105">
-			<option value="106">
-			<option value="107">
-			<option value="108">
-			<option value="109">
-			<option value="110">
-			<option value="111">
-			<option value="112">
-			<option value="113">
-			<option value="114">
-			<option value="115">
-			<option value="116">
-			<option value="117">
-			<option value="118">
-			<option value="119">
-			<option value="120">
-			<option value="130">
-			<option value="140">
-			<option value="150">
-			<option value="200">
-			<option value="300">
-			<option value="400">
-			<option value="500">
-			<option value="1000">
-		</datalist>
-	</fieldset>
+			<h3>Input type search</h3>
 
-	<h3>Input type search</h3>
+			<fieldset>
+				<legend>Please provide a search term</legend>
 
-	<fieldset>
-		<legend>Please provide a search term</legend>
+				<label for="search">Search:</label>
+				<input
+					type="search"
+					name="search"
+					id="search"
+					value=""
+					list="searchlist"
+				/>
+				<datalist id="searchlist" title="Search suggestions:">
+					<option value="weather"></option>
+					<option value="translate"></option>
+					<option value="maps"></option>
+					<option value="news"></option>
+					<option value="calculator"></option>
+					<option value="g"></option>
+					<option value="youtube to mp3"></option>
+					<option value="dictionary"></option>
+					<option value="f"></option>
+					<option value="translator"></option>
+				</datalist>
+			</fieldset>
 
-		<label for="search">Search:</label>
-		<input type="search" name="search" id="search" value="" list="searchlist">
-		<datalist id="searchlist" title="Search suggestions:">
-			<option value="weather">
-			<option value="translate">
-			<option value="maps">
-			<option value="news">
-			<option value="calculator">
-			<option value="g">
-			<option value="youtube to mp3">
-			<option value="dictionary">
-			<option value="f">
-			<option value="translator">
-		</datalist>
-	</fieldset>
+			<h3>Input type tel</h3>
 
-	<h3>Input type tel</h3>
+			<fieldset>
+				<legend>Who you gonna call?</legend>
 
-	<fieldset>
-		<legend>Who you gonna call?</legend>
+				<label for="tel">Telephone no.:</label>
+				<input type="tel" name="tel" id="tel" value="" list="tellist" />
+				<datalist id="tellist" title="Telephone no. suggestions:">
+					<option value="555-2323"></option>
+					<option value="91-1892-221343"></option>
+					<option value="206-709-3100"></option>
+					<option value="44-020-7930-4832"></option>
+					<option value="39-06-6982"></option>
+					<option value="202-456-1111"></option>
+				</datalist>
+			</fieldset>
 
-		<label for="tel">Telephone no.:</label>
-		<input type="tel" name="tel" id="tel" value="" list="tellist">
-		<datalist id="tellist" title="Telephone no. suggestions:">
-			<option value="555-2323">
-			<option value="91-1892-221343">
-			<option value="206-709-3100">
-			<option value="44-020-7930-4832">
-			<option value="39-06-6982">
-			<option value="202-456-1111">
-		</datalist>
-	</fieldset>
+			<h3>Input type url</h3>
 
-	<h3>Input type url</h3>
+			<fieldset>
+				<legend>What's your favorite website</legend>
 
-	<fieldset>
-		<legend>What's your favorite website</legend>
+				<label for="url">URLs:</label>
+				<input type="url" name="url" id="url" value="" list="urllist" />
+				<datalist id="urllist" title="URL suggestions:">
+					<option value="https://davidhasselhoffonline.com"></option>
+					<option value="https://southpark.cc.com"></option>
+					<option value="http://reynholm.co.uk"></option>
+				</datalist>
+			</fieldset>
 
-		<label for="url">URLs:</label>
-		<input type="url" name="url" id="url" value="" list="urllist">
-		<datalist id="urllist" title="URL suggestions:">
-			<option value="https://davidhasselhoffonline.com">
-			<option value="https://southpark.cc.com">
-			<option value="http://reynholm.co.uk">
-		</datalist>
-	</fieldset>
+			<button type="submit">Send</button>
+		</form>
 
-	<button type="submit">Send</button>
-</form>
-
-
-	<script type="text/javascript" src="../datalist-polyfill.js"></script>
-
-</body>
+		<!-- Even though that it's recommended to omit the type on the following script tag, we're keeping it for older browser compatibility -->
+		<script type="text/javascript" src="../datalist-polyfill.js"></script>
+	</body>
 </html>
