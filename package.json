@@ -48,18 +48,5 @@
     "pretty-quick": "^3.1.0",
     "webdriverio": "^6.1.12",
     "xo": "^0.38.2"
-  },
-  "xo": {
-    "envs": [
-      "browser"
-    ],
-    "prettier": true,
-    "esnext": false,
-    "rules": {
-      "one-var": 0,
-      "no-use-before-define": 0,
-      "unicorn/prefer-includes": 0,
-      "unicorn/prefer-dataset": 0
-    }
   }
 }
