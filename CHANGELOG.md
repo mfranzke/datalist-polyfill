@@ -76,14 +76,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Updated `webdriverio` and `xo` dependencies
 - Reformatted the JS code
-- Removed pointless loop in the code PR #GH-61
-- Updated docs regarding browser support #GH-62
+- Removed pointless loop in the code PR [#61](https://github.com/mfranzke/loading-attribute-polyfill/issues/61)
+- Updated docs regarding browser support [#62](https://github.com/mfranzke/loading-attribute-polyfill/issues/62)
 
 ### Fixed
 
 - Docs: filesize in the readme
-- fixed to have a "correct" minification #GH-58
-- Fix exception in IE9 emulator mode PR #GH-65
+- fixed to have a "correct" minification [#58](https://github.com/mfranzke/loading-attribute-polyfill/issues/58)
+- Fix exception in IE9 emulator mode PR [#65](https://github.com/mfranzke/loading-attribute-polyfill/issues/65)
 - Badges displaying problems in some readers / compilers
 - Docs: optimizing on the typos and clearity
 
@@ -95,28 +95,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- No substring matching for multiple emailadress suggestions in IE10+ and EDGE / #GH-54
-- EDGE: Incorrect handling of non-text input fields / #GH-55
-- IE10: Changes by #39 break script execution due to usage of `.dataset` / #GH-56
+- No substring matching for multiple emailadress suggestions in IE10+ and EDGE / [#54](https://github.com/mfranzke/loading-attribute-polyfill/issues/54)
+- EDGE: Incorrect handling of non-text input fields / [#55](https://github.com/mfranzke/loading-attribute-polyfill/issues/55)
+- IE10: Changes by [#39](https://github.com/mfranzke/loading-attribute-polyfill/issues/39) break script execution due to usage of `.dataset` / [#56](https://github.com/mfranzke/loading-attribute-polyfill/issues/56)
 - Some simple corrections, like e.g. removing incorrectly set `multiple` attributes
 
 ## [1.23.2] - 2019-01-08
 
 ### Fixed
 
-- Prevent the form to be submitted on selecting a value via `ENTER` key within the `select` / #GH-51
+- Prevent the form to be submitted on selecting a value via `ENTER` key within the `select` / [#51](https://github.com/mfranzke/loading-attribute-polyfill/issues/51)
 
 ## [1.23.1] - 2019-01-07
 
 ### Fixed
 
-- JavaScript bug in IE9 and corrected the handling of the browsers towards IE10+ / #GH-50
+- JavaScript bug in IE9 and corrected the handling of the browsers towards IE10+ / [#50](https://github.com/mfranzke/loading-attribute-polyfill/issues/50)
 
 ## [1.23.0] - 2019-01-05
 
 ### Added
 
-- Microsoft EDGE / `datalist` popups get "emptied" when receiving focus via tabbing / #GH-49
+- Microsoft EDGE / `datalist` popups get "emptied" when receiving focus via tabbing / [#49](https://github.com/mfranzke/loading-attribute-polyfill/issues/49)
 
 ### Changed
 
@@ -129,23 +129,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Added comment regarding the structure of the HTML code / #GH-44 & #GH-45
+- Added comment regarding the structure of the HTML code / [#44](https://github.com/mfranzke/loading-attribute-polyfill/issues/44) & [#45](https://github.com/mfranzke/loading-attribute-polyfill/issues/45)
 
 ### Fixed
 
-- Preventing a JS error on no `type`-attribute being provided for the `input`-element / #GH-45
+- Preventing a JS error on no `type`-attribute being provided for the `input`-element / [#45](https://github.com/mfranzke/loading-attribute-polyfill/issues/45)
 
 ## [1.22.1] - 2018-08-27
 
 ### Fixed
 
-- Escaping the user inputs value as doublequotes wouldn't work on the newly added IE11+ and EDGE functionality / #GH-40
+- Escaping the user inputs value as doublequotes wouldn't work on the newly added IE11+ and EDGE functionality / [#40](https://github.com/mfranzke/loading-attribute-polyfill/issues/40)
 
 ## [1.22.0] - 2018-08-27
 
 ### Added
 
-- Substring matching for the suggestions on both the `value` and the `text` values / #GH-36
+- Substring matching for the suggestions on both the `value` and the `text` values / [#36](https://github.com/mfranzke/loading-attribute-polyfill/issues/36)
 
 ## [1.21.2] - 2018-08-11
 
@@ -161,7 +161,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Suggestions aren‘t working `onClick` any more (#GH-35)
+- Suggestions aren‘t working `onClick` any more ([#35](https://github.com/mfranzke/loading-attribute-polyfill/issues/35))
 
 ## [1.21.0] - 2018-08-08
 
@@ -179,7 +179,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Arrow keys (top&down) disturb the general browser behaviour on number fields (#GH-32)
+- Arrow keys (top&down) disturb the general browser behaviour on number fields ([#32](https://github.com/mfranzke/loading-attribute-polyfill/issues/32))
 
 ## [1.20.1] - 2018-07-20
 
@@ -189,20 +189,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Suggestions aren‘t working `onclick` any more #GH-31
+- Suggestions aren‘t working `onclick` any more [#31](https://github.com/mfranzke/loading-attribute-polyfill/issues/31)
 
 ## [1.20.0] - 2018-07-18
 
 ### Changed
 
-- on `input[type=url]` omitting the scheme part and performing intelligent matching on the domain name (#GH-28)
+- on `input[type=url]` omitting the scheme part and performing intelligent matching on the domain name ([#28](https://github.com/mfranzke/loading-attribute-polyfill/issues/28))
 - README: Updated the tested browsers list as well as updated the Features section due to the updates by this release
 - Preparation for automated testing / splitting the demo page by regular and IE9
 
 ### Fixed
 
-- IE9: Use `.getAttribute` for retrieving `.type` and `.multiple` values/existance (#GH-29)
-- list IDL attribute must return the current suggestions source element (#GH-30)
+- IE9: Use `.getAttribute` for retrieving `.type` and `.multiple` values/existance ([#29](https://github.com/mfranzke/loading-attribute-polyfill/issues/29))
+- list IDL attribute must return the current suggestions source element ([#30](https://github.com/mfranzke/loading-attribute-polyfill/issues/30))
 
 ## [1.19.0] - 2018-07-13
 
@@ -238,7 +238,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Include behavior on pressing `Tab` or other printable keys (#GH-#27)
+- Include behavior on pressing `Tab` or other printable keys ([#27](https://github.com/mfranzke/loading-attribute-polyfill/issues/27))
 - Added Greenkeeper badge. I'm using this service to keep being updated on the dev dependencies.
 
 ## [1.16.2] - 2018-07-04
@@ -246,13 +246,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixed a bug that lead to an incorrectly selected suggestion (first instead of last) while using the up key on the `input` element
-- Fix for `input[list]` elements with `class` attribute - thanks to @mricherzhagen for mentioning this and even also providing a solution by pull request #GH-25
+- Fix for `input[list]` elements with `class` attribute - thanks to @mricherzhagen for mentioning this and even also providing a solution by pull request [#25](https://github.com/mfranzke/loading-attribute-polyfill/issues/25)
 
 ## [1.16.1] - 2018-06-28
 
 ### Fixed
 
-- Introduced a new bug by the fix for #GH-23. Reverted that one and corrected the `ESLint` rules settings. (#GH-24)
+- Introduced a new bug by the fix for [#23](https://github.com/mfranzke/loading-attribute-polyfill/issues/23). Reverted that one and corrected the `ESLint` rules settings. ([#24](https://github.com/mfranzke/loading-attribute-polyfill/issues/24))
 
 ## [1.16.0] - 2018-06-27
 
@@ -263,17 +263,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-Made a lot of code changes in relation to what the previously mentioned linters reported. (e.g. #GH-23)
+Made a lot of code changes in relation to what the previously mentioned linters reported. (e.g. [#23](https://github.com/mfranzke/loading-attribute-polyfill/issues/23))
 
 ### Security
 
-Made some code changes in relation to what the previously mentioned linters reported. (e.g. #GH-21, #GH-22)
+Made some code changes in relation to what the previously mentioned linters reported. (e.g. [#21](https://github.com/mfranzke/loading-attribute-polyfill/issues/21), [#22](https://github.com/mfranzke/loading-attribute-polyfill/issues/22))
 
 ## [1.15.1] - 2018-06-22
 
 ### Fixed
 
-- A previous checkin has broken the solution provided for #GH-16, so I've fixed this again.
+- A previous checkin has broken the solution provided for [#16](https://github.com/mfranzke/loading-attribute-polyfill/issues/16), so I've fixed this again.
 
 ## [1.15.0] - 2018-06-22
 
@@ -285,7 +285,7 @@ Made some code changes in relation to what the previously mentioned linters repo
 
 ### Fixed
 
-- IE9: After choosing a suggestion out of the polyfilling select, the select itself wouldn't get hidden. (#GH-19)
+- IE9: After choosing a suggestion out of the polyfilling select, the select itself wouldn't get hidden. ([#19](https://github.com/mfranzke/loading-attribute-polyfill/issues/19))
 
 ## [1.14.3] - 2018-06-20
 
@@ -326,7 +326,7 @@ Made some code changes in relation to what the previously mentioned linters repo
 
 ### Added
 
-- Added `MutationObserver` to even also capture changes to the `option` elements as a correction to enhance the current functionality (#GH-16).
+- Added `MutationObserver` to even also capture changes to the `option` elements as a correction to enhance the current functionality ([#16](https://github.com/mfranzke/loading-attribute-polyfill/issues/16)).
 
 ### Changed
 
@@ -337,7 +337,7 @@ Made some code changes in relation to what the previously mentioned linters repo
 
 ### Changed
 
-- Focusing the `input[list]` after selecting a suggestion, as in #GH-18
+- Focusing the `input[list]` after selecting a suggestion, as in [#18](https://github.com/mfranzke/loading-attribute-polyfill/issues/18)
 
 ## [1.13.1] - 2018-06-04
 
@@ -350,7 +350,7 @@ Made some code changes in relation to what the previously mentioned linters repo
 
 ### Added
 
-- Thanks to @eddr and @Kravimir for inspiring me via #GH-5 that there should be another possibility on defining `value` and `label` for the suggestions. As the browser vendors (GC vs. the others) don't seem to be aligned on this topic, I've decided to enable the `label`-attribute to serve as the definitive label being displayed, even if a value is being defined differing from the label. Check out the „Different ways of defining an option“ section on the demo page regarding this topic.
+- Thanks to @eddr and @Kravimir for inspiring me via [#5](https://github.com/mfranzke/loading-attribute-polyfill/issues/5) that there should be another possibility on defining `value` and `label` for the suggestions. As the browser vendors (GC vs. the others) don't seem to be aligned on this topic, I've decided to enable the `label`-attribute to serve as the definitive label being displayed, even if a value is being defined differing from the label. Check out the „Different ways of defining an option“ section on the demo page regarding this topic.
 
 ### Changed
 
@@ -361,7 +361,7 @@ Made some code changes in relation to what the previously mentioned linters repo
 
 ### Fixed
 
-- @wlekin thankfully mentioned (extracted to #GH-15) that the polyfilling `select` gets positioned incorrectly underneath the `input[list]` element on iOS.
+- @wlekin thankfully mentioned (extracted to [#15](https://github.com/mfranzke/loading-attribute-polyfill/issues/15)) that the polyfilling `select` gets positioned incorrectly underneath the `input[list]` element on iOS.
 
 ## [1.12.2] - 2018-05-01
 
@@ -393,13 +393,13 @@ Made some code changes in relation to what the previously mentioned linters repo
 
 ### Fixed
 
-- @hryamzik thankfully mentioned by #GH-7 that the polyfilling `select` gets positioned incorrectly in case of the `input[list]` element being styled as a block-level element.
+- @hryamzik thankfully mentioned by [#7](https://github.com/mfranzke/loading-attribute-polyfill/issues/7) that the polyfilling `select` gets positioned incorrectly in case of the `input[list]` element being styled as a block-level element.
 
 ## [1.11.0] - 2017-10-08
 
 ### Changed
 
-- I'm very thankful for @ailintom mentioning the missing IE9 support with #GH-2, which is still relevant (at least and maybe foremost) for the Windows Vista users.
+- I'm very thankful for @ailintom mentioning the missing IE9 support with [#2](https://github.com/mfranzke/loading-attribute-polyfill/issues/2), which is still relevant (at least and maybe foremost) for the Windows Vista users.
 - Additionally @Kravimir thankfully brought to my attention, that IE9 handles the `option` subelements quite restricted - so I've added a section regarding IE9 support to the demo page with the additional two lines of HTML, that you'll need to add in case you also need / want to still support IE9 in your projects, as well as changed the JavaScript code to even also support IE9.
 
 ## [1.10.3] - 2017-10-07
