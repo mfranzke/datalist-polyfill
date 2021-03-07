@@ -3,7 +3,6 @@ tests
 *.yml
 *.yaml
 .gitignore
-.huskyrc
-config.codekit3
+.husky
 commitlint.config.js
 .github

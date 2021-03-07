@@ -263,7 +263,12 @@
 			<button type="submit">Send</button>
 		</form>
 
+		<script type="module" src="index.js"></script>
 		<!-- Even though that it's recommended to omit the type on the following script tag, we're keeping it for older browser compatibility -->
-		<script type="text/javascript" src="../datalist-polyfill.js"></script>
+		<script
+			type="text/javascript"
+			src="../dist/datalist-polyfill.umd.js"
+			nomodule
+		></script>
 	</body>
 </html>

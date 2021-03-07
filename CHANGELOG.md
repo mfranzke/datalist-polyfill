@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Safari TP seems to support the `datalist` element at least basically. Yeah !!! Exciting news! I'm planning to release a new major version soon to both cheer as well as accommodate their implementation.
 
+## [2.0.0-beta.0] - 2021-03-
+
+### Changed
+
+- BREAKING CHANGE: Even also generate JS modules from now on supported by [microbundle](https://npmjs.com/microbundle), added the relevant property entries within the `package.json` directing to those files, that are now stored within the `dist/` folder (see [migration guide](MIGRATION.md)
+
 ## [1.24.4] - 2020-05-23
 
 ### Changed

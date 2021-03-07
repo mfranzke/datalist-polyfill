@@ -35,7 +35,6 @@
 		"*.yaml",
 		".gitignore",
 		".husky",
-		"config.codekit3",
 		"commitlint.config.js"
 	]
 }
