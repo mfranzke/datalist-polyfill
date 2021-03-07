@@ -32,7 +32,7 @@
   "bugs": {
     "url": "https://github.com/mfranzke/datalist-polyfill/issues"
   },
-  "homepage": "https://github.com/mfranzke/datalist-polyfill",
+  "homepage": "https://mfranzke.github.io/datalist-polyfill/demos/",
   "devDependencies": {
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
