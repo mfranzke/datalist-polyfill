@@ -6,3 +6,7 @@ tests
 .husky
 commitlint.config.js
 .github
+.gitattributes
+.prettierignore
+.htmlvalidate.json
+bower.json
