@@ -5,7 +5,7 @@
   "main": "datalist-polyfill.js",
   "scripts": {
     "test": "run-p validate:* lint:*",
-    "validate:html": "html-validate demos/index.html",
+    "validate:html": "html-validate demos/index.html && html-validate demos/ie9/index.html",
     "lint:xo": "xo datalist-polyfill.js",
     "release:minor": "npm version minor -m 'build(release): new minor version' && git push && git push --tags && npm publish",
     "release:patch": "npm version patch -m 'build(release): new patch version' && git push && git push --tags && npm publish",
