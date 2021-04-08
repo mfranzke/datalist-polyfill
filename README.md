@@ -16,6 +16,7 @@
 [![Join the chat at https://gitter.im/datalist-polyfill/community](https://badges.gitter.im/datalist-polyfill/community.svg)](https://gitter.im/datalist-polyfill/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Open Source Love](https://badges.frapsoft.com/os/v3/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
 **Update:** Safari now supports the `datalist` element at least basically, as [announced earlier this year with the latest release of Safari both for iOS and MacOS X](https://developer.apple.com/documentation/safari_release_notes/safari_12_1_release_notes#3130314). Yeah !!! Exciting news!
 I'm planning to release a new major version soon to both cheer as well as accommodate their implementation.
