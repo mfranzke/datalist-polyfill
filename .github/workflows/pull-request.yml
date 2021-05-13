@@ -2,7 +2,7 @@ name: pull-request
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -18,5 +18,5 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests 
+      - name: Run tests
         run: npm test

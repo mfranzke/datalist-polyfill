@@ -78,7 +78,7 @@ exports.config = {
 			// https://app.crossbrowsertesting.com/selenium/run
 			platform: 'Mac OSX 10.13',
 			browserName: 'Safari',
-			version: '11.0'
+			version: '11.0',
 		} /* ,
 		// TODO: Fix the test cases regarding older versions of safari/selenium
 		{
@@ -101,7 +101,7 @@ exports.config = {
 			browserName: 'Safari',
 			version: '9'
 		}
-		*/
+		*/,
 	],
 	//
 	// ===================
@@ -177,8 +177,8 @@ exports.config = {
 	// See the full list at http://mochajs.org/
 	mochaOpts: {
 		ui: 'bdd',
-		timeout: 60000
-	}
+		timeout: 60000,
+	},
 	//
 	// =====
 	// Hooks
