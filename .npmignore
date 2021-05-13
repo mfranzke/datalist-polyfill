@@ -1,12 +1,12 @@
-demos
-tests
+demos/
+tests/
 *.yml
 *.yaml
 .gitignore
-.husky
+.husky/
 config.codekit3
 commitlint.config.js
-.github
+.github/
 .gitattributes
 .prettierignore
 .htmlvalidate.json
