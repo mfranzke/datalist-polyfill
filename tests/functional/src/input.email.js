@@ -1,4 +1,4 @@
-var field = { fieldId: 'email', initialValue: '@r', expectedAmount: 4, wrongValue: 'doe1' };
+const field = { fieldId: 'email', initialValue: '@r', expectedAmount: 4, wrongValue: 'doe1' };
 
 // @codekit-append 'tests.js';
 

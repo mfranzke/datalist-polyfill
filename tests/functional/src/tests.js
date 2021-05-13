@@ -3,21 +3,21 @@
 
 const assert = require('assert');
 
-var keysSelect = [
+const keysSelect = [
 	{ keyName: 'ESC', unicodeChars: '\uE00C' },
 	{ keyName: 'ENTER', unicodeChars: '\uE007' },
 	{ keyName: 'BACKSPACE', unicodeChars: '\uE003' },
 	{ keyName: 'TAB', unicodeChars: '\uE004' },
 ];
-var keysInput = [
+const keysInput = [
 	{ keyName: 'DOWN', unicodeChars: '\uE015' },
 	{ keyName: 'UP', unicodeChars: '\uE013' },
 ];
 
 browser.url('index.html');
 
-describe('input field #' + field.fieldId, function () {
-	beforeEach(function () {
+describe('input field #' + field.fieldId, () => {
+	beforeEach(() => {
 		$('#' + field.fieldId).waitForDisplayed(5000);
 
 		// Setting a value within the input field
@@ -26,11 +26,11 @@ describe('input field #' + field.fieldId, function () {
 		// Select should be visible
 		assert.ok($('#' + field.fieldId + 'list select').isDisplayed());
 	});
-	it('should provide suggestions after inserting the value "' + field.initialValue + '"', function () {
+	it('should provide suggestions after inserting the value "' + field.initialValue + '"', () => {
 		// Assert number of results
 		assert.lengthOf($$('#' + field.fieldId + 'list select option:not(:disabled)'), 1);
 	});
-	it('should not provide suggestions after inserting the value "' + field.wrongValue + '"', function () {
+	it('should not provide suggestions after inserting the value "' + field.wrongValue + '"', () => {
 		// Setting a value within the input field
 		$('#' + field.fieldId).setValue(field.wrongValue);
 
@@ -44,7 +44,7 @@ describe('input field #' + field.fieldId, function () {
 		'should provide suggestions after inserting the value "' +
 			field.initialValue +
 			'" and deleting these again bit by bit afterwards',
-		function () {
+		() => {
 			browser.keys('\uE003');
 
 			// Assert number of results
@@ -63,8 +63,8 @@ describe('input field #' + field.fieldId, function () {
 			assert.isNotOk($('#' + field.fieldId + 'list select').isDisplayed());
 		}
 	);
-	keysInput.forEach(function (actKey) {
-		it('should work with the key "' + actKey.keyName + '"', function () {
+	for (const actKey of keysInput) {
+		it('should work with the key "' + actKey.keyName + '"', () => {
 			browser.keys(actKey.unicodeChars);
 
 			// Select should be visible
@@ -78,19 +78,19 @@ describe('input field #' + field.fieldId, function () {
 				assert.ok($('#' + field.fieldId + 'list select').isFocused());
 
 				// Check for the selected element
-				var options = $$('#' + field.fieldId + 'list select option:not(:disabled)'),
+				const options = $$('#' + field.fieldId + 'list select option:not(:disabled)'),
 					optionsLength = options.length,
 					option = actKey.keyName === 'DOWN' ? options[0] : options[optionsLength - 1];
 
 				assert.ok(option.isSelected());
 			}
 		});
-	});
+	}
 
 	if (field.fieldId !== 'number') {
-		keysSelect.forEach(function (actKey) {
-			it('datalists element should work with the key "' + actKey.keyName + '"', function () {
-				var inputInitialValue = $('#' + field.fieldId).isDisplayed('value');
+		for (const actKey of keysSelect) {
+			it('datalists element should work with the key "' + actKey.keyName + '"', () => {
+				const inputInitialValue = $('#' + field.fieldId).isDisplayed('value');
 
 				// Focus the select
 				browser.keys('\uE015');
@@ -127,10 +127,10 @@ describe('input field #' + field.fieldId, function () {
 						break;
 				}
 			});
-		});
+		}
 	}
 
-	it('should set the value on clicking on the suggestions select', function () {
+	it('should set the value on clicking on the suggestions select', () => {
 		// Delete the last byte to ensure that there's more than one option/suggestion
 		browser.keys('\uE003');
 
