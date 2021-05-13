@@ -2,7 +2,8 @@ name: pull-request
 
 on:
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
   build:
@@ -10,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the source code
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Set up NodeJS
         uses: actions/setup-node@v1
@@ -18,5 +19,5 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests 
+      - name: Run tests
         run: npm test
