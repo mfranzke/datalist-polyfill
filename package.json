@@ -44,7 +44,7 @@
     "husky": "^6.0.0",
     "np": "^7.5.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.2.1",
+    "prettier": "^2.3.0",
     "pretty-quick": "^3.1.0",
     "webdriverio": "^7.6.1",
     "xo": "^0.40.1"
