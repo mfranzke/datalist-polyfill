@@ -1,7 +1,7 @@
 {
 	"name": "datalist-polyfill",
 	"description": "Minimal and dependency-free vanilla JS datalist polyfill. Supports all standard's functionality as well as mimics other browsers behavior.",
-	"version": "1.24.3",
+	"version": "1.24.4",
 	"homepage": "https://github.com/mfranzke/datalist-polyfill",
 	"authors": [
 		{
@@ -34,7 +34,7 @@
 		"*.yml",
 		"*.yaml",
 		".gitignore",
-		".huskyrc",
+		".husky",
 		"config.codekit3",
 		"commitlint.config.js"
 	]

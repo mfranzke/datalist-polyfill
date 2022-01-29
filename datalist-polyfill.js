@@ -445,7 +445,7 @@
 
 		if (typeof obs !== 'undefined') {
 			obs.observe(datalist, {
-				childList: true
+				childList: true,
 			});
 		}
 
@@ -632,7 +632,7 @@
 
 		if (typeof Event === 'function') {
 			evt = new Event('input', {
-				bubbles: true
+				bubbles: true,
 			});
 		} else {
 			evt = dcmnt.createEvent('Event');
@@ -676,7 +676,7 @@
 						element.matches('datalist')
 						? element
 						: null;
-				}
+				},
 			});
 		}
 	})(window.HTMLInputElement);
@@ -693,7 +693,7 @@
 					return typeof this === 'object' && this instanceof constructor
 						? this.getElementsByTagName('option')
 						: null;
-				}
+				},
 			});
 		}
 	})(window.HTMLElement);
