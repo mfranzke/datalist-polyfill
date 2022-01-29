@@ -1,6 +1,6 @@
 # datalist-polyfill
 
-[![MIT license](https://img.shields.io/npm/l/datalist-polyfill.svg "license badge")](https://opensource.org/licenses/mit-license.php)
+[![Financial Contributors on Open Collective](https://opencollective.com/datalist-polyfill/all/badge.svg?label=financial+contributors)](https://opencollective.com/datalist-polyfill) [![MIT license](https://img.shields.io/npm/l/datalist-polyfill.svg "license badge")](https://opensource.org/licenses/mit-license.php)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/datalist-polyfill)](https://bundlephobia.com/result?p=datalist-polyfill)
 [![Total downloads ~ Npmjs](https://img.shields.io/npm/dt/datalist-polyfill.svg "Count of total downloads – NPM")](https://npmjs.com/package/datalist-polyfill "datalist polyfill – on NPM")
 [![jsDelivr CDN downloads](https://data.jsdelivr.com/v1/package/npm/datalist-polyfill/badge "Count of total downloads – jsDelivr")](https://www.jsdelivr.com/package/npm/datalist-polyfill "datalist polyfill – on jsDelivr")
@@ -229,3 +229,33 @@ But on the other hand this leads to an additional visible field, but doesn't emu
 If you're trying out and using my work, feel free to contact me and give me any feedback. I'm curious about how it's gonna be used.
 
 And if you do like this polyfill, please consider even also having a look at the other polyfill we've developed: <https://github.com/mfranzke/loading-attribute-polyfill>
+
+## Contributors
+
+### Code Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/mfranzke/datalist-polyfill/graphs/contributors"><img src="https://opencollective.com/datalist-polyfill/contributors.svg?width=890&button=false" /></a>
+
+### Financial Contributors
+
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/datalist-polyfill/contribute)]
+
+#### Individuals
+
+<a href="https://opencollective.com/datalist-polyfill"><img src="https://opencollective.com/datalist-polyfill/individuals.svg?width=890"></a>
+
+#### Organizations
+
+Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/datalist-polyfill/contribute)]
+
+<a href="https://opencollective.com/datalist-polyfill/organization/0/website"><img src="https://opencollective.com/datalist-polyfill/organization/0/avatar.svg"></a>
+<a href="https://opencollective.com/datalist-polyfill/organization/1/website"><img src="https://opencollective.com/datalist-polyfill/organization/1/avatar.svg"></a>
+<a href="https://opencollective.com/datalist-polyfill/organization/2/website"><img src="https://opencollective.com/datalist-polyfill/organization/2/avatar.svg"></a>
+<a href="https://opencollective.com/datalist-polyfill/organization/3/website"><img src="https://opencollective.com/datalist-polyfill/organization/3/avatar.svg"></a>
+<a href="https://opencollective.com/datalist-polyfill/organization/4/website"><img src="https://opencollective.com/datalist-polyfill/organization/4/avatar.svg"></a>
+<a href="https://opencollective.com/datalist-polyfill/organization/5/website"><img src="https://opencollective.com/datalist-polyfill/organization/5/avatar.svg"></a>
+<a href="https://opencollective.com/datalist-polyfill/organization/6/website"><img src="https://opencollective.com/datalist-polyfill/organization/6/avatar.svg"></a>
+<a href="https://opencollective.com/datalist-polyfill/organization/7/website"><img src="https://opencollective.com/datalist-polyfill/organization/7/avatar.svg"></a>
+<a href="https://opencollective.com/datalist-polyfill/organization/8/website"><img src="https://opencollective.com/datalist-polyfill/organization/8/avatar.svg"></a>
+<a href="https://opencollective.com/datalist-polyfill/organization/9/website"><img src="https://opencollective.com/datalist-polyfill/organization/9/avatar.svg"></a>
