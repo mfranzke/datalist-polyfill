@@ -26,7 +26,8 @@
     "autosuggester",
     "suggest",
     "suggester",
-    "select"
+    "select",
+    "front-end"
   ],
   "bugs": {
     "url": "https://github.com/mfranzke/datalist-polyfill/issues"
