@@ -4,7 +4,7 @@
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/datalist-polyfill)](https://bundlephobia.com/result?p=datalist-polyfill)
 [![Total downloads ~ Npmjs](https://img.shields.io/npm/dt/datalist-polyfill.svg "Count of total downloads – NPM")](https://npmjs.com/package/datalist-polyfill "datalist polyfill – on NPM")
 [![jsDelivr CDN downloads](https://data.jsdelivr.com/v1/package/npm/datalist-polyfill/badge "Count of total downloads – jsDelivr")](https://www.jsdelivr.com/package/npm/datalist-polyfill "datalist polyfill – on jsDelivr")
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d1f98a2d1fd44c41b7ad5c7670d8cdcd)](https://app.codacy.com/app/mfranzke/datalist-polyfill?utm_source=github.com&utm_medium=referral&utm_content=mfranzke/datalist-polyfill&utm_campaign=badger)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/8338e7ee4e554d05b5277cb449d92375)](https://www.codacy.com/gh/mfranzke/datalist-polyfill/dashboard)
 [![GitHub Super-Linter](https://github.com/mfranzke/datalist-polyfill/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/mfranzke/datalist-polyfill/actions/workflows/linter.yml)
 [![CodeQL](https://github.com/mfranzke/datalist-polyfill/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/mfranzke/datalist-polyfill/actions/workflows/codeql-analysis.yml)
 [![Known Vulnerabilities](https://snyk.io/test/github/mfranzke/datalist-polyfill/badge.svg?targetFile=package.json)](https://snyk.io/test/github/mfranzke/datalist-polyfill?targetFile=package.json)
