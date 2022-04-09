@@ -6,7 +6,7 @@
 [![jsDelivr CDN downloads](https://data.jsdelivr.com/v1/package/npm/datalist-polyfill/badge "Count of total downloads – jsDelivr")](https://www.jsdelivr.com/package/npm/datalist-polyfill "datalist polyfill – on jsDelivr")
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/8338e7ee4e554d05b5277cb449d92375)](https://www.codacy.com/gh/mfranzke/datalist-polyfill/dashboard)
 [![GitHub Super-Linter](https://github.com/mfranzke/datalist-polyfill/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/mfranzke/datalist-polyfill/actions/workflows/linter.yml)
-[![CodeQL](https://github.com/mfranzke/datalist-polyfill/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/mfranzke/datalist-polyfill/actions/workflows/codeql-analysis.yml)
+[![CodeQL](https://github.com/mfranzke/datalist-polyfill/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/mfranzke/datalist-polyfill/actions/workflows/codeql-analysis.yml)
 [![Known Vulnerabilities](https://snyk.io/test/github/mfranzke/datalist-polyfill/badge.svg?targetFile=package.json)](https://snyk.io/test/github/mfranzke/datalist-polyfill?targetFile=package.json)
 [![dependencies Status](https://david-dm.org/mfranzke/datalist-polyfill/status.svg "Count of dependencies")](https://david-dm.org/mfranzke/datalist-polyfill "datalist polyfill – on david-dm")
 [![datalist-polyfill on Npmjs](https://img.shields.io/npm/v/datalist-polyfill.svg?color=rgb%28237%2C%2028%2C%2036%29 "npm version")](https://npmjs.com/package/datalist-polyfill "datalist polyfill – on NPM")
