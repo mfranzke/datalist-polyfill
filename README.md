@@ -8,7 +8,7 @@
 [![GitHub Super-Linter](https://github.com/mfranzke/datalist-polyfill/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/mfranzke/datalist-polyfill/actions/workflows/linter.yml)
 [![CodeQL](https://github.com/mfranzke/datalist-polyfill/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/mfranzke/datalist-polyfill/actions/workflows/codeql-analysis.yml)
 [![Known Vulnerabilities](https://snyk.io/test/github/mfranzke/datalist-polyfill/badge.svg?targetFile=package.json)](https://snyk.io/test/github/mfranzke/datalist-polyfill?targetFile=package.json)
-[![dependencies Status](https://david-dm.org/mfranzke/datalist-polyfill/status.svg "Count of dependencies")](https://david-dm.org/mfranzke/datalist-polyfill "datalist polyfill – on david-dm")
+[![Dependencies Status](https://requires.io/github/mfranzke/datalist-polyfill/requirements.svg?branch=main)](https://requires.io/github/mfranzke/datalist-polyfill/requirements/?branch=main)
 [![datalist-polyfill on Npmjs](https://img.shields.io/npm/v/datalist-polyfill.svg?color=rgb%28237%2C%2028%2C%2036%29 "npm version")](https://npmjs.com/package/datalist-polyfill "datalist polyfill – on NPM")
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
