@@ -11,3 +11,7 @@ commitlint.config.js
 .prettierignore
 .htmlvalidate.json
 bower.json
+.nvmrc
+.xo-config.json
+renovate.json
+.vscode/
