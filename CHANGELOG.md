@@ -11,6 +11,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Safari TP seems to support the `datalist` element at least basically. Yeah !!! Exciting news! I'm planning to release a new major version soon to both cheer as well as accommodate their implementation.
 
+## [1.25.0] - 2022-05-16
+
+### Added
+
+- npm scripts for easier releasing
+- test: `html-validate` for testing
+- code conventions file [#76](https://github.com/mfranzke/loading-attribute-polyfill/issues/76)
+- test: CodeQL
+- Recommended VS Code extensions
+- test: Super linter
+- build: CI/CD workflows / actions
+- renovate for Dependency updates
+- feature detection result shown on the demo page
+- financial contributors to the README ([#82](https://github.com/mfranzke/loading-attribute-polyfill/issues/82))
+
+### Changed
+
+- optimized documentation
+- updated `devDependencies`
+- optimized build process
+- `.gitignore` file according to githubs default content
+- manifested to use Node 14 for the moment dependening on Webdriver.io
+- default branch name from `master` to `main`
+- replaced dependencies badge
+
 ## [1.24.4] - 2020-05-23
 
 ### Changed
