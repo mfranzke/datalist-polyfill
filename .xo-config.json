@@ -6,6 +6,13 @@
 		"one-var": 0,
 		"no-use-before-define": 0,
 		"unicorn/prefer-includes": 0,
-		"unicorn/prefer-dataset": 0
+		"unicorn/prefer-dataset": 0,
+		"unicorn/prefer-module": 0,
+		"no-var": 0,
+		"unicorn/no-array-for-each": 0,
+		"unicorn/prefer-dom-node-dataset": 0,
+		"object-shorthand": 0,
+		"unicorn/prefer-dom-node-append": 0,
+		"unicorn/prefer-number-properties": 0
 	}
 }

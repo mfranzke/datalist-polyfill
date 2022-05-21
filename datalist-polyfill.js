@@ -24,7 +24,7 @@
 		// TODO: obviously ugly. But sadly necessary until Microsoft enhances the UX within EDGE (compare to https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/9573654/)
 		// Tested against the following UA strings: http://useragentstring.com/pages/useragentstring.php?name=Internet+Explorer
 		// And adapted out of https://gist.github.com/gaboratorium/25f08b76eb82b1e7b91b01a0448f8b1d :
-		isGteIE10 = Boolean(ua.match(/MSIE\s1[01]./) || ua.match(/rv:11./)),
+		isGteIE10 = Boolean(/MSIE\s1[01]./.test(ua) || /rv:11./.test(ua)),
 		isEDGE = Boolean(ua.indexOf('Edge/') !== -1);
 
 	// Let's break here, if it's even already supported ... and not IE10+ or EDGE
@@ -51,7 +51,7 @@
 		supportedTypes = ['text', 'email', 'number', 'search', 'tel', 'url'],
 		// Classes for elements
 		classNameInput = 'polyfilled',
-		classNamePolyfillingSelect = 'polyfilling',
+		classNamePolyfillingSelect = '.polyfilling',
 		// Defining a most likely unique polyfill string
 		uniquePolyfillString = '###[P0LYFlLLed]###';
 
@@ -93,9 +93,7 @@
 					// Prepare the options and toggle the visiblity afterwards
 					toggleVisibility(
 						prepOptions(datalistNeedsAnUpdate, input).length,
-						datalistNeedsAnUpdate.getElementsByClassName(
-							classNamePolyfillingSelect
-						)[0]
+						datalistNeedsAnUpdate.querySelector(classNamePolyfillingSelect)
 					);
 				}
 			}
@@ -136,7 +134,7 @@
 		var visible = false,
 			// Creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
 			datalistSelect =
-				datalist.getElementsByClassName(classNamePolyfillingSelect)[0] ||
+				datalist.querySelector(classNamePolyfillingSelect) ||
 				setUpPolyfillingSelect(input, datalist);
 
 		// On an ESC or ENTER key press within the input, let's break here and afterwards hide the datalist select, but if the input contains a value or one of the opening keys have been pressed ...
@@ -274,6 +272,7 @@
 			// Set the value of the first option to it's value - this actually triggers a redraw of the complete list
 			var firstOption = input.list.options[0];
 
+			// eslint-disable-next-line no-self-assign
 			firstOption.value = firstOption.value;
 		}
 
@@ -284,7 +283,7 @@
 
 		var // Creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
 			datalistSelect =
-				datalist.getElementsByClassName(classNamePolyfillingSelect)[0] ||
+				datalist.querySelector(classNamePolyfillingSelect) ||
 				setUpPolyfillingSelect(input, datalist),
 			// Either have the select set to the state to get displayed in case of that it would have been focused or because it's the target on the inputs blur - and check for general existance of any option as suggestions
 			visible =
@@ -373,7 +372,7 @@
 
 		var // Creating the select if there's no instance so far (e.g. because of that it hasn't been handled or it has been dynamically inserted)
 			datalistSelect =
-				datalist.getElementsByClassName(classNamePolyfillingSelect)[0] ||
+				datalist.querySelector(classNamePolyfillingSelect) ||
 				setUpPolyfillingSelect(input, datalist),
 			inputValue = getInputValue(input),
 			newSelectValues = dcmnt.createDocumentFragment(),
@@ -439,7 +438,7 @@
 		datalistSelect.multiple = !touched && datalistSelectOptionsLength < 2;
 
 		// Input the unused options as siblings next to the select - and differentiate in between the regular, and the IE9 fix syntax upfront
-		(datalist.getElementsByClassName('ie9_fix')[0] || datalist).appendChild(
+		(datalist.querySelectorAll('.ie9_fix')[0] || datalist).appendChild(
 			disabledValues
 		);
 
@@ -471,7 +470,7 @@
 			datalistSelect = dcmnt.createElement('select');
 
 		// Setting a class for easier identifying that select afterwards
-		datalistSelect.setAttribute('class', classNamePolyfillingSelect);
+		datalistSelect.setAttribute('class', classNamePolyfillingSelect.slice(1));
 
 		// Set general styling related definitions
 		datalistSelect.style.position = 'absolute';
@@ -510,9 +509,8 @@
 		}
 
 		// Set the polyfilling selects border-radius equally to the one by the polyfilled input
-		datalistSelect.style.borderRadius = inputStyles.getPropertyValue(
-			'border-radius'
-		);
+		datalistSelect.style.borderRadius =
+			inputStyles.getPropertyValue('border-radius');
 		datalistSelect.style.minWidth = rects[0].width + 'px';
 
 		if (touched) {
@@ -668,7 +666,7 @@
 					"The list IDL attribute must return the current suggestions source element, if any, or null otherwise."
 					"If there is no list attribute, or if there is no element with that ID, or if the first element with that ID is not a datalist element, then there is no suggestions source element."
 					*/
-					var element = dcmnt.getElementById(this.getAttribute('list'));
+					var element = dcmnt.querySelector('#' + this.getAttribute('list'));
 
 					return typeof this === 'object' &&
 						this instanceof constructor &&
@@ -691,7 +689,7 @@
 			Object.defineProperty(constructor.prototype, 'options', {
 				get: function () {
 					return typeof this === 'object' && this instanceof constructor
-						? this.getElementsByTagName('option')
+						? this.querySelectorAll('option')
 						: null;
 				},
 			});
