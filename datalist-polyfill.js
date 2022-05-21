@@ -86,6 +86,7 @@
 
 			if (datalistNeedsAnUpdate) {
 				var input = dcmnt.querySelector(
+					// eslint-disable-next-line prettier/prettier
 					'input[list="' + datalistNeedsAnUpdate.id + '"]'
 				);
 
@@ -93,6 +94,7 @@
 					// Prepare the options and toggle the visiblity afterwards
 					toggleVisibility(
 						prepOptions(datalistNeedsAnUpdate, input).length,
+						// eslint-disable-next-line prettier/prettier
 						datalistNeedsAnUpdate.querySelector(classNamePolyfillingSelect)
 					);
 				}
@@ -219,6 +221,7 @@
 		var option = datalist.querySelector(
 			'option[value="' +
 				getInputValue(input).replace(/\\([\s\S])|(")/g, '\\$1$2') +
+				// eslint-disable-next-line prettier/prettier
 				'"]'
 		);
 
@@ -243,6 +246,7 @@
 			option.disabled === false &&
 				((optValue !== '' && optValue.indexOf(inptValue) !== -1) ||
 					(label && label.toLowerCase().indexOf(inptValue) !== -1) ||
+					// eslint-disable-next-line prettier/prettier
 					(text !== '' && text.indexOf(inptValue) !== -1))
 		);
 	};
@@ -404,6 +408,7 @@
 				if (isValidSuggestion(opt, inputValue)) {
 					var textOptionPart = text.slice(
 							0,
+							// eslint-disable-next-line prettier/prettier
 							optionValue.length + textValueSeperator.length
 						),
 						optionPart = optionValue + textValueSeperator;
@@ -439,6 +444,7 @@
 
 		// Input the unused options as siblings next to the select - and differentiate in between the regular, and the IE9 fix syntax upfront
 		(datalist.querySelectorAll('.ie9_fix')[0] || datalist).appendChild(
+			// eslint-disable-next-line prettier/prettier
 			disabledValues
 		);
 
@@ -501,6 +507,7 @@
 				'-' +
 					(rects[0].width +
 						parseFloat(inputStyles.getPropertyValue('margin-' + direction))) +
+					// eslint-disable-next-line prettier/prettier
 					'px'
 			);
 			datalistSelect.style.marginTop =
