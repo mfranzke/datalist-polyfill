@@ -36,6 +36,7 @@
 		".gitignore",
 		".husky",
 		"config.codekit3",
-		"commitlint.config.js"
+		"commitlint.config.js",
+		"renovate.json"
 	]
 }
