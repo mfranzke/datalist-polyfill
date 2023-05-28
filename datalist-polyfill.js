@@ -68,7 +68,7 @@
 		obs;
 
 	// Define a new observer
-	if (typeof MutationObserver !== 'undefined') {
+	if (MutationObserver !== undefined) {
 		obs = new MutationObserver(function (mutations) {
 			var datalistNeedsAnUpdate = false;
 
@@ -370,7 +370,7 @@
 
 	// Function for preparing and sorting the options/suggestions
 	var prepOptions = function (datalist, input) {
-		if (typeof obs !== 'undefined') {
+		if (obs !== undefined) {
 			obs.disconnect();
 		}
 
@@ -448,7 +448,7 @@
 			disabledValues
 		);
 
-		if (typeof obs !== 'undefined') {
+		if (obs !== undefined) {
 			obs.observe(datalist, {
 				childList: true,
 			});
