@@ -8,7 +8,7 @@
     "validate:html": "html-validate demos",
     "lint:xo": "xo datalist-polyfill.js",
     "release": "np",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
