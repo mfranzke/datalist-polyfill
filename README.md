@@ -168,11 +168,7 @@ Supported by Christian, Johannes, @mitchhentges, @mertenhanisch, @ailintom, @Kra
 
 ### Big Thanks
 
-Cross-browser testing platform provided by [CrossBrowserTesting][crossbrowsertestinghomepage]
-
-[![CrossBrowserTesting](https://static1.smartbear.co/crossbrowsertesting/media/site/cbt-smartbear-logo.svg "CrossBrowserTesting")][crossbrowsertestinghomepage]
-
-[crossbrowsertestinghomepage]: https://crossbrowsertesting.com
+[![BrowserStack](https://avatars.githubusercontent.com/u/1119453?s=16&v=4 "")]([https://browserstack.com](https://www.browserstack.com/)) Cross-browser testing platform provided by [BrowserStack](https://www.browserstack.com/)
 
 ## Prospects & functionality overview
 
