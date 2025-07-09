@@ -1,6 +1,6 @@
 # datalist-polyfill
 
-[![Financial Contributors on Open Collective](https://opencollective.com/datalist-polyfill/all/badge.svg?label=financial+contributors)](https://opencollective.com/datalist-polyfill) [![MIT license](https://img.shields.io/npm/l/datalist-polyfill.svg "license badge")](https://opensource.org/licenses/mit-license.php)
+[![MIT license](https://img.shields.io/npm/l/datalist-polyfill.svg "license badge")](https://opensource.org/licenses/mit-license.php)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/datalist-polyfill)](https://bundlephobia.com/result?p=datalist-polyfill)
 [![Total downloads ~ Npmjs](https://img.shields.io/npm/dt/datalist-polyfill.svg "Count of total downloads – NPM")](https://npmjs.com/package/datalist-polyfill "datalist polyfill – on NPM")
 [![jsDelivr CDN downloads](https://data.jsdelivr.com/v1/package/npm/datalist-polyfill/badge "Count of total downloads – jsDelivr")](https://www.jsdelivr.com/package/npm/datalist-polyfill "datalist polyfill – on jsDelivr")
