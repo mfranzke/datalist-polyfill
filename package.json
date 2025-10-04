@@ -49,5 +49,8 @@
     "pretty-quick": "^3.1.1",
     "webdriverio": "^7.19.5",
     "xo": "^0.53.0"
+  },
+  "engines": {
+    "node": ">= 20"
   }
 }
